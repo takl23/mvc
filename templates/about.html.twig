@@ -1,0 +1,44 @@
+{% extends "base.html.twig" %}
+
+{% block title %}About{% endblock %}
+
+{% block body %}
+
+<div class="center">
+<h1>About</h1>
+</div>
+<div class="row">
+  <div class="column1" >
+    
+  <h2>Course</h2>
+    <p>
+    This homepage is made as part of the course "DV1608 V24 lp4 Objektorienterade webbteknologier" at Blekinge Institute of Technology.
+    The main purpouse of the course is to get introduced to object-oriented PHP programming using web-based framework. By the end of the course the goal is to have developed 
+    an webbapplication where the base for the application is found in object-oriented programming frameworks together with databases.  
+    </p>
+
+    <a href="https://github.com/dbwebb-se/mvc">
+        <img src="{{ asset('img/walkator-dwigDz0t6TY-unsplash.jpg') }}" alt="Picture representing webdevelopment code blurry">
+    </a>
+
+  </div>
+  <div class="column2" >
+    <h2>Links GitHub</h2>
+    <ul>
+    <li>
+    <a href="https://github.com/dbwebb-se/mvc">
+        DV1608 V24 lp4 mvc
+    </a>
+    </li>
+
+     <li>
+    <a href="https://github.com/takl23/DV1608-V24-lp4">
+        takl23 mvc
+    </a>
+    </li>
+
+    </ul>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,11 @@
+/* Float */
+.float {
+    display: inline-block;
+    transition-duration: 0.3s;
+    transition-property: transform;
+    
+    &:hover {
+        transform: translateY(-5px);
+        color: $hover-color;
+    }
+}

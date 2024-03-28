@@ -1,0 +1,24 @@
+.row {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+}
+  
+.column1 {
+  flex:75%;
+  padding: 1%;
+    
+}
+
+.column2 {
+  flex:25%;
+  padding: 1%;
+  // writing-mode: vertical-lr;
+  // text-orientation: upright;
+  border-left: $border-light;
+}
+  
+.center {
+  text-align: center;
+}
+  

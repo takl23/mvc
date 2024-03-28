@@ -1,0 +1,18 @@
+
+* {
+    font-family: $main-font;
+    color: $font-color;
+    
+}
+
+h1, h2, h3, h4, h5, h6 {
+   
+    @include headers ($header-font, $margin);
+}
+
+p {
+    @include line-height-and-font-size-and-text-margines($main-font, $margin, $margin-bottom);
+}
+
+
+

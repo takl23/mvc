@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1" >
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="icon" href="{{ asset('img/glider.svg') }}">
+
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+            {% block importmap %}{{ importmap('app') }}{% endblock %}
+        {% endblock %}
+    </head>
+
+    <body>
+    <div class="header" role="banner">
+        <div class="site-header site-title">
+            <header>
+            {# <header class="site-header">#}
+            {#<span class="site-title">My Symfony Site</span>#}
+            <a href="{{ path('me') }}">
+            <h1>My Symfony Site</h1>
+            </a>
+            </header>
+        </div>
+        
+        <div class="nav">
+            <nav>
+                <ul>
+                    <li><a href="{{ path('me') }}">Me-page</a></li>
+                    <li><a href="{{ path('about') }}">About</a></li>
+                    <li><a href="{{ path('report') }}">Report</a></li>
+                    <li><a href="{{ path('lucky') }}">Lucky number</a></li>
+                </ul>
+            </nav>
+        </div> 
+    </div>    
+
+    <div class="main" role="main">
+                <main>
+                {% block body %}{% endblock %}
+                </main>
+</div>  
+
+    <div class="footer">
+        <div class="social">
+            <footer>
+            <p> &copy2024 takl23</p>
+            </footer>
+        </div>    
+    </div>
+    </body>
+</html>

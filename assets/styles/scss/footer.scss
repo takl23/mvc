@@ -1,0 +1,22 @@
+.footer {
+    background-color: $background-alternative-color;
+    padding: 2rem;
+    min-height: 5%;
+    text-align: center;
+    border-top: $border-light;
+    
+    * {
+        color: $font-alternative-color;
+        text-decoration: none;
+    }
+
+    li:hover, a:hover, i:hover {
+        color: $hover-color;
+    }
+
+    .social {
+        font-size: 2rem;
+     
+    }
+
+}

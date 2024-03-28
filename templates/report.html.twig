@@ -1,0 +1,33 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Report{% endblock %}
+
+{% block body %}
+    
+
+
+    <div class="grid-side">
+
+        <div class="side">
+            <h2>KOMOM</h2>
+                <div class="post">
+                    <ul>
+                        <li ><a href="#kmom01">kmom01</a></li>
+                        <li ><a href="#kmom02">kmom02</a></li>
+                    </ul>
+                    
+                </div>
+               
+            </div>
+
+        <div class="content">
+            <h1>Report</h1>
+            {% include "/incl/kmom01.html" %}
+            <hr>
+            {% include "/incl/kmom02.html" %}
+            <hr>
+           
+
+        </div>
+
+{% endblock %}

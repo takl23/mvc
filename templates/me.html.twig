@@ -1,0 +1,31 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Jag{% endblock %}
+
+{% block body %}
+    
+
+<div class="grid">
+    <div class="content"> 
+    <h1>Jag</h1>
+        <p>
+        Mitt namn är Tamara. Född i Kroatien och uppvuxen i Nässjö och bor numera i Östersund. Är utbildad civilingenjör i maskinteknik sedan 2016 och jobbar som teknisk projektledare på 
+        Driv innovation. 
+        Har två barn, Valter född mars 2021 och Ines född Juli 2023. 
+        </p>
+
+        <div class="portfolio">
+        <picture>
+            <img src="{{ asset('img/tamara.jpg') }}" alt="Picture showing Tamara">
+        </picture>
+
+        </div>
+
+
+        <p>
+        Fram tills nu var jag föräldraledig, men från och med 2 april jobbar jag igen....Spännande att se hur detta ska gå!
+        </p>
+    </div>
+</div>
+   
+{% endblock %}

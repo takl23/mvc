@@ -1,0 +1,12 @@
+.button {
+    background-color: $background-alternative-color;
+    border: $border-light;
+    border-radius: 0.1rem;
+    box-shadow: 1px 1px 1px 1px $font-color;
+    color: $hover-color;
+    display: inline-block;
+    font-weight: bolder;
+    padding: 0.5rem 1rem;
+    text-align: center;
+    text-decoration: none;
+}

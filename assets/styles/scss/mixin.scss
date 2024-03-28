@@ -1,0 +1,13 @@
+@mixin line-height-and-font-size-and-text-margines($font: sans-serif, $margin, $margin-bottom) {
+    line-height: $base-line-height;
+    font-size: $body-font-size;
+    font-family: $font;
+    margin: $margin;
+    margin-bottom: $margin-bottom;
+}
+
+@mixin headers ($font: sans-serif, $margin) {
+    font-family: $font;
+    margin: $margin;
+    /*margin-bottom: $margin-bottom;*/
+}
