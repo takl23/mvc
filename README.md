@@ -9,7 +9,7 @@ Repository created to learn web design, part of University course DV1608 V24 lp4
 Make sure that you have PHP 8.3 or higher and the latest version of composer.
 
 - Stand in the directory where you want to download the repository.
-- Use the command git clone https://github.com/takl23/DV1608-V24-lp4
+- Use the command git clone https://github.com/takl23/mvc
 - Make sure to stand in the directory of the repository and install following:
   - composer install
   - npm install
