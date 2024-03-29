@@ -26,11 +26,11 @@ Make sure that you have PHP 8.3 or higher and the latest version of composer.
       
     - $ npm --version
 
-      ![image](https://github.com/takl23/DV1608-V24-lp4/assets/142892946/938fee3c-e82f-4b62-817b-017ccc56f4bf)
+      ![image](https://github.com/takl23/mvc/assets/142892946/08db93e5-2b1c-4ca6-9eab-2710f25932b7)
 - Make sure to stand in the directory of the repository and install following:
   - $ npm install --save-dev normalize.css sass stylelint stylelint-config-sass-guidelines
   - Verify that package.json contains following
     
-    ![image](https://github.com/takl23/mvc/assets/142892946/08db93e5-2b1c-4ca6-9eab-2710f25932b7)
+    ![image](https://github.com/takl23/mvc/assets/142892946/f0086fa5-32a1-4203-9b52-606f65690811)
 
   - Comands npm run style will update the style sheet and compile sass files into one css file
