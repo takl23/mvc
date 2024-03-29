@@ -1,5 +1,5 @@
 # INTRO
-![image](https://github.com/takl23/DV1608-V24-lp4/assets/142892946/9cbe7a78-5760-4048-9283-c4843385a9a1)
+![image](https://github.com/takl23/mvc/assets/142892946/6ede50bf-fef4-4834-a968-b2408c024424)
 
 This repository is mainly for teaching purposes.
 
@@ -22,7 +22,7 @@ Make sure that you have PHP 8.3 or higher and the latest version of composer.
   - Check versions in terminal to verify that its working.
     - $ node --version
 
-      ![image](https://github.com/takl23/DV1608-V24-lp4/assets/142892946/7338fdaa-f150-446f-9d8b-4158f1af4413)
+      ![image](https://github.com/takl23/mvc/assets/142892946/63027a75-6ee7-4201-97c6-f807cef300db)
       
     - $ npm --version
 
@@ -31,6 +31,6 @@ Make sure that you have PHP 8.3 or higher and the latest version of composer.
   - $ npm install --save-dev normalize.css sass stylelint stylelint-config-sass-guidelines
   - Verify that package.json contains following
     
-    ![image](https://github.com/takl23/DV1608-V24-lp4/assets/142892946/74ec6b07-7a00-4a24-9574-910d7a8e145d)
+    ![image](https://github.com/takl23/mvc/assets/142892946/08db93e5-2b1c-4ca6-9eab-2710f25932b7)
 
   - Comands npm run style will update the style sheet and compile sass files into one css file
