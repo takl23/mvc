@@ -39,8 +39,16 @@ class LuckyControllerTwig extends AbstractController
     }
 
     #[Route("/api", name: "api")]
-    public function test(): Response
+    public function api(): Response
     {
         return $this->render('api.html.twig');
+    }
+
+
+
+    #[Route("/links", name: "links")]
+    public function links(): Response
+    {
+        return $this->render('links.html.twig');
     }
 }

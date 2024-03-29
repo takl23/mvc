@@ -1,0 +1,39 @@
+{% extends "base.html.twig" %}
+
+{% block title %}API{% endblock %}
+
+{% block body %}
+    
+
+<div class="grid">
+    <div class="content"> 
+    <h1>Länkar för stöd</h1>
+        
+        <a href="https://dbwebb.se/guide/git/introduktion">Stöd GitHub</a>
+            <ul>
+                <li>git status </li>
+                <li>git add .</li>
+                <li>git commit -m <message> </li>
+                <li>git remote add git@github.com:takl23/mvc.git </li>
+                <li>git push </li>
+                <li>git tag </li>
+                <li>git tag -a v1.0.0 -m <message> </li>
+                <li>git push --tags </li>
+                <li>git log </li>
+
+            </ul>
+    
+        <a href="https://github.com/dbwebb-se/mvc/tree/main/example/symfony">Sätt upp Symfony</a>
+            <ul>
+                <li>php -S localhost:8888 -t public </li>
+                <li>npm run build </li>
+            </ul>
+
+
+        <p>
+      
+        </p>
+    </div>
+</div>
+   
+{% endblock %}
