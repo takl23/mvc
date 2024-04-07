@@ -10,7 +10,7 @@ date_default_timezone_set("Europe/Stockholm");
 
 class LuckyControllerJson
 {
-       #[Route("/api/lucky/number", name: "luckynumber")]
+    #[Route("/api/lucky/number", name: "luckynumber")]
     public function jsonNumber(): Response
     {
         $number = random_int(0, 100);
@@ -20,13 +20,13 @@ class LuckyControllerJson
             'lucky-message' => 'Hi there!',
         ];
 
-          // return new JsonResponse($data);
+        // return new JsonResponse($data);
 
-          $response = new JsonResponse($data);
-          $response->setEncodingOptions(
-              $response->getEncodingOptions() | JSON_PRETTY_PRINT
-          );
-          return $response;
+        $response = new JsonResponse($data);
+        $response->setEncodingOptions(
+            $response->getEncodingOptions() | JSON_PRETTY_PRINT
+        );
+        return $response;
     }
 
     #[Route("/api/qoute", name: "qoute")]
@@ -34,22 +34,22 @@ class LuckyControllerJson
     {
         $qoute = array("Seize the day", "Today will be a good day", "You are amazing", "You are awesome");
         shuffle($qoute);
-        
+
         $data = [
             'Random qoute selected for you' => $qoute[0],
-            'Todays date' => date("Y-m-d"), 
-            'Time Europe/Stockholm' => date("H:i:s"), 
+            'Todays date' => date("Y-m-d"),
+            'Time Europe/Stockholm' => date("H:i:s"),
         ];
 
-          // return new JsonResponse($data);
+        // return new JsonResponse($data);
 
-          $response = new JsonResponse($data);
-          $response->setEncodingOptions(
-              $response->getEncodingOptions() | JSON_PRETTY_PRINT
-          );
-          return $response;
+        $response = new JsonResponse($data);
+        $response->setEncodingOptions(
+            $response->getEncodingOptions() | JSON_PRETTY_PRINT
+        );
+        return $response;
     }
 
 
-    
+
 }

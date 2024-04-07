@@ -6,7 +6,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-
 class LuckyController
 {
     #[Route('/lucky/number')]
@@ -21,29 +20,29 @@ class LuckyController
 
 
     #[Route("/lucky/hi")]
-public function hi(): Response
-{
-    return new Response(
-        '<html><body>Hi to you!</body></html>'
-    );
-}
+    public function hi(): Response
+    {
+        return new Response(
+            '<html><body>Hi to you!</body></html>'
+        );
+    }
 
-// #[Route("/api/lucky/number")]
-//     public function jsonNumber(): Response
-//     {
-//         $number = random_int(0, 100);
+    // #[Route("/api/lucky/number")]
+    //     public function jsonNumber(): Response
+    //     {
+    //         $number = random_int(0, 100);
 
-//         $data = [
-//             'lucky-number' => $number,
-//             'lucky-message' => 'Hi there!',
-//         ];
+    //         $data = [
+    //             'lucky-number' => $number,
+    //             'lucky-message' => 'Hi there!',
+    //         ];
 
-//         $response = new Response();
-//         $response->setContent(json_encode($data));
-//         $response->headers->set('Content-Type', 'application/json');
+    //         $response = new Response();
+    //         $response->setContent(json_encode($data));
+    //         $response->headers->set('Content-Type', 'application/json');
 
-//         return $response;
-//     }
+    //         return $response;
+    //     }
 
     // #[Route("/api/lucky/number")]
     // public function jsonNumber(): Response
