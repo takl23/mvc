@@ -1,0 +1,99 @@
+<?php
+
+// namespace App\Card;
+
+// //use function PHPUnit\Framework\stringContains;
+
+// class Card
+// {
+//     private int $value; //siffra
+//     private string $suit; // 1=hjärter, 2=ruter, 3=klöver, 4=spader
+   
+
+//     public function __construct(int $value, string $suit)
+//     {
+//         $this->value = $value;
+//         $this->suit = $suit;
+//     }
+
+//     public function getValue(): int
+//     {
+//         return $this->value;
+//     }
+
+    
+//     public function getSuit(): string
+//     {
+//         return $this->suit;
+//     }
+
+
+//     public function representCard(): string
+//     {
+//         $values = [
+//             1 => "A",
+//             2 => "2",
+//             3 => "3",
+//             4 => "4",
+//             5 => "5",
+//             6 => "6",
+//             7 => "7",
+//             8 => "8",
+//             9 => "9",
+//             10 => "10",
+//             11 => "J",
+//             12 => "Q",
+//             13 => "K",
+//             14 => "A",
+//         ];
+
+//         $suits = [
+//             1 => "♥", 
+//             2 =>"♦",
+//             3 => "♣",
+//             4 => "♠",
+//         ];
+
+//         return "{$values[$this->getValue()]}{$suits[$this->getSuit()]}";
+
+//     }
+
+//     public function drawCard(): array
+    
+//     {
+//         $value = random_int(1, 13);
+
+//         $this->value = $value;
+//         if ($value == 1 || $value > 10) {
+//             if ($value == 1) {
+//                 $this->value = "A";
+//             } elseif ($value == 11) {
+//                 $this->value = "J";
+//             } elseif ($value == 12) {
+//                 $this->value = "Q";
+//             } elseif ($value == 13) {
+//                 $this->value = "K";
+//             }
+//         }
+
+//         $suit = random_int(1, 4);
+
+//         $this->suit = "♥";
+//         if ($suit == 2) {
+//             $this->suit = "♦";
+//         } elseif ($suit == 3) {
+//             $this->suit = "♣";
+//         } elseif ($suit == 4) {
+//             $this->suit = "♠";
+//         }
+
+//         return array($this->value, $this->suit);
+        
+
+//     }
+
+//     public function getAsString(): string
+//     {
+//         return "{$this->value} {$this->suit}";
+//     }
+//}

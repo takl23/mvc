@@ -637,3 +637,26 @@ a:hover {
   text-align: center;
   text-decoration: none;
 }
+
+.card {
+  /* Allmänna stilregler för kort */
+  font-size: 2rem;
+  font-weight: bold;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid #000;
+  border-radius: 10px; /* Runda hörn för kortet */
+  width: 100px; /* Justera bredden efter ditt kort */
+  height: 150px; /* Justera höjden efter ditt kort */
+  display: inline-block; /* Så att korten visas på samma rad */
+  margin: 10px; /* Mellanrum mellan korten */
+  text-align: center; /* Centrera texten */
+}
+
+.red {
+  color: red; /* Färg för hjärter */
+}
+
+.black {
+  color: black; /* Färg för spader */
+}

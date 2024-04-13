@@ -1,0 +1,16 @@
+{% extends "base.html.twig" %}
+{% block title %}Pig game{% endblock %}
+
+{% block body %}
+<h1>Carddeck</h1>
+
+
+<div class="deck">
+{% for card in deck %}
+   <div class="card {{ card.getColor() | lower }}">
+        {{ card.representCard() }} <!-- Anropa representCard() för att visa kortet -->
+    </div>
+{% endfor %}
+</div>
+
+{% endblock %}

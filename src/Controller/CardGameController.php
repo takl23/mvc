@@ -2,13 +2,16 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use App\Card\Card;
+use App\Card\DeckOfCards;
+
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
 class CardGameController extends AbstractController
 {
@@ -18,64 +21,50 @@ class CardGameController extends AbstractController
             return $this->render('card/home.html.twig');
     }
 
-
-    #[Route("/game/card/session", name: "card_session", methods: ['GET'])]
-    public function sessionPrint(
-        SessionInterface $session
-    ): Response
+    #[Route("/game/card/test/card", name: "test_card")]
+    public function testCard(): Response
     {
-       
+        $card = new Card(random_int(1, 13), random_int(1, 4));
+
         $data = [
-            "session" => $session->all()
+            "card" => $card->representCard(),
         ];
 
-        //var_dump($data);
-        
-
-            return $this->render('card/session.html.twig', $data);
+        return $this->render('card/test/card.html.twig', $data);
     }
 
-    #[Route("/game/card/session/delete", name: "card_session_delete")]
-    public function sessionDelete(
-        SessionInterface $session
-    ): Response
+    #[Route("/game/card/test/deck", name: "test_deck")]
+    public function testDeck(): Response
     {
-      
-    $session->clear();
-    
+        $deck = new DeckOfCards();
 
-$this->addFlash(
-            'notice',
-            'Session deleted!'
-        );
-        //var_dump($data);
-        
-            return $this->redirectToRoute('card_session');
+        $data = [
+            "deck" => $deck->getDeck(),
+        ];
+
+        return $this->render('card/test/deck.html.twig', $data);
     }
 
+    // #[Route("/game/card/test/dicehand/{num<\d+>}", name: "test_dicehand")]
+    // public function testDiceHand(int $num): Response
+    // {
+    //     if ($num > 52) {
+    //         throw new \Exception("Can not roll more than 52 dices!");
+    //     }
 
-    #[Route("/game/card/session/delete2", name: "card_session_delete2", methods: ['POST'])]
-    public function sessionDelete2(
-        SessionInterface $session
-    ): Response
-    {
-      
-    $session->clear();
-    
+    //     $hand = new DiceHand();
+    //     for ($i = 1; $i <= $num; $i++) {
+    //         $hand->add(new Dice());
+    //     }
 
-$this->addFlash(
-            'notice',
-            'Session deleted!'
-        );
-        //var_dump($data);
-        
-            return $this->redirectToRoute('card_session');
-    }
+    //     $hand->drawCard();
 
-    #[Route("/game/card/deck", name: "deck")]
-    public function deck(): Response
-    {
-            return $this->render('card/deck.html.twig');
-    }
+    //     $data = [
+    //         "num_dices" => $hand->getNumberDices(),
+    //         "diceRoll" => $hand->getString(),
+    //     ];
+
+    //     return $this->render('card/test/dicehand.html.twig', $data);
+    // }
 
 }
