@@ -2,8 +2,8 @@
 
 namespace App\Card;
 
-//use function PHPUnit\Framework\stringContains;
-use InvalidArgumentException;
+
+use Exception;
 
 class Card
 {
@@ -11,7 +11,6 @@ class Card
     private int $value; //siffra
     private int $suit; // 1=hjärter, 2=ruter, 3=klöver, 4=spader
     private string $color; // Färg
-
 
     // Constant for value
     public const ACE = 1;
@@ -25,17 +24,16 @@ class Card
     public const CLUBS = 3;
     public const SPADES = 4;
 
-
    // Use constructor to always have a value and suite for card. 
    // If limit is outreached errormessage is thrown
     public function __construct(int $value, int $suit)
     {
         if ($value < 1 || $value > 13) {
-            throw new InvalidArgumentException("Value must be between 1 and 13.");
+            throw new Exception("Value must be between 1 and 13.");
         }
 
         if ($suit < 1 || $suit > 4) {
-            throw new InvalidArgumentException("Invalid suit.");
+            throw new Exception("Invalid suit.");
         }
 
         $this->value = $value;

@@ -9,15 +9,6 @@
  
 </p>
 
-
-<form method="post" action="">
-    <p>
-        <input type="submit" name="delete session" value="Delete session"
-            onClick="this.form.action='{{ path('pig_session_delete') }}'"
-        >
-    </p>
-</form>
-
 {{ include('flash.html.twig') }}
 
 {% endblock %}

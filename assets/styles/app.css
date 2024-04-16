@@ -640,16 +640,16 @@ a:hover {
 
 .card {
   /* Allmänna stilregler för kort */
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: bold;
   padding: 10px;
   box-sizing: border-box;
   border: 1px solid #000;
   border-radius: 10px; /* Runda hörn för kortet */
-  width: 100px; /* Justera bredden efter ditt kort */
-  height: 150px; /* Justera höjden efter ditt kort */
+  width: 85px; /* Justera bredden efter ditt kort */
+  height: 120px; /* Justera höjden efter ditt kort */
   display: inline-block; /* Så att korten visas på samma rad */
-  margin: 10px; /* Mellanrum mellan korten */
+  margin: 5px; /* Mellanrum mellan korten */
   text-align: center; /* Centrera texten */
 }
 

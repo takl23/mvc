@@ -1,0 +1,31 @@
+{% extends "base.html.twig" %}
+{% block title %}Pig game{% endblock %}
+
+{% block body %}
+<h1>Draw one card</h1>
+
+<p>You draw: {{ cardsDrawn.getValue() }} {{ cardsDrawn.getSuit() }}</p>
+
+<div class="deck">
+    <div class="card {{ cardsDrawn.getColor() | lower }}">
+        {{ cardsDrawn.representCard() }}
+    </div>
+</div
+
+
+<hr>
+
+<hr>
+
+
+<p>Cards left in deck</p>
+<div class="deck">
+{% for card in cardsLeft %}
+   <div class="card {{ card.getColor() | lower }}">
+        {{ card.representCard() }} <!-- Anropa representCard() för att visa kortet -->
+    </div>
+{% endfor %}
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,15 @@
+<?php
+
+namespace App\Card;
+
+class DeckOfCardsWithJokers extends DeckOfCards
+{
+    public function __construct()
+    {
+        parent::__construct();
+
+        // Lägg till två jokrar i kortleken
+        $this->deck[] = new Card(Card::JOKER_VALUE, Card::JOKER_SUIT);
+        $this->deck[] = new Card(Card::JOKER_VALUE, Card::JOKER_SUIT);
+    }
+}
