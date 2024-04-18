@@ -13,26 +13,14 @@ class CardHand
     }
 
 
-    public function getNumberCards(): int
+    public function countHand(): int
     {
         return count($this->hand);
     }
 
-    // public function getValues(): array
-    // {
-    //     $values = [];
-    //     foreach ($this->hand as $card) {
-    //         $values[] = $card->getValue();
-    //     }
-    //     return $values;
-    // }
 
-    // public function getString(): array
-    // {
-    //     $values = [];
-    //     foreach ($this->hand as $card) {
-    //         $values[] = $card->getAsString();
-    //     }
-    //     return $values;
-    // }
+    public function getHand(): array
+    {
+        return $this->hand;
+    }
 }

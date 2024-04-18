@@ -57,6 +57,12 @@ class CardGameController extends AbstractController
     {
         $deck = $session->get("cards_left_in_deck");
 
+        if ($deck === null) {
+            $deck = new DeckOfCards();
+            $deck->shuffle();
+            $session->set("cards_left_in_deck", $deck);
+        }
+
         $data = [
             "deck" => $deck->getDeck(),
         ];
@@ -84,7 +90,7 @@ class CardGameController extends AbstractController
     }
 
     #[Route("/game/card/test/deck/draw", name: "test_deck_draw")]
-    public function drawCard(SessionInterface $session): Response
+    public function drawOneCard(SessionInterface $session): Response
     {
         $deck = $session->get("cards_left_in_deck");
 
@@ -93,10 +99,6 @@ class CardGameController extends AbstractController
             $deck->shuffle();
             $session->set("cards_left_in_deck", $deck);
         }
-
-        // if ($deck->getNumberCards() <= 0) {
-        //     throw new Exception("Can't draw more cards than the deck currently contains.");
-        // }
 
         $hand = new CardHand();
         $drawnCard = $deck->draw();
@@ -108,14 +110,54 @@ class CardGameController extends AbstractController
         
         $hand->add($drawnCard);
 
-        //$deck->sort();
+        // Store the hand in the session
+        $session->set("drawn_cards", $hand->getHand());
 
         $data = [
             "cardsLeft" => $deck->getDeck(),
-            "cardsDrawn" => $drawnCard,
+            "cardsDrawn" => $hand->getHand(),
+            "cardsLeftInt" => $deck->countDeck(),
         ];
 
-        return $this->render('card/test/drawone.html.twig', $data);
+        return $this->render('card/test/draw.html.twig', $data);
+    }
+
+
+    #[Route("/game/card/test/deck/draw/{number<\d+>}", name: "draw_5_cards")]
+    public function drawFiveCards(SessionInterface $session, int $number): Response
+    {
+        $deck = $session->get("cards_left_in_deck");
+
+        if ($deck === null) {
+            $deck = new DeckOfCards();
+            $deck->shuffle();
+            $session->set("cards_left_in_deck", $deck);
+        }
+
+
+        if ($number > 52) {
+            throw new Exception("Can not draw more cards then the number of cards a deck contains");
+        } elseif ($number > $deck->countDeck()) {
+            throw new Exception("Can not draw more cards than cards left in deck.");
+        }
+
+        $hand = new CardHand();
+        
+        for ($i = 1; $i <= $number; $i++) {
+            $drawnCard = $deck->draw();
+            $hand->add($drawnCard);
+        }
+    
+        // Store the hand in the session
+        $session->set("drawn_cards", $hand);
+
+        $data = [
+            "cardsLeft" => $deck->getDeck(),
+            "cardsDrawn" => $hand->getHand(),
+            "cardsLeftInt" => $deck->countDeck(),
+        ];
+
+        return $this->render('card/test/draw.html.twig', $data);
     }
 
     #[Route("/game/card/session", name: "card_session", methods: ['GET'])]

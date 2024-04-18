@@ -10,9 +10,12 @@
 <li><a href="{{ path('test_deck') }}">Deck of cards sorted</a></li>
 <li><a href="{{ path('test_deck_shuffle') }}">Deck of cards shuffled</a></li>
 <li><a href="{{ path('test_deck_draw') }}">Draw one card from deck</a></li>
+<li><a href="{{ path('draw_5_cards', {number:5}) }}">Draw five cards from deck</a></li>
 <li><a href="{{ path('card_session_delete') }}">Reset deck</a></li>
 </ul>
 
+
+<h2>Cards in deck</h2>
 <div class="deck">
 {% for card in deck %}
    <div class="card {{ card.getColor() | lower }}">

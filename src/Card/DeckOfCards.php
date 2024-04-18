@@ -55,14 +55,9 @@ class DeckOfCards
         return $drawnCard;
     }
 
-    // // Sort cards
-    // public function sort(): void
-    // {
-    //     usort($this->deck, function ($a, $b) {
-    //         if ($a->getValue() == $b->getValue()) {
-    //             return $a->getSuit() - $b->getSuit(); // Sortera efter färg om värdena är lika
-    //         }
-    //         return $a->getValue() - $b->getValue(); // Sortera efter värde
-    //     });
-    // }
+    public function countDeck(): int
+    {
+        return count($this->deck);
+    }
+
 }

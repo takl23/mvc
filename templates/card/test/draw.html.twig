@@ -2,23 +2,25 @@
 {% block title %}Pig game{% endblock %}
 
 {% block body %}
-<h1>Draw one card</h1>
+<h1>Draw cards</h1>
 
-<p>You draw: {{ cardsDrawn.getValue() }} {{ cardsDrawn.getSuit() }}</p>
 
+
+
+<h2>Card hand</h2>
 <div class="deck">
-    <div class="card {{ cardsDrawn.getColor() | lower }}">
-        {{ cardsDrawn.representCard() }}
+{% for card in cardsDrawn %}
+   <div class="card {{ card.getColor() | lower }}">
+        {{ card.representCard() }} <!-- Anropa representCard() för att visa kortet -->
     </div>
-</div
-
-
-<hr>
+{% endfor %}
+</div>
 
 <hr>
 
 
-<p>Cards left in deck</p>
+<h2>Deck</h2>
+<p>Cards left in deck: {{cardsLeftInt}} </p>
 <div class="deck">
 {% for card in cardsLeft %}
    <div class="card {{ card.getColor() | lower }}">
