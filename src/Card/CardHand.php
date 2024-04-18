@@ -18,7 +18,6 @@ class CardHand
         return count($this->hand);
     }
 
-
     public function getHand(): array
     {
         return $this->hand;

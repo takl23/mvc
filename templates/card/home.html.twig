@@ -6,6 +6,12 @@
 
 <p>This is a card game.</p>
 
+{% for flashMessage in app.flashes('notice') %}
+    <div class="flash-notice">
+        {{ flashMessage }}
+    </div>
+{% endfor %}
+
 <ul>
 <li><a href="{{ path('test_deck') }}">Deck of cards sorted</a></li>
 <li><a href="{{ path('test_deck_shuffle') }}">Deck of cards shuffled</a></li>

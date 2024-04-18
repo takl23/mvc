@@ -6,7 +6,7 @@ use App\Card\Card;
 use App\Card\DeckOfCards;
 use App\Card\CardHand;
 
-use Symfony\Component\HttpFoundation\Request;
+//use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,7 +17,7 @@ use Exception;
 
 class CardGameController extends AbstractController
 {
-    #[Route("/game/card/init", name: "card_init")]
+    #[Route("/game/card/init", name: "card_init",  methods: ["GET"])]
     public function initcallback(SessionInterface $session): Response 
     {
         $deck = new DeckOfCards();
@@ -25,7 +25,7 @@ class CardGameController extends AbstractController
         return $this->redirectToRoute('card_start');
     }
 
-    #[Route("/game/card", name: "card_start")]
+    #[Route("/game/card", name: "card_start",  methods: ["GET"])]
     public function home(SessionInterface $session): Response
     {
         $deck = $session->get("cards_left_in_deck");
@@ -52,7 +52,7 @@ class CardGameController extends AbstractController
         return $this->render('card/test/card.html.twig', $data);
     }
 
-    #[Route("/game/card/test/deck", name: "test_deck")]
+    #[Route("/game/card/test/deck", name: "test_deck",  methods: ["GET"])]
     public function sortedDeck(SessionInterface $session): Response
     {
         $deck = $session->get("cards_left_in_deck");
@@ -72,7 +72,7 @@ class CardGameController extends AbstractController
         return $this->render('card/test/deck.html.twig', $data);
     }
 
-    #[Route("/game/card/test/deck/shuffle", name: "test_deck_shuffle")]
+    #[Route("/game/card/test/deck/shuffle", name: "test_deck_shuffle",  methods: ["GET"])]
     public function shuffleDeck(SessionInterface $session): Response
     {
     $deck = $session->get("cards_left_in_deck");
@@ -89,7 +89,7 @@ class CardGameController extends AbstractController
     return $this->render('card/test/deck.html.twig', $data);
     }
 
-    #[Route("/game/card/test/deck/draw", name: "test_deck_draw")]
+    #[Route("/game/card/test/deck/draw", name: "test_deck_draw",  methods: ["GET"])]
     public function drawOneCard(SessionInterface $session): Response
     {
         $deck = $session->get("cards_left_in_deck");
@@ -123,7 +123,7 @@ class CardGameController extends AbstractController
     }
 
 
-    #[Route("/game/card/test/deck/draw/{number<\d+>}", name: "draw_5_cards")]
+    #[Route("/game/card/test/deck/draw/{number<\d+>}", name: "draw_5_cards",  methods: ["GET"])]
     public function drawFiveCards(SessionInterface $session, int $number): Response
     {
         $deck = $session->get("cards_left_in_deck");
@@ -176,7 +176,7 @@ class CardGameController extends AbstractController
             return $this->render('card/session.html.twig', $data);
     }
 
-    #[Route("/game/card/session/delete", name: "card_session_delete")]
+    #[Route("/game/card/session/delete", name: "card_session_delete",  methods: ["GET"])]
     public function sessionDelete(
         SessionInterface $session
     ): Response
