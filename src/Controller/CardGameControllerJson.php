@@ -78,9 +78,9 @@ class CardGameControllerJson extends AbstractController
         return $response;
     }
 
-    #[Route("/api/deck/draw", name: "draw", methods: ["POST"])]
-    public function jsonDraw(SessionInterface $session): Response
-    {
+    // #[Route("/api/deck/draw", name: "draw", methods: ["POST"])]
+    // public function jsonDraw(SessionInterface $session): Response
+    // {
        
-    }
+    // }
 }

@@ -29,14 +29,14 @@ class LuckyControllerJson
         return $response;
     }
 
-    #[Route("/api/qoute", name: "qoute")]
-    public function jsonQoute(): Response
+    #[Route("/api/quote", name: "quote")]
+    public function jsonQuote(): Response
     {
-        $qoute = array("Seize the day", "Today will be a good day", "You are amazing", "You are awesome");
-        shuffle($qoute);
+        $quote = array("Seize the day", "Today will be a good day", "You are amazing", "You are awesome");
+        shuffle($quote);
 
         $data = [
-            'Random qoute selected for you' => $qoute[0],
+            'Random quote selected for you' => $quote[0],
             'Todays date' => date("Y-m-d"),
             'Time Europe/Stockholm' => date("H:i:s"),
         ];
