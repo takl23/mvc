@@ -18,18 +18,18 @@
 
 <form method="post" action="">
     <p>
-        <input type="submit" name="draw" value="Draw one card JSON"
-            onClick="this.form.action='{{ path('draw') }}'"
+        <input type="submit" name="apidraw" value="Draw one card JSON"
+            onClick="this.form.action='{{ path('apidraw') }}'"
         >
     </p>
 </form>
 
-<form method="post" action="{{ path('drawmany', {'number': 1} )}}">
+<form method="post" action="{{ path('api_drawmany', {'number': 1} )}}">
     <p>
         <input type="number" name="number" min="1" max="10" value="1">
     </p>
     <p>
-        <input type="submit" name="draw" value="Draw cards">
+        <input type="submit" name="apidraw" value="Draw cards">
     </p>
 </form>
 
