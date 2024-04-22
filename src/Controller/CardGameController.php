@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Card\Card;
 use App\Card\DeckOfCards;
 use App\Card\CardHand;
+use App\Card\CardGraphic;
+use Psr\Log\LoggerInterface;
 
 //use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -40,17 +42,23 @@ class CardGameController extends AbstractController
         return $this->render('card/home.html.twig', $data);
     }
 
-    #[Route("/game/card/card", name: "card")]
-    public function testCard(): Response
-    {
-        $card = new Card(random_int(1, 13), random_int(1, 4));
+    #[Route("/game/card/card", name: "testcard")]
+public function testCard(LoggerInterface $logger): Response
+{
+    $value = random_int(1, 13);
+    $suit = random_int(1, 4);
+    $card = new CardGraphic($value, $suit);
 
-        $data = [
-            "card" => $card->representCard(),
-        ];
+    // Logga kortets värde och svit
+    $logger->info("Value: $value, Suit: $suit");
 
-        return $this->render('card/card.html.twig', $data);
-    }
+    $data = [
+        "card" => $card->representCardUnicode(),
+    ];
+
+    return $this->render('card/card.html.twig', $data);
+}
+
 
     #[Route("/game/card/deck", name: "deck",  methods: ["GET"])]
     public function sortedDeck(SessionInterface $session): Response

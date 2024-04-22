@@ -1,0 +1,45 @@
+----------------------------------
+|            DeckOfCards          |
+----------------------------------
+| - deck: array                   |
+----------------------------------
+| + __construct()                 |
+| + getDeck(): array              |
+| + shuffle(): void               |
+| + draw(): ?Card                 |
+| + countDeck(): int              |
+----------------------------------
+
+----------------------------------
+|             Card                |
+----------------------------------
+| - value: int                    |
+| - suit: int                     |
+| - color: string                 |
+----------------------------------
+| + ACE: int                      |
+| + JACK: int                     |
+| + QUEEN: int                    |
+| + KING: int                     |
+| + HEARTS: int                   |
+| + DIAMONDS: int                 |
+| + CLUBS: int                    |
+| + SPADES: int                   |
+----------------------------------
+| + __construct(value: int, suit: |
+|   int)                          |
+| + getValue(): int               |
+| + getSuit(): int                |
+| + getColor(): string            |
+| + representCard(): string      |
+----------------------------------
+
+----------------------------------
+|            CardHand             |
+----------------------------------
+| - hand: array                   |
+----------------------------------
+| + add(card: Card): void         |
+| + countHand(): int              |
+| + getHand(): array              |
+----------------------------------
