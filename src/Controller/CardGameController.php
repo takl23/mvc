@@ -47,13 +47,16 @@ public function testCard(LoggerInterface $logger): Response
 {
     $value = random_int(1, 13);
     $suit = random_int(1, 4);
-    $card = new CardGraphic($value, $suit);
+    $cardGraphic = new CardGraphic($value, $suit);
+    $card = new Card($value, $suit);
 
     // Logga kortets värde och svit
     $logger->info("Value: $value, Suit: $suit");
 
     $data = [
-        "card" => $card->representCardUnicode(),
+        "cardGraphic" => $cardGraphic->representCardUnicode(),
+        "card" => $card->representCard(),
+
     ];
 
     return $this->render('card/card.html.twig', $data);
