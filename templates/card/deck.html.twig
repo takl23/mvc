@@ -8,9 +8,9 @@
 <br>
 
 <div class="deck">
-{% for card in deck %}
-   <div class="card {{ card.getColor() | lower }}">
-        {{ card.representCard() }} <!-- Anropa representCard() för att visa kortet -->
+{% for cardGraphic in deck %}
+   <div class="graphiccard">
+        {{ cardGraphic }} <!-- Anropa representCard() för att visa kortet -->
     </div>
 {% endfor %}
 </div>

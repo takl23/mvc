@@ -13,9 +13,9 @@ class DeckOfCards
 
         // Loop through each suit and value to create the deck
         //  I Card är detta definerat som HEARTS = 1, DIAMONDS = 2, CLUBS = 3, SPADES = 4;
-        for ($suit = Card::HEARTS; $suit <= Card::SPADES; $suit++) {
-            for ($value = Card::ACE; $value <= Card::KING; $value++) {
-                $this->deck[] = new Card($value, $suit);
+        for ($suit = CardGraphic::HEARTS; $suit <= CardGraphic::SPADES; $suit++) {
+            for ($value = CardGraphic::ACE; $value <= CardGraphic::KING; $value++) {
+                $this->deck[] = new CardGraphic($value, $suit);
             }
         }
     }
@@ -32,7 +32,7 @@ class DeckOfCards
     }
 
     // Draw a card from the deck
-    public function draw(): ?Card
+    public function draw(): ?CardGraphic
     {
         // If the deck is empty, return null
         if (empty($this->deck)) {
@@ -59,5 +59,16 @@ class DeckOfCards
     {
         return count($this->deck);
     }
+
+    public function getDeckOfCardGraphics(): array
+{
+    $cardGraphics = [];
+
+    foreach ($this->deck as $card) {
+        $cardGraphics[] = new CardGraphic($card->getValue(), $card->getSuit());
+    }
+
+    return $cardGraphics;
+}
 
 }

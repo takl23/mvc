@@ -7,14 +7,10 @@ use App\Card\DeckOfCards;
 use App\Card\CardHand;
 use App\Card\CardGraphic;
 use Psr\Log\LoggerInterface;
-
-//use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
 use Exception;
 
 class CardGameController extends AbstractController
@@ -74,11 +70,12 @@ public function testCard(LoggerInterface $logger): Response
             $session->set("cards_left_in_deck", $deck);
         }
 
+        
         $data = [
-            "deck" => $deck->getDeck(),
+            "deck" => $deck->getDeckOfCardGraphics(),
         ];
 
-        $session->set("cards_left_in_deck", $deck);
+        //$session->set("cards_left_in_deck", $deck);
 
         return $this->render('card/deck.html.twig', $data);
     }
