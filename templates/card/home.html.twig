@@ -30,4 +30,26 @@
 {% endfor %}
 </div>
 
+<h2>Klassbeskrivning</h2>
+<p>Klassen Card representerar ett enskilt kort, DeckOfCards representerar en kortlek 
+och CardHand representerar en samling av kort. CardGraphis är en förlängling av Card för att 
+möjliggöra representation av kort på ett annat sätt.</p>
+
+<h2>Relationen mellan klassern</h2>
+
+<p>CardGraphis ärver från Card och kan använda alla publika delar från Card. 
+De privata delarna är dock osynliga.</p>
+
+<p>CardHand kan inte finnas utan användninga av klassen Card och därför 
+ har vi en aggregationssrelation mellan dessa klasser. 
+DeckOfCards å andra sidan skapar en kompostionsrelation med klassen Card där DeckOfCards har ett
+ fast antal kort i sin kortlek</p>
+
+<div >
+    <picture>
+        <img src="{{ asset('img/Diagram1.png') }}" alt="UML diagram och card game">
+    </picture>
+
+</div>
+
 {% endblock %}
