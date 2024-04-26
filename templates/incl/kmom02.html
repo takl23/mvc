@@ -1,7 +1,58 @@
 
 
-            <h2 id="kmom02">Redovisning av kmom02</h2>
-            <p>
-            ABC
-            </p>
+<h2 id="kmom02">Redovisning av kmom02</h2>
+
+<p>
+I objektorienterad programmering finns det konstruktioner som hjälper en att organisera sin kod effektivt. 
+Några exempel är arv, komposition, interface och trait.
+</p>   
+
+<ul> 
+<li>
+Arv gör att en klass kan ärva allt från en annan klass, vilket ger tillgång till dess metoder och egenskaper och möjliggör att man kan bygga vidare på dem. 
+</li>
+
+<li>
+Komposition är liknande arv, men med skillnaden att klassen innehåller instanser av andra klasser.
+</li>
+
+
+<li>
+Interface är en konstruktion som kräver att alla metoder är publika och tillåter oss att definiera en uppsättning metoder en klass måste använda utan att specificera 
+hur dessa metoder implementeras.
+</li>   
+
+<li>
+Trait är en grupp av metoder som kan återanvändas i flera klasser utan att skapa en hierarki av klasser.
+</li>
+ 
+</ul> 
             
+<p>
+I kmom02 skulle vi skapa en kortlek där man kunde dra ett eller flera kort. Jag är i det stora hela nöjd med min implementation. Initialt utgick jag från koden för 
+"Dice" och modifierade så jag fick fram Classen Card, DeckOfCards och CardHand. I kmom02 kravställde man att man skulle minst implementera ett arv, vilket jag också 
+gjorde, "CardGraphic". Här var det inte lika lätt att bygga vidare från "Dice" då jag redan hade implementerat delar av metodiken som användes i "DiceGraphic" i 
+"Card". Det var väl här jag fick kämpa och initialt tänkte jag att jag skulle skapa ett arv med Card och utöka kortleken med jorkar, men gick bet och valde att istället 
+skapa kort med unicode istället. 
+</p>  
+
+<p>
+Jag fick överlag kämpa med kmom02 länge och har faktiskt svårt att hitta förbättringspotential eftersom jag har för dålig kunskap. Men bara för att säga något 
+så kanske förbättringspotentialen hade varit att inte skapa så "avancerade" klasser från början, tex Card, utan använt just objektorienterade programmeringens 
+funktionaliet och byggt på med arv allt eftersom. 
+</p>
+
+<p>
+Min reflektion så här långt med att jobba i Symfony med applikationskod enligt MVC är att jag köper konceptet om ett modulärt språk med funktioner så som "routing", 
+men jag har mycket kvar att lära mig för att kunna säga att jag använder detta PHP-ramverk till dess fulla potential. 
+</p>
+
+<p>
+    TIL(“Today I Learned”) för kmom02:
+ </p>
+ 
+ <ul>
+     <li>Förstått lite mera om arv och komposition och hur de kan användas</li>
+     <li>Hur ett bra Git commit message kan se ut (men tycker det är svårt och glömmer göra många små commits) </li>
+     <li>Hur jag kan skapa en kortlek med hjälp av Symfony och MVC principer </li>
+ </ul>
