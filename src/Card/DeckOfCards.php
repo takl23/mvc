@@ -2,11 +2,10 @@
 
 namespace App\Card;
 
-
-class DeckOfCards 
+class DeckOfCards
 {
     private array $deck; //deck of cards
-    
+
     public function __construct()
     {
         $this->deck = [];
@@ -56,14 +55,14 @@ class DeckOfCards
     }
 
     public function getDeckOfCardGraphics(): array
-{
-    $cardGraphics = [];
+    {
+        $cardGraphics = [];
 
-    foreach ($this->deck as $card) {
-        $cardGraphics[] = new CardGraphic($card->getValue(), $card->getSuit());
+        foreach ($this->deck as $card) {
+            $cardGraphics[] = new CardGraphic($card->getValue(), $card->getSuit());
+        }
+
+        return $cardGraphics;
     }
-
-    return $cardGraphics;
-}
 
 }

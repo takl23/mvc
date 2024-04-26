@@ -72,16 +72,13 @@ class CardGraphic extends Card
     {
         parent::__construct($value, $suit);
 
-        // Initialisera egenskapen för grafisk representation
         $this->graphicRepresentation = $this->representCardUnicode();
     }
 
     public function representCardUnicode(): string
     {
-        // Hämta Unicode-teckenmappningen för färgen
         $values = self::$cardValues[$this->getSuit()] ?? [];
 
-        // Hämta Unicode-tecknet baserat på värdet inom färgmappningen
         $unicodeChar = $values[$this->getValue()] ?? '';
 
         return $unicodeChar;

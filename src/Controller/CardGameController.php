@@ -15,15 +15,15 @@ use Exception;
 
 class CardGameController extends AbstractController
 {
-    #[Route("/game/card/init", name: "card_init",  methods: ["GET"])]
-    public function initcallback(SessionInterface $session): Response 
+    #[Route("/game/card/init", name: "card_init", methods: ["GET"])]
+    public function initcallback(SessionInterface $session): Response
     {
         $deck = new DeckOfCards();
         $session->set("cards_left_in_deck", $deck);
         return $this->redirectToRoute('card_start');
     }
 
-    #[Route("/game/card", name: "card_start",  methods: ["GET"])]
+    #[Route("/game/card", name: "card_start", methods: ["GET"])]
     public function home(SessionInterface $session): Response
     {
         $deck = $session->get("cards_left_in_deck");
@@ -39,27 +39,27 @@ class CardGameController extends AbstractController
     }
 
     #[Route("/game/card/card", name: "testcard")]
-public function testCard(LoggerInterface $logger): Response
-{
-    $value = random_int(1, 13);
-    $suit = random_int(1, 4);
-    $cardGraphic = new CardGraphic($value, $suit);
-    $card = new Card($value, $suit);
+    public function testCard(LoggerInterface $logger): Response
+    {
+        $value = random_int(1, 13);
+        $suit = random_int(1, 4);
+        $cardGraphic = new CardGraphic($value, $suit);
+        $card = new Card($value, $suit);
 
-    // Logga kortets värde och svit
-    $logger->info("Value: $value, Suit: $suit");
+        // Logga kortets värde och svit
+        $logger->info("Value: $value, Suit: $suit");
 
-    $data = [
-        "cardGraphic" => $cardGraphic->representCardUnicode(),
-        "card" => $card->representCard(),
+        $data = [
+            "cardGraphic" => $cardGraphic->representCardUnicode(),
+            "card" => $card->representCard(),
 
-    ];
+        ];
 
-    return $this->render('card/card.html.twig', $data);
-}
+        return $this->render('card/card.html.twig', $data);
+    }
 
 
-    #[Route("/game/card/deck", name: "deck",  methods: ["GET"])]
+    #[Route("/game/card/deck", name: "deck", methods: ["GET"])]
     public function sortedDeck(SessionInterface $session): Response
     {
         $deck = $session->get("cards_left_in_deck");
@@ -70,7 +70,7 @@ public function testCard(LoggerInterface $logger): Response
             $session->set("cards_left_in_deck", $deck);
         }
 
-        
+
         $data = [
             "deck" => $deck->getDeckOfCardGraphics(),
         ];
@@ -80,24 +80,24 @@ public function testCard(LoggerInterface $logger): Response
         return $this->render('card/deck.html.twig', $data);
     }
 
-    #[Route("/game/card/deck/shuffle", name: "deck_shuffle",  methods: ["GET"])]
+    #[Route("/game/card/deck/shuffle", name: "deck_shuffle", methods: ["GET"])]
     public function shuffleDeck(SessionInterface $session): Response
     {
-    $deck = $session->get("cards_left_in_deck");
+        $deck = $session->get("cards_left_in_deck");
 
-    // Make copy of deck
-    $shuffleDeck = $deck->getDeck();
+        // Make copy of deck
+        $shuffleDeck = $deck->getDeck();
 
-   shuffle($shuffleDeck);
+        shuffle($shuffleDeck);
 
-    $data = [
-        "deck" => $shuffleDeck
-    ];
+        $data = [
+            "deck" => $shuffleDeck
+        ];
 
-    return $this->render('card/deck.html.twig', $data);
+        return $this->render('card/deck.html.twig', $data);
     }
 
-    #[Route("/game/card/deck/draw", name: "deck_draw",  methods: ["GET"])]
+    #[Route("/game/card/deck/draw", name: "deck_draw", methods: ["GET"])]
     public function drawOneCard(SessionInterface $session): Response
     {
         $deck = $session->get("cards_left_in_deck");
@@ -113,9 +113,9 @@ public function testCard(LoggerInterface $logger): Response
 
         // Om det inte finns några kort kvar i kortleken, visa ett meddelande
         if ($drawnCard === null) {
-        return new Response("The deck is empty!");
+            return new Response("The deck is empty!");
         }
-        
+
         $hand->add($drawnCard);
 
         // Store the hand in the session
@@ -131,7 +131,7 @@ public function testCard(LoggerInterface $logger): Response
     }
 
 
-    #[Route("/game/card/deck/draw/{number<\d+>}", name: "draw_5_cards",  methods: ["GET"])]
+    #[Route("/game/card/deck/draw/{number<\d+>}", name: "draw_5_cards", methods: ["GET"])]
     public function drawFiveCards(SessionInterface $session, int $number): Response
     {
         $deck = $session->get("cards_left_in_deck");
@@ -150,12 +150,12 @@ public function testCard(LoggerInterface $logger): Response
         }
 
         $hand = new CardHand();
-        
+
         for ($i = 1; $i <= $number; $i++) {
             $drawnCard = $deck->draw();
             $hand->add($drawnCard);
         }
-    
+
         // Store the hand in the session
         $session->set("drawn_cards", $hand);
 
@@ -171,54 +171,51 @@ public function testCard(LoggerInterface $logger): Response
     #[Route("/game/card/session", name: "card_session", methods: ['GET'])]
     public function sessionPrint(
         SessionInterface $session
-    ): Response
-    {
-       
+    ): Response {
+
         $data = [
             "session" => $session->all()
         ];
 
         //var_dump($data);
-        
 
-            return $this->render('card/session.html.twig', $data);
+
+        return $this->render('card/session.html.twig', $data);
     }
 
-    #[Route("/game/card/session/delete", name: "card_session_delete",  methods: ["GET"])]
+    #[Route("/game/card/session/delete", name: "card_session_delete", methods: ["GET"])]
     public function sessionDelete(
         SessionInterface $session
-    ): Response
-    {
-      
-    $session->clear();
-    
+    ): Response {
 
-$this->addFlash(
+        $session->clear();
+
+
+        $this->addFlash(
             'notice',
             'Session deleted!'
         );
         //var_dump($data);
-        
-            return $this->redirectToRoute('card_start');
+
+        return $this->redirectToRoute('card_start');
     }
 
-  
+
 
     #[Route("/game/card/session/delete2", name: "card_session_delete2", methods: ['POST'])]
     public function sessionDelete2(
         SessionInterface $session
-    ): Response
-    {
-      
-    $session->clear();
-    
+    ): Response {
 
-$this->addFlash(
+        $session->clear();
+
+
+        $this->addFlash(
             'notice',
             'Session deleted!'
         );
         //var_dump($data);
-        
-            return $this->redirectToRoute('card_session');
+
+        return $this->redirectToRoute('card_session');
     }
 }
