@@ -1,10 +1,14 @@
 <?php
 
 namespace App\Card;
+
 class CardGraphic extends Card
 {
-    private string $graphicRepresentation;
+    private string $graphicRep;
 
+    /**
+    * @var array<int, array<int, string>>
+    */
     public static array $cardValues = [
         Card::HEARTS => [
             Card::ACE => "\u{1F0B1}",
@@ -52,7 +56,7 @@ class CardGraphic extends Card
             Card::KING => "\u{1F0DE}",
         ],
         Card::SPADES => [
-            Card::ACE => "\u{1F0A1}", 
+            Card::ACE => "\u{1F0A1}",
             2 => "\u{1F0A2}",
             3 => "\u{1F0A3}",
             4 => "\u{1F0A4}",
@@ -66,13 +70,14 @@ class CardGraphic extends Card
             self::QUEEN => "\u{1F0AD}",
             self::KING => "\u{1F0AE}",
         ],
-    ]; 
+    ];
 
     public function __construct(int $value, int $suit)
     {
         parent::__construct($value, $suit);
 
-        $this->graphicRepresentation = $this->representCardUnicode();
+        $this->graphicRep
+ = $this->representCardUnicode();
     }
 
     public function representCardUnicode(): string
@@ -84,14 +89,16 @@ class CardGraphic extends Card
         return $unicodeChar;
     }
 
-    public function getGraphicRepresentation(): string
+    public function getgraphicRep(): string
     {
-        return $this->graphicRepresentation;
+        return $this->graphicRep
+;
     }
-    
+
     public function __toString(): string
-{
-    return $this->getGraphicRepresentation();
-}
+    {
+        return $this->getgraphicRep
+();
+    }
 
 }

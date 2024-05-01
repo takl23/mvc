@@ -162,9 +162,9 @@ class CardGameControllerJson extends AbstractController
             // Lägg till det dragna kortet till handen
             if ($drawnCard !== null) {
                 $hand->add($drawnCard);
-            } else {
-                break; // Om kortleken är tom, bryt loopen
-            }
+            } //else {
+            //     break; // Om kortleken är tom, bryt loopen
+            // }
         }
 
         // Store the hand in the session

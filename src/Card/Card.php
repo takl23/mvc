@@ -2,12 +2,10 @@
 
 namespace App\Card;
 
-
 use Exception;
 
 class Card
 {
-    
     private int $value; //siffra
     private int $suit; // 1=hjärter, 2=ruter, 3=klöver, 4=spader
     private string $color; // Färg
@@ -24,8 +22,8 @@ class Card
     public const CLUBS = 3;
     public const SPADES = 4;
 
-   // Use constructor to always have a value and suite for card. 
-   // If limit is outreached errormessage is thrown
+    // Use constructor to always have a value and suite for card.
+    // If limit is outreached errormessage is thrown
     public function __construct(int $value, int $suit)
     {
         if ($value < 1 || $value > 13) {
@@ -46,8 +44,8 @@ class Card
         return $this->value;
     }
 
-    
-    public function getSuit(): string
+
+    public function getSuit(): int
     {
         return $this->suit;
     }

@@ -33,7 +33,7 @@ class LuckyControllerTwig extends AbstractController
     }
 
     #[Route("/", name: "me")]
-    public function me(): Response
+    public function mepage(): Response
     {
         return $this->render('me.html.twig');
     }

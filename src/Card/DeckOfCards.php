@@ -4,6 +4,9 @@ namespace App\Card;
 
 class DeckOfCards
 {
+    /**
+     * @var CardGraphic[]
+     */
     private array $deck; //deck of cards
 
     public function __construct()
@@ -20,6 +23,9 @@ class DeckOfCards
     }
 
     // Getter method to retrieve the deck
+    /**
+     * @return CardGraphic[]
+     */
     public function getDeck(): array
     {
         return $this->deck;
@@ -54,6 +60,9 @@ class DeckOfCards
         return count($this->deck);
     }
 
+     /**
+     * @return CardGraphic[]
+     */
     public function getDeckOfCardGraphics(): array
     {
         $cardGraphics = [];

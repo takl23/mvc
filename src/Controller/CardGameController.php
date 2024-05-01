@@ -26,6 +26,7 @@ class CardGameController extends AbstractController
     #[Route("/game/card", name: "card_start", methods: ["GET"])]
     public function home(SessionInterface $session): Response
     {
+         /** @var DeckOfCards|null $deck */
         $deck = $session->get("cards_left_in_deck");
         if ($deck == null) {
             return $this->redirectToRoute('card_init');
@@ -62,6 +63,7 @@ class CardGameController extends AbstractController
     #[Route("/game/card/deck", name: "deck", methods: ["GET"])]
     public function sortedDeck(SessionInterface $session): Response
     {
+         /** @var DeckOfCards|null $deck */
         $deck = $session->get("cards_left_in_deck");
 
         if ($deck === null) {
@@ -70,7 +72,7 @@ class CardGameController extends AbstractController
             $session->set("cards_left_in_deck", $deck);
         }
 
-
+    
         $data = [
             "deck" => $deck->getDeckOfCardGraphics(),
         ];
@@ -83,7 +85,14 @@ class CardGameController extends AbstractController
     #[Route("/game/card/deck/shuffle", name: "deck_shuffle", methods: ["GET"])]
     public function shuffleDeck(SessionInterface $session): Response
     {
+         /** @var DeckOfCards|null $deck */
         $deck = $session->get("cards_left_in_deck");
+
+        // Check if $deck is null or not an instance of DeckOfCards
+         if ($deck === null) {
+        // Handle the case when $deck is null
+        return new Response("Deck is not available.", Response::HTTP_BAD_REQUEST);
+    }
 
         // Make copy of deck
         $shuffleDeck = $deck->getDeck();
@@ -100,6 +109,7 @@ class CardGameController extends AbstractController
     #[Route("/game/card/deck/draw", name: "deck_draw", methods: ["GET"])]
     public function drawOneCard(SessionInterface $session): Response
     {
+        /** @var DeckOfCards|null $deck */
         $deck = $session->get("cards_left_in_deck");
 
         if ($deck === null) {
@@ -134,13 +144,20 @@ class CardGameController extends AbstractController
     #[Route("/game/card/deck/draw/{number<\d+>}", name: "draw_5_cards", methods: ["GET"])]
     public function drawFiveCards(SessionInterface $session, int $number): Response
     {
-        $deck = $session->get("cards_left_in_deck");
+         /** @var DeckOfCards|null $deck */
+    $deck = $session->get("cards_left_in_deck");
 
-        if ($deck === null) {
-            $deck = new DeckOfCards();
-            $deck->shuffle();
-            $session->set("cards_left_in_deck", $deck);
-        }
+    // Check if $deck is null or not an instance of DeckOfCards
+    if ($deck === null) {
+        $deck = new DeckOfCards();
+        $deck->shuffle();
+        $session->set("cards_left_in_deck", $deck);
+    }
+
+    // Ensure that $deck is an instance of DeckOfCards
+    if (!($deck instanceof DeckOfCards)) {
+        throw new Exception("Invalid deck.");
+    }
 
 
         if ($number > 52) {
