@@ -1,0 +1,22 @@
+{% extends "base.html.twig" %}
+{% block title %}Card Game{% endblock %}
+
+{% block body %}
+<h1>Game 32</h1>
+
+<p>TEXT</p>
+
+{% for flashMessage in app.flashes('notice') %}
+    <div class="flash-notice">
+        {{ flashMessage }}
+    </div>
+{% endfor %}
+
+<ul>
+<li><a href="{{ path('game21_documentation') }}">Dokumentation</a></li>
+
+</ul>
+
+
+
+{% endblock %}
