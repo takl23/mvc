@@ -2,21 +2,23 @@
 {% block title %}Card Game{% endblock %}
 
 {% block body %}
-<h1>Game 32</h1>
-
-<p>TEXT</p>
-
-{% for flashMessage in app.flashes('notice') %}
-    <div class="flash-notice">
-        {{ flashMessage }}
-    </div>
-{% endfor %}
+<h1>Game 21</h1>
 
 <ul>
-<li><a href="{{ path('game21_documentation') }}">Dokumentation</a></li>
+
+<li>Spelet går ut på att dra kort så man hamnar så nära som möjligt värdet 21. </li>
+<li>Ess är värt 1. </li>
+<li>Spelare 1 börjar med att dra kort och stanna när den känner sig nöjd. </li>
+<li>Skulle spelare 1 få ett värde som är större än 21 förlorar spelare 1 automatiskt och vinnsten går till spelare 2.</li>
+<li>Spelare 2 drar kort när spelare 1 har stannat och samma prinicper gäller som för spelare 1.</li>
 
 </ul>
 
+<hr>
+
+<a href="{{ path('game21_documentation') }}">>>> Dokumentation</a>
+<br>
+<a href="{{ path('game21_documentation') }}">>>> Börja spela</a>
 
 
 {% endblock %}
