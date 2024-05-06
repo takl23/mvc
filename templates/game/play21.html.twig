@@ -1,0 +1,21 @@
+{% extends "base.html.twig" %}
+{% block title %}Card Game{% endblock %}
+
+{% block body %}
+<h1>Player 1's Hand:</h1>
+    <ul>
+        {% for card in player1Cards %}
+            <li>{{ card.representCard() }}</li>
+        {% endfor %}
+    </ul>
+
+    <h1>Player 2's Hand:</h1>
+    <ul>
+        {% for card in player2Cards %}
+            <li>{{ card.representCard() }}</li>
+        {% endfor %}
+    </ul>
+
+
+
+{% endblock %}

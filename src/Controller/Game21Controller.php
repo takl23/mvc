@@ -6,6 +6,9 @@ namespace App\Controller;
 // use App\Card\DeckOfCards;
 // use App\Card\CardHand;
 
+use App\Card\Game21;
+
+
 // use Psr\Log\LoggerInterface;
 // use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -29,5 +32,21 @@ class Game21Controller extends AbstractController
         return $this->render('game/doc.html.twig');
     }
 
+    #[Route("/game/play21", name: "game21_play", methods: ["GET"])]
+    public function play21(): Response
+    {
+        $game = new Game21();
+        $game->NewGame();
+    
+        $player1Cards = $game->getPlayer1Hand()->getHand();
+        $player2Cards = $game->getPlayer2Hand()->getHand();
+    
+        return $this->render('game/play21.html.twig', [
+            'player1Cards' => $player1Cards,
+            'player2Cards' => $player2Cards,
+        ]);
+        
+        return $this->render('game/play21.html.twig');
+    }
      
 }
