@@ -18,7 +18,10 @@
 
 <a href="{{ path('game21_documentation') }}">>>> Dokumentation</a>
 <br>
-<a href="{{ path('game21_play') }}">>>> Börja spela</a>
+
+<form action="{{ path('init21') }}" method="post">
+    <button type="submit">Börja spela</button>
+</form>
 
 
 {% endblock %}

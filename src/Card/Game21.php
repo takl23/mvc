@@ -33,9 +33,9 @@ class Game21
         $this->player1Hand = new CardHand();
         $this->player2Hand = new CardHand();
 
-        //Deal inital cards player 1 and 2
+        // //Deal inital cards player 1 and 2
         $this->player1Hand->add($this->deck->draw());
-        $this->player2Hand->add($this->deck->draw());
+        // $this->player2Hand->add($this->deck->draw());
     }
 
     public function getPlayer1Hand(): CardHand
@@ -48,4 +48,21 @@ class Game21
         return $this->player2Hand;
     }
     
+
+    public function getDeck(): DeckOfCards
+    {
+        return $this->deck;
+    }
+
+    public function sumHand(array $hand): int
+    {
+        $sum = 0;
+
+        foreach ($hand as $card) {
+            $sum += $card->getValue();
+        }
+
+        return $sum;
+    }
+
 }

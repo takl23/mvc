@@ -3,15 +3,22 @@
 
 {% block body %}
 <h1>Player 1's Hand:</h1>
-    <ul>
-        {% for card in player1Cards %}
-            <li>{{ card.representCard() }}</li>
+  
+        {% for card in player1Hand %}
+            {{ card.representCard() }}
         {% endfor %}
-    </ul>
+  
+<h1>Player 1's Score:</h1>
+
+   {{ player1Score }}
+
+<form action="{{ path('draw21') }}" method="post">
+    <button type="submit">Dra kort</button>
+</form>
 
     <h1>Player 2's Hand:</h1>
     <ul>
-        {% for card in player2Cards %}
+        {% for card in player2Hand %}
             <li>{{ card.representCard() }}</li>
         {% endfor %}
     </ul>
