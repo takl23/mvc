@@ -619,6 +619,14 @@ a:hover {
   color: #fff;
 }
 
+div.centerul {
+  text-align: center;
+}
+div.centerul ul {
+  display: inline-block;
+  text-align: left;
+}
+
 .row {
   display: flex;
   flex-direction: row;

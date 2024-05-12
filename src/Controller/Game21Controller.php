@@ -56,9 +56,13 @@ class Game21Controller extends AbstractController
 
         $player1Hand = $game21->getPlayer1Hand()->getHand();
         $player1Score = $game21->sumHand($player1Hand);
-
+     
         $player2Hand = $game21->getPlayer2Hand()->getHand();
         $player2Score = $game21->sumHand($player2Hand);
+
+        // sätt ställning i sessionen
+        $session->set("player1Score", $player1Score);
+        $session->set("player2Score", $player2Score);
 
         return $this->render('game/play21.html.twig', [
             'player1Hand' => $player1Hand,
@@ -85,6 +89,10 @@ class Game21Controller extends AbstractController
 
         $player2Hand = $game21->getPlayer2Hand()->getHand();
         $player2Score = $game21->sumHand($player2Hand);
+
+        // sätt ställning i sessionen
+        $session->set("player1Score", $player1Score);
+        $session->set("player2Score", $player2Score);
 
         return $this->render('game/result21.html.twig', [
             'player1Hand' => $player1Hand,
@@ -133,7 +141,7 @@ class Game21Controller extends AbstractController
         if ($game21 == null) {
             return $this->redirectToRoute('init21');
         } 
-        
+
         // Dra kort för spelare 2 tills deras poäng når 17 eller mer
         while ($game21->getPlayer2Score() < 17) {
             $game21->drawCardPlayer2();
@@ -146,7 +154,7 @@ class Game21Controller extends AbstractController
 
         // Uppdatera spelet i sessionen
         $session->set("game21", $game21);
-
+    
         // Omdirigera till resultatet
         return $this->redirectToRoute('result21');
     }
