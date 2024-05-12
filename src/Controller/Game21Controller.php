@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-// use App\Card\Card;
+use App\Card\Card;
 // use App\Card\DeckOfCards;
 // use App\Card\CardHand;
 
@@ -37,7 +37,7 @@ class Game21Controller extends AbstractController
     public function init21(SessionInterface $session): Response
     {
         $game21 = new Game21();
-        $game21->NewGame();
+        $game21->newGame();
 
         $session->set("game21", $game21);
 
@@ -47,11 +47,12 @@ class Game21Controller extends AbstractController
     #[Route("/game/play21", name: "play21", methods: ["GET"])]
     public function play21(SessionInterface $session): Response
     {
+        /** @var Game21|null $game21 */
         $game21 = $session->get("game21");
 
         if ($game21 == null) {
             return $this->redirectToRoute('init21');
-        }
+        } 
 
         $player1Hand = $game21->getPlayer1Hand()->getHand();
         $player1Score = $game21->sumHand($player1Hand);
@@ -70,8 +71,14 @@ class Game21Controller extends AbstractController
 
     #[Route("/game/result21", name: "result21", methods: ["GET", "POST"])]
     public function result21(SessionInterface $session): Response
-    {
+    {   
+        /** @var Game21|null $game21 */
         $game21 = $session->get("game21");
+
+        // Kontrollera om $game21 är null innan du fortsätter
+        if ($game21 == null) {
+            return $this->redirectToRoute('init21');
+        } 
 
         $player1Hand = $game21->getPlayer1Hand()->getHand();
         $player1Score = $game21->sumHand($player1Hand);
@@ -91,18 +98,23 @@ class Game21Controller extends AbstractController
     #[Route("/game/draw21", name: "draw21", methods: ["POST"])]
     public function draw21(SessionInterface $session): Response
     {
+        /** @var Game21|null $game21 */
         $game21 = $session->get("game21");
-        $deck = $game21->getDeck();
-        $player1Hand = $game21->getPlayer1Hand();
-
-        $card = $deck->draw();
-        $player1Hand ->add($card);
 
         if ($game21 == null) {
             return $this->redirectToRoute('init21');
+        } 
+
+        $deck = $game21->getDeck();
+        $player1Hand = $game21->getPlayer1Hand();
+    
+        $card = $deck->draw();
+
+        if ($card instanceof Card) {
+            $player1Hand ->add($card);
         }
 
-        // Dra kort för spelare 2 tills deras poäng når 17 eller mer
+        // Omdirigera om spelare 1 når >21
         if ($game21->getPlayer1Score() > 21) {
             return $this->redirectToRoute('stay21');
         }
@@ -114,8 +126,14 @@ class Game21Controller extends AbstractController
     #[Route("/game/stay21", name: "stay21", methods: ["GET", "POST"])]
     public function stay21(SessionInterface $session): Response
     {
+        /** @var Game21|null $game21 */
         $game21 = $session->get("game21");
 
+        
+        if ($game21 == null) {
+            return $this->redirectToRoute('init21');
+        } 
+        
         // Dra kort för spelare 2 tills deras poäng når 17 eller mer
         while ($game21->getPlayer2Score() < 17) {
             $game21->drawCardPlayer2();

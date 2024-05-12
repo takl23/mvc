@@ -28,20 +28,42 @@ class Game21 extends AbstractController
         $this->player2Hand = new CardHand();
     }
 
-    public function NewGame(): void
+    public function newGame(): void
     {
         $this->deck->shuffle();
         $this->player1Hand = new CardHand();
         $this->player2Hand = new CardHand();
 
-        $this->player1Hand->add($this->deck->draw());
+        //$this->player1Hand->add($this->deck->draw());
 
     }
 
 
+
+    public function drawCardPlayer1(): void
+    {
+       // Hämta ett kort från leken
+    $newCard = $this->deck->draw();
+
+    // Kontrollera om det hämtade kortet är en giltig instans av Card innan du lägger till det i handen
+    if ($newCard instanceof Card) {
+        
+        $this->player2Hand->add($newCard);
+    } 
+      
+    }
+
     public function drawCardPlayer2(): void
     {
-        $this->player2Hand->add($this->deck->draw());
+       // Hämta ett kort från leken
+    $newCard = $this->deck->draw();
+
+    // Kontrollera om det hämtade kortet är en giltig instans av Card innan du lägger till det i handen
+    if ($newCard instanceof Card) {
+        
+        $this->player2Hand->add($newCard);
+    } 
+      
     }
 
 
@@ -71,6 +93,12 @@ class Game21 extends AbstractController
         return $this->deck;
     }
 
+    /**
+    * Calculates the sum of values for cards in the hand.
+    *
+    * @param Card[] $hand The array containing Card objects representing the hand.
+    * @return int The sum of values for cards in the hand.
+    */
     public function sumHand(array $hand): int
     {
         $sum = 0;
@@ -89,18 +117,22 @@ class Game21 extends AbstractController
 
         if ($player1Score > 21 && $player2Score > 21) {
             $result = "Ingen vinner, båda förlorar";
+            return $result;
         } elseif ($player1Score > 21) {
             $result = "Spelare 2 vinner, spelare 1 förlorar";
+            return $result;
         } elseif ($player2Score > 21) {
             $result = "Spelare 1 vinner, spelare 2 förlorar";
+            return $result;
         } elseif ($player1Score > $player2Score) {
             $result = "Spelare 1 vinner!";
+            return $result;
         } elseif ($player2Score > $player1Score) {
             $result = "Spelare 2 vinner!";
-        } else {
-            $result = "Det är oavgjort!";
-        }
-
+            return $result;
+        } 
+        
+        $result = "Det är oavgjort!";
         return $result;
 
     }

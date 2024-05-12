@@ -29,6 +29,7 @@ class CardGameControllerJson extends AbstractController
     #[Route("/api/deck", name: "apideck", methods: ["GET"])]
     public function jsonDeck(SessionInterface $session): Response
     {
+         /** @var DeckOfCards|null $deck */
         $deck = $session->get("cards_left_in_deck");
         if ($deck == null) {
             return $this->redirectToRoute('deck_init');
@@ -56,9 +57,15 @@ class CardGameControllerJson extends AbstractController
     #[Route("/api/deck/shuffle", name: "apishuffle", methods: ["GET"])]
     public function jsonShuffle(SessionInterface $session): Response
     {
+         /** @var DeckOfCards|null $deck */
         $deck = $session->get("cards_left_in_deck");
+        
+        if ($deck === null) {
+            return new Response("Deck is not initialized", Response::HTTP_NOT_FOUND);
+        }
+    
         $shuffleDeck = $deck->getDeck();
-
+    
         shuffle($shuffleDeck);
 
 
@@ -83,6 +90,7 @@ class CardGameControllerJson extends AbstractController
     #[Route("/api/deck/draw", name: "apidraw", methods: ["POST"])]
     public function jsonDraw(SessionInterface $session): Response
     {
+         /** @var DeckOfCards|null $deck */
         $deck = $session->get("cards_left_in_deck");
 
         if ($deck === null) {
@@ -139,7 +147,7 @@ class CardGameControllerJson extends AbstractController
         // Hämta värdet för number från requesten
         $number = $request->request->getInt('number', 1); // Använd det skickade värdet för antalet kort
 
-
+        /** @var DeckOfCards|null $deck */
         $deck = $session->get("cards_left_in_deck");
 
         if ($deck === null) {

@@ -170,7 +170,14 @@ class CardGameController extends AbstractController
 
         for ($i = 1; $i <= $number; $i++) {
             $drawnCard = $deck->draw();
-            $hand->add($drawnCard);
+    
+            // Kontrollera om $drawnCard är en instans av Card innan du lägger till det i handen
+            if ($drawnCard instanceof Card) {
+                $hand->add($drawnCard);
+            }
+            
+            throw new Exception('Invalid card drawn from the deck.');
+            
         }
 
         // Store the hand in the session
