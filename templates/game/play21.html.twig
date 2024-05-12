@@ -2,27 +2,33 @@
 {% block title %}Card Game{% endblock %}
 
 {% block body %}
-<h1>Player 1's Hand:</h1>
+
+{{ include('flash.html.twig') }}
+
+<h1>Player 1</h1>
   
         {% for card in player1Hand %}
             {{ card.representCard() }}
         {% endfor %}
   
-<h1>Player 1's Score:</h1>
+<p> Score: {{ player1Score }}</p>
 
-   {{ player1Score }}
+
 
 <form action="{{ path('draw21') }}" method="post">
     <button type="submit">Dra kort</button>
 </form>
 
-    <h1>Player 2's Hand:</h1>
-    <ul>
-        {% for card in player2Hand %}
-            <li>{{ card.representCard() }}</li>
-        {% endfor %}
-    </ul>
+<form action="{{ path('stay21') }}" method="post">
+    <button type="submit">Stanna</button>
+</form>
 
+<h1>Player 2:</h1>
+    {% for card in player2Hand %}
+        {{ card.representCard() }}
+    {% endfor %}
+    
+<p> Score: {{ player2Score }}</p>
 
 
 {% endblock %}

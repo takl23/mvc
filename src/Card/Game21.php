@@ -5,8 +5,10 @@ namespace App\Card;
 use App\Card\Card;
 use App\Card\CardHand;
 use App\Card\DeckOfCards;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class Game21
+class Game21 extends AbstractController
 
 {
     // FUNKTIONER
@@ -33,10 +35,17 @@ class Game21
         $this->player1Hand = new CardHand();
         $this->player2Hand = new CardHand();
 
-        // //Deal inital cards player 1 and 2
         $this->player1Hand->add($this->deck->draw());
-        // $this->player2Hand->add($this->deck->draw());
+        
     }
+
+
+    public function drawCardPlayer2(): void
+    {
+        $this->player2Hand->add($this->deck->draw());
+    }
+
+
 
     public function getPlayer1Hand(): CardHand
     {
@@ -47,7 +56,16 @@ class Game21
     {
         return $this->player2Hand;
     }
-    
+
+    public function getPlayer1Score(): int
+    {
+    return $this->sumHand($this->player1Hand->getHand());
+    }
+
+    public function getPlayer2Score(): int
+    {
+        return $this->sumHand($this->player2Hand->getHand());
+    }
 
     public function getDeck(): DeckOfCards
     {
@@ -64,5 +82,28 @@ class Game21
 
         return $sum;
     }
+
+    public function processResult(): string
+{
+    $player1Score = $this->getPlayer1Score();
+    $player2Score = $this->getPlayer2Score();
+
+    if ($player1Score > 21 && $player2Score > 21) {
+        $result = "Ingen vinner, båda förlorar";
+    } elseif ($player1Score > 21) {
+        $result = "Spelare 2 vinner, spelare 1 förlorar";
+    } elseif ($player2Score > 21) {
+        $result = "Spelare 1 vinner, spelare 2 förlorar";
+    } elseif ($player1Score > $player2Score) {
+        $result = "Spelare 1 vinner!";
+    } elseif ($player2Score > $player1Score) {
+        $result = "Spelare 2 vinner!";
+    } else {
+        $result = "Det är oavgjort!";
+    }
+
+    return $result;
+
+}
 
 }

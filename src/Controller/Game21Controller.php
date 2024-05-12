@@ -40,9 +40,6 @@ class Game21Controller extends AbstractController
 
         $session->set("game21", $game21);
     
-        // $player1Cards = $game21->getPlayer1Hand()->getHand();
-        // $player2Cards = $21->getPlayer2Hand()->getHand();
-    
         return $this->redirectToRoute('play21');
     }
      
@@ -59,12 +56,13 @@ class Game21Controller extends AbstractController
         $player1Score = $game21->sumHand($player1Hand);
 
         $player2Hand = $game21->getPlayer2Hand()->getHand();
+        $player2Score = $game21->sumHand($player2Hand);
     
         return $this->render('game/play21.html.twig', [
             'player1Hand' => $player1Hand,
             'player1Score' => $player1Score,
-
             'player2Hand' => $player2Hand,
+            'player2Score' => $player2Score,
         ]);
         
     }
@@ -82,8 +80,35 @@ class Game21Controller extends AbstractController
         if ($game21 == null) {
             return $this->redirectToRoute('init21');
         }
-    
+
+        // Dra kort för spelare 2 tills deras poäng når 17 eller mer
+        if ($game21->getPlayer1Score() > 21) {
+            return $this->redirectToRoute('stay21');
+        }
+        
         return $this->redirectToRoute('play21');
 
+    }
+
+    #[Route("/game/stay21", name: "stay21", methods: ["POST"])]
+    public function stay21(SessionInterface $session): Response
+    {
+        $game21 = $session->get("game21");
+
+        // Dra kort för spelare 2 tills deras poäng når 17 eller mer
+        while ($game21->getPlayer2Score() < 17) {
+        $game21->drawCardPlayer2();
+        }
+
+        // Beräkna vinnaren baserat på spelarnas poäng
+        $result = $game21->processResult();
+        // Använd flashmeddelanden för att skicka meddelandet till nästa request
+        $this->addFlash('info', $result);
+
+        // Uppdatera spelet i sessionen
+        $session->set("game21", $game21);
+
+        // Omdirigera till resultatet
+        return $this->redirectToRoute('play21');
     }
 }
