@@ -465,6 +465,14 @@ a:hover {
   content: "⚠";
 }
 
+.flash-info {
+  padding: 0.5em;
+  color: #fff;
+  background-color: #544059;
+  border-color: #A582AE;
+  text-align: center;
+}
+
 .site-header {
   box-sizing: border-box;
   width: 100vw;
@@ -594,6 +602,21 @@ a:hover {
   grid-template-areas: " . main . ";
   text-align: center;
   align-items: center;
+}
+
+.playrow {
+  display: flex;
+  flex-direction: row;
+}
+
+.play2 {
+  width: 50%;
+  background-color: #405950;
+  text-align: center;
+  color: #fff;
+}
+.play2 h1, .play2 p {
+  color: #fff;
 }
 
 .row {

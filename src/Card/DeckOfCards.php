@@ -60,9 +60,9 @@ class DeckOfCards
         return count($this->deck);
     }
 
-     /**
-     * @return CardGraphic[]
-     */
+    /**
+    * @return CardGraphic[]
+    */
     public function getDeckOfCardGraphics(): array
     {
         $cardGraphics = [];

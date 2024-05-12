@@ -92,13 +92,12 @@ class CardGraphic extends Card
     public function getgraphicRep(): string
     {
         return $this->graphicRep
-;
+        ;
     }
 
     public function __toString(): string
     {
-        return $this->getgraphicRep
-();
+        return $this->getgraphicRep();
     }
 
 }

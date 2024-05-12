@@ -9,13 +9,12 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class Game21 extends AbstractController
-
 {
     // FUNKTIONER
     // •	Skapa kortlek och blanda - från DeckOfCards
     // •	Skapa hand för spelare och banken - från CardHand
     // •	Dra kort och lägga in i hand - från CardHand
-    // •	Summera handen - Använd getValue i klassen Card och utveckla 
+    // •	Summera handen - Använd getValue i klassen Card och utveckla
     // •	Resultatet - Skapa logik för vem som vinner - (Kanske egen klass?)
 
     private DeckOfCards $deck;
@@ -36,7 +35,7 @@ class Game21 extends AbstractController
         $this->player2Hand = new CardHand();
 
         $this->player1Hand->add($this->deck->draw());
-        
+
     }
 
 
@@ -59,7 +58,7 @@ class Game21 extends AbstractController
 
     public function getPlayer1Score(): int
     {
-    return $this->sumHand($this->player1Hand->getHand());
+        return $this->sumHand($this->player1Hand->getHand());
     }
 
     public function getPlayer2Score(): int
@@ -84,26 +83,26 @@ class Game21 extends AbstractController
     }
 
     public function processResult(): string
-{
-    $player1Score = $this->getPlayer1Score();
-    $player2Score = $this->getPlayer2Score();
+    {
+        $player1Score = $this->getPlayer1Score();
+        $player2Score = $this->getPlayer2Score();
 
-    if ($player1Score > 21 && $player2Score > 21) {
-        $result = "Ingen vinner, båda förlorar";
-    } elseif ($player1Score > 21) {
-        $result = "Spelare 2 vinner, spelare 1 förlorar";
-    } elseif ($player2Score > 21) {
-        $result = "Spelare 1 vinner, spelare 2 förlorar";
-    } elseif ($player1Score > $player2Score) {
-        $result = "Spelare 1 vinner!";
-    } elseif ($player2Score > $player1Score) {
-        $result = "Spelare 2 vinner!";
-    } else {
-        $result = "Det är oavgjort!";
+        if ($player1Score > 21 && $player2Score > 21) {
+            $result = "Ingen vinner, båda förlorar";
+        } elseif ($player1Score > 21) {
+            $result = "Spelare 2 vinner, spelare 1 förlorar";
+        } elseif ($player2Score > 21) {
+            $result = "Spelare 1 vinner, spelare 2 förlorar";
+        } elseif ($player1Score > $player2Score) {
+            $result = "Spelare 1 vinner!";
+        } elseif ($player2Score > $player1Score) {
+            $result = "Spelare 2 vinner!";
+        } else {
+            $result = "Det är oavgjort!";
+        }
+
+        return $result;
+
     }
-
-    return $result;
-
-}
 
 }

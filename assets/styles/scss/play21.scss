@@ -1,0 +1,17 @@
+.playrow { 
+    display: flex; 
+    flex-direction: row; 
+    
+}
+
+.play2 { 
+    width: 50%; 
+    background-color: #405950; 
+    //background: linear-gradient(
+        //#405950, #595240, #544059, #A582AE, #7ED9B8);
+    text-align: center; 
+    color: $font-alternative-color;
+    h1, p {
+        color: $font-alternative-color;
+    }
+} 

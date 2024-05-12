@@ -22,9 +22,9 @@ class CardHand
         return count($this->hand);
     }
 
-     /**
-     * @return Card[]
-     */
+    /**
+    * @return Card[]
+    */
     public function getHand(): array
     {
         return $this->hand;

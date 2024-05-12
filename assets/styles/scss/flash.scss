@@ -17,3 +17,12 @@
 .flash-warning:before {
     content: "⚠";
 }
+
+
+.flash-info {
+    padding: 0.5em;
+    color: #fff;
+    background-color: #544059;
+    border-color: #A582AE;
+    text-align: center;
+}

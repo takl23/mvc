@@ -5,7 +5,6 @@
 
 {{ include('flash.html.twig') }}
 
-
 <div class="playrow">
 
 <div class="play2">
@@ -30,18 +29,9 @@
 </div>
 
 <div class="playrow">
-<form action="{{ path('draw21') }}" method="post">
-    <button type="submit">Dra kort</button>
-</form>
-
-<form action="{{ path('stay21') }}" method="post">
-    <button type="submit">Stanna</button>
-</form>
-
 <form action="{{ path('init21') }}" method="post">
     <button type="submit">Nytt spel</button>
 </form>
 </div>
-
 
 {% endblock %}
