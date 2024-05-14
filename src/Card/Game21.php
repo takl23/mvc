@@ -42,30 +42,29 @@ class Game21 extends AbstractController
 
     public function drawCardPlayer1(): void
     {
-       // Hämta ett kort från leken
-    $newCard = $this->deck->draw();
+        // Hämta ett kort från leken
+        $newCard = $this->deck->draw();
 
-    // Kontrollera om det hämtade kortet är en giltig instans av Card innan du lägger till det i handen
-    if ($newCard instanceof Card) {
-        
-        $this->player2Hand->add($newCard);
-    } 
-      
+        // Kontrollera om det hämtade kortet är en giltig instans av Card innan du lägger till det i handen
+        if ($newCard instanceof Card) {
+
+            $this->player2Hand->add($newCard);
+        }
+
     }
 
     public function drawCardPlayer2(): void
     {
-       // Hämta ett kort från leken
-    $newCard = $this->deck->draw();
+        // Hämta ett kort från leken
+        $newCard = $this->deck->draw();
 
-    // Kontrollera om det hämtade kortet är en giltig instans av Card innan du lägger till det i handen
-    if ($newCard instanceof Card) {
-        
-        $this->player2Hand->add($newCard);
-    } 
-      
+        // Kontrollera om det hämtade kortet är en giltig instans av Card innan du lägger till det i handen
+        if ($newCard instanceof Card) {
+
+            $this->player2Hand->add($newCard);
+        }
+
     }
-
 
 
     public function getPlayer1Hand(): CardHand
@@ -130,8 +129,8 @@ class Game21 extends AbstractController
         } elseif ($player2Score > $player1Score) {
             $result = "Spelare 2 vinner!";
             return $result;
-        } 
-        
+        }
+
         $result = "Det är oavgjort!";
         return $result;
 

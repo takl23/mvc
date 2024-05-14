@@ -21,8 +21,8 @@ class Game21ControllerJson extends AbstractController
         $player2Score = $session->get("player2Score");
 
         $data = [
-            "player1Score" => $player1Score, 
-            "player2Score" => $player2Score, 
+            "player1Score" => $player1Score,
+            "player2Score" => $player2Score,
         ];
 
         $response = new JsonResponse($data);

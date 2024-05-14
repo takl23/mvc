@@ -52,11 +52,11 @@ class Game21Controller extends AbstractController
 
         if ($game21 == null) {
             return $this->redirectToRoute('init21');
-        } 
+        }
 
         $player1Hand = $game21->getPlayer1Hand()->getHand();
         $player1Score = $game21->sumHand($player1Hand);
-     
+
         $player2Hand = $game21->getPlayer2Hand()->getHand();
         $player2Score = $game21->sumHand($player2Hand);
 
@@ -75,14 +75,14 @@ class Game21Controller extends AbstractController
 
     #[Route("/game/result21", name: "result21", methods: ["GET", "POST"])]
     public function result21(SessionInterface $session): Response
-    {   
+    {
         /** @var Game21|null $game21 */
         $game21 = $session->get("game21");
 
         // Kontrollera om $game21 är null innan du fortsätter
         if ($game21 == null) {
             return $this->redirectToRoute('init21');
-        } 
+        }
 
         $player1Hand = $game21->getPlayer1Hand()->getHand();
         $player1Score = $game21->sumHand($player1Hand);
@@ -111,11 +111,11 @@ class Game21Controller extends AbstractController
 
         if ($game21 == null) {
             return $this->redirectToRoute('init21');
-        } 
+        }
 
         $deck = $game21->getDeck();
         $player1Hand = $game21->getPlayer1Hand();
-    
+
         $card = $deck->draw();
 
         if ($card instanceof Card) {
@@ -137,10 +137,10 @@ class Game21Controller extends AbstractController
         /** @var Game21|null $game21 */
         $game21 = $session->get("game21");
 
-        
+
         if ($game21 == null) {
             return $this->redirectToRoute('init21');
-        } 
+        }
 
         // Dra kort för spelare 2 tills deras poäng når 17 eller mer
         while ($game21->getPlayer2Score() < 17) {
@@ -154,7 +154,7 @@ class Game21Controller extends AbstractController
 
         // Uppdatera spelet i sessionen
         $session->set("game21", $game21);
-    
+
         // Omdirigera till resultatet
         return $this->redirectToRoute('result21');
     }
