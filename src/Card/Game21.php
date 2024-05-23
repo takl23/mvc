@@ -48,7 +48,7 @@ class Game21 extends AbstractController
         // Kontrollera om det hämtade kortet är en giltig instans av Card innan du lägger till det i handen
         if ($newCard instanceof Card) {
 
-            $this->player2Hand->add($newCard);
+            $this->player1Hand->add($newCard);
         }
 
     }
