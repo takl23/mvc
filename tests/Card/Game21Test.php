@@ -13,7 +13,7 @@ class Game21Test extends TestCase
     /**
      * Construct object and verify that the object is correctly instansiated
      */
-    public function testSetupGameInitaialValues()
+    public function testSetupGameInitaialValues(): void
     {
         $game21 = new Game21();
         $this->assertInstanceOf("\App\Card\Game21", $game21);
@@ -26,7 +26,7 @@ class Game21Test extends TestCase
     /**
      * Test creating a new game
      */
-    public function testNewGame()
+    public function testNewGame(): void
     {
         $game21 = new Game21();
         $this->assertInstanceOf("\App\Card\Game21", $game21);
@@ -42,7 +42,7 @@ class Game21Test extends TestCase
     /**
      * Test creating a new game
      */
-    public function testdrawCard()
+    public function testdrawCard(): void
     {
         $game21 = new Game21();
         $this->assertInstanceOf("\App\Card\Game21", $game21);
@@ -60,7 +60,7 @@ class Game21Test extends TestCase
     /**
      * Test sum a hand
      */
-    public function testSumHand()
+    public function testSumHand(): void
     {
         $game21 = new Game21();
         $this->assertInstanceOf("\App\Card\Game21", $game21);
@@ -83,7 +83,7 @@ class Game21Test extends TestCase
     /**
      * Test processResult by adding known values to players hands and compare expression
      */
-    public function testProcessResult()
+    public function testProcessResult(): void
     {
         $game21 = new Game21();
         $this->assertInstanceOf("\App\Card\Game21", $game21);

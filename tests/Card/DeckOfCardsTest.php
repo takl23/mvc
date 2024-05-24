@@ -28,8 +28,13 @@ class DeckOfCardsTest extends TestCase
     {
         $deck = new DeckOfCards();
         $this->assertInstanceOf("\App\Card\DeckOfCards", $deck);
-        $deckShuffled = $deck->shuffle();
-        $this->assertNotEquals($deck, $deckShuffled);
+
+        $originalDeck = $deck->getDeck();
+        $deck->shuffle();
+        $shuffledDeck = $deck->getDeck();
+
+        $this->assertNotEquals($originalDeck, $shuffledDeck);
+        $this->assertCount(52, $shuffledDeck);
     }
 
     /**

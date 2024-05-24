@@ -14,7 +14,7 @@ class CardTest extends TestCase
      * Construct object and verify that the object has the expected
      * properties, use valid arguments for card creation.
      */
-    public function testCreateCard()
+    public function testCreateCard(): void
     {
         $card = new Card(Card::KING, Card::HEARTS);
         $this->assertInstanceOf("\App\Card\Card", $card);
@@ -22,13 +22,12 @@ class CardTest extends TestCase
         $res = $card->representCard();
         $this->assertEquals('K ♥', $res);
 
-
     }
 
     /**
      * Test to create a card with invalid value
      */
-    public function testInvalidCardValue()
+    public function testInvalidCardValue(): void
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage("Value must be between 1 and 13.");
@@ -38,7 +37,7 @@ class CardTest extends TestCase
     /**
      * Test to create a card with invalid suit
      */
-    public function testInvalidCardSuit()
+    public function testInvalidCardSuit(): void
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage("Invalid suit.");
@@ -48,7 +47,7 @@ class CardTest extends TestCase
     /**
      * Test color of a card
      */
-    public function testCardColor()
+    public function testCardColor(): void
     {
         $card = new Card(Card::KING, Card::HEARTS);
         $this->assertInstanceOf("\App\Card\Card", $card);
