@@ -3,32 +3,32 @@ Search.appendIndex(
                 {
             "fqsen": "\\App\\Card\\Card",
             "name": "Card",
-            "summary": "",
+            "summary": "Represents\u0020a\u0020card\u0020with\u0020a\u0020value,\u0020suit,\u0020and\u0020color.",
             "url": "classes/App-Card-Card.html"
         },                {
             "fqsen": "\\App\\Card\\Card\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
-            "summary": "",
+            "summary": "Constructor.",
             "url": "classes/App-Card-Card.html#method___construct"
         },                {
             "fqsen": "\\App\\Card\\Card\u003A\u003AgetValue\u0028\u0029",
             "name": "getValue",
-            "summary": "",
+            "summary": "Fetches\u0020the\u0020value\u0020of\u0020the\u0020card.",
             "url": "classes/App-Card-Card.html#method_getValue"
         },                {
             "fqsen": "\\App\\Card\\Card\u003A\u003AgetSuit\u0028\u0029",
             "name": "getSuit",
-            "summary": "",
+            "summary": "Gets\u0020the\u0020suit\u0020of\u0020the\u0020card.",
             "url": "classes/App-Card-Card.html#method_getSuit"
         },                {
             "fqsen": "\\App\\Card\\Card\u003A\u003AgetColor\u0028\u0029",
             "name": "getColor",
-            "summary": "",
+            "summary": "Gets\u0020the\u0020color\u0020of\u0020the\u0020card.",
             "url": "classes/App-Card-Card.html#method_getColor"
         },                {
             "fqsen": "\\App\\Card\\Card\u003A\u003ArepresentCard\u0028\u0029",
             "name": "representCard",
-            "summary": "",
+            "summary": "Creates\u0020a\u0020card\u0020as\u0020a\u0020string\u0020\u0028value\u0020suit\u0029",
             "url": "classes/App-Card-Card.html#method_representCard"
         },                {
             "fqsen": "\\App\\Card\\Card\u003A\u003AACE",
@@ -88,12 +88,12 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Card\\CardGraphic",
             "name": "CardGraphic",
-            "summary": "",
+            "summary": "Represents\u0020a\u0020card\u0020with\u0020a\u0020value,\u0020suit,\u0020and\u0020color.",
             "url": "classes/App-Card-CardGraphic.html"
         },                {
             "fqsen": "\\App\\Card\\CardGraphic\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
-            "summary": "",
+            "summary": "Constructor.",
             "url": "classes/App-Card-CardGraphic.html#method___construct"
         },                {
             "fqsen": "\\App\\Card\\CardGraphic\u003A\u003ArepresentCardUnicode\u0028\u0029",

@@ -11,12 +11,12 @@ use Exception;
 class CardHandTest extends TestCase
 {
     /**
-     * Create a hand and verify that the hand is an array 
+     * Create a hand and verify that the hand is an array
      */
     public function testCardHand(): void
     {
         $cardHand = new CardHand();
-        $this->assertInstanceOf("\App\Card\CardHand", $cardHand); 
+        $this->assertInstanceOf("\App\Card\CardHand", $cardHand);
         $this->assertCount(0, $cardHand->getHand());
         $this->assertEquals(0, $cardHand->countHand());
 
@@ -27,6 +27,6 @@ class CardHandTest extends TestCase
         $this->assertCount(1, $cardHand->getHand());
         $this->assertEquals(1, $cardHand->countHand());
 
-       
-    }        
+
+    }
 }

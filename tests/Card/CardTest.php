@@ -18,7 +18,7 @@ class CardTest extends TestCase
     {
         $card = new Card(Card::KING, Card::HEARTS);
         $this->assertInstanceOf("\App\Card\Card", $card);
-        
+
         $res = $card->representCard();
         $this->assertEquals('K ♥', $res);
 
@@ -54,5 +54,5 @@ class CardTest extends TestCase
         $this->assertInstanceOf("\App\Card\Card", $card);
         $this->assertEquals('red', $card->getColor());
     }
-    
+
 }

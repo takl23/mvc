@@ -16,9 +16,9 @@ class CardGraphicTest extends TestCase
     public function testGraphicRep(): void
     {
         $card = new CardGraphic(Card::ACE, Card::HEARTS);
-        $this->assertInstanceOf("\App\Card\CardGraphic", $card); 
-        $this->assertEquals("\u{1F0B1}", $card->getgraphicRep());          
-    }   
+        $this->assertInstanceOf("\App\Card\CardGraphic", $card);
+        $this->assertEquals("\u{1F0B1}", $card->getgraphicRep());
+    }
 
     /**
      * Test to get graphic representation of card
@@ -26,7 +26,7 @@ class CardGraphicTest extends TestCase
     public function testGraphicRepConvertToString(): void
     {
         $card = new CardGraphic(Card::ACE, Card::HEARTS);
-        $this->assertInstanceOf("\App\Card\CardGraphic", $card); 
-        $this->assertEquals("\u{1F0B1}", (string)$card);          
-    }        
-}   
+        $this->assertInstanceOf("\App\Card\CardGraphic", $card);
+        $this->assertEquals("\u{1F0B1}", (string)$card);
+    }
+}

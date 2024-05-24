@@ -19,7 +19,7 @@ class DeckOfCardsTest extends TestCase
         $this->assertInstanceOf("\App\Card\DeckOfCards", $deck);
         //$this->assertEquals(52, $deck->getDeck());
         $this->assertCount(52, $deck->getDeck());
-    }    
+    }
 
     /**
     * Test to shuffle deck
@@ -30,8 +30,8 @@ class DeckOfCardsTest extends TestCase
         $this->assertInstanceOf("\App\Card\DeckOfCards", $deck);
         $deckShuffled = $deck->shuffle();
         $this->assertNotEquals($deck, $deckShuffled);
-    } 
-    
+    }
+
     /**
     * Test to draw one card from deck
     */
@@ -41,7 +41,7 @@ class DeckOfCardsTest extends TestCase
         $deck->draw();
         $this->assertInstanceOf("\App\Card\DeckOfCards", $deck);
         $this->assertCount(51, $deck->getDeck());
-    } 
+    }
 
     /**
     * Test to count deck
@@ -52,7 +52,7 @@ class DeckOfCardsTest extends TestCase
         $this->assertInstanceOf("\App\Card\DeckOfCards", $deck);
         $countDeck = $deck->countDeck();
         $this->assertEquals(52, $countDeck);
-    } 
+    }
 
     /**
     * Test graphic representation of deck
@@ -65,7 +65,7 @@ class DeckOfCardsTest extends TestCase
         $this->assertCount(52, $deckGraphic);
     }
 
-     /**
+    /**
     * Test to draw cards if deck is emphy
     */
     public function testDrawEmphtyDeck(): void
@@ -80,5 +80,5 @@ class DeckOfCardsTest extends TestCase
         $drawnCard = $deck->draw();
         $this->assertNull($drawnCard);
     }
-    
+
 }

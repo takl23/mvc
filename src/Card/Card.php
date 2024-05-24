@@ -4,6 +4,10 @@ namespace App\Card;
 
 use Exception;
 
+/**
+ * Represents a card with a value, suit, and color.
+ */
+
 class Card
 {
     private int $value; //siffra
@@ -22,6 +26,16 @@ class Card
     public const CLUBS = 3;
     public const SPADES = 4;
 
+
+    /**
+     * Constructor.
+     * Initializes the card with a value and a suit.
+     *
+     * @param int $value The value of the card.
+     * @param int $suit The suit of the card.
+     * @throws Exception If the value is not between 1 and 13, or if the suit is not between 1 and 4.
+     */
+
     // Use constructor to always have a value and suite for card.
     // If limit is outreached errormessage is thrown
     public function __construct(int $value, int $suit)
@@ -39,22 +53,42 @@ class Card
         $this->color = ($suit === self::HEARTS || $suit === self::DIAMONDS) ? 'red' : 'black';
     }
 
+
+    /**
+     * Fetches the value of the card.
+     *
+     * @return int The value of the card.
+     */
     public function getValue(): int
     {
         return $this->value;
     }
 
-
+    /**
+     * Gets the suit of the card.
+     *
+     * @return int The suit of the card.
+     */
     public function getSuit(): int
     {
         return $this->suit;
     }
 
+    /**
+     * Gets the color of the card.
+     *
+     * @return string The color of the card.
+     */
     public function getColor(): string
     {
         return $this->color;
     }
 
+    /**
+     * Creates a card as a string (value suit)
+     *
+     * @return string The string (value suit) of the card.
+     */
     // Create card
     public function representCard(): string
     {

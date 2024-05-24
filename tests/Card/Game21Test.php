@@ -48,7 +48,7 @@ class Game21Test extends TestCase
         $this->assertInstanceOf("\App\Card\Game21", $game21);
 
         $game21 -> newGame();
-        
+
         $game21->drawCardPlayer1();
         $this->assertCount(1, $game21->getPlayer1Hand()->getHand());
 
@@ -68,69 +68,69 @@ class Game21Test extends TestCase
         $game21 -> newGame();
         $game21->drawCardPlayer1();
         $player1Score = $game21->getPlayer1Score();
-        $compareValue = 0;     
+        $compareValue = 0;
 
-        $this->assertGreaterThan($compareValue,  $player1Score);
+        $this->assertGreaterThan($compareValue, $player1Score);
 
         $game21->drawCardPlayer2();
         $player2Score = $game21->getPlayer2Score();
-        $this->assertGreaterThan($compareValue,  $player2Score);
+        $this->assertGreaterThan($compareValue, $player2Score);
 
     }
 
 
 
-/**
- * Test processResult by adding known values to players hands and compare expression
- */
-public function testProcessResult()
-{
-    $game21 = new Game21();
-    $this->assertInstanceOf("\App\Card\Game21", $game21);
+    /**
+     * Test processResult by adding known values to players hands and compare expression
+     */
+    public function testProcessResult()
+    {
+        $game21 = new Game21();
+        $this->assertInstanceOf("\App\Card\Game21", $game21);
 
-    $game21 -> newGame();
-    $game21->getPlayer1Hand()->add(new Card(10, Card::HEARTS));
-    $game21->getPlayer1Hand()->add(new Card(11, Card::HEARTS));
-    $game21->getPlayer1Hand()->add(new Card(12, Card::HEARTS));
-    $game21->getPlayer2Hand()->add(new Card(10, Card::SPADES));
-    $game21->getPlayer2Hand()->add(new Card(11, Card::SPADES));
-    $game21->getPlayer2Hand()->add(new Card(12, Card::SPADES));
-    $this->assertEquals("Ingen vinner, båda förlorar", $game21->processResult());
-
-
-    $game21 -> newGame();
-    $game21->getPlayer1Hand()->add(new Card(10, Card::HEARTS));
-    $game21->getPlayer1Hand()->add(new Card(11, Card::HEARTS));
-    $game21->getPlayer1Hand()->add(new Card(12, Card::HEARTS));
-    $game21->getPlayer2Hand()->add(new Card(10, Card::SPADES));
-    $game21->getPlayer2Hand()->add(new Card(11, Card::SPADES));
- 
-    $this->assertEquals("Spelare 2 vinner, spelare 1 förlorar", $game21->processResult());
+        $game21 -> newGame();
+        $game21->getPlayer1Hand()->add(new Card(10, Card::HEARTS));
+        $game21->getPlayer1Hand()->add(new Card(11, Card::HEARTS));
+        $game21->getPlayer1Hand()->add(new Card(12, Card::HEARTS));
+        $game21->getPlayer2Hand()->add(new Card(10, Card::SPADES));
+        $game21->getPlayer2Hand()->add(new Card(11, Card::SPADES));
+        $game21->getPlayer2Hand()->add(new Card(12, Card::SPADES));
+        $this->assertEquals("Ingen vinner, båda förlorar", $game21->processResult());
 
 
-    $game21 -> newGame();
-    $game21->getPlayer1Hand()->add(new Card(10, Card::HEARTS));
-    $game21->getPlayer1Hand()->add(new Card(11, Card::HEARTS));
-    $game21->getPlayer2Hand()->add(new Card(10, Card::SPADES));
-    $game21->getPlayer2Hand()->add(new Card(11, Card::SPADES));
-    $game21->getPlayer2Hand()->add(new Card(12, Card::SPADES));
-    $this->assertEquals( "Spelare 1 vinner, spelare 2 förlorar", $game21->processResult());
+        $game21 -> newGame();
+        $game21->getPlayer1Hand()->add(new Card(10, Card::HEARTS));
+        $game21->getPlayer1Hand()->add(new Card(11, Card::HEARTS));
+        $game21->getPlayer1Hand()->add(new Card(12, Card::HEARTS));
+        $game21->getPlayer2Hand()->add(new Card(10, Card::SPADES));
+        $game21->getPlayer2Hand()->add(new Card(11, Card::SPADES));
+
+        $this->assertEquals("Spelare 2 vinner, spelare 1 förlorar", $game21->processResult());
 
 
-    $game21 -> newGame();
-    $game21->getPlayer1Hand()->add(new Card(10, Card::HEARTS));
-    $game21->getPlayer2Hand()->add(new Card(5, Card::SPADES));
-    $this->assertEquals("Spelare 1 vinner!", $game21->processResult());
+        $game21 -> newGame();
+        $game21->getPlayer1Hand()->add(new Card(10, Card::HEARTS));
+        $game21->getPlayer1Hand()->add(new Card(11, Card::HEARTS));
+        $game21->getPlayer2Hand()->add(new Card(10, Card::SPADES));
+        $game21->getPlayer2Hand()->add(new Card(11, Card::SPADES));
+        $game21->getPlayer2Hand()->add(new Card(12, Card::SPADES));
+        $this->assertEquals("Spelare 1 vinner, spelare 2 förlorar", $game21->processResult());
 
-    $game21 -> newGame();
-    $game21->getPlayer1Hand()->add(new Card(2, Card::HEARTS));
-    $game21->getPlayer2Hand()->add(new Card(5, Card::SPADES));
-    $this->assertEquals("Spelare 2 vinner!", $game21->processResult());
 
-    $game21 -> newGame();
-    $game21->getPlayer1Hand()->add(new Card(5, Card::HEARTS));
-    $game21->getPlayer2Hand()->add(new Card(5, Card::SPADES));
-    $this->assertEquals("Det är oavgjort!", $game21->processResult());
+        $game21 -> newGame();
+        $game21->getPlayer1Hand()->add(new Card(10, Card::HEARTS));
+        $game21->getPlayer2Hand()->add(new Card(5, Card::SPADES));
+        $this->assertEquals("Spelare 1 vinner!", $game21->processResult());
 
-}
+        $game21 -> newGame();
+        $game21->getPlayer1Hand()->add(new Card(2, Card::HEARTS));
+        $game21->getPlayer2Hand()->add(new Card(5, Card::SPADES));
+        $this->assertEquals("Spelare 2 vinner!", $game21->processResult());
+
+        $game21 -> newGame();
+        $game21->getPlayer1Hand()->add(new Card(5, Card::HEARTS));
+        $game21->getPlayer2Hand()->add(new Card(5, Card::SPADES));
+        $this->assertEquals("Det är oavgjort!", $game21->processResult());
+
+    }
 }
