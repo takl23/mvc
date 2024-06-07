@@ -7,4 +7,10 @@
  */
 import './styles/app.css';
 
+// Import Font Awesome
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
+// Import other JS dependencies
+import '@fortawesome/fontawesome-free/js/all.js';
+
 console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');

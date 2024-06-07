@@ -2,6 +2,14 @@
 
 {% block title %}Library view{% endblock %}
 
+{% block stylesheets %}
+    {{ encore_entry_link_tags('app') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+{% endblock %}
+
 {% block body %}
 
 <table>
@@ -24,8 +32,8 @@
                 <td>{{ book.getAuthor|e }}</td>
                 <td>{{ book.getCover|e }}</td>
                 <td>
-                    <a href="update/{{ book.getId|e }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                    <a href="delete/{{ book.getId|e }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                    <a href="update/{{ book.getId|e }}"><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
+                    <a href="delete/{{ book.getId|e }}"><i class="fas fa-trash" aria-hidden="true"></i></a>
                 </td>
             </tr>
         {% endfor %}
