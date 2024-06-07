@@ -473,6 +473,26 @@ a:hover {
   text-align: center;
 }
 
+table {
+  max-width: 100%;
+  font-size: 1.1rem;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+table tr:nth-child(2n) {
+  background-color: #fff;
+}
+table td {
+  border-top: 1px solid #ccc;
+}
+table th, table td {
+  padding: 0.8rem 1.2rem;
+}
+
+.overflow-table {
+  overflow-x: auto;
+}
+
 .site-header {
   box-sizing: border-box;
   width: 100vw;

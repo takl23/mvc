@@ -4,6 +4,7 @@ namespace App\Controller;
 
 
 use App\Entity\Library;
+use App\Repository\LibraryRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use PharIo\Manifest\Library as ManifestLibrary;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -54,5 +55,17 @@ class LibraryController extends AbstractController
     return new Response('Saved new Library with id '.$library->getId());
     }
     
+    #[Route('/library/show', name: 'view_library')]
+    public function viewLibrary(
+    LibraryRepository $libraryRepository
+    ): Response {
+    $library = $libraryRepository ->findAll();
+
+    $data = [
+        'library' => $library
+    ];
+
+    return $this->render('library/view.html.twig', $data);
+    }
     
 }

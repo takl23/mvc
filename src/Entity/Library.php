@@ -42,7 +42,7 @@ class Library
         return $this;
     }
 
-    public function getISBN(): ?int
+    public function getISBN(): ?string
     {
         return $this->isbn;
     }
