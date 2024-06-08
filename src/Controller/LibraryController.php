@@ -1,18 +1,14 @@
-<?php
+<?php 
 
 namespace App\Controller;
-
 
 use App\Entity\Library;
 use App\Repository\LibraryRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use PharIo\Manifest\Library as ManifestLibrary;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
-
+use Symfony\Component\Routing\Annotation\Route;
 
 class LibraryController extends AbstractController
 {
@@ -26,46 +22,47 @@ class LibraryController extends AbstractController
 
     #[Route('/library/create', name: 'library_create_post', methods: ['POST'])]
     public function createLibrary(
-    ManagerRegistry $doctrine, 
-    Request $request
+        ManagerRegistry $doctrine, 
+        Request $request
     ): Response {
-
         $newLibrary = [
             'title' => $request->request->get('title'),
             'author' => $request->request->get('author'),
             'isbn' => $request->request->get('isbn'),
             'cover' => $request->request->get('cover')
-            ];  
+        ];  
         
-    $entityManager = $doctrine->getManager();
+        $entityManager = $doctrine->getManager();
 
-    $library = new Library();
-    $library->setTitle($newLibrary['title']);
-    $library->setAuthor($newLibrary['author']);
-    $library->setIsbn($newLibrary['isbn']);
-    $library->setCover($newLibrary['cover']);
+        $library = new Library();
+        $library->setTitle($newLibrary['title']);
+        $library->setAuthor($newLibrary['author']);
+        $library->setIsbn($newLibrary['isbn']);
+        $library->setCover($newLibrary['cover']);
 
-    // tell Doctrine you want to (eventually) save the Product
-    // (no queries yet)
-    $entityManager->persist($library);
+        // Tell Doctrine you want to save the Product
+        $entityManager->persist($library);
 
-    // actually executes the queries (i.e. the INSERT query)
-    $entityManager->flush();
+        // Execute the queries (i.e. the INSERT query)
+        $entityManager->flush();
 
-    return new Response('Saved new Library with id '.$library->getId());
+        // Add a flash message
+        $this->addFlash('notice', 'Saved new book with id ' . $library->getId());
+
+        // Redirect to the library route
+        return $this->redirectToRoute('app_library');
     }
     
     #[Route('/library/show', name: 'view_library')]
     public function viewLibrary(
-    LibraryRepository $libraryRepository
+        LibraryRepository $libraryRepository
     ): Response {
-    $library = $libraryRepository ->findAll();
+        $library = $libraryRepository->findAll();
 
-    $data = [
-        'library' => $library
-    ];
+        $data = [
+            'library' => $library
+        ];
 
-    return $this->render('library/view.html.twig', $data);
+        return $this->render('library/view.html.twig', $data);
     }
-    
 }
