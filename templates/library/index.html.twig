@@ -1,41 +1,44 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello LibraryController!{% endblock %}
+{% block title %}Create New Book{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <h1>Welcome to the library</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/home/takl23/dbwebb-kurser/mvc/me/report/src/Controller/LibraryController.php</code></li>
-        <li>Your template at <code>/home/takl23/dbwebb-kurser/mvc/me/report/templates/library/index.html.twig</code></li>
-    </ul>
+<div class="grid-two-columns-fix-row">
+    <div class="main1">
+        <div class="library">
+            <a href="{{ path('view_library') }}" class="float">
+                <p>View all books in library</p>
+            </a>
+        </div>
+    </div>
+    <div class="main2">
+        <div class="book-form-container">
+            <form action="{{ path('library_create_post') }}" method="POST" class="book-form">
+                <fieldset>
+                    <legend>Add new book to the library</legend>
+                    <div class="form-group">
+                        <label for="title">Title:</label>
+                        <input type="text" id="title" name="title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="author">Author:</label>
+                        <input type="text" id="author" name="author" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="isbn">ISBN:</label>
+                        <input type="text" id="isbn" name="isbn" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cover">Cover:</label>
+                        <input type="text" id="cover" name="cover" required>
+                    </div>
+                    <button type="submit" class="btn float">Add</button>
+                </fieldset>
+            </form>
+        </div>
+    </div>
 </div>
-
-<h2>Create New Book</h2>
-    <form action="{{ path('library_create_post') }}" method="POST">
-        <div>
-            <label for="title">Title:</label>
-            <input type="text" id="title" name="title" required>
-        </div>
-        <div>
-            <label for="author">Author:</label>
-            <input type="text" id="author" name="author" required>
-        </div>
-        <div>
-            <label for="isbn">ISBN:</label>
-            <input type="text" id="isbn" name="isbn" required>
-        </div>
-        <div>
-            <label for="cover">Cover:</label>
-            <input type="text" id="cover" name="cover" required>
-        </div>
-        <button type="submit">Create</button>
-    </form>
 {% endblock %}

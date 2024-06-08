@@ -1,31 +1,45 @@
-.content {
-    grid-area: main;
+.main1, .main2 {
+    grid-area: main1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main2 {
+    grid-area: main2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .side {
     grid-area: side;
     border-right: 1px solid #000;
     padding-right: 1em;
-} 
+}
 
 .grid-side {
     display: grid;
     gap: 2em 2em;
-    /*grid-template-columns: repeat(3, auto);*/
-    grid-template-columns: minmax(auto, 20rem) minmax(auto, 45rem) minmax(auto, 20rem) ;
-    /*grid-auto-rows: minmax(100px, auto);*/
+    grid-template-columns: minmax(auto, 20rem) minmax(auto, 45rem) minmax(auto, 20rem);
     grid-template-areas:
-    " side main . ";
+    " side main1 . ";
+}
+
+.grid-two-columns-fix-row {
+    display: grid;
+    gap: 2em 2em;
+    grid-template-columns: auto minmax(auto, 25rem) minmax(auto, 25rem) auto;
+    grid-template-areas:
+    " . main1 main2 . ";
 }
 
 .grid {
     display: grid;
     gap: 2em 2em;
-    /*grid-template-columns: repeat(3, auto);*/
-    grid-template-columns: auto  minmax(auto, 45rem)  auto ;
-    /*grid-auto-rows: minmax(100px, auto);*/
+    grid-template-columns: auto minmax(auto, 45rem) auto;
     grid-template-areas:
-    " . main . ";
+    " . main1 . ";
     text-align: center;
     align-items: center;
 }

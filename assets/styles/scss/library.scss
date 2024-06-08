@@ -1,0 +1,91 @@
+
+.library, .book-form-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 1rem;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+.library a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+}
+
+.book-form {
+    width: 100%;
+    max-height: 100%;
+    padding: 1rem;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.book-form fieldset {
+    width: 100%;
+    border: none; 
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.book-form legend {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    text-align: left;
+    font-weight: bold;
+}
+
+.book-form .form-group {
+    margin: 1rem 0;
+    width: 100%;
+}
+
+.book-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    text-align: left; 
+}
+
+.book-form input[type="text"] {
+    width: calc(100% - 1rem); 
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    font-size: 0.9rem;
+    box-sizing: border-box; 
+}
+
+.book-form .btn {
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    background-color: $background-alternative-color;  
+    color: #fff; 
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    align-self: flex-start; 
+}
+
+.book-form .btn:hover {
+    background-color: $hover-color;
+}
