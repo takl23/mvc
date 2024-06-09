@@ -820,3 +820,11 @@ div.centerul ul {
 .book-form .btn:hover {
   background-color: #c6b200;
 }
+
+.bold {
+  font-weight: bold;
+}
+
+.cover {
+  max-width: 5rem;
+}

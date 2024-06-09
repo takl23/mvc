@@ -40,7 +40,7 @@ class LibraryController extends AbstractController
         $library->setIsbn($newLibrary['isbn']);
         $library->setCover($newLibrary['cover']);
 
-        // Tell Doctrine you want to save the Product
+        // Tell Doctrine you want to save the library
         $entityManager->persist($library);
 
         // Execute the queries (i.e. the INSERT query)
@@ -64,5 +64,19 @@ class LibraryController extends AbstractController
         ];
 
         return $this->render('library/view.html.twig', $data);
+    }
+
+    #[Route('/library/show/{id}', name: 'book_by_id')]
+    public function showBookById(
+    LibraryRepository $libraryRepository, int $id
+    ): Response {
+    $book = $libraryRepository
+        ->find($id);
+
+        // $data = [
+        //     'book' => $book
+        // ];
+        
+    return $this->json($book);
     }
 }

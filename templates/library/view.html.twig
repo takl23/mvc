@@ -26,11 +26,22 @@
     <tbody>
         {% for book in library %}
             <tr>
-                <td>{{ book.getId|e }}</td>
+                <td class="bold">
+                    <a href="{{ path('book_by_id', { id: book.getId }) }}">
+                        {{ book.getId|e }}
+                    </a>
+                </td>
                 <td>{{ book.getTitle|e }}</td>
                 <td>{{ book.getISBN|e }}</td>
                 <td>{{ book.getAuthor|e }}</td>
-                <td>{{ book.getCover|e }}</td>
+                <td>
+                <div class="cover">
+                    {% set coverPath = 'img/cover' ~ book.getId ~ '.jpg' %}
+                    <picture>
+                        <img src="{{ asset(coverPath) }}" onerror="this.onerror=null; this.src='{{ asset('img/nocover.jpg') }}';" alt="Cover for book {{ book.getTitle|e }}">
+                    </picture>
+                </div>
+                </td>
                 <td>
                     <a href="update/{{ book.getId|e }}"><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
                     <a href="delete/{{ book.getId|e }}"><i class="fas fa-trash" aria-hidden="true"></i></a>
