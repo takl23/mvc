@@ -71,7 +71,22 @@
     box-sizing: border-box; 
 }
 
-.book-form .btn {
+.book-form {
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    //background-color: $background-alternative-color;  
+    color: #fff; 
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    //align-self: flex-start; 
+}
+
+.btn {
     display: inline-block;
     padding: 0.6rem 1.2rem;
     background-color: $background-alternative-color;  
@@ -86,9 +101,11 @@
     align-self: flex-start; 
 }
 
-.book-form .btn:hover {
+.btn:hover {
     background-color: $hover-color;
+    color: $font-alternative-color;
 }
+
 
 .bold {
     font-weight: bold;

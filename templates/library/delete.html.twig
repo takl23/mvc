@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Confirm Deletion{% endblock %}
+
+{% block body %}
+    <h1>Confirm Deletion</h1>
+    <p>Are you sure you want to delete the book "{{ book.title }}"?</p>
+    <form action="{{ path('library_delete_confirm', { id: book.id }) }}" method="POST">
+        <button type="submit" class="btn float">YES, DELETE</button>
+        <a href="{{ path('view_library') }}" class="btn">No, go back</a>
+    </form>
+{% endblock %}

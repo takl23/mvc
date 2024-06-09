@@ -79,4 +79,47 @@ class LibraryController extends AbstractController
         
     return $this->json($book);
     }
+
+    #[Route('/library/delete/{id}', name: 'library_delete_by_id', methods: ['GET'])]
+    public function deleteBookById(
+        LibraryRepository $libraryRepository, int $id
+    ): Response {
+        $book = $libraryRepository->find($id);
+
+        if (!$book) {
+            throw $this->createNotFoundException(
+                'No book found for id ' . $id
+            );
+        }
+
+        // Add a flash message
+        $this->addFlash('warning', 'You are about to delete book with id ' . $book->getId()  . ' and title ' . $book->getTitle() . ', please confirme.');
+
+        return $this->render('library/delete.html.twig', [
+            'book' => $book
+        ]);
+    }
+
+    #[Route('/library/delete/confirm/{id}', name: 'library_delete_confirm', methods: ['POST'])]
+    public function confirmDeleteBookById(
+        ManagerRegistry $doctrine, int $id
+    ): Response {
+        $entityManager = $doctrine->getManager();
+        $book = $entityManager->getRepository(Library::class)->find($id);
+
+        if (!$book) {
+            throw $this->createNotFoundException(
+                'No book found for id ' . $id
+            );
+        }
+
+         // Add a flash message
+         $this->addFlash('notice', 'You have delete book with id ' . $book->getId()  . ' and title ' . $book->getTitle());
+
+        $entityManager->remove($book);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('view_library');
+    }
+
 }

@@ -802,7 +802,20 @@ div.centerul ul {
   box-sizing: border-box;
 }
 
-.book-form .btn {
+.book-form {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+}
+
+.btn {
   display: inline-block;
   padding: 0.6rem 1.2rem;
   background-color: #544059;
@@ -817,8 +830,9 @@ div.centerul ul {
   align-self: flex-start;
 }
 
-.book-form .btn:hover {
+.btn:hover {
   background-color: #c6b200;
+  color: #fff;
 }
 
 .bold {
@@ -826,5 +840,5 @@ div.centerul ul {
 }
 
 .cover {
-  max-width: 5rem;
+  max-width: 10rem;
 }

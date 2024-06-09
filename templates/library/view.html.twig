@@ -44,7 +44,7 @@
                 </td>
                 <td>
                     <a href="update/{{ book.getId|e }}"><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
-                    <a href="delete/{{ book.getId|e }}"><i class="fas fa-trash" aria-hidden="true"></i></a>
+                    <a href="{{ path('library_delete_by_id', { id: book.getId }) }}"><i class="fas fa-trash" aria-hidden="true"></i></a>
                 </td>
             </tr>
         {% endfor %}
