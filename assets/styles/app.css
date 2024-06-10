@@ -842,3 +842,7 @@ div.centerul ul {
 .cover {
   max-width: 10rem;
 }
+
+.center {
+  text-align: center;
+}

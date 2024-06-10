@@ -25,6 +25,12 @@ class LibraryController extends AbstractController
         ManagerRegistry $doctrine, 
         Request $request
     ): Response {
+
+        $cover = $request->request->get('cover');
+        if (empty($cover)) {
+            $cover = 'img/default_cover.jpg'; // Default cover image path
+        }
+        
         $newLibrary = [
             'title' => $request->request->get('title'),
             'author' => $request->request->get('author'),
@@ -122,4 +128,51 @@ class LibraryController extends AbstractController
         return $this->redirectToRoute('view_library');
     }
 
+    #[Route('/library/update/{id}', name: 'library_update_by_id', methods: ['GET'])]
+    public function updateBookById(
+        LibraryRepository $libraryRepository, int $id
+    ): Response {
+        $book = $libraryRepository->find($id);
+
+        if (!$book) {
+            throw $this->createNotFoundException(
+                'No book found for id ' . $id
+            );
+        }
+
+        return $this->render('library/update.html.twig', [
+            'book' => $book
+        ]);
+    }
+
+    #[Route('/library/update/confirm/{id}', name: 'library_update_confirm', methods: ['POST'])]
+    public function confirmUpdateBookById(
+        ManagerRegistry $doctrine, Request $request, int $id
+    ): Response {
+        $entityManager = $doctrine->getManager();
+        $book = $entityManager->getRepository(Library::class)->find($id);
+
+        if (!$book) {
+            throw $this->createNotFoundException(
+                'No book found for id ' . $id
+            );
+        }
+
+        $cover = $request->request->get('cover');
+        if (empty($cover)) {
+            $cover = 'img/default_cover.jpg'; // Default cover image path
+        }
+
+        $book->setTitle($request->request->get('title'));
+        $book->setAuthor($request->request->get('author'));
+        $book->setIsbn($request->request->get('isbn'));
+        $book->setCover($request->request->get('cover'));
+
+        $entityManager->flush();
+
+        // Add a flash message
+        $this->addFlash('notice', 'Updated book with id ' . $book->getId());
+
+        return $this->redirectToRoute('view_library');
+    }
 }
