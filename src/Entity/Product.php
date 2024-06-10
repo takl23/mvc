@@ -36,12 +36,12 @@ class Product
         return $this;
     }
 
-    public function getvalue(): ?string
+    public function getvalue(): ?int
     {
         return $this->value;
     }
 
-    public function setvalue(string $value): static
+    public function setvalue(int $value): static
     {
         $this->value = $value;
 

@@ -11,9 +11,10 @@ use Symfony\Component\Routing\Annotation\Route;
 date_default_timezone_set("Europe/Stockholm");
 
 class LibraryControllerJson extends AbstractController
-{  
+{
     #[Route('/api/library/books', name: 'api_library_books')]
-    public function showAllLibraryBooks(LibraryRepository $libraryRepository): JsonResponse {
+    public function showAllLibraryBooks(LibraryRepository $libraryRepository): JsonResponse
+    {
         $libraries = $libraryRepository->findAll();
 
         $response = $this->json($libraries);

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Controller;
 
@@ -22,7 +22,7 @@ class LibraryController extends AbstractController
 
     #[Route('/library/create', name: 'library_create_post', methods: ['POST'])]
     public function createLibrary(
-        ManagerRegistry $doctrine, 
+        ManagerRegistry $doctrine,
         Request $request
     ): Response {
 
@@ -30,14 +30,14 @@ class LibraryController extends AbstractController
         if (empty($cover)) {
             $cover = 'img/default_cover.jpg'; // Default cover image path
         }
-        
+
         $newLibrary = [
-            'title' => $request->request->get('title'),
-            'author' => $request->request->get('author'),
-            'isbn' => $request->request->get('isbn'),
-            'cover' => $request->request->get('cover')
-        ];  
-        
+            'title' => (string) $request->request->get('title'),
+            'author' => (string) $request->request->get('author'),
+            'isbn' => (string) $request->request->get('isbn'),
+            'cover' => (string) $cover
+        ];
+
         $entityManager = $doctrine->getManager();
 
         $library = new Library();
@@ -58,7 +58,7 @@ class LibraryController extends AbstractController
         // Redirect to the library route
         return $this->redirectToRoute('app_library');
     }
-    
+
     #[Route('/library/show', name: 'view_library')]
     public function viewLibrary(
         LibraryRepository $libraryRepository
@@ -74,21 +74,23 @@ class LibraryController extends AbstractController
 
     #[Route('/library/show/{id}', name: 'book_by_id')]
     public function showBookById(
-    LibraryRepository $libraryRepository, int $id
+        LibraryRepository $libraryRepository,
+        int $id
     ): Response {
-    $book = $libraryRepository
-        ->find($id);
+        $book = $libraryRepository
+            ->find($id);
 
         // $data = [
         //     'book' => $book
         // ];
-        
-    return $this->json($book);
+
+        return $this->json($book);
     }
 
     #[Route('/library/delete/{id}', name: 'library_delete_by_id', methods: ['GET'])]
     public function deleteBookById(
-        LibraryRepository $libraryRepository, int $id
+        LibraryRepository $libraryRepository,
+        int $id
     ): Response {
         $book = $libraryRepository->find($id);
 
@@ -108,7 +110,8 @@ class LibraryController extends AbstractController
 
     #[Route('/library/delete/confirm/{id}', name: 'library_delete_confirm', methods: ['POST'])]
     public function confirmDeleteBookById(
-        ManagerRegistry $doctrine, int $id
+        ManagerRegistry $doctrine,
+        int $id
     ): Response {
         $entityManager = $doctrine->getManager();
         $book = $entityManager->getRepository(Library::class)->find($id);
@@ -119,8 +122,8 @@ class LibraryController extends AbstractController
             );
         }
 
-         // Add a flash message
-         $this->addFlash('notice', 'You have delete book with id ' . $book->getId()  . ' and title ' . $book->getTitle());
+        // Add a flash message
+        $this->addFlash('notice', 'You have delete book with id ' . $book->getId()  . ' and title ' . $book->getTitle());
 
         $entityManager->remove($book);
         $entityManager->flush();
@@ -130,7 +133,8 @@ class LibraryController extends AbstractController
 
     #[Route('/library/update/{id}', name: 'library_update_by_id', methods: ['GET'])]
     public function updateBookById(
-        LibraryRepository $libraryRepository, int $id
+        LibraryRepository $libraryRepository,
+        int $id
     ): Response {
         $book = $libraryRepository->find($id);
 
@@ -147,7 +151,9 @@ class LibraryController extends AbstractController
 
     #[Route('/library/update/confirm/{id}', name: 'library_update_confirm', methods: ['POST'])]
     public function confirmUpdateBookById(
-        ManagerRegistry $doctrine, Request $request, int $id
+        ManagerRegistry $doctrine,
+        Request $request,
+        int $id
     ): Response {
         $entityManager = $doctrine->getManager();
         $book = $entityManager->getRepository(Library::class)->find($id);
@@ -163,10 +169,10 @@ class LibraryController extends AbstractController
             $cover = 'img/default_cover.jpg'; // Default cover image path
         }
 
-        $book->setTitle($request->request->get('title'));
-        $book->setAuthor($request->request->get('author'));
-        $book->setIsbn($request->request->get('isbn'));
-        $book->setCover($request->request->get('cover'));
+        $book->setTitle((string) $request->request->get('title'));
+        $book->setAuthor((string) $request->request->get('author'));
+        $book->setIsbn((string) $request->request->get('isbn'));
+        $book->setCover((string) $cover);
 
         $entityManager->flush();
 
