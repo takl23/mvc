@@ -7,10 +7,14 @@
     <h1>Update Book</h1>
     <div class="grid-two-columns-fix-row">
         <div class="main1">
-            <div class="library">
-                <a href="{{ path('view_library') }}" class="float">
-                    View all books in library
-                </a>
+            <div class="book-cover">
+                <picture>
+                    {% if book.getCover starts with 'http' %}
+                        <img src="{{ book.getCover }}" alt="Cover for book {{ book.getTitle|e }}">
+                    {% else %}
+                        <img src="{{ asset(book.getCover) }}" onerror="this.onerror=null; this.src='{{ asset('img/nocover.jpg') }}';" alt="Cover for book {{ book.getTitle|e }}">
+                    {% endif %}
+                </picture>
             </div>
         </div>
         <div class="main2">
