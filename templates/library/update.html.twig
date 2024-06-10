@@ -5,24 +5,40 @@
 
 {% block body %}
     <h1>Update Book</h1>
-    <form action="{{ path('library_update_confirm', { id: book.id }) }}" method="POST">
-        <div class="form-group">
-            <label for="title">Title:</label>
-            <input type="text" id="title" name="title" value="{{ book.title }}" required>
+    <div class="grid-two-columns-fix-row">
+        <div class="main1">
+            <div class="library">
+                <a href="{{ path('view_library') }}" class="float">
+                    View all books in library
+                </a>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="author">Author:</label>
-            <input type="text" id="author" name="author" value="{{ book.author }}" required>
+        <div class="main2">
+            <div class="book-form-container">
+                <form action="{{ path('library_update_confirm', { id: book.id }) }}" method="POST" class="book-form">
+                    <fieldset>
+                        <legend>Update book details</legend>
+                        <div class="form-group">
+                            <label for="title">Title:</label>
+                            <input type="text" id="title" name="title" value="{{ book.title }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="author">Author:</label>
+                            <input type="text" id="author" name="author" value="{{ book.author }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="isbn">ISBN:</label>
+                            <input type="text" id="isbn" name="isbn" value="{{ book.isbn }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cover">Cover:</label>
+                            <input type="text" id="cover" name="cover" value="{{ book.cover }}">
+                        </div>
+                        <button type="submit" class="btn float">UPDATE</button>
+                        <a href="{{ path('view_library') }}" class="btn">Cancel</a>
+                    </fieldset>
+                </form>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="isbn">ISBN:</label>
-            <input type="text" id="isbn" name="isbn" value="{{ book.isbn }}" required>
-        </div>
-        <div class="form-group">
-            <label for="cover">Cover:</label>
-            <input type="text" id="cover" name="cover" value="{{ book.cover }}">
-        </div>
-        <button type="submit" class="btn float">UPDATE</button>
-        <a href="{{ path('view_library') }}" class="btn">Cancel</a>
-    </form>
+    </div>
 {% endblock %}
