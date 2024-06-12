@@ -1,6 +1,6 @@
-.main1, .main2 {
-    grid-area: main1;
-    display: flex;
+.content, .main2 {
+    grid-area: content;
+    //display: flex;
     align-items: center;
     justify-content: center;
 }
@@ -23,7 +23,7 @@
     gap: 2em 2em;
     grid-template-columns: minmax(auto, 20rem) minmax(auto, 45rem) minmax(auto, 20rem);
     grid-template-areas:
-    " side main1 . ";
+    " side content . ";
 }
 
 .grid-two-columns-fix-row {
@@ -31,7 +31,7 @@
     gap: 2em 2em;
     grid-template-columns: auto minmax(auto, 25rem) minmax(auto, 25rem) auto;
     grid-template-areas:
-    " . main1 main2 . ";
+    " . content main2 . ";
 }
 
 .grid {
@@ -39,7 +39,7 @@
     gap: 2em 2em;
     grid-template-columns: auto minmax(auto, 45rem) auto;
     grid-template-areas:
-    " . main1 . ";
+    " . content . ";
     text-align: center;
     align-items: center;
 }

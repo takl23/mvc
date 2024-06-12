@@ -594,9 +594,8 @@ table th, table td {
   color: #c6b200;
 }
 
-.main1, .main2 {
-  grid-area: main1;
-  display: flex;
+.content, .main2 {
+  grid-area: content;
   align-items: center;
   justify-content: center;
 }
@@ -618,21 +617,21 @@ table th, table td {
   display: grid;
   gap: 2em 2em;
   grid-template-columns: minmax(auto, 20rem) minmax(auto, 45rem) minmax(auto, 20rem);
-  grid-template-areas: " side main1 . ";
+  grid-template-areas: " side content . ";
 }
 
 .grid-two-columns-fix-row {
   display: grid;
   gap: 2em 2em;
   grid-template-columns: auto minmax(auto, 25rem) minmax(auto, 25rem) auto;
-  grid-template-areas: " . main1 main2 . ";
+  grid-template-areas: " . content main2 . ";
 }
 
 .grid {
   display: grid;
   gap: 2em 2em;
   grid-template-columns: auto minmax(auto, 45rem) auto;
-  grid-template-areas: " . main1 . ";
+  grid-template-areas: " . content . ";
   text-align: center;
   align-items: center;
 }
