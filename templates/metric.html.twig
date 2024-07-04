@@ -1,0 +1,44 @@
+{% extends "base.html.twig" %}
+{% block title %}Metric{% endblock %}
+
+{% block body %}
+<h1>Introduktion</h1>
+
+<p>God kodkvalitet är avgörande för att kunna underhålla och förstå koden över tid, även om det kanske inte är ett krav för att skapa en fungerande 
+webbplats. För att säkerställa god kodkvalitet kan vi använda oss av "6C"</p>
+
+<ul>
+<li>
+Codestyle: Innebär att man eftersträvar en konsekvent kodstil där man till sin hjälp kan använda olika linters verktyg. Ett exempel är PHPMD (PHP Mess Detector), 
+som kan hjälpa till att identifiera potentiella problem i koden och säkerställa att kodstilen är konsekvent och lättläst. 
+</li>
+
+<li>
+Coverage: Är ett mått som anger hur väl man enhetstestar sin kod för att minska risken för kod som inte utför det man tänkt sig. 
+Hög täckningsgrad innebär att de flesta funktioner och logik är testade, vilket minskar risken för buggar och oväntade fel. 
+</li>
+
+<li>
+Complexity: Är ett sätt att mäta komplexiteten i ett program genom att räkna antalet oberoende vägar genom programmet. Tex ju fler if-satser koden 
+innehåller desto fler beslutspunkter innehåller koden och desto mer komplex blir den. 
+</li>
+
+<li>
+Cohesion: Mäter hur väl klasser fungerar som en egen enhet där metoderna hänger ihop. 
+Låg cohesion gör koden mer logisk, lättare att förstå och underhålla, eftersom varje klass har ett tydligt definierat ansvar och syfte
+</li>
+
+<li>
+Coupling: Mäter hur beroende olika delar av systemet är av varandra. Låg koppling innebär att ändringar i en modul inte påverkar andra moduler, 
+vilket gör systemet mer robust och lättare att vidareutveckla
+</li>
+
+<li>
+CRAP:Ett mått som kombinerar kodens komplexitet och testtäckning för att identifiera riskabla kodområden. 
+Ett högt CRAP-värde indikerar kod som är både komplex och dåligt testad, vilket ökar risken för buggar.
+</li>
+
+</ul>
+
+
+{% endblock %}

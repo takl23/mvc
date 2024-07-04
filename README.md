@@ -1,4 +1,12 @@
 # INTRO
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/takl23/mvc/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/takl23/mvc/?branch=main)
+
+[![Code Coverage](https://scrutinizer-ci.com/g/takl23/mvc/badges/coverage.png?b=main)](https://scrutinizer-ci.com/g/takl23/mvc/?branch=main)
+
+[![Build Status](https://scrutinizer-ci.com/g/takl23/mvc/badges/build.png?b=main)](https://scrutinizer-ci.com/g/takl23/mvc/build-status/main)
+
+[![Code Intelligence Status](https://scrutinizer-ci.com/g/takl23/mvc/badges/code-intelligence.svg?b=main)](https://scrutinizer-ci.com/code-intelligence)
+
 ![image](https://github.com/takl23/mvc/assets/142892946/6ede50bf-fef4-4834-a968-b2408c024424)
 
 This repository is mainly for teaching purposes.
