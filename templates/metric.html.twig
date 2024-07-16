@@ -40,5 +40,111 @@ Ett högt CRAP-värde indikerar kod som är både komplex och dåligt testad, vi
 
 </ul>
 
+<h1>Phpmetrics</h1>
+<p>
+Min första analys i PhpMetrics är fokuserad på de olika stora och färgade cirklarna. 
+Storlek på cirklarna representerar hur lätt det blir att underhålla koden och färg representerar 
+komplexiteten. Min första analys i PhpMetric representeras nedan i bild där de 3 största cirklarna 
+i rött representeras av följande klasser: 
+</p>
+
+<ul>
+    <li>
+    CardGameControllerJson
+    </li>
+
+    <li>
+    CardGameController
+    </li>
+
+    <li>
+    Game21
+    </li>
+</ul>
+
+<div class="analysisimg1">
+    <figure>
+        <picture>
+            <img src="{{ asset('img/PhpMetrics.png') }}" alt="First analysis PhpMetrics Maintainability / complexity chart">
+        </picture>
+        <figcaption>First analysis PhpMetrics Maintainability / complexity chart</figcaption>
+    </figure>
+</div>
+
+<p>
+En översyn i dessa klasser ger en ganska tydlig bild av att jag är väldigt sparsam med att skriva 
+kommentarer samt så saknar 1 och 2 i listan enhetstester och kan förbättras markant. Komplexiteten 
+kan även förbättras för alla dessa genom att se om delar i klasserna kan delas upp i enklare 
+metoder.  
+</p>
+
+<h1>Scrutinizer</h1>
+
+<p>
+Min första analys med Scrutinizer visar jag har ett snitt på 9,85 i betyg där 10 är det högsta 
+betyg. Det man kan se från den första analysen är att kodtäckningen (coverage) är endast 20%. 
+Detta innebär att en stor del av koden inte är testad, vilket ökar risken för oförutsägbar kod. 
+</p>
+
+<div class="analysisimg1">
+    <figure>
+        <picture>
+            <img src="{{ asset('img/scrutinizerstart.png') }}" alt="First analysis Scrutinizer overview">
+        </picture>
+        <figcaption>First analysis Scrutinizer overview</figcaption>
+    </figure>
+</div>
+
+<p>
+Från en annan vy i Scrutinizer kan man sortera kod på komplexitet. Kod med hög komplexitet är 
+oftast svårare att underhålla samt så innebär hög komplexiteten fler beslutsvägar vilket också 
+innebär svårare att testa samt risk för buggar. 
+</p>
+
+<div class="analysisimg2">
+    <figure>
+        <picture>
+            <img src="{{ asset('img/scrutinizer.png') }}" alt="First analysis Scrutinizer complexity overview">
+        </picture>
+        <figcaption>First analysis Scrutinizer complexity overview</figcaption>
+    </figure>
+</div>
+
+<p>
+Ytterliggare en djupdykning i Scrutinzer vyer kan man även se vilka operationer i en klass som 
+skapar hög komplexitet. 
+</p>
+
+<div class="analysisimg2">
+    <figure>
+        <picture>
+            <img src="{{ asset('img/scrutinizer_operation.png') }}" alt="First analysis Scrutinizer complexity overview methods">
+        </picture>
+        <figcaption>First analysis Scrutinizer complexity overview methods</figcaption>
+    </figure>
+</div>
+
+<p>
+Ska man sammanfatta analyzen i Scrutinizer så kommer jag välja att fokusera på att enhetstesta 
+den kod som anses vara mest komplex och där enhetstester inte är gjorda överhuvudtaget. Sedan så 
+är målet att även försöka minska komplexiteten i de operationer med många rader. Fokus kommer 
+läggas på följande klasser: 
+</p>
+
+
+<ul>
+    <li>
+    CardGameController
+    </li>
+
+    <li>
+    CardGameControllerJson
+    </li>
+
+    <li>
+    Game21
+    </li>
+</ul>
+
 
 {% endblock %}

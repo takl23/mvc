@@ -845,3 +845,19 @@ div.centerul ul {
 .center {
   text-align: center;
 }
+
+.analysisimg1 {
+  box-sizing: content-box;
+  margin: auto;
+}
+.analysisimg1 img {
+  max-width: 25rem;
+}
+
+.analysisimg2 {
+  box-sizing: content-box;
+  margin: auto;
+}
+.analysisimg2 img {
+  max-width: 50rem;
+}
