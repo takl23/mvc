@@ -46,7 +46,6 @@ class CardGameControllerJson extends AbstractController
 
         $session->set("cards_left_in_deck", $deck);
 
-        // Returnerar kortleken som JSON med vacker utskrift
         $response = new JsonResponse($data);
         $response->setEncodingOptions(
             $response->getEncodingOptions() | JSON_PRETTY_PRINT
@@ -65,7 +64,6 @@ class CardGameControllerJson extends AbstractController
             return new Response("Deck is not initialized", Response::HTTP_NOT_FOUND);
         }
 
-        // Kopiera och blanda kortleken
         $shuffleDeck = $deck->getDeck();
         shuffle($shuffleDeck);
 
@@ -80,7 +78,6 @@ class CardGameControllerJson extends AbstractController
         ];
         $session->set("cards_left_in_deck", $deck);
 
-        // Returnerar den blandade kortleken som JSON med vacker utskrift
         $response = new JsonResponse($data);
         $response->setEncodingOptions(
             $response->getEncodingOptions() | JSON_PRETTY_PRINT
@@ -102,15 +99,11 @@ class CardGameControllerJson extends AbstractController
         }
 
         $hand = new CardHand();
-        $drawnCard = $deck->draw();
-
-        // Om det inte finns några kort kvar i kortleken, visa ett meddelande
-        if ($drawnCard === null) {
-            return new Response("The deck is empty!");
+        try {
+            CardHand::drawCardToHand($deck, $hand);
+        } catch (Exception $e) {
+            return new Response($e->getMessage(), Response::HTTP_BAD_REQUEST);
         }
-
-        // Lägg till det dragna kortet i handen
-        $hand->add($drawnCard);
 
         // Spara handen i sessionen
         $session->set("drawn_cards", $hand->getHand());
@@ -168,19 +161,15 @@ class CardGameControllerJson extends AbstractController
         $hand = new CardHand();
 
         for ($i = 1; $i <= $number; $i++) {
-            $drawnCard = $deck->draw();
-
-            // Lägg till det dragna kortet till handen
-            if ($drawnCard !== null) {
-                $hand->add($drawnCard);
-            } else {
-                break; // Om kortleken är tom, bryt loopen
+            try {
+                CardHand::drawCardToHand($deck, $hand);
+            } catch (Exception $e) {
+                break; // Om ett fel inträffar, bryt loopen
             }
         }
 
         // Spara handen i sessionen
         $session->set("drawn_cards", $hand->getHand());
-
         // Uppdatera kortleken i sessionen
         $session->set("cards_left_in_deck", $deck);
 
