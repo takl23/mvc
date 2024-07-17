@@ -1,8 +1,5 @@
 <?php
-
 namespace App\Card;
-
-use App\Card\Card;
 
 class CardHand
 {
@@ -16,7 +13,6 @@ class CardHand
         $this->hand[] = $card;
     }
 
-
     public function countHand(): int
     {
         return count($this->hand);
@@ -28,5 +24,19 @@ class CardHand
     public function getHand(): array
     {
         return $this->hand;
+    }
+
+    /**
+     * Hjälpfunktion för att dra ett kort och lägga till det i en hand.
+     */
+    public static function drawCardToHand(DeckOfCards $deck, CardHand $hand): void
+    {
+        $drawnCard = $deck->draw();
+
+        if ($drawnCard === null) {
+            throw new \Exception("The deck is empty!");
+        }
+
+        $hand->add($drawnCard);
     }
 }

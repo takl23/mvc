@@ -20,6 +20,7 @@ class CardGameController extends AbstractController
     public function initcallback(SessionInterface $session): Response
     {
         $deck = new DeckOfCards();
+        $deck->shuffle();
         $session->set("cards_left_in_deck", $deck);
         return $this->redirectToRoute('card_start');
     }
@@ -28,15 +29,14 @@ class CardGameController extends AbstractController
     #[Route("/game/card", name: "card_start", methods: ["GET"])]
     public function home(SessionInterface $session): Response
     {
-        /** @var DeckOfCards|null $deck */
         $deck = $session->get("cards_left_in_deck");
         if ($deck == null) {
             return $this->redirectToRoute('card_init');
         }
+
         $data = [
             "deck" => $deck->getDeck()
         ];
-        $session->set("cards_left_in_deck", $deck);
 
         return $this->render('card/home.html.twig', $data);
     }
@@ -65,7 +65,6 @@ class CardGameController extends AbstractController
     #[Route("/game/card/deck", name: "deck", methods: ["GET"])]
     public function sortedDeck(SessionInterface $session): Response
     {
-        /** @var DeckOfCards|null $deck */
         $deck = $session->get("cards_left_in_deck");
 
         // Om det inte finns någon kortlek i sessionen, skapa en ny och blanda den
@@ -86,7 +85,6 @@ class CardGameController extends AbstractController
     #[Route("/game/card/deck/shuffle", name: "deck_shuffle", methods: ["GET"])]
     public function shuffleDeck(SessionInterface $session): Response
     {
-        /** @var DeckOfCards|null $deck */
         $deck = $session->get("cards_left_in_deck");
 
         // Kontrollera om det finns en kortlek i sessionen
@@ -109,10 +107,7 @@ class CardGameController extends AbstractController
     #[Route("/game/card/deck/draw", name: "deck_draw", methods: ["GET"])]
     public function drawOneCard(SessionInterface $session): Response
     {
-        /** @var DeckOfCards|null $deck */
         $deck = $session->get("cards_left_in_deck");
-
-        // Om det inte finns någon kortlek, skapa en ny och blanda den
         if ($deck === null) {
             $deck = new DeckOfCards();
             $deck->shuffle();
@@ -120,18 +115,7 @@ class CardGameController extends AbstractController
         }
 
         $hand = new CardHand();
-        $drawnCard = $deck->draw();
-
-        // Om det inte finns några kort kvar i kortleken, visa ett meddelande
-        if ($drawnCard === null) {
-            return new Response("The deck is empty!");
-        }
-
-        // Lägg till det dragna kortet i handen
-        $hand->add($drawnCard);
-
-        // Spara handen i sessionen
-        $session->set("drawn_cards", $hand->getHand());
+        CardHand::drawCardToHand($deck, $hand);
 
         $data = [
             "cardsLeft" => $deck->getDeck(),
@@ -146,19 +130,11 @@ class CardGameController extends AbstractController
     #[Route("/game/card/deck/draw/{number<\d+>}", name: "draw_5_cards", methods: ["GET"])]
     public function drawFiveCards(SessionInterface $session, int $number): Response
     {
-        /** @var DeckOfCards|null $deck */
         $deck = $session->get("cards_left_in_deck");
-
-        // Om det inte finns någon kortlek, skapa en ny och blanda den
         if ($deck === null) {
             $deck = new DeckOfCards();
             $deck->shuffle();
             $session->set("cards_left_in_deck", $deck);
-        }
-
-        // Kontrollera att kortleken är en instans av DeckOfCards
-        if (!($deck instanceof DeckOfCards)) {
-            throw new Exception("Invalid deck.");
         }
 
         // Kontrollera att antalet kort att dra är giltigt
@@ -169,19 +145,10 @@ class CardGameController extends AbstractController
         }
 
         $hand = new CardHand();
-
         for ($i = 1; $i <= $number; $i++) {
-            $drawnCard = $deck->draw();
-
-            // Kontrollera om det dragna kortet är en instans av Card innan du lägger till det i handen
-            if ($drawnCard instanceof Card) {
-                $hand->add($drawnCard);
-            } else {
-                throw new Exception('Invalid card drawn from the deck.');
-            }
+            CardHand::drawCardToHand($deck, $hand);
         }
 
-        // Spara handen i sessionen
         $session->set("drawn_cards", $hand);
 
         $data = [
