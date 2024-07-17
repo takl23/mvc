@@ -114,45 +114,54 @@ class Game21 extends AbstractController
         return $this->deck;
     }
 
-    /**
-     * Beräknar summan av värdena för korten i handen
-     *
-     * @param Card[] $hand En array som innehåller Card-objekt som representerar handen
-     * @return int Summan av värdena för korten i handen
-     */
-    public function sumHand(array $hand): int
-    {
-        $sum = 0;
+   /**
+ * Räknar summan av värden för kort i handen.
+ *
+ * @param Card[] $hand En array som innehåller Card-objekt som representerar handen.
+ * @return int Summan av värden för kort i handen.
+ */
+public function sumHand(array $hand): int
+{
+    return array_reduce($hand, function($sum, $card) {
+        return $sum + $card->getValue();
+    }, 0);
+}
 
-        foreach ($hand as $card) {
-            $sum += $card->getValue();
-        }
+  /**
+ * Processar resultatet av spelet och bestämmer vinnaren
+ *
+ * @return string En sträng som beskriver resultatet av spelet
+ */
+public function processResult(): string
+{
+    $player1Score = $this->getPlayer1Score();
+    $player2Score = $this->getPlayer2Score();
 
-        return $sum;
+    // Kontrollera om båda spelarna förlorar
+    if ($player1Score > 21 && $player2Score > 21) {
+        return "Ingen vinner, båda förlorar";
     }
 
-    /**
-     * Processar resultatet av spelet och bestämmer vinnaren
-     *
-     * @return string En sträng som beskriver resultatet av spelet
-     */
-    public function processResult(): string
-    {
-        $player1Score = $this->getPlayer1Score();
-        $player2Score = $this->getPlayer2Score();
+    // Kontrollera om spelare 1 förlorar
+    if ($player1Score > 21) {
+        return "Spelare 2 vinner, spelare 1 förlorar";
+    }
 
-        if ($player1Score > 21 && $player2Score > 21) {
-            return "Ingen vinner, båda förlorar";
-        } elseif ($player1Score > 21) {
-            return "Spelare 2 vinner, spelare 1 förlorar";
-        } elseif ($player2Score > 21) {
-            return "Spelare 1 vinner, spelare 2 förlorar";
-        } elseif ($player1Score > $player2Score) {
-            return "Spelare 1 vinner!";
-        } elseif ($player2Score > $player1Score) {
-            return "Spelare 2 vinner!";
-        }
+    // Kontrollera om spelare 2 förlorar
+    if ($player2Score > 21) {
+        return "Spelare 1 vinner, spelare 2 förlorar";
+    }
 
-        return "Det är oavgjort!";
+    // Kontrollera vem som har högst poäng
+    if ($player1Score > $player2Score) {
+        return "Spelare 1 vinner!";
+    }
+
+    if ($player2Score > $player1Score) {
+        return "Spelare 2 vinner!";
+    }
+
+    // Om poängen är lika, är det oavgjort
+    return "Det är oavgjort!";
     }
 }
