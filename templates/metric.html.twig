@@ -5,7 +5,7 @@
 <h1>Introduktion</h1>
 
 <p>God kodkvalitet är avgörande för att kunna underhålla och förstå koden över tid, även om det kanske inte är ett krav för att skapa en fungerande 
-webbplats. För att säkerställa god kodkvalitet kan vi använda oss av "6C"</p>
+webbplats. För att säkerställa god kodkvalitet kan vi använda oss av <b id="6C">"6C"</b> </p>
 
 <ul>
 <li>
@@ -40,7 +40,7 @@ Ett högt CRAP-värde indikerar kod som är både komplex och dåligt testad, vi
 
 </ul>
 
-<h1>Phpmetrics</h1>
+<h1 id="Phpmetrics">Phpmetrics</h1>
 <p>
 Min första analys i PhpMetrics är fokuserad på de olika stora och färgade cirklarna. 
 Storlek på cirklarna representerar hur lätt det blir att underhålla koden och färg representerar 
@@ -72,13 +72,12 @@ i rött representeras av följande klasser:
 </div>
 
 <p>
-En översyn i dessa klasser ger en ganska tydlig bild av att jag är väldigt sparsam med att skriva 
-kommentarer samt så saknar 1 och 2 i listan enhetstester och kan förbättras markant. Komplexiteten 
-kan även förbättras för alla dessa genom att se om delar i klasserna kan delas upp i enklare 
-metoder.  
+En översyn i min kod och i synnerhet i dessa klasser ger en ganska tydlig bild av att jag är väldigt sparsam med att skriva 
+kommentarer och saknar enhetstester för många klasser. Många av mina "controllers" är komplexa i första analysen i PhpMetric där 
+det helt klart bör ses över om komplexitetetn med färre beslutspunkter går att förbättra. 
 </p>
 
-<h1>Scrutinizer</h1>
+<h1 id="Scrutinizer">Scrutinizer</h1>
 
 <p>
 Min första analys med Scrutinizer visar jag har ett snitt på 9,85 i betyg där 10 är det högsta 
@@ -125,10 +124,8 @@ skapar hög komplexitet.
 </div>
 
 <p>
-Ska man sammanfatta analyzen i Scrutinizer så kommer jag välja att fokusera på att enhetstesta 
-den kod som anses vara mest komplex och där enhetstester inte är gjorda överhuvudtaget. Sedan så 
-är målet att även försöka minska komplexiteten i de operationer med många rader. Fokus kommer 
-läggas på följande klasser: 
+Ska man sammanfatta analyzen i Scrutinizer så är det tydligt att enhetstestning bör utföras i strörre utrsträckning än vad det är gjort 
+hittils. Man kan även se att delar i viss kod är mer komplex så att förenklar delar skulle göra koden mera robust.
 </p>
 
 
@@ -146,5 +143,77 @@ läggas på följande klasser:
     </li>
 </ul>
 
+<h1>Förbättringar</h1>
+
+<p>
+I min kod har jag identifierat ett par förbättringar som jag initialt kommer fokusera på. 
+Jag har utgått ifårn bilderna som är representerade ovan under rubrikerna 
+<a href="#Phpmetrics">PhpMetrics</a> och <a href="#Scrutinizer">Scrutinizer</a> där målet kommer 
+vara att få bättre resultat. Följande förbättringar kommer ligga i fokus:
+</p>
+
+<ul>
+    <li>
+    I första hand kommer jag öka enhetstestning för att öka kodtäckningen vilket bör öka min "Coverage" som är en del av de 
+    <b><a href="#6C">6C</a></b> som beskrivits tidigare.
+    </li>
+
+    <li>
+    Jag kommer förbättra dokumentation för CardGameController, CardGameControllerJson, Game21 för att göra 
+    koden mer lättläst och lättare att underhålla vilket kan kopplas till "Codestyle" och "Cohesion" 
+    som är en del av de <b><a href="#6C">6C</a></b> som beskrivits tidigare.
+   </li>
+
+    <li>
+    Dela upp kod för metoderna CardGameControllerJson::jsonDrawMany(), CardGameController::drawFiveCards() och 
+    App\Card\Game21::processResult() för att minska beslutsbägar och göra koden minder komplex vilket ¨
+    lirar med "Complexity" som är en del av de <b><a href="#6C">6C</a></b> som beskrivits tidigare.
+    </li>
+</ul>
+
+
+<h2>Analys innan förbättringar</h2>
+<p>Nedan repserenteras de bilder från PhpMetric och Scrutinizer som är tagna innan genomförda 
+förbättringar.</p>
+
+<div class="analysisimg1">
+    <figure>
+        <picture>
+            <img src="{{ asset('img/PhpMetrics.png') }}" alt="First analysis PhpMetrics Maintainability / complexity chart">
+        </picture>
+        <figcaption>First analysis PhpMetrics Maintainability / complexity chart</figcaption>
+    </figure>
+</div>
+
+<div class="analysisimg1">
+    <figure>
+        <picture>
+            <img src="{{ asset('img/scrutinizerstart.png') }}" alt="First analysis Scrutinizer overview">
+        </picture>
+        <figcaption>First analysis Scrutinizer overview</figcaption>
+    </figure>
+</div>
+
+<div class="analysisimg2">
+    <figure>
+        <picture>
+            <img src="{{ asset('img/scrutinizer.png') }}" alt="First analysis Scrutinizer complexity overview">
+        </picture>
+        <figcaption>First analysis Scrutinizer complexity overview</figcaption>
+    </figure>
+</div>
+
+<div class="analysisimg2">
+    <figure>
+        <picture>
+            <img src="{{ asset('img/scrutinizer_operation.png') }}" alt="First analysis Scrutinizer complexity overview methods">
+        </picture>
+        <figcaption>First analysis Scrutinizer complexity overview methods</figcaption>
+    </figure>
+</div>
+
+<h2>Analys efter förbättringar</h2>
+<p>Nedan repserenteras de bilder från PhpMetric och Scrutinizer som är tagna efter genomförda 
+förbättringar.</p>
 
 {% endblock %}
