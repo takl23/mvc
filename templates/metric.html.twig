@@ -216,4 +216,86 @@ förbättringar.</p>
 <p>Nedan repserenteras de bilder från PhpMetric och Scrutinizer som är tagna efter genomförda 
 förbättringar.</p>
 
+<div class="analysisimg1">
+    <figure>
+        <picture>
+            <img src="{{ asset('img/PhpMetrics2.png') }}" alt="Second analysis PhpMetrics Maintainability / complexity chart">
+        </picture>
+        <figcaption>Second analysis PhpMetrics Maintainability / complexity chart</figcaption>
+    </figure>
+</div>
+
+<div class="analysisimg1">
+    <figure>
+        <picture>
+            <img src="{{ asset('img/scrutinizerstart2.png') }}" alt="Second analysis Scrutinizer overview">
+        </picture>
+        <figcaption>Second analysis Scrutinizer overview</figcaption>
+    </figure>
+</div>
+
+<div class="analysisimg2">
+    <figure>
+        <picture>
+            <img src="{{ asset('img/scrutinizer2.png') }}" alt="Second analysis Scrutinizer complexity overview">
+        </picture>
+        <figcaption>Second analysis Scrutinizer complexity overview</figcaption>
+    </figure>
+</div>
+
+<div class="analysisimg2">
+    <figure>
+        <picture>
+            <img src="{{ asset('img/scrutinizer_operation2.png') }}" alt="Sedond analysis Scrutinizer complexity overview methods">
+        </picture>
+        <figcaption>Second analysis Scrutinizer complexity overview methods</figcaption>
+    </figure>
+</div>
+
+<h1>Diskussion</h1>
+
+<p>
+I mitt arbete har jag fokuserat på flera viktiga förbättringar för att öka kodkvaliteten och uppnå "clean code". Jag har:
+</p>
+
+<ol>
+    <li>Skapat enhetstester för Library och Product</li>
+    <li>Lagt till kommentarer i koden för Game21, CardGameController och CardGameControllerJson</li>
+    <li>Förenklat metoden processResult genom att ta bort onödiga elseif-satser och återanvända tidigare returvärden</li>
+    <li>Uppdaterat metoden sumHand för att använda array_reduce istället för foreach</li>
+    <li>Uppdaterat CardHand med en ny metod drawCardToHand</li>
+    <li>Implementerat den nya metoden drawCardToHand i CardGameController och CardGameControllerJson</li>
+</0l>
+
+<p> 
+I PhpMetrics såg man tydligaste skillnaden när man la in kommentarer i Game21 enligt punkt 2 i listan. 
+Cirkeln i PhpMetric för Game21 blev gul, vilket indikerar en förbättring i kodens underhållbarhet. Efter att alla uppdateringar var 
+genomförda såg man även att cirkeln för CardGameController blev minder i PhpMetric vilket troligt vis beror på uppdateringarna gjorda 
+enligt punkt 5 och 6 i listan ovan där målet var att minska kompleciteten på koden. 
+</p>
+
+<p> 
+I Scrutinizer ser man att kvalitetsindex reda var bra från start men med införda förbättreingar blev den något bättre. Uppdateringar gjorda 
+enligt punkt 1 gjorde så att kodtäckning "coverage" ökade. Man ser även att i de andra bilderna i listvyerna att kompexiteten minskade 
+vilket beror på punkterna 3-5 i listan ovan. 
+</p>
+
+<p>
+Att arbeta med kodkvalitet på detta sätt har både fördelar och nackdelar. Fördelarna inkluderar mer läsbar och underhållbar kod, 
+samt minskad risk för buggar tack vare ökad testtäckning. Nackdelarna kan vara att det tar mer tid att implementera.
+Skulle även säga att även att om man har full testäckning så kanske man inte testar rätt saker.
+</p>
+
+<p>
+Att använda sig av verktyg tycker jag ger en tydlig struktur för att jobba med "clean code" men ser även 
+andra möjligheter för att arbeta mot "clean code". Till exempel kan kodgranskning göras av kollegor där de ställer frågor och ger feedback. 
+</p>
+
+<p>
+Genom att använda de 6C-principerna och verktyg som PhpMetrics och Scrutinizer har vi kunnat identifiera och åtgärda problem, 
+vilket resulterar i en mer robust och underhållbar kodbas. De förändringar vi har gjort, som att förbättra dokumentationen och 
+minska komplexiteten i specifika metoder, har redan visat positiva resultat i våra analysverktyg.
+</p>
+
+
 {% endblock %}
