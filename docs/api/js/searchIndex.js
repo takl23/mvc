@@ -521,6 +521,16 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Controller-LuckyControllerTwig.html#method_links"
         },                {
+            "fqsen": "\\App\\Controller\\MetricController",
+            "name": "MetricController",
+            "summary": "",
+            "url": "classes/App-Controller-MetricController.html"
+        },                {
+            "fqsen": "\\App\\Controller\\MetricController\u003A\u003Ametric\u0028\u0029",
+            "name": "metric",
+            "summary": "",
+            "url": "classes/App-Controller-MetricController.html#method_metric"
+        },                {
             "fqsen": "\\App\\Controller\\ProductController",
             "name": "ProductController",
             "summary": "",
