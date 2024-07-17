@@ -1,23 +1,21 @@
 <?php
-
 namespace App\Controller;
 
 use App\Card\DeckOfCards;
 use App\Card\CardHand;
-
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-
 use Exception;
 
 date_default_timezone_set("Europe/Stockholm");
 
 class CardGameControllerJson extends AbstractController
 {
+    // Initierar en ny kortlek och sparar den i sessionen
     #[Route("/api/deck/init", name: "deck_init", methods: ["GET"])]
     public function initcallback(SessionInterface $session): Response
     {
@@ -26,6 +24,7 @@ class CardGameControllerJson extends AbstractController
         return $this->redirectToRoute('deck');
     }
 
+    // Returnerar kortleken i JSON-format
     #[Route("/api/deck", name: "apideck", methods: ["GET"])]
     public function jsonDeck(SessionInterface $session): Response
     {
@@ -47,6 +46,7 @@ class CardGameControllerJson extends AbstractController
 
         $session->set("cards_left_in_deck", $deck);
 
+        // Returnerar kortleken som JSON med vacker utskrift
         $response = new JsonResponse($data);
         $response->setEncodingOptions(
             $response->getEncodingOptions() | JSON_PRETTY_PRINT
@@ -54,6 +54,7 @@ class CardGameControllerJson extends AbstractController
         return $response;
     }
 
+    // Blandar kortleken och returnerar den i JSON-format
     #[Route("/api/deck/shuffle", name: "apishuffle", methods: ["GET"])]
     public function jsonShuffle(SessionInterface $session): Response
     {
@@ -64,10 +65,9 @@ class CardGameControllerJson extends AbstractController
             return new Response("Deck is not initialized", Response::HTTP_NOT_FOUND);
         }
 
+        // Kopiera och blanda kortleken
         $shuffleDeck = $deck->getDeck();
-
         shuffle($shuffleDeck);
-
 
         // Hämta kortleken som en array av kortrepresentationer
         $deckData = [];
@@ -80,6 +80,7 @@ class CardGameControllerJson extends AbstractController
         ];
         $session->set("cards_left_in_deck", $deck);
 
+        // Returnerar den blandade kortleken som JSON med vacker utskrift
         $response = new JsonResponse($data);
         $response->setEncodingOptions(
             $response->getEncodingOptions() | JSON_PRETTY_PRINT
@@ -87,6 +88,7 @@ class CardGameControllerJson extends AbstractController
         return $response;
     }
 
+    // Drar ett kort från kortleken och returnerar informationen i JSON-format
     #[Route("/api/deck/draw", name: "apidraw", methods: ["POST"])]
     public function jsonDraw(SessionInterface $session): Response
     {
@@ -107,9 +109,10 @@ class CardGameControllerJson extends AbstractController
             return new Response("The deck is empty!");
         }
 
+        // Lägg till det dragna kortet i handen
         $hand->add($drawnCard);
 
-        // Store the hand in the session
+        // Spara handen i sessionen
         $session->set("drawn_cards", $hand->getHand());
 
         // Hämta kortleken som en array av kortrepresentationer
@@ -123,10 +126,9 @@ class CardGameControllerJson extends AbstractController
             $deckDrawn[] = $card->representCard();
         }
 
-
         $deckLeftInt = $deck->countDeck();
 
-
+        // Returnerar information om dragna kort och kort kvar i leken som JSON
         $data = [
             "cardsLeftInt" => $deckLeftInt,
             "cardsDrawn" => $deckDrawn,
@@ -140,10 +142,10 @@ class CardGameControllerJson extends AbstractController
         return $response;
     }
 
+    // Drar ett specificerat antal kort från kortleken och returnerar informationen i JSON-format
     #[Route("/api/deck/draw/{number<\d+>?}", name: "api_drawmany", methods: ["POST"])]
     public function jsonDrawMany(SessionInterface $session, Request $request): Response
     {
-
         // Hämta värdet för number från requesten
         $number = $request->request->getInt('number', 1); // Använd det skickade värdet för antalet kort
 
@@ -156,8 +158,9 @@ class CardGameControllerJson extends AbstractController
             $session->set("cards_left_in_deck", $deck);
         }
 
+        // Kontrollera att antalet kort att dra är giltigt
         if ($number > 52) {
-            throw new Exception("Can not draw more cards then the number of cards a deck contains");
+            throw new Exception("Can not draw more cards than the number of cards a deck contains");
         } elseif ($number > $deck->countDeck()) {
             throw new Exception("Can not draw more cards than cards left in deck.");
         }
@@ -170,12 +173,12 @@ class CardGameControllerJson extends AbstractController
             // Lägg till det dragna kortet till handen
             if ($drawnCard !== null) {
                 $hand->add($drawnCard);
-            } //else {
-            //     break; // Om kortleken är tom, bryt loopen
-            // }
+            } else {
+                break; // Om kortleken är tom, bryt loopen
+            }
         }
 
-        // Store the hand in the session
+        // Spara handen i sessionen
         $session->set("drawn_cards", $hand->getHand());
 
         // Uppdatera kortleken i sessionen
@@ -192,10 +195,9 @@ class CardGameControllerJson extends AbstractController
             $deckDrawn[] = $card->representCard();
         }
 
-
         $deckLeftInt = $deck->countDeck();
 
-
+        // Returnerar information om dragna kort och kort kvar i leken som JSON
         $data = [
             "cardsLeftInt" => $deckLeftInt,
             "cardsDrawn" => $deckDrawn,
