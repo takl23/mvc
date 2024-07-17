@@ -10,17 +10,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class Game21 extends AbstractController
 {
-    // FUNKTIONER
-    // •	Skapa kortlek och blanda - från DeckOfCards
-    // •	Skapa hand för spelare och banken - från CardHand
-    // •	Dra kort och lägga in i hand - från CardHand
-    // •	Summera handen - Använd getValue i klassen Card och utveckla
-    // •	Resultatet - Skapa logik för vem som vinner - (Kanske egen klass?)
-
+    // Egenskaper för att hantera kortleken och spelarnas händer
     private DeckOfCards $deck;
     private CardHand $player1Hand;
     private CardHand $player2Hand;
 
+    /**
+     * Constructor för Game21
+     * Skapar en ny kortlek och tomma händer för spelarna
+     */
     public function __construct()
     {
         $this->deck = new DeckOfCards();
@@ -28,18 +26,19 @@ class Game21 extends AbstractController
         $this->player2Hand = new CardHand();
     }
 
+    /**
+     * Initierar ett nytt spel genom att blanda kortleken och tömma spelarnas händer
+     */
     public function newGame(): void
     {
         $this->deck->shuffle();
         $this->player1Hand = new CardHand();
         $this->player2Hand = new CardHand();
-
-        //$this->player1Hand->add($this->deck->draw());
-
     }
 
-
-
+    /**
+     * Drar ett kort till spelare 1:s hand från kortleken
+     */
     public function drawCardPlayer1(): void
     {
         // Hämta ett kort från leken
@@ -47,12 +46,13 @@ class Game21 extends AbstractController
 
         // Kontrollera om det hämtade kortet är en giltig instans av Card innan du lägger till det i handen
         if ($newCard instanceof Card) {
-
             $this->player1Hand->add($newCard);
         }
-
     }
 
+    /**
+     * Drar ett kort till spelare 2:s hand från kortleken
+     */
     public function drawCardPlayer2(): void
     {
         // Hämta ett kort från leken
@@ -60,44 +60,66 @@ class Game21 extends AbstractController
 
         // Kontrollera om det hämtade kortet är en giltig instans av Card innan du lägger till det i handen
         if ($newCard instanceof Card) {
-
             $this->player2Hand->add($newCard);
         }
-
     }
 
-
+    /**
+     * Hämtar spelare 1:s hand
+     *
+     * @return CardHand Spelare 1:s hand
+     */
     public function getPlayer1Hand(): CardHand
     {
         return $this->player1Hand;
     }
 
+    /**
+     * Hämtar spelare 2:s hand
+     *
+     * @return CardHand Spelare 2:s hand
+     */
     public function getPlayer2Hand(): CardHand
     {
         return $this->player2Hand;
     }
 
+    /**
+     * Hämtar poängen för spelare 1:s hand
+     *
+     * @return int Poängen för spelare 1:s hand
+     */
     public function getPlayer1Score(): int
     {
         return $this->sumHand($this->player1Hand->getHand());
     }
 
+    /**
+     * Hämtar poängen för spelare 2:s hand
+     *
+     * @return int Poängen för spelare 2:s hand
+     */
     public function getPlayer2Score(): int
     {
         return $this->sumHand($this->player2Hand->getHand());
     }
 
+    /**
+     * Hämtar kortleken
+     *
+     * @return DeckOfCards Kortleken
+     */
     public function getDeck(): DeckOfCards
     {
         return $this->deck;
     }
 
     /**
-    * Calculates the sum of values for cards in the hand.
-    *
-    * @param Card[] $hand The array containing Card objects representing the hand.
-    * @return int The sum of values for cards in the hand.
-    */
+     * Beräknar summan av värdena för korten i handen
+     *
+     * @param Card[] $hand En array som innehåller Card-objekt som representerar handen
+     * @return int Summan av värdena för korten i handen
+     */
     public function sumHand(array $hand): int
     {
         $sum = 0;
@@ -109,31 +131,28 @@ class Game21 extends AbstractController
         return $sum;
     }
 
+    /**
+     * Processar resultatet av spelet och bestämmer vinnaren
+     *
+     * @return string En sträng som beskriver resultatet av spelet
+     */
     public function processResult(): string
     {
         $player1Score = $this->getPlayer1Score();
         $player2Score = $this->getPlayer2Score();
 
         if ($player1Score > 21 && $player2Score > 21) {
-            $result = "Ingen vinner, båda förlorar";
-            return $result;
+            return "Ingen vinner, båda förlorar";
         } elseif ($player1Score > 21) {
-            $result = "Spelare 2 vinner, spelare 1 förlorar";
-            return $result;
+            return "Spelare 2 vinner, spelare 1 förlorar";
         } elseif ($player2Score > 21) {
-            $result = "Spelare 1 vinner, spelare 2 förlorar";
-            return $result;
+            return "Spelare 1 vinner, spelare 2 förlorar";
         } elseif ($player1Score > $player2Score) {
-            $result = "Spelare 1 vinner!";
-            return $result;
+            return "Spelare 1 vinner!";
         } elseif ($player2Score > $player1Score) {
-            $result = "Spelare 2 vinner!";
-            return $result;
+            return "Spelare 2 vinner!";
         }
 
-        $result = "Det är oavgjort!";
-        return $result;
-
+        return "Det är oavgjort!";
     }
-
 }
