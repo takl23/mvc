@@ -1,5 +1,8 @@
 <?php
+
 namespace App\Card;
+
+use Exception;
 
 class CardHand
 {
@@ -34,9 +37,17 @@ class CardHand
         $drawnCard = $deck->draw();
 
         if ($drawnCard === null) {
-            throw new \Exception("The deck is empty!");
+            throw new Exception("The deck is empty!");
         }
 
         $hand->add($drawnCard);
+    }
+
+    /**
+     * Wrapper instansmetod för att dra ett kort.
+     */
+    public function drawCard(DeckOfCards $deck): void
+    {
+        self::drawCardToHand($deck, $this);
     }
 }

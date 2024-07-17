@@ -15,7 +15,6 @@ use Exception;
 
 class CardGameController extends AbstractController
 {
-    // Initierar en ny kortlek och sparar den i sessionen
     #[Route("/game/card/init", name: "card_init", methods: ["GET"])]
     public function initcallback(SessionInterface $session): Response
     {
@@ -25,12 +24,11 @@ class CardGameController extends AbstractController
         return $this->redirectToRoute('card_start');
     }
 
-    // Startar spelet och visar kortleken
     #[Route("/game/card", name: "card_start", methods: ["GET"])]
     public function home(SessionInterface $session): Response
     {
         $deck = $session->get("cards_left_in_deck");
-        if ($deck == null) {
+        if (!$deck instanceof DeckOfCards) {
             return $this->redirectToRoute('card_init');
         }
 
@@ -41,7 +39,6 @@ class CardGameController extends AbstractController
         return $this->render('card/home.html.twig', $data);
     }
 
-    // Testar att skapa och visa ett kort
     #[Route("/game/card/card", name: "testcard")]
     public function testCard(LoggerInterface $logger): Response
     {
@@ -50,7 +47,6 @@ class CardGameController extends AbstractController
         $cardGraphic = new CardGraphic($value, $suit);
         $card = new Card($value, $suit);
 
-        // Logga kortets värde och svit
         $logger->info("Value: $value, Suit: $suit");
 
         $data = [
@@ -61,14 +57,12 @@ class CardGameController extends AbstractController
         return $this->render('card/card.html.twig', $data);
     }
 
-    // Visar den aktuella kortleken
     #[Route("/game/card/deck", name: "deck", methods: ["GET"])]
     public function sortedDeck(SessionInterface $session): Response
     {
         $deck = $session->get("cards_left_in_deck");
 
-        // Om det inte finns någon kortlek i sessionen, skapa en ny och blanda den
-        if ($deck === null) {
+        if (!$deck instanceof DeckOfCards) {
             $deck = new DeckOfCards();
             $deck->shuffle();
             $session->set("cards_left_in_deck", $deck);
@@ -81,18 +75,15 @@ class CardGameController extends AbstractController
         return $this->render('card/deck.html.twig', $data);
     }
 
-    // Blandar kortleken och visar den
     #[Route("/game/card/deck/shuffle", name: "deck_shuffle", methods: ["GET"])]
     public function shuffleDeck(SessionInterface $session): Response
     {
         $deck = $session->get("cards_left_in_deck");
 
-        // Kontrollera om det finns en kortlek i sessionen
-        if ($deck === null) {
+        if (!$deck instanceof DeckOfCards) {
             return new Response("Deck is not available.", Response::HTTP_BAD_REQUEST);
         }
 
-        // Kopiera och blanda kortleken
         $shuffleDeck = $deck->getDeck();
         shuffle($shuffleDeck);
 
@@ -103,19 +94,18 @@ class CardGameController extends AbstractController
         return $this->render('card/deck.html.twig', $data);
     }
 
-    // Drar ett kort från kortleken och visar det
     #[Route("/game/card/deck/draw", name: "deck_draw", methods: ["GET"])]
     public function drawOneCard(SessionInterface $session): Response
     {
         $deck = $session->get("cards_left_in_deck");
-        if ($deck === null) {
+        if (!$deck instanceof DeckOfCards) {
             $deck = new DeckOfCards();
             $deck->shuffle();
             $session->set("cards_left_in_deck", $deck);
         }
 
         $hand = new CardHand();
-        CardHand::drawCardToHand($deck, $hand);
+        $hand->drawCard($deck); // Använd instansmetoden som kallar den statiska metoden
 
         $data = [
             "cardsLeft" => $deck->getDeck(),
@@ -126,18 +116,16 @@ class CardGameController extends AbstractController
         return $this->render('card/draw.html.twig', $data);
     }
 
-    // Drar ett specifikt antal kort från kortleken och visar dem
     #[Route("/game/card/deck/draw/{number<\d+>}", name: "draw_5_cards", methods: ["GET"])]
     public function drawFiveCards(SessionInterface $session, int $number): Response
     {
         $deck = $session->get("cards_left_in_deck");
-        if ($deck === null) {
+        if (!$deck instanceof DeckOfCards) {
             $deck = new DeckOfCards();
             $deck->shuffle();
             $session->set("cards_left_in_deck", $deck);
         }
 
-        // Kontrollera att antalet kort att dra är giltigt
         if ($number > 52) {
             throw new Exception("Can not draw more cards than the number of cards a deck contains");
         } elseif ($number > $deck->countDeck()) {
@@ -146,7 +134,7 @@ class CardGameController extends AbstractController
 
         $hand = new CardHand();
         for ($i = 1; $i <= $number; $i++) {
-            CardHand::drawCardToHand($deck, $hand);
+            $hand->drawCard($deck); // Använd instansmetoden som kallar den statiska metoden
         }
 
         $session->set("drawn_cards", $hand);
@@ -160,7 +148,6 @@ class CardGameController extends AbstractController
         return $this->render('card/draw.html.twig', $data);
     }
 
-    // Visar sessionens innehåll
     #[Route("/game/card/session", name: "card_session", methods: ['GET'])]
     public function sessionPrint(SessionInterface $session): Response
     {
@@ -171,7 +158,6 @@ class CardGameController extends AbstractController
         return $this->render('card/session.html.twig', $data);
     }
 
-    // Rensar sessionen och visar ett meddelande
     #[Route("/game/card/session/delete", name: "card_session_delete", methods: ["GET"])]
     public function sessionDelete(SessionInterface $session): Response
     {
@@ -185,7 +171,6 @@ class CardGameController extends AbstractController
         return $this->redirectToRoute('card_start');
     }
 
-    // Rensar sessionen med POST-metod och visar ett meddelande
     #[Route("/game/card/session/delete2", name: "card_session_delete2", methods: ['POST'])]
     public function sessionDelete2(SessionInterface $session): Response
     {

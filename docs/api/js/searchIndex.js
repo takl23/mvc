@@ -141,6 +141,16 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Card-CardHand.html#method_getHand"
         },                {
+            "fqsen": "\\App\\Card\\CardHand\u003A\u003AdrawCardToHand\u0028\u0029",
+            "name": "drawCardToHand",
+            "summary": "Hj\u00E4lpfunktion\u0020f\u00F6r\u0020att\u0020dra\u0020ett\u0020kort\u0020och\u0020l\u00E4gga\u0020till\u0020det\u0020i\u0020en\u0020hand.",
+            "url": "classes/App-Card-CardHand.html#method_drawCardToHand"
+        },                {
+            "fqsen": "\\App\\Card\\CardHand\u003A\u003AdrawCard\u0028\u0029",
+            "name": "drawCard",
+            "summary": "Wrapper\u0020instansmetod\u0020f\u00F6r\u0020att\u0020dra\u0020ett\u0020kort.",
+            "url": "classes/App-Card-CardHand.html#method_drawCard"
+        },                {
             "fqsen": "\\App\\Card\\CardHand\u003A\u003A\u0024hand",
             "name": "hand",
             "summary": "",
@@ -193,57 +203,57 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Card\\Game21\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
-            "summary": "",
+            "summary": "Constructor\u0020f\u00F6r\u0020Game21\nSkapar\u0020en\u0020ny\u0020kortlek\u0020och\u0020tomma\u0020h\u00E4nder\u0020f\u00F6r\u0020spelarna",
             "url": "classes/App-Card-Game21.html#method___construct"
         },                {
             "fqsen": "\\App\\Card\\Game21\u003A\u003AnewGame\u0028\u0029",
             "name": "newGame",
-            "summary": "",
+            "summary": "Initierar\u0020ett\u0020nytt\u0020spel\u0020genom\u0020att\u0020blanda\u0020kortleken\u0020och\u0020t\u00F6mma\u0020spelarnas\u0020h\u00E4nder",
             "url": "classes/App-Card-Game21.html#method_newGame"
         },                {
             "fqsen": "\\App\\Card\\Game21\u003A\u003AdrawCardPlayer1\u0028\u0029",
             "name": "drawCardPlayer1",
-            "summary": "",
+            "summary": "Drar\u0020ett\u0020kort\u0020till\u0020spelare\u00201\u003As\u0020hand\u0020fr\u00E5n\u0020kortleken",
             "url": "classes/App-Card-Game21.html#method_drawCardPlayer1"
         },                {
             "fqsen": "\\App\\Card\\Game21\u003A\u003AdrawCardPlayer2\u0028\u0029",
             "name": "drawCardPlayer2",
-            "summary": "",
+            "summary": "Drar\u0020ett\u0020kort\u0020till\u0020spelare\u00202\u003As\u0020hand\u0020fr\u00E5n\u0020kortleken",
             "url": "classes/App-Card-Game21.html#method_drawCardPlayer2"
         },                {
             "fqsen": "\\App\\Card\\Game21\u003A\u003AgetPlayer1Hand\u0028\u0029",
             "name": "getPlayer1Hand",
-            "summary": "",
+            "summary": "H\u00E4mtar\u0020spelare\u00201\u003As\u0020hand",
             "url": "classes/App-Card-Game21.html#method_getPlayer1Hand"
         },                {
             "fqsen": "\\App\\Card\\Game21\u003A\u003AgetPlayer2Hand\u0028\u0029",
             "name": "getPlayer2Hand",
-            "summary": "",
+            "summary": "H\u00E4mtar\u0020spelare\u00202\u003As\u0020hand",
             "url": "classes/App-Card-Game21.html#method_getPlayer2Hand"
         },                {
             "fqsen": "\\App\\Card\\Game21\u003A\u003AgetPlayer1Score\u0028\u0029",
             "name": "getPlayer1Score",
-            "summary": "",
+            "summary": "H\u00E4mtar\u0020po\u00E4ngen\u0020f\u00F6r\u0020spelare\u00201\u003As\u0020hand",
             "url": "classes/App-Card-Game21.html#method_getPlayer1Score"
         },                {
             "fqsen": "\\App\\Card\\Game21\u003A\u003AgetPlayer2Score\u0028\u0029",
             "name": "getPlayer2Score",
-            "summary": "",
+            "summary": "H\u00E4mtar\u0020po\u00E4ngen\u0020f\u00F6r\u0020spelare\u00202\u003As\u0020hand",
             "url": "classes/App-Card-Game21.html#method_getPlayer2Score"
         },                {
             "fqsen": "\\App\\Card\\Game21\u003A\u003AgetDeck\u0028\u0029",
             "name": "getDeck",
-            "summary": "",
+            "summary": "H\u00E4mtar\u0020kortleken",
             "url": "classes/App-Card-Game21.html#method_getDeck"
         },                {
             "fqsen": "\\App\\Card\\Game21\u003A\u003AsumHand\u0028\u0029",
             "name": "sumHand",
-            "summary": "Calculates\u0020the\u0020sum\u0020of\u0020values\u0020for\u0020cards\u0020in\u0020the\u0020hand.",
+            "summary": "R\u00E4knar\u0020summan\u0020av\u0020v\u00E4rden\u0020f\u00F6r\u0020kort\u0020i\u0020handen.",
             "url": "classes/App-Card-Game21.html#method_sumHand"
         },                {
             "fqsen": "\\App\\Card\\Game21\u003A\u003AprocessResult\u0028\u0029",
             "name": "processResult",
-            "summary": "",
+            "summary": "Processar\u0020resultatet\u0020av\u0020spelet\u0020och\u0020best\u00E4mmer\u0020vinnaren",
             "url": "classes/App-Card-Game21.html#method_processResult"
         },                {
             "fqsen": "\\App\\Card\\Game21\u003A\u003A\u0024deck",
