@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link rel="icon" href="{{ asset('img/glider.svg') }}">
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+    {% endblock %}
+</head>
+<body class="proj-body">
+    <nav class="proj-nav">
+        <ul>
+            <li><a href="{{ path('me') }}"><< TILLBAKA TILL REPORT <<</a></li>
+        </ul>
+    </nav>
+    <header class="proj-header" style="background-image: url('{{ asset('img/background.jpg') }}'); height: 500px;">
+        <div class="proj-hero-text">
+            <h1>Sustainability Indicators Project</h1>
+            <a href="{{ path('proj_home') }}">
+                <button style="background-color: #028482; border: none; color: white; padding: 1em 2em; margin-bottom: 5%; cursor: pointer;">Nytt Projekt!</button>
+            </a>
+            <nav class="proj-nav">
+                <ul>
+                    <li><a href="{{ path('proj_about') }}">About</a></li>
+        
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main class="proj-container">
+        {% block body %}{% endblock %}
+    </main>
+    <footer class="proj-footer">
+        {% block footer %}
+            &copy; 2024 takl23
+        {% endblock %}
+    </footer>
+</body>
+</html>

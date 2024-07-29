@@ -861,3 +861,74 @@ div.centerul ul {
 .analysisimg2 img {
   max-width: 50rem;
 }
+
+body.proj-body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+.proj-header {
+  background-image: url("../../public/img/background.jpg");
+  background-size: cover;
+  color: white;
+  padding: 5em 0;
+  text-align: center;
+}
+
+.proj-nav {
+  background-color: #028482;
+  color: white;
+  display: flex;
+  justify-content: center;
+  padding: 1em 0;
+}
+
+.proj-nav ul {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.proj-nav ul li {
+  margin: 0 1em;
+}
+
+.proj-nav ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+.proj-nav ul li a:hover {
+  text-decoration: underline;
+}
+
+.proj-container {
+  padding: 2em;
+}
+
+.proj-center {
+  text-align: center;
+}
+
+.proj-row {
+  display: flex;
+  justify-content: space-around;
+}
+
+.proj-column1, .proj-column2 {
+  flex: 1;
+  margin: 1em;
+}
+
+.proj-column1 img {
+  max-width: 100%;
+}
+
+.proj-footer {
+  background-color: #028482;
+  color: white;
+  text-align: center;
+  padding: 1em;
+}
