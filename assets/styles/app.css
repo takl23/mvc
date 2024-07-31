@@ -862,26 +862,34 @@ div.centerul ul {
   max-width: 50rem;
 }
 
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
 body.proj-body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   font-family: Arial, sans-serif;
   background-color: #f4f4f4;
   color: #333;
 }
 
 .proj-header {
-  background-image: url("../../public/img/background.jpg");
-  background-size: cover;
-  color: white;
-  padding: 5em 0;
-  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em;
+  background-color: white;
+  border-bottom: 1px solid black; /* Black line dividing navbar and main */
 }
 
-.proj-nav {
-  background-color: #028482;
-  color: white;
-  display: flex;
-  justify-content: center;
-  padding: 1em 0;
+.back-link {
+  color: rgba(0, 0, 0, 0.5); /* Light gray transparent text */
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 0.9em;
 }
 
 .proj-nav ul {
@@ -896,8 +904,9 @@ body.proj-body {
 }
 
 .proj-nav ul li a {
-  color: white;
+  color: black;
   text-decoration: none;
+  font-weight: bold;
 }
 
 .proj-nav ul li a:hover {
@@ -905,30 +914,77 @@ body.proj-body {
 }
 
 .proj-container {
+  flex: 1; /* Ensure main content grows to fill the available space */
   padding: 2em;
-}
-
-.proj-center {
-  text-align: center;
-}
-
-.proj-row {
-  display: flex;
-  justify-content: space-around;
-}
-
-.proj-column1, .proj-column2 {
-  flex: 1;
-  margin: 1em;
-}
-
-.proj-column1 img {
-  max-width: 100%;
+  background-color: white; /* Main section in clean white */
 }
 
 .proj-footer {
-  background-color: #028482;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1em;
+  background: linear-gradient(to right, #E5243B 0%, #E5243B 5.88%, #DDA63A 5.88%, #DDA63A 11.76%, #4C9F38 11.76%, #4C9F38 17.64%, #C5192D 17.64%, #C5192D 23.52%, #FF3A21 23.52%, #FF3A21 29.4%, #26BDE2 29.4%, #26BDE2 35.28%, #FCC30B 35.28%, #FCC30B 41.16%, #A21942 41.16%, #A21942 47.04%, #FD6925 47.04%, #FD6925 52.92%, #DD1367 52.92%, #DD1367 58.8%, #FD9D24 58.8%, #FD9D24 64.68%, #BF8B2E 64.68%, #BF8B2E 70.56%, #3F7E44 70.56%, #3F7E44 76.44%, #0A97D9 76.44%, #0A97D9 82.32%, #56C02B 82.32%, #56C02B 88.2%, #00689D 88.2%, #00689D 94.08%, #19486A 94.08%, #19486A 100%);
   color: white;
   text-align: center;
-  padding: 1em;
+}
+
+.proj-footer p {
+  flex-basis: 100%;
+  margin: 0;
+  padding: 0.5em 0;
+}
+
+.center {
+  text-align: center;
+}
+
+body.proj-index-body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  height: 100vh;
+  background-color: #f4f4f4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.project-title {
+  color: black;
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: bold;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.project-title a {
+  color: black;
+  text-decoration: none;
+}
+
+.goals-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  left: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.goals-list li {
+  color: rgba(0, 0, 0, 0.2); /* Very light gray transparent color */
+  font-size: 1.2em;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.goals-list li.goal7 {
+  color: rgba(0, 0, 0, 0.5); /* Darker gray transparent color */
+  /* font-size: 2em;  Larger size for Goal 7 */
 }

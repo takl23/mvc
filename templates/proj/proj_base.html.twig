@@ -12,24 +12,14 @@
     {% endblock %}
 </head>
 <body class="proj-body">
-    <nav class="proj-nav">
-        <ul>
-            <li><a href="{{ path('me') }}"><< TILLBAKA TILL REPORT <<</a></li>
-        </ul>
-    </nav>
-    <header class="proj-header" style="background-image: url('{{ asset('img/background.jpg') }}'); height: 500px;">
-        <div class="proj-hero-text">
-            <h1>Sustainability Indicators Project</h1>
-            <a href="{{ path('proj_home') }}">
-                <button style="background-color: #028482; border: none; color: white; padding: 1em 2em; margin-bottom: 5%; cursor: pointer;">Nytt Projekt!</button>
-            </a>
-            <nav class="proj-nav">
-                <ul>
-                    <li><a href="{{ path('proj_about') }}">About</a></li>
-        
-                </ul>
-            </nav>
-        </div>
+    <header class="proj-header">
+        <a href="{{ path('me') }}" class="back-link"><<< TAKL23 </a>
+        <nav class="proj-nav">
+            <ul>
+                <li><a href="{{ path('proj_home') }}">Home</a></li>
+                <li><a href="{{ path('proj_about') }}">About</a></li>
+            </ul>
+        </nav>
     </header>
     <main class="proj-container">
         {% block body %}{% endblock %}

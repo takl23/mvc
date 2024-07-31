@@ -8,6 +8,12 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ProjectController extends AbstractController
 {
+    #[Route("/proj", name: "proj")]
+    public function index(): Response
+    {
+        return $this->render('proj/index.html.twig');
+    }
+
     #[Route("/proj/home", name: "proj_home")]
     public function home(): Response
     {
