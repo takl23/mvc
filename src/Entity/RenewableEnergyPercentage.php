@@ -14,45 +14,45 @@ class RenewableEnergyPercentage
     private ?int $id = null;
 
     #[ORM\Column]
-    private ?int $ar = null;
+    private ?int $year = null;
 
     #[ORM\Column(nullable: true)]
-    private ?int $varme_kyla_industri_mm = null;
+    private ?int $vim = null;
 
     #[ORM\Column(nullable: true)]
     private ?int $el = null;
 
     #[ORM\Column(nullable: true)]
-    private ?int $transporter = null;
+    private ?int $transport = null;
 
     #[ORM\Column(nullable: true)]
-    private ?int $totalt = null;
+    private ?int $total = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getAr(): ?int
+    public function getYear(): ?int
     {
-        return $this->ar;
+        return $this->year;
     }
 
-    public function setAr(int $ar): static
+    public function setYear(int $year): static
     {
-        $this->ar = $ar;
+        $this->year = $year;
 
         return $this;
     }
 
-    public function getVarmeKylaIndustriMm(): ?int
+    public function getVIM(): ?int
     {
-        return $this->varme_kyla_industri_mm;
+        return $this->vim;
     }
 
-    public function setVarmeKylaIndustriMm(?int $varme_kyla_industri_mm): static
+    public function setVIM(?int $vim): static
     {
-        $this->varme_kyla_industri_mm = $varme_kyla_industri_mm;
+        $this->vim = $vim;
 
         return $this;
     }
@@ -69,26 +69,26 @@ class RenewableEnergyPercentage
         return $this;
     }
 
-    public function getTransporter(): ?int
+    public function getTransport(): ?int
     {
-        return $this->transporter;
+        return $this->transport;
     }
 
-    public function setTransporter(?int $transporter): static
+    public function setTransport(?int $transport): static
     {
-        $this->transporter = $transporter;
+        $this->transport = $transport;
 
         return $this;
     }
 
-    public function getTotalt(): ?int
+    public function getTotal(): ?int
     {
-        return $this->totalt;
+        return $this->total;
     }
 
-    public function setTotalt(?int $totalt): static
+    public function setTotal(?int $total): static
     {
-        $this->totalt = $totalt;
+        $this->total = $total;
 
         return $this;
     }

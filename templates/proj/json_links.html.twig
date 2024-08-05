@@ -1,0 +1,13 @@
+{# templates/proj/json_links.html.twig #}
+{% extends 'proj/proj_base.html.twig' %}
+
+{% block title %}JSON Links{% endblock %}
+
+{% block body %}
+    <h1>JSON Data Links</h1>
+    <ul>
+        <li><a href="{{ path('api_renewable_energy_json') }}" target="_blank">Renewable Energy Percentage Data</a></li>
+        <li><a href="{{ path('api_renewable_energy_twh') }}" target="_blank">Renewable Energy TWh Data</a></li>
+      
+    </ul>
+{% endblock %}

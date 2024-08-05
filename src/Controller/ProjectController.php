@@ -31,4 +31,10 @@ class ProjectController extends AbstractController
     {
         return $this->render('proj/goal.html.twig');
     }
+
+    #[Route("/proj/json", name: "proj_json")]
+    public function projectJson(): Response
+    {
+        return $this->render('proj/json_links.html.twig');
+    }
 }
