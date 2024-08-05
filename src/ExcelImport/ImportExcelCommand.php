@@ -1,4 +1,4 @@
-// src/ExcelImport/ImportExcelCommandPercentage.php
+// src/ExcelImport/ImportExcelCommand.php
 
 namespace App\ExcelImport;
 
@@ -7,12 +7,12 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class ImportExcelCommandPercentage extends Command
+class ImportExcelCommand extends Command
 {
-    protected static $defaultName = 'app:import-excel-percentage';
+    protected static $defaultName = 'app:import-excel';
     private $importService;
 
-    public function __construct(ImportServicePercentage $importService)
+    public function __construct(ImportService $importService)
     {
         $this->importService = $importService;
         parent::__construct();

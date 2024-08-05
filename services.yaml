@@ -18,12 +18,12 @@ services:
         tags: ['controller.service_arguments']
 
     # Register Excel import services
-    App\ExcelImport\ImportServicePercentage:
+    App\ExcelImport\ImportService:
         arguments:
             $entityManager: '@doctrine.orm.entity_manager'
 
-    App\ExcelImport\ImportExcelCommandPercentage:
+    App\ExcelImport\ImportExcelCommand:
         arguments:
-            $importService: '@App\ExcelImport\ImportServicePercentage'
+            $importService: '@App\ExcelImport\ImportService'
         tags:
             - { name: 'console.command' }

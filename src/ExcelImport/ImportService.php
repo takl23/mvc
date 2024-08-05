@@ -1,4 +1,4 @@
-// src/ExcelImport/ImportServicePercentage.php
+// src/ExcelImport/ImportService.php
 
 namespace App\ExcelImport;
 
@@ -6,7 +6,7 @@ use PhpOffice\PhpSpreadsheet\IOFactory;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\RenewableEnergyPercentage;
 
-class ImportServicePercentage
+class ImportService
 {
     private $entityManager;
 
