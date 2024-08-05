@@ -2,36 +2,47 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Sustainability Project</title>
+    <title>Home</title>
+    <link rel="icon" href="{{ asset('img/glider.svg') }}">
     {% block stylesheets %}
         {{ encore_entry_link_tags('app') }}
     {% endblock %}
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+    {% endblock %}
 </head>
 <body class="proj-index-body">
-    <div class="project-title">
-        <a href="{{ path('proj_about') }}">
-            <h1>PROJEKTET</h1>
-            <i>Visualisera indikatorer för hållbarhet (sustainability)</i>
-        </a>
-    </div>
-    <ul class="goals-list">
-        <li>1 No Poverty</li>
-        <li>2 Zero Hunger</li>
-        <li>3 Good Health</li>
-        <li>4 Quality Education</li>
-        <li>5 Gender Equality</li>
-        <li>6 Clean Water</li>
-        <li class="goal7">7 Clean Energy</li>
-        <li>8 Decent Work</li>
-        <li>9 Industry</li>
-        <li>10 Reduced Inequalities</li>
-        <li>11 Sustainable Cities</li>
-        <li>12 Responsible Production</li>
-        <li>13 Climate Action</li>
-        <li>14 Life Below Water</li>
-        <li>15 Life on Land</li>
-        <li>16 Peace & Justice</li>
-        <li>17 Partnerships</li>
-    </ul>
+    <main class="proj-container">
+        <div class="side-project">
+           <h2>Globala målen</h2>
+        <ul class="goals-list">
+            <li> 1 Ingen fattigdom</a></li>
+            <li>2 Ingen hunger</a></li>
+            <li>3 God hälsa och välbefinnande</a></li>
+            <li>4 God utbildning för alla</a></li>
+            <li>5 Jämställdhet</a></li>
+            <li>6 Rent vatten och sanitet</a></li>
+            <li>7 Hållbar energi för alla</a></li>
+            <li>8 Anständiga arbetsvillkor och ekonomisk tillväxt</a></li>
+            <li>9 Hållbar industri, innovationer och infrastruktur</a></li>
+            <li>10 Minskad ojämlikhet</a></li>
+            <li>11 Hållbara städer och samhällen</a></li>
+            <li>12 Hållbar konsumtion och produktion</a></li>
+            <li>13 Bekämpa klimatförändringen</a></li>
+            <li>14 Hav och marina resurser</a></li>
+            <li>15 Ekosystem och biologisk mångfald</a></li>
+            <li>16 Fredliga och inkluderande samhällen</a></li>
+            <li>17 Genomförande och globalt partnerskap</a></li>
+        </ul>
+        </div>
+        <div class="proj-content">
+            <div class="project-title">
+                <a href="{{ path('proj_about') }}">
+                    <h1>PROJEKTET</h1>
+                    <i>Visualisera indikatorer för hållbarhet (sustainability)</i>
+                </a>
+            </div>
+        </div>
+    </main>
 </body>
 </html>

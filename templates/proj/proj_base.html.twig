@@ -13,16 +13,19 @@
 </head>
 <body class="proj-body">
     <header class="proj-header">
-        <a href="{{ path('me') }}" class="back-link"><<< TAKL23 </a>
+        <a href="{{ path('me') }}" class="back-link"><< TILLBAKA TILL REPORT <<</a>
         <nav class="proj-nav">
             <ul>
-                <li><a href="{{ path('proj_home') }}">Home</a></li>
-                <li><a href="{{ path('proj_about') }}">About</a></li>
+                <li><a href="{{ path('proj_home') }}">Hem</a></li>
+                <li><a href="{{ path('proj_about') }}">Om</a></li>
+                <li><a href="{{ path('proj_goal') }}">Globala målen</a></li>
             </ul>
         </nav>
     </header>
     <main class="proj-container">
-        {% block body %}{% endblock %}
+      
+            {% block body %}{% endblock %}
+        
     </main>
     <footer class="proj-footer">
         {% block footer %}

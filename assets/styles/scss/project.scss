@@ -1,15 +1,16 @@
 html, body {
-    height: 100%;
+    min-height: 100%;
     margin: 0;
+    padding: 0;
 }
 
-body.proj-body {
+body.proj-body, body.proj-index-body {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #ffffff;
     color: #333;
+    padding: 0;
 }
 
 .proj-header {
@@ -18,11 +19,11 @@ body.proj-body {
     align-items: center;
     padding: 1em;
     background-color: white;
-    border-bottom: 1px solid black; /* Black line dividing navbar and main */
+    border-bottom: 1px solid black;
 }
 
 .back-link {
-    color: rgba(0, 0, 0, 0.5); /* Light gray transparent text */
+    color: rgba(0, 0, 0, 0.5);
     text-decoration: none;
     font-weight: bold;
     font-size: 0.9em;
@@ -50,9 +51,63 @@ body.proj-body {
 }
 
 .proj-container {
-    flex: 1; /* Ensure main content grows to fill the available space */
+    display: grid;
+    grid-template-columns: 1fr minmax(auto, 45rem) 1fr;
+    gap: 2em;
     padding: 2em;
-    background-color: white; /* Main section in clean white */
+    background-color: white;
+    flex: 1;
+    width: 100%;
+    box-sizing: border-box;
+    min-height: calc(100vh - 4em); /* Se till att containern fyller hela höjden */
+}
+
+.side-project {
+    grid-column: 1 / 2;
+    border-right: 1px solid #000;
+    padding-right: 1em;
+    font-size: 1em; /* Justera till samma storlek på alla sidor */
+}
+
+.side-project h2{
+    color: rgba(0, 0, 0, 0.2);
+}
+
+.proj-content {
+    grid-column: 2 / 3;
+    text-align: left;
+    padding: 1em;
+    max-width: 45rem;
+}
+
+.goals-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+
+.goals-list li {
+    color: rgba(0, 0, 0, 0.2);
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.goals-list li a {
+    color: rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    text-transform: none; /* Förhindra att "a" blir uppercase */
+}
+
+.goals-list li a:hover {
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.goals-list li.goal7, .goals-list li.goal7 a {
+    color: rgba(0, 0, 0, 0.5);
 }
 
 .proj-footer {
@@ -80,6 +135,10 @@ body.proj-body {
         #19486A 94.08%, #19486A 100%);
     color: white;
     text-align: center;
+    width: 100%;
+    flex-shrink: 0;
+    margin-top: auto;
+    box-sizing: border-box;
 }
 
 .proj-footer p {
@@ -93,11 +152,6 @@ body.proj-body {
 }
 
 body.proj-index-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    height: 100vh;
-    background-color: #f4f4f4;
-    display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
@@ -117,27 +171,4 @@ body.proj-index-body {
 .project-title a {
     color: black;
     text-decoration: none;
-}
-
-.goals-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    position: absolute;
-    left: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-.goals-list li {
-    color: rgba(0, 0, 0, 0.2); /* Very light gray transparent color */
-    font-size: 1.2em;
-    font-weight: bold;
-    margin: 10px 0;
-}
-
-.goals-list li.goal7 {
-    color: rgba(0, 0, 0, 0.5); /* Darker gray transparent color */
-    /* font-size: 2em;  Larger size for Goal 7 */
 }
