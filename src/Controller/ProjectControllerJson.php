@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\RenewableEnergyPercentage;
 use App\Entity\RenewableEnergyTWh;
+use App\Entity\EnergySupplyGDP;
 use Doctrine\ORM\EntityManagerInterface;
 
 class ProjectControllerJson extends AbstractController
@@ -15,11 +16,9 @@ class ProjectControllerJson extends AbstractController
     #[Route("/api/renewable-energy", name: "api_renewable_energy_json")]
     public function index(EntityManagerInterface $entityManager): Response
     {
-        // Hämta all data från RenewableEnergyPercentage-tabellen
         $repository = $entityManager->getRepository(RenewableEnergyPercentage::class);
         $data = $repository->findAll();
 
-        // Formatera data för JSON-svar
         $formattedData = array_map(function ($item) {
             return [
                 'year' => $item->getYear(),
@@ -61,7 +60,7 @@ class ProjectControllerJson extends AbstractController
                 'solar_energy' => $item->getSolarEnergy(),
                 'total' => $item->getTotal(),
                 'stat_transfer_to_norway' => $item->getStatTransferToNorway(),
-                'reneweble_energy_in_target_calculation' => $item->getRenewebleEnergyInTargetCalculation(),
+                'renewable_energy_in_target_calculation' => $item->getRenewableEnergyInTargetCalculation(),
                 'total_energy_use' => $item->getTotalEnergyUse(),
             ];
         }, $data);
@@ -69,6 +68,30 @@ class ProjectControllerJson extends AbstractController
         $response = new JsonResponse([
             'data' => $formattedData,
             'reference' => 'https://www.scb.se/hitta-statistik/temaomraden/agenda-2030/mal-7/#141072',
+            'date' => 'August 2024'
+        ]);
+        
+        $response->setEncodingOptions($response->getEncodingOptions() | JSON_PRETTY_PRINT);
+
+        return $response;
+    }
+
+    #[Route("/api/energy_supply_gdp", name: "api_energy_supply_gdp")]
+    public function energySupplyGDP(EntityManagerInterface $entityManager): JsonResponse
+    {
+        $repository = $entityManager->getRepository(EnergySupplyGDP::class);
+        $data = $repository->findAll();
+
+        $formattedData = array_map(function ($item) {
+            return [
+                'year' => $item->getYear(),
+                'precentage' => $item->getPrecentage(),
+            ];
+        }, $data);
+
+        $response = new JsonResponse([
+            'data' => $formattedData,
+            'reference' => 'https://www.scb.se/hitta-statistik/temaomraden/agenda-2030/mal-7/',
             'date' => 'August 2024'
         ]);
         

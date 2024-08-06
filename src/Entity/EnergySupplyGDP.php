@@ -16,7 +16,7 @@ class EnergySupplyGDP
     #[ORM\Column]
     private ?int $year = null;
 
-    #[ORM\Column]
+    #[ORM\Column(name: "precentage")]
     private ?float $precentage = null;
 
     public function getId(): ?int

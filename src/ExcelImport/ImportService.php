@@ -1,5 +1,4 @@
-<?php 
-// src/ExcelImport/ImportService.php
+<?php
 
 namespace App\ExcelImport;
 
@@ -16,7 +15,7 @@ class ImportService
         $this->entityManager = $entityManager;
     }
 
-    public function import(string $filePath): void
+    public function import(string $filePath, string $entityClass): void
     {
         $spreadsheet = IOFactory::load($filePath);
         $worksheet = $spreadsheet->getActiveSheet();
@@ -35,19 +34,23 @@ class ImportService
                 continue;
             }
 
-            $energyTWh = new RenewableEnergyTWh();
-            $energyTWh->setYear((int)$data[0]);
-            $energyTWh->setBiofuels((int)$data[1]);
-            $energyTWh->setHydropower((int)$data[2]);
-            $energyTWh->setWindPower((int)$data[3]);
-            $energyTWh->setHeatPump((int)$data[4]);
-            $energyTWh->setSolarEnergy((int)$data[5]);
-            $energyTWh->setTotal((int)$data[6]);
-            $energyTWh->setStatTransferToNorway((int)$data[7]);
-            $energyTWh->setRenewebleEnergyInTargetCalculation((int)$data[8]);
-            $energyTWh->setTotalEnergyUse((int)$data[9]);
+            if ($entityClass === RenewableEnergyTWh::class) {
+                $entity = new RenewableEnergyTWh();
+                $entity->setYear((int)$data[0]);
+                $entity->setBiofuels($data[1] !== null ? (int)$data[1] : null);
+                $entity->setHydropower($data[2] !== null ? (int)$data[2] : null);
+                $entity->setWindPower($data[3] !== null ? (int)$data[3] : null);
+                $entity->setHeatPump($data[4] !== null ? (int)$data[4] : null);
+                $entity->setSolarEnergy($data[5] !== null ? (int)$data[5] : null);
+                $entity->setTotal($data[6] !== null ? (int)$data[6] : null);
+                $entity->setStatTransferToNorway($data[7] !== null ? (int)$data[7] : null);
+                $entity->setRenewebleEnergyInTargetCalculation($data[8] !== null ? (int)$data[8] : null);
+                $entity->setTotalEnergyUse($data[9] !== null ? (int)$data[9] : null);
+            } else {
+                throw new \Exception("Unknown entity class: $entityClass");
+            }
 
-            $this->entityManager->persist($energyTWh);
+            $this->entityManager->persist($entity);
         }
 
         $this->entityManager->flush();
