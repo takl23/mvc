@@ -14,34 +14,34 @@ class RenewableEnergyTWh
     private ?int $id = null;
 
     #[ORM\Column]
-    private ?int $Year = null;
+    private ?int $year = null;
 
     #[ORM\Column(nullable: true)]
-    private ?int $Biofuels = null;
+    private ?int $biofuels = null;
 
     #[ORM\Column(nullable: true)]
-    private ?int $Hydropower = null;
+    private ?int $hydropower = null;
 
     #[ORM\Column(nullable: true)]
-    private ?int $Wind_Power = null;
+    private ?int $windPower = null;
 
     #[ORM\Column(nullable: true)]
-    private ?int $Heat_Pump = null;
+    private ?int $heatPump = null;
 
     #[ORM\Column(nullable: true)]
-    private ?int $Solar_Energy = null;
+    private ?int $solarEnergy = null;
 
     #[ORM\Column(nullable: true)]
-    private ?int $Total = null;
+    private ?int $total = null;
 
     #[ORM\Column(nullable: true)]
-    private ?int $Stat_Transfer_To_Norway = null;
+    private ?int $statTransferToNorway = null;
 
     #[ORM\Column(nullable: true)]
-    private ?int $Reneweble_Energy_In_Target_Calculation = null;
+    private ?int $renewableEnergyInTargetCalculation = null;
 
     #[ORM\Column(nullable: true)]
-    private ?int $Total_Energy_Use = null;
+    private ?int $totalEnergyUse = null;
 
     public function getId(): ?int
     {
@@ -50,121 +50,122 @@ class RenewableEnergyTWh
 
     public function getYear(): ?int
     {
-        return $this->Year;
+        return $this->year;
     }
 
-    public function setYear(int $Year): static
+    public function setYear(int $year): static
     {
-        $this->Year = $Year;
+        $this->year = $year;
 
         return $this;
     }
 
     public function getBiofuels(): ?int
     {
-        return $this->Biofuels;
+        return $this->biofuels;
     }
 
-    public function setBiofuels(?int $Biofuels): static
+    public function setBiofuels(?int $biofuels): static
     {
-        $this->Biofuels = $Biofuels;
+        $this->biofuels = $biofuels;
 
         return $this;
     }
 
     public function getHydropower(): ?int
     {
-        return $this->Hydropower;
+        return $this->hydropower;
     }
 
-    public function setHydropower(?int $Hydropower): static
+    public function setHydropower(?int $hydropower): static
     {
-        $this->Hydropower = $Hydropower;
+        $this->hydropower = $hydropower;
 
         return $this;
     }
 
     public function getWindPower(): ?int
     {
-        return $this->Wind_Power;
+        return $this->windPower;
     }
 
-    public function setWindPower(?int $Wind_Power): static
+    public function setWindPower(?int $windPower): static
     {
-        $this->Wind_Power = $Wind_Power;
+        $this->windPower = $windPower;
 
         return $this;
     }
 
     public function getHeatPump(): ?int
     {
-        return $this->Heat_Pump;
+        return $this->heatPump;
     }
 
-    public function setHeatPump(?int $Heat_Pump): static
+    public function setHeatPump(?int $heatPump): static
     {
-        $this->Heat_Pump = $Heat_Pump;
+        $this->heatPump = $heatPump;
 
         return $this;
     }
 
     public function getSolarEnergy(): ?int
     {
-        return $this->Solar_Energy;
+        return $this->solarEnergy;
     }
 
-    public function setSolarEnergy(?int $Solar_Energy): static
+    public function setSolarEnergy(?int $solarEnergy): static
     {
-        $this->Solar_Energy = $Solar_Energy;
+        $this->solarEnergy = $solarEnergy;
 
         return $this;
     }
 
     public function getTotal(): ?int
     {
-        return $this->Total;
+        return $this->total;
     }
 
-    public function setTotal(?int $Total): static
+    public function setTotal(?int $total): static
     {
-        $this->Total = $Total;
+        $this->total = $total;
 
         return $this;
     }
 
     public function getStatTransferToNorway(): ?int
     {
-        return $this->Stat_Transfer_To_Norway;
+        return $this->statTransferToNorway;
     }
 
-    public function setStatTransferToNorway(?int $Stat_Transfer_To_Norway): static
+    public function setStatTransferToNorway(?int $statTransferToNorway): static
     {
-        $this->Stat_Transfer_To_Norway = $Stat_Transfer_To_Norway;
+        $this->statTransferToNorway = $statTransferToNorway;
 
         return $this;
     }
 
-    public function getRenewebleEnergyInTargetCalculation(): ?int
+    public function getRenewableEnergyInTargetCalculation(): ?int
     {
-        return $this->Reneweble_Energy_In_Target_Calculation;
+        return $this->renewableEnergyInTargetCalculation;
     }
 
-    public function setRenewebleEnergyInTargetCalculation(?int $Reneweble_Energy_In_Target_Calculation): static
+    public function setRenewableEnergyInTargetCalculation(?int $renewableEnergyInTargetCalculation): static
     {
-        $this->Reneweble_Energy_In_Target_Calculation = $Reneweble_Energy_In_Target_Calculation;
+        $this->renewableEnergyInTargetCalculation = $renewableEnergyInTargetCalculation;
 
         return $this;
     }
 
     public function getTotalEnergyUse(): ?int
     {
-        return $this->Total_Energy_Use;
+        return $this->totalEnergyUse;
     }
 
-    public function setTotalEnergyUse(?int $Total_Energy_Use): static
+    public function setTotalEnergyUse(?int $totalEnergyUse): static
     {
-        $this->Total_Energy_Use = $Total_Energy_Use;
+        $this->totalEnergyUse = $totalEnergyUse;
 
         return $this;
     }
 }
+

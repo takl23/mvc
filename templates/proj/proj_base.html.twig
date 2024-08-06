@@ -5,10 +5,11 @@
     <title>{% block title %}Welcome!{% endblock %}</title>
     <link rel="icon" href="{{ asset('img/glider.svg') }}">
     {% block stylesheets %}
-        {{ encore_entry_link_tags('app') }}
+        {{ encore_entry_link_tags('app') }}  {# Se till att denna rad finns #}
     {% endblock %}
     {% block javascripts %}
         {{ encore_entry_script_tags('app') }}
+        {{ encore_entry_script_tags('chart') }} {# Lägg till denna rad #}
     {% endblock %}
 </head>
 <body class="proj-body">
@@ -24,9 +25,7 @@
         </nav>
     </header>
     <main class="proj-container">
-      
-            {% block body %}{% endblock %}
-        
+        {% block body %}{% endblock %}
     </main>
     <footer class="proj-footer">
         {% block footer %}

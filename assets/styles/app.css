@@ -863,7 +863,7 @@ div.centerul ul {
 }
 
 html, body {
-  min-height: 100%;
+  height: 100%;
   margin: 0;
   padding: 0;
 }
@@ -875,6 +875,7 @@ body.proj-body, body.proj-index-body {
   background-color: #ffffff;
   color: #333;
   padding: 0;
+  min-height: 100%;
 }
 
 .proj-header {
@@ -923,14 +924,13 @@ body.proj-body, body.proj-index-body {
   flex: 1;
   width: 100%;
   box-sizing: border-box;
-  min-height: calc(100vh - 4em); /* Se till att containern fyller hela höjden */
 }
 
 .side-project {
   grid-column: 1/2;
   border-right: 1px solid #000;
   padding-right: 1em;
-  font-size: 1em; /* Justera till samma storlek på alla sidor */
+  font-size: 1em;
 }
 
 .side-project h2 {
@@ -962,7 +962,6 @@ body.proj-body, body.proj-index-body {
 .goals-list li a {
   color: rgba(0, 0, 0, 0.2);
   text-decoration: none;
-  text-transform: none; /* Förhindra att "a" blir uppercase */
 }
 
 .goals-list li a:hover {
@@ -982,13 +981,11 @@ body.proj-body, body.proj-index-body {
   color: white;
   text-align: center;
   width: 100%;
-  flex-shrink: 0;
   margin-top: auto;
   box-sizing: border-box;
 }
 
 .proj-footer p {
-  flex-basis: 100%;
   margin: 0;
   padding: 0.5em 0;
 }
@@ -1017,4 +1014,16 @@ body.proj-index-body {
 .project-title a {
   color: black;
   text-decoration: none;
+}
+
+canvas {
+  width: 100%;
+  height: 400px;
+}
+
+.chart-description {
+  margin-top: 10px;
+  font-size: 0.9em;
+  color: #555;
+  font-style: italic;
 }

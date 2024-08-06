@@ -49,22 +49,22 @@ class ProjectControllerJson extends AbstractController
     {
         $repository = $entityManager->getRepository(RenewableEnergyTWh::class);
         $data = $repository->findAll();
-
+    
         $formattedData = array_map(function ($item) {
             return [
                 'year' => $item->getYear(),
                 'biofuels' => $item->getBiofuels(),
                 'hydropower' => $item->getHydropower(),
-                'wind_power' => $item->getWindPower(),
-                'heat_pump' => $item->getHeatPump(),
-                'solar_energy' => $item->getSolarEnergy(),
+                'windPower' => $item->getWindPower(),
+                'heatPump' => $item->getHeatPump(),
+                'solarEnergy' => $item->getSolarEnergy(),
                 'total' => $item->getTotal(),
-                'stat_transfer_to_norway' => $item->getStatTransferToNorway(),
-                'renewable_energy_in_target_calculation' => $item->getRenewableEnergyInTargetCalculation(),
-                'total_energy_use' => $item->getTotalEnergyUse(),
+                'statTransferToNorway' => $item->getStatTransferToNorway(),
+                'renewableEnergyInTargetCalculation' => $item->getRenewableEnergyInTargetCalculation(),
+                'totalEnergyUse' => $item->getTotalEnergyUse(),
             ];
         }, $data);
-
+    
         $response = new JsonResponse([
             'data' => $formattedData,
             'reference' => 'https://www.scb.se/hitta-statistik/temaomraden/agenda-2030/mal-7/#141072',
@@ -72,10 +72,9 @@ class ProjectControllerJson extends AbstractController
         ]);
         
         $response->setEncodingOptions($response->getEncodingOptions() | JSON_PRETTY_PRINT);
-
+    
         return $response;
     }
-
     #[Route("/api/energy_supply_gdp", name: "api_energy_supply_gdp")]
     public function energySupplyGDP(EntityManagerInterface $entityManager): JsonResponse
     {
