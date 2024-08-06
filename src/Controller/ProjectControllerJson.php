@@ -6,10 +6,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\RenewableEnergyPercentage;
 use App\Entity\RenewableEnergyTWh;
 use App\Entity\EnergySupplyGDP;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Entity\AverageTemperature;
+use App\Entity\AverageConsumption;
+use App\Entity\ElectricityPrice;
 
 class ProjectControllerJson extends AbstractController
 {
@@ -94,6 +97,86 @@ class ProjectControllerJson extends AbstractController
             'date' => 'August 2024'
         ]);
         
+        $response->setEncodingOptions($response->getEncodingOptions() | JSON_PRETTY_PRINT);
+
+        return $response;
+    }
+
+    #[Route("/api/average-temperature", name: "api_average_temperature")]
+    public function averageTemperature(EntityManagerInterface $entityManager): JsonResponse
+    {
+        $repository = $entityManager->getRepository(AverageTemperature::class);
+        $data = $repository->findAll();
+
+        $formattedData = array_map(function ($item) {
+            return [
+                'year' => $item->getYear(),
+                'SE1' => $item->getSE1(),
+                'SE2' => $item->getSE2(),
+                'SE3' => $item->getSE3(),
+                'SE4' => $item->getSE4(),
+            ];
+        }, $data);
+
+        $response = new JsonResponse([
+            'data' => $formattedData,
+            'reference' => 'https://example.com/reference',
+            'date' => 'August 2024'
+        ]);
+
+        $response->setEncodingOptions($response->getEncodingOptions() | JSON_PRETTY_PRINT);
+
+        return $response;
+    }
+
+    #[Route("/api/average-consumption", name: "api_average_consumption")]
+    public function averageConsumption(EntityManagerInterface $entityManager): JsonResponse
+    {
+        $repository = $entityManager->getRepository(AverageConsumption::class);
+        $data = $repository->findAll();
+
+        $formattedData = array_map(function ($item) {
+            return [
+                'year' => $item->getYear(),
+                'SE1' => $item->getSE1(),
+                'SE2' => $item->getSE2(),
+                'SE3' => $item->getSE3(),
+                'SE4' => $item->getSE4(),
+            ];
+        }, $data);
+
+        $response = new JsonResponse([
+            'data' => $formattedData,
+            'reference' => 'https://example.com/reference',
+            'date' => 'August 2024'
+        ]);
+
+        $response->setEncodingOptions($response->getEncodingOptions() | JSON_PRETTY_PRINT);
+
+        return $response;
+    }
+    #[Route("/api/electricity-price", name: "api_electricity_price")]
+    public function electricityPrice(EntityManagerInterface $entityManager): JsonResponse
+    {
+        $repository = $entityManager->getRepository(ElectricityPrice::class);
+        $data = $repository->findAll();
+
+        $formattedData = array_map(function ($item) {
+            return [
+                'year' => $item->getYear(),
+                'SE1' => $item->getSE1(),
+                'SE2' => $item->getSE2(),
+                'SE3' => $item->getSE3(),
+                'SE4' => $item->getSE4(),
+            ];
+        }, $data);
+
+        $response = new JsonResponse([
+            'data' => $formattedData,
+            'reference' => 'https://example.com/reference',
+            'date' => 'August 2024'
+        ]);
+
         $response->setEncodingOptions($response->getEncodingOptions() | JSON_PRETTY_PRINT);
 
         return $response;
