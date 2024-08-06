@@ -7854,7 +7854,10 @@
                 },
                 "exclude-from-classmap": [
                     "/Tests/"
-                ]
+                    
+                ],
+
+                "_comment": "Lägg till fler exkluderingar här om det behövs fast innanför ]"
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
