@@ -1,10 +1,9 @@
 <?php
-
 namespace App\ExcelImport;
 
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use Doctrine\ORM\EntityManagerInterface;
-use App\Entity\RenewableEnergyTWh;
+use App\Entity\AverageConsumption;
 
 class ImportService
 {
@@ -15,10 +14,14 @@ class ImportService
         $this->entityManager = $entityManager;
     }
 
-    public function import(string $filePath, string $entityClass): void
+    public function import(string $filePath, string $sheetName, string $entityClass): void
     {
         $spreadsheet = IOFactory::load($filePath);
-        $worksheet = $spreadsheet->getActiveSheet();
+        $worksheet = $spreadsheet->getSheetByName($sheetName);
+
+        if (!$worksheet) {
+            throw new \Exception("Sheet $sheetName not found in the file $filePath");
+        }
 
         foreach ($worksheet->getRowIterator() as $row) {
             $cellIterator = $row->getCellIterator();
@@ -34,25 +37,22 @@ class ImportService
                 continue;
             }
 
-            if ($entityClass === RenewableEnergyTWh::class) {
-                $entity = new RenewableEnergyTWh();
+            if ($entityClass === AverageConsumption::class) {
+                $entity = new AverageConsumption();
                 $entity->setYear((int)$data[0]);
-                $entity->setBiofuels($data[1] !== null ? (int)$data[1] : null);
-                $entity->setHydropower($data[2] !== null ? (int)$data[2] : null);
-                $entity->setWindPower($data[3] !== null ? (int)$data[3] : null);
-                $entity->setHeatPump($data[4] !== null ? (int)$data[4] : null);
-                $entity->setSolarEnergy($data[5] !== null ? (int)$data[5] : null);
-                $entity->setTotal($data[6] !== null ? (int)$data[6] : null);
-                $entity->setStatTransferToNorway($data[7] !== null ? (int)$data[7] : null);
-                $entity->setRenewebleEnergyInTargetCalculation($data[8] !== null ? (int)$data[8] : null);
-                $entity->setTotalEnergyUse($data[9] !== null ? (int)$data[9] : null);
+                $entity->setSE1((float)str_replace(',', '.', $data[1]));
+                $entity->setSE2((float)str_replace(',', '.', $data[2]));
+                $entity->setSE3((float)str_replace(',', '.', $data[3]));
+                $entity->setSE4((float)str_replace(',', '.', $data[4]));
+
+                $this->entityManager->persist($entity);
             } else {
                 throw new \Exception("Unknown entity class: $entityClass");
             }
-
-            $this->entityManager->persist($entity);
         }
 
         $this->entityManager->flush();
     }
 }
+
+
