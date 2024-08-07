@@ -8,7 +8,7 @@ body.proj-body, body.proj-index-body {
     display: flex;
     flex-direction: column;
     font-family: Arial, sans-serif;
-    background-color: #ffffff;
+    background-color: $background-color;
     color: #333;
     padding: 0;
     min-height: 100%;
@@ -19,8 +19,8 @@ body.proj-body, body.proj-index-body {
     justify-content: space-between;
     align-items: center;
     padding: 1em;
-    background-color: white;
-    border-bottom: 1px solid black;
+    background-color: $font-alternative-color;
+    border-bottom: 1px solid $font-color;
 }
 
 .back-link {
@@ -42,7 +42,7 @@ body.proj-body, body.proj-index-body {
 }
 
 .proj-nav ul li a {
-    color: black;
+    color: $font-color;
     text-decoration: none;
     font-weight: bold;
 }
@@ -56,7 +56,7 @@ body.proj-body, body.proj-index-body {
     grid-template-columns: 1fr minmax(auto, 45rem) 1fr;
     gap: 2em;
     padding: 2em;
-    background-color: white;
+    background-color: $font-alternative-color;
     flex: 1;
     width: 100%;
     box-sizing: border-box;
@@ -131,7 +131,7 @@ body.proj-body, body.proj-index-body {
         #56C02B 82.32%, #56C02B 88.20%,
         #00689D 88.20%, #00689D 94.08%,
         #19486A 94.08%, #19486A 100%);
-    color: white;
+    color: $font-alternative-color;
     text-align: center;
     width: 100%;
     margin-top: auto;
@@ -154,7 +154,7 @@ body.proj-index-body {
 }
 
 .project-title {
-    color: black;
+    color: $font-color;
     text-align: center;
     font-size: 1.5em;
     font-weight: bold;
@@ -165,7 +165,7 @@ body.proj-index-body {
 }
 
 .project-title a {
-    color: black;
+    color: $font-color;
     text-decoration: none;
 }
 
@@ -206,8 +206,8 @@ th {
 }
 
 .table-cell {
-    background-color: #98bdcf;
-    color: white;
+    background-color: $background-alternative-color;
+    color: $font-alternative-color;
     padding: 20px;
     border-radius: 10px;
     display: flex;
@@ -226,4 +226,35 @@ th {
 
 .lan {
     font-size: 1em;
+}
+.navigation-buttons {
+    display: flex;
+    justify-content: center; /* Center the buttons horizontally */
+    gap: 20px; /* Space between the buttons */
+    flex-wrap: wrap; /* Wrap buttons to next line if needed */
+    margin: 20px 0;
+}
+
+.nav-button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px; /* Adjust the size of the circles */
+    height: 150px; /* Adjust the size of the circles */
+    margin: 10px;
+    border-radius: 50%;
+    background-color: $background-alternative-color;
+    color: $font-color;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s, color 0.3s;
+    font-size: 14px; /* Adjust text size */
+}
+
+.nav-button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    color: $hover-color; /* Change text color on hover */
 }

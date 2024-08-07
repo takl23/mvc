@@ -26,7 +26,8 @@ Encore
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
     .addEntry('app', './assets/app.js')
-    .addEntry('chart', './assets/chart.js') // Lägg till denna rad
+    .addEntry('graphs_goal', './assets/js/graphs_goal.js')
+    .addEntry('graphs_energy_analysis', './assets/js/graphs_energy_analysis.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()

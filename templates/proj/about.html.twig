@@ -5,27 +5,28 @@
 {% block body %}
 
     <div class="side-project">
-    <h2>Globala målen</h2>
+        <h2>Globala målen</h2>
         <ul class="goals-list">
-            <li> 1 Ingen fattigdom</a></li>
-            <li>2 Ingen hunger</a></li>
-            <li>3 God hälsa och välbefinnande</a></li>
-            <li>4 God utbildning för alla</a></li>
-            <li>5 Jämställdhet</a></li>
-            <li>6 Rent vatten och sanitet</a></li>
-            <li>7 Hållbar energi för alla</a></li>
-            <li>8 Anständiga arbetsvillkor och ekonomisk tillväxt</a></li>
-            <li>9 Hållbar industri, innovationer och infrastruktur</a></li>
-            <li>10 Minskad ojämlikhet</a></li>
-            <li>11 Hållbara städer och samhällen</a></li>
-            <li>12 Hållbar konsumtion och produktion</a></li>
-            <li>13 Bekämpa klimatförändringen</a></li>
-            <li>14 Hav och marina resurser</a></li>
-            <li>15 Ekosystem och biologisk mångfald</a></li>
-            <li>16 Fredliga och inkluderande samhällen</a></li>
-            <li>17 Genomförande och globalt partnerskap</a></li>
+            <li>1 Ingen fattigdom</li>
+            <li>2 Ingen hunger</li>
+            <li>3 God hälsa och välbefinnande</li>
+            <li>4 God utbildning för alla</li>
+            <li>5 Jämställdhet</li>
+            <li>6 Rent vatten och sanitet</li>
+            <li>7 Hållbar energi för alla</li>
+            <li>8 Anständiga arbetsvillkor och ekonomisk tillväxt</li>
+            <li>9 Hållbar industri, innovationer och infrastruktur</li>
+            <li>10 Minskad ojämlikhet</li>
+            <li>11 Hållbara städer och samhällen</li>
+            <li>12 Hållbar konsumtion och produktion</li>
+            <li>13 Bekämpa klimatförändringen</li>
+            <li>14 Hav och marina resurser</li>
+            <li>15 Ekosystem och biologisk mångfald</li>
+            <li>16 Fredliga och inkluderande samhällen</li>
+            <li>17 Genomförande och globalt partnerskap</li>
         </ul>
     </div>
+
     <div class="proj-content">
         <div class="content-project">
             <h1>Om projektet</h1>
@@ -36,31 +37,22 @@
                 med fokus på att öka medvetenheten och förståelsen kring de globala målen för hållbar utveckling. För närmare beskrivning av projektet se
                 <a href="https://dbwebb.se/kurser/mvc-v2/kmom10/sustainability">Projekt - Visualisera indikatorer för hållbarhet</a><sup>2</sup>.
             </p>
-            <h2>De globala målen</h2>
-            <p>
-                De globala målen för hållbar utveckling, även kända som Agenda 2030, består av 17 mål som antogs av FN:s medlemsländer 2015. 
-                Dessa mål syftar till att utrota fattigdom, skydda planeten och säkerställa välstånd för alla människor till 2030. 
-                Varje mål har specifika delmål och indikatorer som hjälper till att mäta framstegen. 
-                För mer information, besök <a href="https://www.scb.se/hitta-statistik/temaomraden/agenda-2030/">SCB:s Agenda 2030-sida</a><sup>3</sup> och <a href="https://www.scb.se/hitta-statistik/statistik-efter-amne/miljo/miljoekonomi-och-hallbar-utveckling/indikatorer-for-hallbar-utveckling/produktrelaterat/Fordjupad-information/fakta-om-indikatorer-for-hallbar-utveckling/">Fakta om indikatorer för hållbar utveckling</a><sup>4</sup>.
-            </p>
-            <h2>Avgränsningar i projektet</h2>
-            <p>
-                Jag har valt att fokusera på globala målet nummer 7: Hållbar energi i Agenda 2030. 
-                Detta mål är centralt för att säkerställa tillgång till prisvärd, pålitlig, hållbar och modern energi för alla till 2030.
-            </p>
-             <p>
-                I samband med att jag analyserade globala målet nummer 7 så kollar vi även på hur energianvändingen och elpriset 
-                har sett ut i Sverige dom senaste åren. Det var ju inte allt för länge sen då man införde stora subvenstioner på elpriset och dessa subvensioner var 
-                större i vissa regioner än i andra och jag ville se hur det sett ut historiskt. 
 
+            <p>
+                I samband med att jag analyserade globala målet nummer 7 så kollar vi även på hur energianvändingen och elpriset 
+                har sett ut i Sverige de senaste åren. Det var inte allt för länge sen då man införde stora subventioner på elpriset och dessa subventioner var 
+                större i vissa regioner än i andra och jag ville se hur det sett ut historiskt. 
             </p>
-            
+
+         <div class="navigation-buttons">
+    <a href="{{ path('proj_goal') }}" class="nav-button">Globala målen</a>
+    <a href="{{ path('proj_energy_analysis') }}" class="nav-button">Analys energianvändning Sverige</a>
+</div>
+
             <h2>Referenser</h2>
             <ol>
                 <li><a href="https://dbwebb.se/kurser/mvc-v2">MVC-v2</a></li>
                 <li><a href="https://dbwebb.se/kurser/mvc-v2/kmom10/sustainability">Projekt - Visualisera indikatorer för hållbarhet</a></li>
-                <li><a href="https://www.scb.se/hitta-statistik/temaomraden/agenda-2030/">SCB:s Agenda 2030-sida</a></li>
-                <li><a href="https://www.scb.se/hitta-statistik/statistik-efter-amne/miljo/miljoekonomi-och-hallbar-utveckling/indikatorer-for-hallbar-utveckling/produktrelaterat/Fordjupad-information/fakta-om-indikatorer-for-hallbar-utveckling/">Fakta om indikatorer för hållbar utveckling</a></li>
             </ol>
         </div>
     </div>

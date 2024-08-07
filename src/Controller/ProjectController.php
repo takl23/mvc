@@ -56,4 +56,19 @@ class ProjectController extends AbstractController
     {
         return $this->render('proj/json_links.html.twig');
     }
+    #[Route("/proj/energy-analysis", name: "proj_energy_analysis")]
+    public function energyAnalysis(EntityManagerInterface $entityManager): Response
+    {
+        $repository = $entityManager->getRepository(LanElomrade::class);
+        $lanElomrade = $repository->findAll();
+
+        $groupedData = [];
+        foreach ($lanElomrade as $item) {
+            $groupedData[$item->getElomrade()][] = $item->getLan();
+        }
+
+        return $this->render('proj/energy_analysis.html.twig', [
+            'groupedData' => $groupedData,
+        ]);
+    }
 }

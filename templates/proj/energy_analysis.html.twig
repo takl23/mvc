@@ -1,0 +1,52 @@
+{# templates/proj/energy_analysis.html.twig #}
+{% extends 'proj/proj_base.html.twig' %}
+
+{% block title %}Analys energianvändning Sverige{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('graphs_energy_analysis') }}
+{% endblock %}
+
+{% block body %}
+<div class="proj-content">
+    <h1>Analys av energianvändning i Sverige</h1>
+
+    <h3>Graf 4: Län och Elområde Data</h3>
+    <div class="table-container">
+        {% for elomrade, lans in groupedData %}
+            <div class="table-cell">
+                <div class="elomrade">{{ elomrade }}</div>
+                {% for lan in lans %}
+                    <div class="lan">{{ lan }}</div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+    <p><em>Elområden och län - <a href="https://www.energimyndigheten.se/statistik/">Energimyndigheten</a> - 2024-08-06</em></p>
+    <p><em>Gå till URL. Välj 'Elområden'. Ladda ner data som Excel-fil. N/A</em></p>
+
+    <h3>Graf 5: Genomsnittlig temperatur per elområde</h3>
+    <canvas id="averageTemperatureChart"></canvas>
+    <p><em>Snitttemperatur per elområde från 2015 till 2023.</em></p>
+    <p><em>Referens: <a href="https://www.smhi.se/data/meteorologi/temperatur/">SMHI</a> - 2024-08-06</em></p>
+    <p><em>Gå till URL. Välj 'Temperaturdata'. Välj elområde och tidsperiod (2015-2023). Ladda ner data som Excel-fil. °C</em></p>
+
+    <h3>Graf 6: Snittförbrukning per elområde</h3>
+    <canvas id="averageConsumptionChart"></canvas>
+    <p><em>Snittförbrukning per elområde från 2015 till 2023.</em></p>
+    <p><em>Referens: <a href="https://www.energimyndigheten.se/statistik/">Energimyndigheten</a> - 2024-08-06</em></p>
+    <p><em>Gå till URL. Välj 'Elförbrukning'. Välj elområde och tidsperiod (2015-2023). Ladda ner data som Excel-fil. GWh</em></p>
+
+    <hr>
+
+    <h2>Referenser</h2>
+    <ol>
+        <li><a href="https://www.globalamalen.se/om-globala-malen">Globala målen</a></li>
+        <li><a href="https://www.sverigesmiljomal.se/miljomalen/generationsmalet/fornybar-energi/">Sveriges miljömål</a></li>
+        <li><a href="https://www.scb.se/hitta-statistik/temaomraden/agenda-2030/mal-7/#141072">SCB</a></li>
+        <li><a href="https://www.energimyndigheten.se/statistik/">ENERGIMYNDIGHETEN</a></li>
+        <li><a href="https://www.smhi.se/data/meteorologi/temperatur/">SMHI</a></li>
+    </ol>
+</div>
+{% endblock %}

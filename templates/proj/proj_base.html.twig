@@ -9,7 +9,6 @@
     {% endblock %}
     {% block javascripts %}
         {{ encore_entry_script_tags('app') }}
-        {{ encore_entry_script_tags('chart') }} {# Lägg till denna rad #}
     {% endblock %}
 </head>
 <body class="proj-body">
@@ -20,6 +19,7 @@
                 <li><a href="{{ path('proj_home') }}">Hem</a></li>
                 <li><a href="{{ path('proj_about') }}">Om</a></li>
                 <li><a href="{{ path('proj_goal') }}">Globala målen</a></li>
+                <li><a href="{{ path('proj_energy_analysis') }}">Analys energianvändning Sverige</a></li>
                 <li><a href="{{ path('proj_json') }}">JSON</a></li>
             </ul>
         </nav>

@@ -3,6 +3,11 @@
 
 {% block title %}Globala mål{% endblock %}
 
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('graphs_goal') }}
+{% endblock %}
+
 {% block body %}
 <div class="side-project">
     <h2>Globala målen</h2>
@@ -28,7 +33,20 @@
 </div>
 
 <div class="proj-content">
-    <h1>Analys av utvalt/utvalda globala mål</h1>
+    <h2>De globala målen</h2>
+    <p>
+        De globala målen för hållbar utveckling, även kända som Agenda 2030, består av 17 mål som antogs av FN:s medlemsländer 2015. 
+        Dessa mål syftar till att utrota fattigdom, skydda planeten och säkerställa välstånd för alla människor till 2030. 
+        Varje mål har specifika delmål och indikatorer som hjälper till att mäta framstegen. 
+        För mer information, besök <a href="https://www.scb.se/hitta-statistik/temaomraden/agenda-2030/">SCB:s Agenda 2030-sida</a><sup>3</sup> och <a href="https://www.scb.se/hitta-statistik/statistik-efter-amne/miljo/miljoekonomi-och-hallbar-utveckling/indikatorer-for-hallbar-utveckling/produktrelaterat/Fordjupad-information/fakta-om-indikatorer-for-hallbar-utveckling/">Fakta om indikatorer för hållbar utveckling</a><sup>4</sup>.
+    </p>
+    
+    <h2>Avgränsningar i projektet</h2>
+    <p>
+        Jag har valt att fokusera på globala målet nummer 7: Hållbar energi i Agenda 2030. 
+        Detta mål är centralt för att säkerställa tillgång till prisvärd, pålitlig, hållbar och modern energi för alla till 2030.
+    </p>
+    
     <h2 id="goal7">7 Hållbar energi för alla</h2>
     <p>
         Mål 7 syftar till att säkerställa tillgång till prisvärd, pålitlig, hållbar och modern energi för alla till 2030. 
@@ -57,31 +75,14 @@
     <p><em>Energitillförsel som procentandel av BNP från 2008 till 2021.</em></p>
     <p><em>Referens: <a href="https://www.scb.se/hitta-statistik/temaomraden/agenda-2030/mal-7/">SCB</a><sup>3</sup></em></p>
 
-    <h3>Graf 4: Län och Elområde Data</h3>
-    <div class="table-container">
-        {% for elomrade, lans in groupedData %}
-            <div class="table-cell">
-                <div class="elomrade">{{ elomrade }}</div>
-                {% for lan in lans %}
-                    <div class="lan">{{ lan }}</div>
-                {% endfor %}
-            </div>
-        {% endfor %}
-    </div>
-    <p><em>Elområden och län - <a href="https://www.energimyndigheten.se/statistik/">Energimyndigheten</a> - 2024-08-06</em></p>
-    <p><em>Gå till URL. Välj 'Elområden'. Ladda ner data som Excel-fil. N/A</em></p>
+    <hr>
 
-    <h3>Graf 5: Genomsnittlig temperatur per elområde</h3>
-    <canvas id="averageTemperatureChart"></canvas>
-    <p><em>Snitttemperatur per elområde från 2015 till 2023.</em></p>
-    <p><em>Referens: <a href="https://www.smhi.se/data/meteorologi/temperatur/">SMHI</a> - 2024-08-06</em></p>
-    <p><em>Gå till URL. Välj 'Temperaturdata'. Välj elområde och tidsperiod (2015-2023). Ladda ner data som Excel-fil. °C</em></p>
-
-    <h3>Graf 6: Snittförbrukning per elområde</h3>
-    <canvas id="averageConsumptionChart"></canvas>
-    <p><em>Snittförbrukning per elområde från 2015 till 2023.</em></p>
-    <p><em>Referens: <a href="https://www.energimyndigheten.se/statistik/">Energimyndigheten</a> - 2024-08-06</em></p>
-    <p><em>Gå till URL. Välj 'Elförbrukning'. Välj elområde och tidsperiod (2015-2023). Ladda ner data som Excel-fil. GWh</em></p>
+    <h2>Sammanfattning av graferna</h2>
+    <p>
+        Sverige är på väg åt rätt håll när det gäller att öka andelen förnybar energi och förbättra energieffektiviteten. 
+        Graferna visar en stadig ökning i andelen förnybar energi och en minskning i energitillförselns andel av BNP, vilket indikerar en positiv utveckling.
+        Dock finns det fortfarande utmaningar att möta för att säkerställa att målen för 2030 uppnås.
+    </p>
 
     <hr>
 
