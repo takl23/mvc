@@ -7,12 +7,10 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Console\Attribute\AsCommand;
-use App\Entity\AverageConsumption;
-use App\Entity\ElectricityPrice;
 
 #[AsCommand(
     name: 'app:import-excel',
-    description: 'Imports data from an Excel file'
+    description: 'Import data from an Excel file'
 )]
 class ImportExcelCommand extends Command
 {
@@ -20,8 +18,8 @@ class ImportExcelCommand extends Command
 
     public function __construct(ImportService $importService)
     {
-        $this->importService = $importService;
         parent::__construct();
+        $this->importService = $importService;
     }
 
     protected function configure()
@@ -29,8 +27,8 @@ class ImportExcelCommand extends Command
         $this
             ->setDescription('Imports data from an Excel file')
             ->addArgument('filePath', InputArgument::REQUIRED, 'Path to the Excel file')
-            ->addArgument('sheetName', InputArgument::REQUIRED, 'Name of the Excel sheet')
-            ->addArgument('entityClass', InputArgument::REQUIRED, 'Entity class (AverageConsumption or ElectricityPrice)');
+            ->addArgument('sheetName', InputArgument::REQUIRED, 'The name of the sheet to import')
+            ->addArgument('entityClass', InputArgument::REQUIRED, 'The entity class to import the data into');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -46,14 +44,7 @@ class ImportExcelCommand extends Command
         }
 
         try {
-            if ($entityClass === 'AverageConsumption') {
-                $this->importService->import($filePath, $sheetName, AverageConsumption::class);
-            } elseif ($entityClass === 'ElectricityPrice') {
-                $this->importService->import($filePath, $sheetName, ElectricityPrice::class);
-            } else {
-                throw new \Exception("Invalid entity class: $entityClass");
-            }
-
+            $this->importService->import($filePath, $sheetName, $entityClass);
             $io->success('Data imported successfully!');
             return Command::SUCCESS;
         } catch (\Exception $e) {

@@ -1,18 +1,13 @@
-# config/services.yaml
 services:
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
 
-    # Makes classes in src/ available to be used as services
-    # This creates a service per class whose id is the fully-qualified class name
     App\:
         resource: '../src/*'
-        exclude: '../src/{DependencyInjection,Entity,Tests,Kernel.php, Controller}'
+        exclude: '../src/{DependencyInjection,Entity,Tests,Kernel.php}'
 
-    # Controllers are imported separately to make sure services can be injected
-    # as action arguments even if you make your services lazy
     App\Controller\:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
@@ -22,21 +17,8 @@ services:
         arguments:
             $entityManager: '@doctrine.orm.entity_manager'
 
-    App\ExcelImport\ImportExcelCommand:
+    App\ExcelImport\ResetAndImportDataCommand:
         arguments:
             $importService: '@App\ExcelImport\ImportService'
         tags:
             - { name: 'console.command' }
-
-# Any additional services or parameters from the other file can be added below
-parameters:
-
-    # Here you can add any parameters that need to be configured.
-    # Example:
-    #    database_host: 127.0.0.1
-
-    # If there are additional services from the second file, they can be added here:
-    # Example:
-    # App\AnotherService:
-    #     arguments:
-    #         $someDependency: '@some.service'
