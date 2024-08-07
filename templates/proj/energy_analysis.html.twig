@@ -1,4 +1,3 @@
-{# templates/proj/energy_analysis.html.twig #}
 {% extends 'proj/proj_base.html.twig' %}
 
 {% block title %}Analys energianvändning Sverige{% endblock %}
@@ -12,7 +11,35 @@
 <div class="proj-content">
     <h1>Analys av energianvändning i Sverige</h1>
 
-    <h3>Graf 4: Län och Elområde Data</h3>
+    <h2>Inledning</h2>
+    <p>
+        Sverige är en av världens största producenter av förnybar energi, med en betydande andel av sin elproduktion från vattenkraft, kärnkraft och vindkraft. De största elproducerande regionerna inkluderar Norrland (vattenkraft) och Sydsverige (kärnkraft) <a href="https://www.energimyndigheten.se/statistik/energilaget/">[1]</a>.
+    </p>
+    <p>
+        Elpriset i Sverige sätts på Nord Pool, den nordiska elbörsen, och bestäms av tillgång och efterfrågan inom de olika elområdena (SE1-SE4). Påverkande faktorer inkluderar väderförhållanden, bränslepriser och kapaciteten i kraftnäten <a href="https://www.nordpoolgroup.com/">[2]</a>.
+    </p>
+    <p>
+        Denna analys ger en översikt över energianvändningen i Sverige, inklusive genomsnittliga temperaturer, snittförbrukning och snittpris på el per elområde från 2015 till 2023.
+    </p>
+
+    <h2>Elpriser och Statliga Subventioner</h2>
+    <p>
+        Sverige har nyligen upplevt kraftigt ökade elpriser, särskilt under vintern, på grund av höga bränslepriser, låg vattennivå i dammar och hög efterfrågan på el. För att mildra effekterna införde regeringen subventioner <a href="https://www.regeringen.se/pressmeddelanden/2022/01/regeringen-infor-elpriskompensation/">[3]</a>.
+    </p>
+    <p>
+        Subventionerna riktades till hushåll med höga elkostnader och gav ekonomiskt stöd för att täcka en del av de ökade elräkningarna. I genomsnitt erhöll hushåll stöd motsvarande upp till 50% av deras extra elkostnader under kritiska månader <a href="https://www.energimyndigheten.se/nyheter/2022/elprisstod-till-hushall-och-foretag/">[4]</a>.
+    </p>
+    <p>
+        Energikrävande industrier fick också stöd för att upprätthålla konkurrenskraften och förhindra nedläggningar och arbetslöshet <a href="https://www.ekonomifakta.se/Fakta/Energi/El/Elsystemet/">[5]</a>.
+    </p>
+    <p>
+        De största subventionerna gick till regioner i södra Sverige (SE3 och SE4), där elpriserna var högst och påverkan på hushåll och företag var störst. Dessa områden har också högre befolkningstäthet och fler industrier som är beroende av stabila och överkomliga energikostnader <a href="https://www.energimyndigheten.se/nyheter/2022/elprisstod-till-hushall-och-foretag/">[4]</a>.
+    </p>
+    <p>
+        Totalt avsattes flera miljarder kronor för subventionerna, vilket hjälpte till att stabilisera ekonomin och minska de negativa effekterna av de höga elpriserna.
+    </p>
+
+    <h3>Graf 1: Län och Elområde Data</h3>
     <div class="table-container">
         {% for elomrade, lans in groupedData %}
             <div class="table-cell">
@@ -23,30 +50,42 @@
             </div>
         {% endfor %}
     </div>
-    <p><em>Elområden och län - <a href="https://www.energimyndigheten.se/statistik/">Energimyndigheten</a> - 2024-08-06</em></p>
+    <p><em>Elområden och län - <a href="https://www.energimyndigheten.se/statistik/">[6]</a> - 2024-08-06</em></p>
     <p><em>Gå till URL. Välj 'Elområden'. Ladda ner data som Excel-fil. N/A</em></p>
 
-    <h3>Graf 5: Genomsnittlig temperatur per elområde</h3>
+    <h3>Graf 2: Genomsnittlig temperatur per elområde</h3>
     <canvas id="averageTemperatureChart"></canvas>
     <p><em>Snitttemperatur per elområde från 2015 till 2023.</em></p>
-    <p><em>Referens: <a href="https://www.smhi.se/data/meteorologi/temperatur/">SMHI</a> - 2024-08-06</em></p>
+    <p><em>Referens: <a href="https://www.smhi.se/data/meteorologi/temperatur/">[7]</a> - 2024-08-06</em></p>
     <p><em>Gå till URL. Välj 'Temperaturdata'. Välj elområde och tidsperiod (2015-2023). Ladda ner data som Excel-fil. °C</em></p>
 
-    <h3>Graf 6: Snittförbrukning per elområde</h3>
+    <h3>Graf 3: Snittförbrukning per elområde</h3>
     <canvas id="averageConsumptionChart"></canvas>
     <p><em>Snittförbrukning per elområde från 2015 till 2023.</em></p>
-    <p><em>Referens: <a href="https://www.energimyndigheten.se/statistik/">Energimyndigheten</a> - 2024-08-06</em></p>
+    <p><em>Referens: <a href="https://www.energimyndigheten.se/statistik/">[8]</a> - 2024-08-06</em></p>
     <p><em>Gå till URL. Välj 'Elförbrukning'. Välj elområde och tidsperiod (2015-2023). Ladda ner data som Excel-fil. GWh</em></p>
+
+    <!-- Ny graf 4 -->
+    <h3>Graf 4: Snittpris per elområde</h3>
+    <canvas id="averageElectricityPriceChart"></canvas>
+    <p><em>Snittpris per elområde från 2015 till 2023.</em></p>
+    <p><em>Referens: <a href="https://www.ei.se/sv/statistik/">[9]</a> - 2024-08-06</em></p>
+    <p><em>Gå till URL. Välj 'Elprisstatistik'. Välj elområde och tidsperiod (2015-2023). Ladda ner data som Excel-fil. SEK/kWh</em></p>
 
     <hr>
 
     <h2>Referenser</h2>
     <ol>
-        <li><a href="https://www.globalamalen.se/om-globala-malen">Globala målen</a></li>
-        <li><a href="https://www.sverigesmiljomal.se/miljomalen/generationsmalet/fornybar-energi/">Sveriges miljömål</a></li>
-        <li><a href="https://www.scb.se/hitta-statistik/temaomraden/agenda-2030/mal-7/#141072">SCB</a></li>
-        <li><a href="https://www.energimyndigheten.se/statistik/">ENERGIMYNDIGHETEN</a></li>
+        <li><a href="https://www.energimyndigheten.se/statistik/energilaget/">Energimyndigheten</a></li>
+        <li><a href="https://www.nordpoolgroup.com/">Nord Pool</a></li>
+        <li><a href="https://www.regeringen.se/pressmeddelanden/2022/01/regeringen-infor-elpriskompensation/">Regeringen</a></li>
+        <li><a href="https://www.energimyndigheten.se/nyheter/2022/elprisstod-till-hushall-och-foretag/">Energimyndigheten</a></li>
+        <li><a href="https://www.ekonomifakta.se/Fakta/Energi/El/Elsystemet/">Ekonomifakta</a></li>
+        <li><a href="https://www.energimyndigheten.se/statistik/">Energimyndigheten</a></li>
         <li><a href="https://www.smhi.se/data/meteorologi/temperatur/">SMHI</a></li>
+        <li><a href="https://www.energimyndigheten.se/statistik/">Energimyndigheten</a></li>
+        <li><a href="https://www.ei.se/sv/statistik/">Energimarknadsinspektionen</a></li>
     </ol>
 </div>
+
 {% endblock %}

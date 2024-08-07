@@ -4,6 +4,7 @@ namespace App\ExcelImport;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\AverageConsumption;
+use App\Entity\ElectricityPrice;
 
 class ImportService
 {
@@ -44,15 +45,20 @@ class ImportService
                 $entity->setSE2((float)str_replace(',', '.', $data[2]));
                 $entity->setSE3((float)str_replace(',', '.', $data[3]));
                 $entity->setSE4((float)str_replace(',', '.', $data[4]));
-
-                $this->entityManager->persist($entity);
+            } elseif ($entityClass === ElectricityPrice::class) {
+                $entity = new ElectricityPrice();
+                $entity->setYear((int)$data[0]);
+                $entity->setSE1((float)str_replace(',', '.', $data[1]));
+                $entity->setSE2((float)str_replace(',', '.', $data[2]));
+                $entity->setSE3((float)str_replace(',', '.', $data[3]));
+                $entity->setSE4((float)str_replace(',', '.', $data[4]));
             } else {
                 throw new \Exception("Unknown entity class: $entityClass");
             }
+
+            $this->entityManager->persist($entity);
         }
 
         $this->entityManager->flush();
     }
 }
-
-

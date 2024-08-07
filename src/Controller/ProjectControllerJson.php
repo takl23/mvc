@@ -164,34 +164,35 @@ class ProjectControllerJson extends AbstractController
     }
 
     #[Route("/api/electricity-price", name: "api_electricity_price")]
-    public function electricityPrice(EntityManagerInterface $entityManager): JsonResponse
-    {
-        $repository = $entityManager->getRepository(ElectricityPrice::class);
-        $data = $repository->findAll();
+public function electricityPrice(EntityManagerInterface $entityManager): JsonResponse
+{
+    $repository = $entityManager->getRepository(ElectricityPrice::class);
+    $data = $repository->findAll();
 
-        $formattedData = array_map(function ($item) {
-            return [
-                'year' => $item->getYear(),
-                'SE1' => $item->getSE1(),
-                'SE2' => $item->getSE2(),
-                'SE3' => $item->getSE3(),
-                'SE4' => $item->getSE4(),
-            ];
-        }, $data);
+    $formattedData = array_map(function ($item) {
+        return [
+            'year' => $item->getYear(),
+            'SE1' => $item->getSE1(),
+            'SE2' => $item->getSE2(),
+            'SE3' => $item->getSE3(),
+            'SE4' => $item->getSE4(),
+        ];
+    }, $data);
 
-        $response = new JsonResponse([
-            'data' => $formattedData,
-            'reference' => 'https://www.ei.se/sv/statistik/',
-            'instructions' => 'Gå till URL. Välj "Elprisstatistik". Välj elområde och tidsperiod (2015-2023). Ladda ner data som Excel-fil.',
-            'date' => 'August 2024'
-        ]);
+    $response = new JsonResponse([
+        'data' => $formattedData,
+        'reference' => 
+        'https://www.energimarknadsinspektionen.se/sv/statistik/elmarknad/elpriser/',
+        'instructions' => 'Gå till URL. Välj "Elprisstatistik". Välj elområde och tidsperiod (2015-2023). Ladda ner data som Excel-fil.',
+        'date' => 'August 2024'
+    ]);
 
-        $response->setEncodingOptions($response->getEncodingOptions() | JSON_PRETTY_PRINT);
+    $response->setEncodingOptions($response->getEncodingOptions() | JSON_PRETTY_PRINT);
 
-        return $response;
-    }
+    return $response;
+}
 
-    #[Route("/api/lan-elomrade", name: "api_lan_elomrade")]
+#[Route("/api/lan-elomrade", name: "api_lan_elomrade")]
     public function lanElomrade(EntityManagerInterface $entityManager): JsonResponse
     {
         $repository = $entityManager->getRepository(LanElomrade::class);
