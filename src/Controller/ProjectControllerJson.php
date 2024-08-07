@@ -10,10 +10,10 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\RenewableEnergyPercentage;
 use App\Entity\RenewableEnergyTWh;
 use App\Entity\EnergySupplyGDP;
-use App\Entity\AverageTemperature;
 use App\Entity\AverageConsumption;
 use App\Entity\ElectricityPrice;
 use App\Entity\LanElomrade;
+
 
 class ProjectControllerJson extends AbstractController
 {
@@ -37,7 +37,6 @@ class ProjectControllerJson extends AbstractController
             'data' => $formattedData,
             'reference1' => 'https://www.sverigesmiljomal.se/miljomalen/generationsmalet/fornybar-energi/',
             'reference2' => 'https://www.scb.se/hitta-statistik/temaomraden/agenda-2030/mal-7/#141072',
-            'instructions' => 'Gå till URL. Välj "Generationsmålet". Ladda ner data som Excel-fil.',
             'date' => 'August 2024'
         ];
 
@@ -73,7 +72,6 @@ class ProjectControllerJson extends AbstractController
         $response = new JsonResponse([
             'data' => $formattedData,
             'reference' => 'https://www.scb.se/hitta-statistik/temaomraden/agenda-2030/mal-7/#141072',
-            'instructions' => 'Gå till URL. Välj "Agenda 2030". Välj "Mål 7". Ladda ner data som Excel-fil.',
             'date' => 'August 2024'
         ]);
         
@@ -98,7 +96,6 @@ class ProjectControllerJson extends AbstractController
         $response = new JsonResponse([
             'data' => $formattedData,
             'reference' => 'https://www.scb.se/hitta-statistik/temaomraden/agenda-2030/mal-7/',
-            'instructions' => 'Gå till URL. Välj "Agenda 2030". Välj "Mål 7". Ladda ner data som Excel-fil.',
             'date' => 'August 2024'
         ]);
         
@@ -107,33 +104,6 @@ class ProjectControllerJson extends AbstractController
         return $response;
     }
 
-    #[Route("/api/average-temperature", name: "api_average_temperature")]
-    public function averageTemperature(EntityManagerInterface $entityManager): JsonResponse
-    {
-        $repository = $entityManager->getRepository(AverageTemperature::class);
-        $data = $repository->findAll();
-
-        $formattedData = array_map(function ($item) {
-            return [
-                'year' => $item->getYear(),
-                'SE1' => $item->getSE1(),
-                'SE2' => $item->getSE2(),
-                'SE3' => $item->getSE3(),
-                'SE4' => $item->getSE4(),
-            ];
-        }, $data);
-
-        $response = new JsonResponse([
-            'data' => $formattedData,
-            'reference' => 'https://www.smhi.se/data/meteorologi/temperatur/',
-            'instructions' => 'Gå till URL. Välj "Temperaturdata". Välj elområde och tidsperiod (2015-2023). Ladda ner data som Excel-fil.',
-            'date' => 'August 2024'
-        ]);
-
-        $response->setEncodingOptions($response->getEncodingOptions() | JSON_PRETTY_PRINT);
-
-        return $response;
-    }
 
     #[Route("/api/average-consumption", name: "api_average_consumption")]
     public function averageConsumption(EntityManagerInterface $entityManager): JsonResponse
@@ -153,8 +123,7 @@ class ProjectControllerJson extends AbstractController
 
         $response = new JsonResponse([
             'data' => $formattedData,
-            'reference' => 'https://www.energimyndigheten.se/statistik/',
-            'instructions' => 'Gå till URL. Välj "Elförbrukning". Välj elområde och tidsperiod (2015-2023). Ladda ner data som Excel-fil.',
+            'reference' => 'https://www.statistikdatabasen.scb.se/pxweb/sv/ssd/START__EN__EN0105__EN0105A/ElAnvSNI2007ArN/table/tableViewLayout1/',
             'date' => 'August 2024'
         ]);
 
@@ -182,8 +151,7 @@ public function electricityPrice(EntityManagerInterface $entityManager): JsonRes
     $response = new JsonResponse([
         'data' => $formattedData,
         'reference' => 
-        'https://www.energimarknadsinspektionen.se/sv/statistik/elmarknad/elpriser/',
-        'instructions' => 'Gå till URL. Välj "Elprisstatistik". Välj elområde och tidsperiod (2015-2023). Ladda ner data som Excel-fil.',
+        'https://data.nordpoolgroup.com/auction/day-ahead/prices?deliveryDate=latest&currency=SEK&aggregation=Yearly&deliveryAreas=SE1,SE2,SE3,SE4',
         'date' => 'August 2024'
     ]);
 
@@ -207,8 +175,7 @@ public function electricityPrice(EntityManagerInterface $entityManager): JsonRes
 
         $response = new JsonResponse([
             'data' => $formattedData,
-            'reference' => 'https://www.energimyndigheten.se/statistik/',
-            'instructions' => 'Gå till URL. Välj "Elområden". Ladda ner data som Excel-fil.',
+            'reference' => 'https://elavtaldirekt.se/elmarknad/elomraden/',
             'date' => 'August 2024'
         ]);
 
@@ -216,4 +183,6 @@ public function electricityPrice(EntityManagerInterface $entityManager): JsonRes
 
         return $response;
     }
+
+
 }
