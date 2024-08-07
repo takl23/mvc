@@ -1,3 +1,4 @@
+{# templates/proj/goal.html.twig #}
 {% extends 'proj/proj_base.html.twig' %}
 
 {% block title %}Globala mål{% endblock %}
@@ -30,17 +31,8 @@
     <h1>Analys av utvalt/utvalda globala mål</h1>
     <h2 id="goal7">7 Hållbar energi för alla</h2>
     <p>
-        Mål 7 syftar till att säkerställa tillgång till prisvärd, pålitlig, hållbar och modern energi för alla till 2030. Det innefattar att förbättra energieffektivitet, öka andelen förnybar energi och förbättra infrastrukturen för energiöverföring och distribution.
-    </p>
-    <p>
-        Delmålen för mål 7 enligt Agenda 2030 inkluderar:
-        <ul>
-            <li>7.1: Senast 2030 säkerställa allmän tillgång till tillförlitliga och moderna energitjänster till ett överkomligt pris.</li>
-            <li>7.2: Senast 2030 avsevärt öka andelen förnybar energi i den globala energimixen.</li>
-            <li>7.3: Senast 2030 fördubbla den globala förbättringstakten i energieffektivitet.</li>
-            <li>7.a: Senast 2030 förstärka det internationella samarbetet för att underlätta tillgång till forskning och teknik kring ren energi, inklusive förnybar energi, energieffektivitet och avancerad och renare fossil bränsleteknik, och främja investeringar i energiinfrastruktur och ren energiteknik.</li>
-            <li>7.b: Senast 2030 utvidga infrastruktur och uppgradera teknik för att tillhandahålla moderna och hållbara energitjänster för alla i utvecklingsländerna, särskilt de minst utvecklade länderna, små önationer under utveckling och inlandsstater, i enlighet med deras respektive stödprogram.</li>
-        </ul>
+        Mål 7 syftar till att säkerställa tillgång till prisvärd, pålitlig, hållbar och modern energi för alla till 2030. 
+        Det innefattar att förbättra energieffektivitet, öka andelen förnybar energi och förbättra infrastrukturen för energiöverföring och distribution<sup>1</sup>.
     </p>
     <p>
         För mer information om mål 7 och dess delmål, besök <a href="https://www.globalamalen.se/om-globala-malen">Globala målen</a><sup>1</sup>.
@@ -52,30 +44,44 @@
 
     <h3>Graf 1: Förnybar energi i procent</h3>
     <canvas id="renewableEnergyPercentageChart"></canvas>
-    <p class="chart-description"><em>Förnybar energi som andel av total energiproduktion från 2008 till 2021.</em></p>
-    <p class="chart-description"><em>Referens: <a href="https://www.sverigesmiljomal.se/miljomalen/generationsmalet/fornybar-energi/">Sveriges miljömål</a><sup>2</sup>, <a href="https://www.scb.se/hitta-statistik/temaomraden/agenda-2030/mal-7/#141072">SCB</a><sup>3</sup></em></p>
+    <p><em>Förnybar energi som andel av total energiproduktion från 2008 till 2021.</em></p>
+    <p><em>Referens: <a href="https://www.sverigesmiljomal.se/miljomalen/generationsmalet/fornybar-energi/">Sveriges miljömål</a><sup>2</sup>, <a href="https://www.scb.se/hitta-statistik/temaomraden/agenda-2030/mal-7/#141072">SCB</a><sup>3</sup></em></p>
 
     <h3>Graf 2: Förnybar energi i TWh</h3>
     <canvas id="renewableEnergyTWhChart"></canvas>
-    <p class="chart-description"><em>Totala TWh av förnybar energi producerad från 2008 till 2021.</em></p>
-    <p class="chart-description"><em>Referens: <a href="https://www.scb.se/hitta-statistik/temaomraden/agenda-2030/mal-7/#141072">SCB</a><sup>3</sup></em></p>
+    <p><em>Totala TWh av förnybar energi producerad från 2008 till 2021.</em></p>
+    <p><em>Referens: <a href="https://www.scb.se/hitta-statistik/temaomraden/agenda-2030/mal-7/#141072">SCB</a><sup>3</sup></em></p>
 
     <h3>Graf 3: Energitillförsel som andel av BNP</h3>
     <canvas id="energySupplyGDPChart"></canvas>
-    <p class="chart-description"><em>Energitillförsel som procentandel av BNP från 2008 till 2021.</em></p>
-    <p class="chart-description"><em>Referens: <a href="https://www.scb.se/hitta-statistik/temaomraden/agenda-2030/mal-7/">SCB</a><sup>3</sup></em></p>
+    <p><em>Energitillförsel som procentandel av BNP från 2008 till 2021.</em></p>
+    <p><em>Referens: <a href="https://www.scb.se/hitta-statistik/temaomraden/agenda-2030/mal-7/">SCB</a><sup>3</sup></em></p>
 
-    <hr>
+    <h3>Graf 4: Län och Elområde Data</h3>
+    <div class="table-container">
+        {% for elomrade, lans in groupedData %}
+            <div class="table-cell">
+                <div class="elomrade">{{ elomrade }}</div>
+                {% for lan in lans %}
+                    <div class="lan">{{ lan }}</div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+    <p><em>Elområden och län - <a href="https://www.energimyndigheten.se/statistik/">Energimyndigheten</a> - 2024-08-06</em></p>
+    <p><em>Gå till URL. Välj 'Elområden'. Ladda ner data som Excel-fil. N/A</em></p>
 
-    <h2>Sammanfattning av Grafer</h2>
-    <p>
-        Graf 1 visar hur andelen förnybar energi av den totala energiproduktionen har förändrats mellan 2008 och 2021. Trenden visar en stadig ökning vilket indikerar en positiv utveckling mot hållbar energiproduktion. 
-        Graf 2 presenterar den totala produktionen av förnybar energi i terawattimmar (TWh) under samma period, vilket också visar en ökning, särskilt under de senaste åren. 
-        Graf 3 visar energitillförsel som andel av BNP och hjälper oss förstå hur energianvändningen förhåller sig till den ekonomiska tillväxten. Den visar hur effektiviteten i energianvändningen har förändrats över tid.
-    </p>
-    <p>
-        Sammantaget visar dessa grafer att Sverige gör framsteg mot en hållbar energiförsörjning, men det finns fortfarande utmaningar kvar att övervinna för att uppnå de globala målen till 2030.
-    </p>
+    <h3>Graf 5: Genomsnittlig temperatur per elområde</h3>
+    <canvas id="averageTemperatureChart"></canvas>
+    <p><em>Snitttemperatur per elområde från 2015 till 2023.</em></p>
+    <p><em>Referens: <a href="https://www.smhi.se/data/meteorologi/temperatur/">SMHI</a> - 2024-08-06</em></p>
+    <p><em>Gå till URL. Välj 'Temperaturdata'. Välj elområde och tidsperiod (2015-2023). Ladda ner data som Excel-fil. °C</em></p>
+
+    <h3>Graf 6: Snittförbrukning per elområde</h3>
+    <canvas id="averageConsumptionChart"></canvas>
+    <p><em>Snittförbrukning per elområde från 2015 till 2023.</em></p>
+    <p><em>Referens: <a href="https://www.energimyndigheten.se/statistik/">Energimyndigheten</a> - 2024-08-06</em></p>
+    <p><em>Gå till URL. Välj 'Elförbrukning'. Välj elområde och tidsperiod (2015-2023). Ladda ner data som Excel-fil. GWh</em></p>
 
     <hr>
 
@@ -84,7 +90,8 @@
         <li><a href="https://www.globalamalen.se/om-globala-malen">Globala målen</a></li>
         <li><a href="https://www.sverigesmiljomal.se/miljomalen/generationsmalet/fornybar-energi/">Sveriges miljömål</a></li>
         <li><a href="https://www.scb.se/hitta-statistik/temaomraden/agenda-2030/mal-7/#141072">SCB</a></li>
+        <li><a href="https://www.energimyndigheten.se/statistik/">ENERGIMYNDIGHETEN</a></li>
+        <li><a href="https://www.smhi.se/data/meteorologi/temperatur/">SMHI</a></li>
     </ol>
 </div>
-
 {% endblock %}

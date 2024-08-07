@@ -13,6 +13,7 @@ use App\Entity\EnergySupplyGDP;
 use App\Entity\AverageTemperature;
 use App\Entity\AverageConsumption;
 use App\Entity\ElectricityPrice;
+use App\Entity\LanElomrade;
 
 class ProjectControllerJson extends AbstractController
 {
@@ -36,6 +37,7 @@ class ProjectControllerJson extends AbstractController
             'data' => $formattedData,
             'reference1' => 'https://www.sverigesmiljomal.se/miljomalen/generationsmalet/fornybar-energi/',
             'reference2' => 'https://www.scb.se/hitta-statistik/temaomraden/agenda-2030/mal-7/#141072',
+            'instructions' => 'Gå till URL. Välj "Generationsmålet". Ladda ner data som Excel-fil.',
             'date' => 'August 2024'
         ];
 
@@ -71,6 +73,7 @@ class ProjectControllerJson extends AbstractController
         $response = new JsonResponse([
             'data' => $formattedData,
             'reference' => 'https://www.scb.se/hitta-statistik/temaomraden/agenda-2030/mal-7/#141072',
+            'instructions' => 'Gå till URL. Välj "Agenda 2030". Välj "Mål 7". Ladda ner data som Excel-fil.',
             'date' => 'August 2024'
         ]);
         
@@ -78,6 +81,7 @@ class ProjectControllerJson extends AbstractController
     
         return $response;
     }
+
     #[Route("/api/energy_supply_gdp", name: "api_energy_supply_gdp")]
     public function energySupplyGDP(EntityManagerInterface $entityManager): JsonResponse
     {
@@ -94,6 +98,7 @@ class ProjectControllerJson extends AbstractController
         $response = new JsonResponse([
             'data' => $formattedData,
             'reference' => 'https://www.scb.se/hitta-statistik/temaomraden/agenda-2030/mal-7/',
+            'instructions' => 'Gå till URL. Välj "Agenda 2030". Välj "Mål 7". Ladda ner data som Excel-fil.',
             'date' => 'August 2024'
         ]);
         
@@ -120,7 +125,8 @@ class ProjectControllerJson extends AbstractController
 
         $response = new JsonResponse([
             'data' => $formattedData,
-            'reference' => 'https://example.com/reference',
+            'reference' => 'https://www.smhi.se/data/meteorologi/temperatur/',
+            'instructions' => 'Gå till URL. Välj "Temperaturdata". Välj elområde och tidsperiod (2015-2023). Ladda ner data som Excel-fil.',
             'date' => 'August 2024'
         ]);
 
@@ -147,7 +153,8 @@ class ProjectControllerJson extends AbstractController
 
         $response = new JsonResponse([
             'data' => $formattedData,
-            'reference' => 'https://example.com/reference',
+            'reference' => 'https://www.energimyndigheten.se/statistik/',
+            'instructions' => 'Gå till URL. Välj "Elförbrukning". Välj elområde och tidsperiod (2015-2023). Ladda ner data som Excel-fil.',
             'date' => 'August 2024'
         ]);
 
@@ -155,6 +162,7 @@ class ProjectControllerJson extends AbstractController
 
         return $response;
     }
+
     #[Route("/api/electricity-price", name: "api_electricity_price")]
     public function electricityPrice(EntityManagerInterface $entityManager): JsonResponse
     {
@@ -173,7 +181,33 @@ class ProjectControllerJson extends AbstractController
 
         $response = new JsonResponse([
             'data' => $formattedData,
-            'reference' => 'https://example.com/reference',
+            'reference' => 'https://www.ei.se/sv/statistik/',
+            'instructions' => 'Gå till URL. Välj "Elprisstatistik". Välj elområde och tidsperiod (2015-2023). Ladda ner data som Excel-fil.',
+            'date' => 'August 2024'
+        ]);
+
+        $response->setEncodingOptions($response->getEncodingOptions() | JSON_PRETTY_PRINT);
+
+        return $response;
+    }
+
+    #[Route("/api/lan-elomrade", name: "api_lan_elomrade")]
+    public function lanElomrade(EntityManagerInterface $entityManager): JsonResponse
+    {
+        $repository = $entityManager->getRepository(LanElomrade::class);
+        $data = $repository->findAll();
+
+        $formattedData = array_map(function ($item) {
+            return [
+                'lan' => $item->getLan(),
+                'elomrade' => $item->getElomrade(),
+            ];
+        }, $data);
+
+        $response = new JsonResponse([
+            'data' => $formattedData,
+            'reference' => 'https://www.energimyndigheten.se/statistik/',
+            'instructions' => 'Gå till URL. Välj "Elområden". Ladda ner data som Excel-fil.',
             'date' => 'August 2024'
         ]);
 
