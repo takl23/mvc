@@ -13,6 +13,8 @@ use App\Entity\RenewableEnergyPercentage;
 use App\Entity\ElectricityPrice;
 use App\Entity\AverageConsumption;
 use App\Entity\EnergySupplyGDP;
+use App\Entity\LanElomrade;
+use App\Entity\PopulationPerLan;
 
 #[AsCommand(
     name: 'app:reset-and-import-data',
@@ -47,6 +49,8 @@ class ResetAndImportDataCommand extends Command
         $this->clearTable(ElectricityPrice::class);
         $this->clearTable(AverageConsumption::class);
         $this->clearTable(EnergySupplyGDP::class);
+        $this->clearTable(LanElomrade::class);
+        $this->clearTable(PopulationPerLan::class);
 
         $io->success('Tables cleared.');
 
@@ -60,6 +64,8 @@ class ResetAndImportDataCommand extends Command
         $this->importService->import('src/Service/importfile.xlsx', 'Snittförbrukning per elområde', ElectricityPrice::class);
         $this->importService->import('src/Service/importfile.xlsx', 'Snittförbrukning per elområde', AverageConsumption::class);
         $this->importService->import('src/Service/importfile.xlsx', '7.3.1', EnergySupplyGDP::class);
+        $this->importService->import('src/Service/importfile.xlsx', 'Elområde och län', LanElomrade::class);
+        $this->importService->import('src/Service/importfile.xlsx', 'Befolkning per län', PopulationPerLan::class);
 
         $io->success('Data import complete.');
 

@@ -22,3 +22,7 @@ services:
             $importService: '@App\Service\ImportService'
         tags:
             - { name: 'console.command' }
+
+    App\Service\CalculatePopulationCommand:
+        tags:
+            - { name: 'console.command' }
