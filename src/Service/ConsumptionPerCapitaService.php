@@ -1,5 +1,4 @@
 <?php
-// src/Service/ConsumptionPerCapitaService.php
 
 namespace App\Service;
 
@@ -19,36 +18,51 @@ class ConsumptionPerCapitaService
 
     public function calculateAndSaveConsumptionPerCapita(): void
     {
+        // Rensa tabellen innan ny data importeras
         $connection = $this->entityManager->getConnection();
         $platform = $connection->getDatabasePlatform();
         $connection->executeStatement($platform->getTruncateTableSQL('consumption_per_capita', true));
 
-        $populationRepo = $this->entityManager->getRepository(PopulationPerElomrade::class);
-        $consumptionRepo = $this->entityManager->getRepository(AverageConsumption::class);
+        $populationPerElomradeRepository = $this->entityManager->getRepository(PopulationPerElomrade::class);
+        $averageConsumptionRepository = $this->entityManager->getRepository(AverageConsumption::class);
 
-        $populations = $populationRepo->findAll();
-        $consumptions = $consumptionRepo->findAll();
+        $populationsPerElomrade = $populationPerElomradeRepository->findAll();
+        $averageConsumptions = $averageConsumptionRepository->findAll();
 
-        $populationData = [];
-        foreach ($populations as $population) {
-            $populationData[$population->getYear()][$population->getElomrade()] = $population->getPopulation();
+        // Skapa en mapping mellan år och elområde för population och förbrukning
+        $populationMap = [];
+        foreach ($populationsPerElomrade as $population) {
+            $year = $population->getYear();
+            $elomrade = $population->getElomrade();
+            $populationMap[$year][$elomrade] = $population->getPopulation();
         }
 
-        foreach ($consumptions as $consumption) {
+        $consumptionPerCapita = [];
+        foreach ($averageConsumptions as $consumption) {
             $year = $consumption->getYear();
             foreach (['SE1', 'SE2', 'SE3', 'SE4'] as $elomrade) {
-                if (isset($populationData[$year][$elomrade])) {
-                    $population = $populationData[$year][$elomrade];
-                    $consumptionValue = $consumption->{'get' . $elomrade}();
-                    $consumptionPerCapita = $population > 0 ? $consumptionValue / $population : 0;
+                if (isset($populationMap[$year][$elomrade])) {
+                    $population = $populationMap[$year][$elomrade];
+                    $consumptionGWh = $consumption->{'get' . $elomrade}();
+                    $consumptionKWh = $consumptionGWh * 1_000_000; // Omvandla GWh till kWh
+                    $consumptionPerCapitaValue = $consumptionKWh / $population;
 
-                    $entity = new ConsumptionPerCapita();
-                    $entity->setYear($year);
-                    $entity->setElomrade($elomrade);
-                    $entity->setConsumptionPerCapita($consumptionPerCapita);
-                    $this->entityManager->persist($entity);
+                    $consumptionPerCapita[] = [
+                        'year' => $year,
+                        'elomrade' => $elomrade,
+                        'consumptionPerCapita' => $consumptionPerCapitaValue,
+                    ];
                 }
             }
+        }
+
+        // Spara konsumtionen per capita till databasen
+        foreach ($consumptionPerCapita as $data) {
+            $entity = new ConsumptionPerCapita();
+            $entity->setYear($data['year']);
+            $entity->setElomrade($data['elomrade']);
+            $entity->setConsumptionPerCapita($data['consumptionPerCapita']);
+            $this->entityManager->persist($entity);
         }
 
         $this->entityManager->flush();

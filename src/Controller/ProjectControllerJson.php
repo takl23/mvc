@@ -13,6 +13,8 @@ use App\Entity\EnergySupplyGDP;
 use App\Entity\AverageConsumption;
 use App\Entity\ElectricityPrice;
 use App\Entity\LanElomrade;
+use App\Entity\PopulationPerElomrade;
+use App\Entity\ConsumptionPerCapita;
 
 
 class ProjectControllerJson extends AbstractController
@@ -183,6 +185,54 @@ public function electricityPrice(EntityManagerInterface $entityManager): JsonRes
 
         return $response;
     }
+    #[Route("/api/population-per-elomrade", name: "api_population_per_elomrade")]
+    public function populationPerElomrade(EntityManagerInterface $entityManager): JsonResponse
+    {
+        $repository = $entityManager->getRepository(PopulationPerElomrade::class);
+        $data = $repository->findAll();
 
+        $formattedData = array_map(function ($item) {
+            return [
+                'year' => $item->getYear(),
+                'elomrade' => $item->getElomrade(),
+                'population' => $item->getPopulation(),
+            ];
+        }, $data);
+
+        $response = new JsonResponse([
+            'data' => $formattedData,
+            'reference' => 'https://www.scb.se/',
+            'date' => 'August 2024'
+        ]);
+
+        $response->setEncodingOptions($response->getEncodingOptions() | JSON_PRETTY_PRINT);
+
+        return $response;
+    }
+
+    #[Route("/api/consumption-per-capita", name: "api_consumption_per_capita")]
+    public function consumptionPerCapita(EntityManagerInterface $entityManager): JsonResponse
+    {
+        $repository = $entityManager->getRepository(ConsumptionPerCapita::class);
+        $data = $repository->findAll();
+
+        $formattedData = array_map(function ($item) {
+            return [
+                'year' => $item->getYear(),
+                'elomrade' => $item->getElomrade(),
+                'consumptionPerCapita' => $item->getConsumptionPerCapita(),
+            ];
+        }, $data);
+
+        $response = new JsonResponse([
+            'data' => $formattedData,
+            'reference' => 'https://www.scb.se/',
+            'date' => 'August 2024'
+        ]);
+
+        $response->setEncodingOptions($response->getEncodingOptions() | JSON_PRETTY_PRINT);
+
+        return $response;
+    }
 
 }
