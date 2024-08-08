@@ -11,18 +11,3 @@ services:
     App\Controller\:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
-
-    # Register Excel import services
-    App\Service\ImportService:
-        arguments:
-            $entityManager: '@doctrine.orm.entity_manager'
-
-    App\Service\ResetAndImportDataCommand:
-        arguments:
-            $importService: '@App\Service\ImportService'
-        tags:
-            - { name: 'console.command' }
-
-    App\Service\CalculatePopulationCommand:
-        tags:
-            - { name: 'console.command' }
