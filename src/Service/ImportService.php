@@ -1,6 +1,6 @@
 <?php
 
-namespace App\ExcelImport;
+namespace App\Service;
 
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use Doctrine\ORM\EntityManagerInterface;

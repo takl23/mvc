@@ -1,6 +1,6 @@
 <?php
 
-namespace App\ExcelImport;
+namespace App\Service;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -55,11 +55,11 @@ class ResetAndImportDataCommand extends Command
 
         // Lägg till dina importkommandon här
         // Till exempel:
-        $this->importService->import('src/ExcelImport/importfile.xlsx', '7.2.1.2', RenewableEnergyTWh::class);
-        $this->importService->import('src/ExcelImport/importfile.xlsx', '7.2.1.1', RenewableEnergyPercentage::class);
-        $this->importService->import('src/ExcelImport/importfile.xlsx', 'Snittförbrukning per elområde', ElectricityPrice::class);
-        $this->importService->import('src/ExcelImport/importfile.xlsx', 'Snittförbrukning per elområde', AverageConsumption::class);
-        $this->importService->import('src/ExcelImport/importfile.xlsx', '7.3.1', EnergySupplyGDP::class);
+        $this->importService->import('src/Service/importfile.xlsx', '7.2.1.2', RenewableEnergyTWh::class);
+        $this->importService->import('src/Service/importfile.xlsx', '7.2.1.1', RenewableEnergyPercentage::class);
+        $this->importService->import('src/Service/importfile.xlsx', 'Snittförbrukning per elområde', ElectricityPrice::class);
+        $this->importService->import('src/Service/importfile.xlsx', 'Snittförbrukning per elområde', AverageConsumption::class);
+        $this->importService->import('src/Service/importfile.xlsx', '7.3.1', EnergySupplyGDP::class);
 
         $io->success('Data import complete.');
 

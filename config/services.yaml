@@ -13,12 +13,12 @@ services:
         tags: ['controller.service_arguments']
 
     # Register Excel import services
-    App\ExcelImport\ImportService:
+    App\Service\ImportService:
         arguments:
             $entityManager: '@doctrine.orm.entity_manager'
 
-    App\ExcelImport\ResetAndImportDataCommand:
+    App\Service\ResetAndImportDataCommand:
         arguments:
-            $importService: '@App\ExcelImport\ImportService'
+            $importService: '@App\Service\ImportService'
         tags:
             - { name: 'console.command' }
