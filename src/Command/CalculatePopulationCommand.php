@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Service;
+namespace App\Command;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Console\Attribute\AsCommand;
+use Doctrine\ORM\EntityManagerInterface;
+use App\Service\PopulationElomradeService;
 
 #[AsCommand(
     name: 'app:calculate-population-elomrade',
@@ -14,11 +16,13 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 )]
 class CalculatePopulationCommand extends Command
 {
-    private PopulationElomradeService $populationElomradeService;
+    private $populationElomradeService;
+    private $entityManager;
 
-    public function __construct(PopulationElomradeService $populationElomradeService)
+    public function __construct(PopulationElomradeService $populationElomradeService, EntityManagerInterface $entityManager)
     {
         $this->populationElomradeService = $populationElomradeService;
+        $this->entityManager = $entityManager;
         parent::__construct();
     }
 
@@ -30,7 +34,7 @@ class CalculatePopulationCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        $this->populationElomradeService->calculateAndSavePopulationPerElomrade();
+        $this->populationElomradeService->calculateAndSavePopulationPerElomrade($this->entityManager);
         $io->success('Population per elomrade calculated and saved successfully.');
         return Command::SUCCESS;
     }

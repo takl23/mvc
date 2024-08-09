@@ -2,12 +2,13 @@
 
 namespace App\Command;
 
-use App\Service\AverageAnnualCostPerPersonService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Console\Attribute\AsCommand;
+use Doctrine\ORM\EntityManagerInterface;
+use App\Service\AverageAnnualCostPerPersonService;
 
 #[AsCommand(
     name: 'app:calculate-annual-cost-per-person',
@@ -16,10 +17,12 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 class CalculateAnnualCostPerPersonCommand extends Command
 {
     private $service;
+    private $entityManager;
 
-    public function __construct(AverageAnnualCostPerPersonService $service)
+    public function __construct(AverageAnnualCostPerPersonService $service, EntityManagerInterface $entityManager)
     {
         $this->service = $service;
+        $this->entityManager = $entityManager;
         parent::__construct();
     }
 
@@ -31,7 +34,7 @@ class CalculateAnnualCostPerPersonCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        $this->service->calculateAndSaveAverageAnnualCostPerPerson();
+        $this->service->calculateAndSaveAverageAnnualCostPerPerson($this->entityManager);
         $io->success('Annual cost per person calculated and saved successfully.');
 
         return Command::SUCCESS;

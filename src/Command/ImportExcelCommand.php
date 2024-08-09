@@ -1,5 +1,5 @@
 <?php
-namespace App\Service;
+namespace App\Command;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -7,6 +7,8 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Console\Attribute\AsCommand;
+use Doctrine\ORM\EntityManagerInterface;
+use App\Service\ImportService;
 
 #[AsCommand(
     name: 'app:import-excel',
@@ -15,11 +17,13 @@ use Symfony\Component\Console\Attribute\AsCommand;
 class ImportExcelCommand extends Command
 {
     private $importService;
+    private $entityManager;
 
-    public function __construct(ImportService $importService)
+    public function __construct(ImportService $importService, EntityManagerInterface $entityManager)
     {
-        parent::__construct();
         $this->importService = $importService;
+        $this->entityManager = $entityManager;
+        parent::__construct();
     }
 
     protected function configure()
@@ -44,7 +48,7 @@ class ImportExcelCommand extends Command
         }
 
         try {
-            $this->importService->import($filePath, $sheetName, $entityClass);
+            $this->importService->import($filePath, $sheetName, $entityClass, $this->entityManager);
             $io->success('Data imported successfully!');
             return Command::SUCCESS;
         } catch (\Exception $e) {

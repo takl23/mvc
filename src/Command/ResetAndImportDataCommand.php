@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Service;
+
+namespace App\Command;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -15,6 +16,7 @@ use App\Entity\AverageConsumption;
 use App\Entity\EnergySupplyGDP;
 use App\Entity\LanElomrade;
 use App\Entity\PopulationPerLan;
+use App\Service\ImportService;
 
 #[AsCommand(
     name: 'app:reset-and-import-data',
@@ -57,8 +59,6 @@ class ResetAndImportDataCommand extends Command
         // Import new data
         $io->section('Importing new data...');
 
-        // Lägg till dina importkommandon här
-        // Till exempel:
         $this->importService->import('src/Service/importfile.xlsx', '7.2.1.2', RenewableEnergyTWh::class);
         $this->importService->import('src/Service/importfile.xlsx', '7.2.1.1', RenewableEnergyPercentage::class);
         $this->importService->import('src/Service/importfile.xlsx', 'Elpris per elområde och år', ElectricityPrice::class);

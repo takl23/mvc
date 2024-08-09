@@ -1,8 +1,8 @@
 services:
-    # default configuration for services in *this* file
+    # Default configuration for services in *this* file
     _defaults:
-        autowire: true      # Automatically injects dependencies in your services.
-        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        autowire: true
+        autoconfigure: true
 
     App\:
         resource: '../src/*'
@@ -12,15 +12,11 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
-    # Register custom commands and services
-    App\Service\ImportService:
-        arguments:
-            $entityManager: '@doctrine.orm.entity_manager'
+    # Register services and commands
+    App\Service\ImportService: ~
 
-    App\Service\ResetAndImportDataCommand:
-        arguments:
-            $importService: '@App\Service\ImportService'
-        tags:
-            - { name: 'console.command' }
-
-   
+    App\Command\CalculateConsumptionPerCapitaCommand: ~
+    App\Command\ImportExcelCommand: ~
+    App\Command\ResetAndImportDataCommand: ~
+    App\Command\CalculatePopulationCommand: ~
+    App\Command\CalculateAnnualCostPerPersonCommand: ~
