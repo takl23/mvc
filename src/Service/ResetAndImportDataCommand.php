@@ -61,7 +61,7 @@ class ResetAndImportDataCommand extends Command
         // Till exempel:
         $this->importService->import('src/Service/importfile.xlsx', '7.2.1.2', RenewableEnergyTWh::class);
         $this->importService->import('src/Service/importfile.xlsx', '7.2.1.1', RenewableEnergyPercentage::class);
-        $this->importService->import('src/Service/importfile.xlsx', 'Snittförbrukning per elområde', ElectricityPrice::class);
+        $this->importService->import('src/Service/importfile.xlsx', 'Elpris per elområde och år', ElectricityPrice::class);
         $this->importService->import('src/Service/importfile.xlsx', 'Snittförbrukning per elområde', AverageConsumption::class);
         $this->importService->import('src/Service/importfile.xlsx', '7.3.1', EnergySupplyGDP::class);
         $this->importService->import('src/Service/importfile.xlsx', 'Elområde och län', LanElomrade::class);

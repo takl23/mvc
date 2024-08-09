@@ -15,6 +15,7 @@ use App\Entity\ElectricityPrice;
 use App\Entity\LanElomrade;
 use App\Entity\PopulationPerElomrade;
 use App\Entity\ConsumptionPerCapita;
+use App\Entity\AverageAnnualCostPerPerson;
 
 
 class ProjectControllerJson extends AbstractController
@@ -234,5 +235,26 @@ public function electricityPrice(EntityManagerInterface $entityManager): JsonRes
 
         return $response;
     }
+
+    #[Route("/api/annual-cost-per-person", name: "api_annual_cost_per_person")]
+public function annualCostPerPerson(EntityManagerInterface $entityManager): JsonResponse
+{
+    $repository = $entityManager->getRepository(AverageAnnualCostPerPerson::class);
+    $data = $repository->findAll();
+
+    $formattedData = array_map(function ($item) {
+        return [
+            'year' => $item->getYear(),
+            'elomrade' => $item->getElomrade(),
+            'annualCost' => $item->getAverageCostPerPerson(),
+        ];
+    }, $data);
+
+    $response = new JsonResponse(['data' => $formattedData]);
+    
+    $response->setEncodingOptions($response->getEncodingOptions() | JSON_PRETTY_PRINT);
+
+    return $response;
+}
 
 }

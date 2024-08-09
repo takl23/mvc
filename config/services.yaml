@@ -11,3 +11,16 @@ services:
     App\Controller\:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
+
+    # Register custom commands and services
+    App\Service\ImportService:
+        arguments:
+            $entityManager: '@doctrine.orm.entity_manager'
+
+    App\Service\ResetAndImportDataCommand:
+        arguments:
+            $importService: '@App\Service\ImportService'
+        tags:
+            - { name: 'console.command' }
+
+   
