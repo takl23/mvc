@@ -1,4 +1,5 @@
 <?php
+
 // src/Service/CalculateConsumptionPerCapitaCommand.php
 
 namespace App\Command;

@@ -1,5 +1,7 @@
 <?php
+
 // src/Controller/ProjectController.php
+
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

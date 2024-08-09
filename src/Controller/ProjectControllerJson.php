@@ -19,7 +19,6 @@ use App\Entity\AverageAnnualCostPerPerson;
 use Symfony\Component\HttpFoundation\Request;
 use App\Repository\ElectricityPriceRepository;
 
-
 class ProjectControllerJson extends AbstractController
 {
     #[Route("/api/renewable-energy", name: "api_renewable_energy_json")]
@@ -58,7 +57,7 @@ class ProjectControllerJson extends AbstractController
     {
         $repository = $entityManager->getRepository(RenewableEnergyTWh::class);
         $data = $repository->findAll();
-    
+
         $formattedData = array_map(function ($item) {
             return [
                 'year' => $item->getYear(),
@@ -73,15 +72,15 @@ class ProjectControllerJson extends AbstractController
                 'totalEnergyUse' => $item->getTotalEnergyUse(),
             ];
         }, $data);
-    
+
         $response = new JsonResponse([
             'data' => $formattedData,
             'reference' => 'https://www.scb.se/hitta-statistik/temaomraden/agenda-2030/mal-7/#141072',
             'date' => 'August 2024'
         ]);
-        
+
         $response->setEncodingOptions($response->getEncodingOptions() | JSON_PRETTY_PRINT);
-    
+
         return $response;
     }
 
@@ -103,7 +102,7 @@ class ProjectControllerJson extends AbstractController
             'reference' => 'https://www.scb.se/hitta-statistik/temaomraden/agenda-2030/mal-7/',
             'date' => 'August 2024'
         ]);
-        
+
         $response->setEncodingOptions($response->getEncodingOptions() | JSON_PRETTY_PRINT);
 
         return $response;
@@ -138,34 +137,34 @@ class ProjectControllerJson extends AbstractController
     }
 
     #[Route("/api/electricity-price", name: "api_electricity_price")]
-public function electricityPrice(EntityManagerInterface $entityManager): JsonResponse
-{
-    $repository = $entityManager->getRepository(ElectricityPrice::class);
-    $data = $repository->findAll();
+    public function electricityPrice(EntityManagerInterface $entityManager): JsonResponse
+    {
+        $repository = $entityManager->getRepository(ElectricityPrice::class);
+        $data = $repository->findAll();
 
-    $formattedData = array_map(function ($item) {
-        return [
-            'year' => $item->getYear(),
-            'SE1' => $item->getSE1(),
-            'SE2' => $item->getSE2(),
-            'SE3' => $item->getSE3(),
-            'SE4' => $item->getSE4(),
-        ];
-    }, $data);
+        $formattedData = array_map(function ($item) {
+            return [
+                'year' => $item->getYear(),
+                'SE1' => $item->getSE1(),
+                'SE2' => $item->getSE2(),
+                'SE3' => $item->getSE3(),
+                'SE4' => $item->getSE4(),
+            ];
+        }, $data);
 
-    $response = new JsonResponse([
-        'data' => $formattedData,
-        'reference' => 
-        'https://data.nordpoolgroup.com/auction/day-ahead/prices?deliveryDate=latest&currency=SEK&aggregation=Yearly&deliveryAreas=SE1,SE2,SE3,SE4',
-        'date' => 'August 2024'
-    ]);
+        $response = new JsonResponse([
+            'data' => $formattedData,
+            'reference' =>
+            'https://data.nordpoolgroup.com/auction/day-ahead/prices?deliveryDate=latest&currency=SEK&aggregation=Yearly&deliveryAreas=SE1,SE2,SE3,SE4',
+            'date' => 'August 2024'
+        ]);
 
-    $response->setEncodingOptions($response->getEncodingOptions() | JSON_PRETTY_PRINT);
+        $response->setEncodingOptions($response->getEncodingOptions() | JSON_PRETTY_PRINT);
 
-    return $response;
-}
+        return $response;
+    }
 
-#[Route("/api/lan-elomrade", name: "api_lan_elomrade")]
+    #[Route("/api/lan-elomrade", name: "api_lan_elomrade")]
     public function lanElomrade(EntityManagerInterface $entityManager): JsonResponse
     {
         $repository = $entityManager->getRepository(LanElomrade::class);
@@ -239,81 +238,81 @@ public function electricityPrice(EntityManagerInterface $entityManager): JsonRes
     }
 
     #[Route("/api/annual-cost-per-person", name: "api_annual_cost_per_person")]
-public function annualCostPerPerson(EntityManagerInterface $entityManager): JsonResponse
-{
-    $repository = $entityManager->getRepository(AverageAnnualCostPerPerson::class);
-    $data = $repository->findAll();
+    public function annualCostPerPerson(EntityManagerInterface $entityManager): JsonResponse
+    {
+        $repository = $entityManager->getRepository(AverageAnnualCostPerPerson::class);
+        $data = $repository->findAll();
 
-    $formattedData = array_map(function ($item) {
-        return [
-            'year' => $item->getYear(),
-            'elomrade' => $item->getElomrade(),
-            'annualCost' => $item->getAverageCostPerPerson(),
-        ];
-    }, $data);
+        $formattedData = array_map(function ($item) {
+            return [
+                'year' => $item->getYear(),
+                'elomrade' => $item->getElomrade(),
+                'annualCost' => $item->getAverageCostPerPerson(),
+            ];
+        }, $data);
 
-    $response = new JsonResponse(['data' => $formattedData]);
-    
-    $response->setEncodingOptions($response->getEncodingOptions() | JSON_PRETTY_PRINT);
+        $response = new JsonResponse(['data' => $formattedData]);
 
-    return $response;
-}
+        $response->setEncodingOptions($response->getEncodingOptions() | JSON_PRETTY_PRINT);
 
-#[Route("/api/calculate-electricity-cost", name: "api_calculate_electricity_cost", methods: ["POST"])]
-public function calculateElectricityCost(Request $request, ElectricityPriceRepository $electricityPriceRepository): JsonResponse
-{
-    $data = json_decode($request->getContent(), true);
-    $elomrade = $data['elomrade'] ?? null;
-    $consumption = $data['consumption'] ?? null;
-
-    if (!$elomrade || !$consumption) {
-        return new JsonResponse([
-            'status' => 'error',
-            'message' => 'Missing required parameters: elomrade and/or consumption'
-        ], 400);
+        return $response;
     }
 
-    // Hämta det senaste elpriset för det angivna elområdet
-    $electricityPrice = $electricityPriceRepository->findOneBy([], ['year' => 'DESC']); // Hämta senaste året
+    #[Route("/api/calculate-electricity-cost", name: "api_calculate_electricity_cost", methods: ["POST"])]
+    public function calculateElectricityCost(Request $request, ElectricityPriceRepository $electricityPriceRepository): JsonResponse
+    {
+        $data = json_decode($request->getContent(), true);
+        $elomrade = $data['elomrade'] ?? null;
+        $consumption = $data['consumption'] ?? null;
 
-    if (!$electricityPrice) {
-        return new JsonResponse([
-            'status' => 'error',
-            'message' => 'Electricity price data not found.'
-        ], 404);
-    }
-
-    // Välj rätt pris för det angivna elområdet
-    $pricePerKwh = null;
-    switch ($elomrade) {
-        case 'SE1':
-            $pricePerKwh = $electricityPrice->getSE1();
-            break;
-        case 'SE2':
-            $pricePerKwh = $electricityPrice->getSE2();
-            break;
-        case 'SE3':
-            $pricePerKwh = $electricityPrice->getSE3();
-            break;
-        case 'SE4':
-            $pricePerKwh = $electricityPrice->getSE4();
-            break;
-        default:
+        if (!$elomrade || !$consumption) {
             return new JsonResponse([
                 'status' => 'error',
-                'message' => 'Invalid elomrade specified.'
+                'message' => 'Missing required parameters: elomrade and/or consumption'
             ], 400);
+        }
+
+        // Hämta det senaste elpriset för det angivna elområdet
+        $electricityPrice = $electricityPriceRepository->findOneBy([], ['year' => 'DESC']); // Hämta senaste året
+
+        if (!$electricityPrice) {
+            return new JsonResponse([
+                'status' => 'error',
+                'message' => 'Electricity price data not found.'
+            ], 404);
+        }
+
+        // Välj rätt pris för det angivna elområdet
+        $pricePerKwh = null;
+        switch ($elomrade) {
+            case 'SE1':
+                $pricePerKwh = $electricityPrice->getSE1();
+                break;
+            case 'SE2':
+                $pricePerKwh = $electricityPrice->getSE2();
+                break;
+            case 'SE3':
+                $pricePerKwh = $electricityPrice->getSE3();
+                break;
+            case 'SE4':
+                $pricePerKwh = $electricityPrice->getSE4();
+                break;
+            default:
+                return new JsonResponse([
+                    'status' => 'error',
+                    'message' => 'Invalid elomrade specified.'
+                ], 400);
+        }
+
+        // Beräkna kostnaden baserat på snittförbrukning och elpris
+        $cost = $consumption * $pricePerKwh;
+
+        return new JsonResponse([
+            'elomrade' => $elomrade,
+            'year' => $electricityPrice->getYear(),
+            'price_per_kwh' => $pricePerKwh,
+            'consumption' => $consumption,
+            'total_cost' => $cost
+        ]);
     }
-
-    // Beräkna kostnaden baserat på snittförbrukning och elpris
-    $cost = $consumption * $pricePerKwh;
-
-    return new JsonResponse([
-        'elomrade' => $elomrade,
-        'year' => $electricityPrice->getYear(),
-        'price_per_kwh' => $pricePerKwh,
-        'consumption' => $consumption,
-        'total_cost' => $cost
-    ]);
-}
 }
