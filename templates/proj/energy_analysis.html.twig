@@ -13,30 +13,24 @@
 
     <h2>Inledning</h2>
     <p>
-        Sverige är en av världens största producenter av förnybar energi, med en betydande andel av sin elproduktion från vattenkraft, kärnkraft och vindkraft. De största elproducerande regionerna inkluderar Norrland (vattenkraft) och Sydsverige (kärnkraft) <a href="https://www.energimyndigheten.se/statistik/energilaget/">[1]</a>.
+        Sverige är en av världens ledande producenter av förnybar energi, med en betydande andel av sin elproduktion från vattenkraft, 
+        kärnkraft och vindkraft. De största elproducerande regionerna inkluderar norra Sverige (vattenkraft) och södra Sverige (kärnkraft) 
+        <a href="https://www.energimyndigheten.se/statistik/energilaget/">[1]</a>.
     </p>
     <p>
-        Elpriset i Sverige sätts på Nord Pool, den nordiska elbörsen, och bestäms av tillgång och efterfrågan inom de olika elområdena (SE1-SE4). Påverkande faktorer inkluderar väderförhållanden, bränslepriser och kapaciteten i kraftnäten <a href="https://www.nordpoolgroup.com/">[2]</a>.
-    </p>
-    <p>
-        Denna analys ger en översikt över energianvändningen i Sverige, inklusive genomsnittliga temperaturer, snittförbrukning och snittpris på el per elområde från 2015 till 2023.
+        Elpriserna i Sverige bestäms av faktorer som väderförhållanden, bränslepriser och kapaciteten i elnätet. 
+        Landet är uppdelat i fyra elområden (SE1-SE4), där priserna kan variera beroende på regional produktion och konsumtion av el. 
+        Svenska kraftnät spelar en viktig roll i att hantera flaskhalsintäkter, vilka uppstår när det finns överföringsbegränsningar 
+        mellan dessa elområden. Dessa intäkter används för att stabilisera elpriserna och återförs till kunderna 
+        <a href="https://www.svk.se/press-och-nyheter/nyheter/allmanna-nyheter/2022/hur-hanger-elpriser-elomraden-och-flaskhalsinkomster-ihop/">[2]</a>.
     </p>
 
     <h2>Elpriser och Statliga Subventioner</h2>
     <p>
-        Sverige har nyligen upplevt kraftigt ökade elpriser, särskilt under vintern, på grund av höga bränslepriser, låg vattennivå i dammar och hög efterfrågan på el. För att mildra effekterna införde regeringen subventioner <a href="https://www.regeringen.se/pressmeddelanden/2022/01/regeringen-infor-elpriskompensation/">[3]</a>.
-    </p>
-    <p>
-        Subventionerna riktades till hushåll med höga elkostnader och gav ekonomiskt stöd för att täcka en del av de ökade elräkningarna. I genomsnitt erhöll hushåll stöd motsvarande upp till 50% av deras extra elkostnader under kritiska månader <a href="https://www.energimyndigheten.se/nyheter/2022/elprisstod-till-hushall-och-foretag/">[4]</a>.
-    </p>
-    <p>
-        Energikrävande industrier fick också stöd för att upprätthålla konkurrenskraften och förhindra nedläggningar och arbetslöshet <a href="https://www.ekonomifakta.se/Fakta/Energi/El/Elsystemet/">[5]</a>.
-    </p>
-    <p>
-        De största subventionerna gick till regioner i södra Sverige (SE3 och SE4), där elpriserna var högst och påverkan på hushåll och företag var störst. Dessa områden har också högre befolkningstäthet och fler industrier som är beroende av stabila och överkomliga energikostnader <a href="https://www.energimyndigheten.se/nyheter/2022/elprisstod-till-hushall-och-foretag/">[4]</a>.
-    </p>
-    <p>
-        Totalt avsattes flera miljarder kronor för subventionerna, vilket hjälpte till att stabilisera ekonomin och minska de negativa effekterna av de höga elpriserna.
+        Under de senaste åren har Sverige upplevt kraftigt ökade elpriser. För att mildra de ekonomiska konsekvenserna för hushåll och företag 
+        införde regeringen olika former av elstöd, som finansieras genom flaskhalsintäkter. Dessa stöd har riktats till de mest drabbade områdena, 
+        främst i södra Sverige (SE3 och SE4), och baseras på förbrukningen under specifika perioder. Målet med stöden har varit att stabilisera 
+        ekonomin och skydda de mest utsatta <a href="https://www.regeringen.se/regeringens-politik/energikrisen/elstod-hushall/">[3]</a>.
     </p>
 
     <h3>Graf 1: Län och Elområde Data</h3>
@@ -50,22 +44,22 @@
             </div>
         {% endfor %}
     </div>
-    <p><em>Elområden och län - <a href="https://elavtaldirekt.se/elmarknad/elomraden/">[6]</a> - August 2024</em></p>
+    <p><em>Elområden och län - <a href="https://elavtaldirekt.se/elmarknad/elomraden/">[4]</a> - August 2024</em></p>
 
     <h3>Graf 2: Årlig snittförbrukning per elområde</h3>
     <canvas id="averageConsumptionChart"></canvas>
     <p><em>Snittförbrukning per elområde från 2015 till 2023.</em></p>
-    <p><em>Referens: <a href="https://www.statistikdatabasen.scb.se/pxweb/sv/ssd/START__EN__EN0105__EN0105A/ElAnvSNI2007ArN/table/tableViewLayout1/">[8]</a> - August 2024</em></p>
+    <p><em>Referens: <a href="https://www.statistikdatabasen.scb.se/pxweb/sv/ssd/START__EN__EN0105__EN0105A/ElAnvSNI2007ArN/table/tableViewLayout1/">[5]</a> - August 2024</em></p>
 
     <h3>Graf 3: Snittpris per elområde och kWh</h3>
     <canvas id="averageElectricityPriceChart"></canvas>
     <p><em>Snittpris per elområde från 2015 till 2023.</em></p>
-    <p><em>Referens: <a href="https://data.nordpoolgroup.com/auction/day-ahead/prices?deliveryDate=latest&currency=SEK&aggregation=Yearly&deliveryAreas=SE1,SE2,SE3,SE4">[9]</a> - August 2024</em></p>
+    <p><em>Referens: <a href="https://data.nordpoolgroup.com/auction/day-ahead/prices?deliveryDate=latest&currency=SEK&aggregation=Yearly&deliveryAreas=SE1,SE2,SE3,SE4">[6]</a> - August 2024</em></p>
 
     <h3>Graf 4: Population per Elområde</h3>
     <canvas id="populationPerElomradeChart"></canvas>
     <p><em>Population per elområde från 2015 till 2023.</em></p>
-    <p><em>Referens: Kombination av PopulationPerLan och LanElomrade.</em></p>
+    <p><em>Referens: Kombination av tabeller i databasen.</em></p>
 
     <h3>Graf 5: Consumption per Capita</h3>
     <canvas id="consumptionPerCapitaChart"></canvas>
@@ -73,24 +67,63 @@
     <p><em>Referens: Kombination av AverageConsumption och PopulationPerElomrade.</em></p>
 
     <h3>Graf 6: Årlig kostnad per person</h3>
-<canvas id="annualCostPerPersonChart"></canvas>
-<p><em>Årlig kostnad per person i SEK för varje elområde.</em></p>
- <p><em>Referens: Kombination av graf 2 och  5.</em></p>
+    <canvas id="annualCostPerPersonChart"></canvas>
+    <p><em>Årlig kostnad per person i SEK för varje elområde.</em></p>
+    <p><em>Referens: Kombination av tabeller i databasen.</em></p>
 
+    <hr>
+
+    <h2>Diskussion</h2>
+    <p>
+        När man analyserar elpriserna och de statliga subventionerna i Sverige, väcks frågan om rättvisa mellan olika regioner. 
+        Största delen av den förnybara elproduktionen sker i norra Sverige, där vattenkraft och vindkraft står för en betydande andel av 
+        energitillförseln. Trots detta visar Graf 6 att den årliga elkostnaden per person är betydligt högre i norra Sverige. 
+        Är det då rättvist att merparten av subventionerna går till södra Sverige.
+    </p>
+    <p>
+        En orsak till de högre årliga elkostnaderna i norra Sverige är den lägre medeltemperaturen, vilket leder till ökad energiförbrukning under 
+        vintermånaderna. Att mer el också förbrukas i snitt i norr kan även bero på att några av landets mest värdefulla industrier, 
+        såsom gruvnäringen och skogsindustrin, är belägna där och kräver betydande mängder energi. Dessa industrier är inte bara avgörande för 
+        Sveriges konkurrenskraft utan också för landets ekonomiska diversifiering. SÅ varför får inte dessa ta del av subvensioner i samma utsträckning som 
+        industrier i södra Sverige.
+    </p>
+    <p>
+        Det framstår som motsägelsefullt att energin som produceras i norra Sverige används i hela landet, men när det kommer till fördelningen 
+        av subventioner och stöd, riktas dessa främst till de regioner där elen är dyrare, snarare än där den produceras. 
+        Borde det inte vara de som nyttjar elen i södra Sverige som bidrar till att övervinna flaskhalsar i elnätet, precis som vi delar 
+        upp kostnaderna för vården.
+    </p>
+    <p>
+        Inom sjukvården delas ansvaret upp regionalt, vilket innebär att de som bor och verkar i en viss region får stå för kostnaderna inom sitt eget 
+        område. Min egen erfarenhet visar att vården kan variera avsevärt mellan regionerna. Till exempel får många i södra Sverige tillgång till 
+        två ultraljud och gratis KUB-test när de väntar barn, medan detta inte alltid är fallet i norra Sverige. Jag är själv uppvuxen i Nässjö 
+        och har kompisar i södra sverige som fått barn som bekräftar mitt påstående. 
+        Detta belyser en bredare fråga om regional rättvisa i landet, där skillnader i tillgång till tjänster och stöd skapar ojämlikhet.
+        Kanske skulle även det nationella elnätet hanteras på ett liknande sätt, där kostnaderna för utveckling och underhåll delas mer 
+        rättvist baserat på regionala gränser.
+    </p>
+    <p>
+        Det man kan undra är om de subventioner som mestadels riktas till södra Sverige faktiskt bidrar till en centralisering av både befolkning 
+        och industri.
+    </p>
+    <p>
+        Frågan om rättvisa subventioner och energikostnader är komplex och kräver en djupare analys. 
+        Det är viktigt att noggrant granska all tillgänglig data för att undvika missförstånd och säkerställa en rättvis fördelning av resurserna. 
+        Längs ner redovisas reffernserna och jag har även skrivit in hur jag filtrerat fram data. Värt att beakta är att jag kan ha gjort 
+        misstaga när jag tagit fram data då det var väldigt svårt att orentera sig på vissa hemsidor. 
+    </p>
 
     <hr>
 
     <h2>Referenser</h2>
     <ol>
         <li><a href="https://www.energimyndigheten.se/statistik/energilaget/">Energimyndigheten</a></li>
-        <li><a href="https://www.nordpoolgroup.com/">Nord Pool</a></li>
-        <li><a href="https://www.regeringen.se/pressmeddelanden/2022/01/regeringen-infor-elpriskompensation/">Regeringen</a></li>
-        <li><a href="https://www.energimyndigheten.se/nyheter/2022/elprisstod-till-hushall-och-foretag/">Energimyndigheten</a></li>
-        <li><a href="https://www.ekonomifakta.se/Fakta/Energi/El/Elsystemet/">Ekonomifakta</a></li>
+        <li><a href="https://www.svk.se/press-och-nyheter/nyheter/allmanna-nyheter/2022/hur-hanger-elpriser-elomraden-och-flaskhalsinkomster-ihop/">Svenska kraftnät - Flaskhalsintäkter</a></li>
+        <li><a href="https://www.regeringen.se/regeringens-politik/energikrisen/elstod-hushall/">Regeringen - Elstöd till hushåll</a></li>
         <li><a href="https://elavtaldirekt.se/elmarknad/elomraden/">Elavtal Direkt</a></li>
-        <li><a href="https://www.smhi.se/data/meteorologi/kartor/medel/arsmedeltemperatur-medel">SMHI årsmedeltemperatur</a></li>
-        <li><a href="https://www.statistikdatabasen.scb.se/pxweb/sv/ssd/START__EN__EN0105__EN0105A/ElAnvSNI2007ArN/table/tableViewLayout1/">SCB (summa slutlig förbrukning inom landet exkl. förluster, SE1-4, 2019-2022)</a></li>
+        <li><a href="https://www.statistikdatabasen.scb.se/pxweb/sv/ssd/START__EN__EN0105__EN0105A/ElAnvSNI2007ArN/table/tableViewLayout1/">SCB - Elanvändning</a></li>
         <li><a href="https://data.nordpoolgroup.com/auction/day-ahead/prices?deliveryDate=latest&currency=SEK&aggregation=Yearly&deliveryAreas=SE1,SE2,SE3,SE4">Nord Pool Data</a></li>
+        <li><a href="https://www.smhi.se/data/meteorologi/kartor/medel/arsmedeltemperatur-medel">SMHI Årsmedeltemperatur</a></li>
     </ol>
 </div>
 
