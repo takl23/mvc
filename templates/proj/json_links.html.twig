@@ -4,7 +4,7 @@
 
 {% block body %}
 <div class="proj-content">
-    <h1>JSON Data Links</h1>
+    <h1>JSON Data Länkar</h1>
     <ul>
         <li><a href="{{ path('api_renewable_energy_json') }}" target="_blank">Renewable Energy Percentage Data</a></li>
         <li><a href="{{ path('api_renewable_energy_twh') }}" target="_blank">Renewable Energy TWh Data</a></li>
@@ -17,7 +17,7 @@
         <li><a href="{{ path('api_annual_cost_per_person') }}" target="_blank">Annual cost per person</a></li>
     </ul>
 
-    <h2>Calculate Annual Electricity Cost</h2>
+    <h2>Beräkna årlig kostand på el baserat på senaste årets tillgängliga data</h2>
     <form id="costForm" action="{{ path('api_calculate_electricity_cost') }}" method="post">
         <label for="elomrade">Elområde:</label>
         <select id="elomrade" name="elomrade">
