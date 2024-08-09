@@ -17,16 +17,16 @@ class ElectricityPrice
     private ?int $year = null;
 
     #[ORM\Column(type: "float")]
-    private ?float $SE1 = null;
+    private ?float $se1 = null;
 
     #[ORM\Column(type: "float")]
-    private ?float $SE2 = null;
+    private ?float $se2 = null;
 
     #[ORM\Column(type: "float")]
-    private ?float $SE3 = null;
+    private ?float $se3 = null;
 
     #[ORM\Column(type: "float")]
-    private ?float $SE4 = null;
+    private ?float $se4 = null;
 
     public function getId(): ?int
     {
@@ -44,47 +44,47 @@ class ElectricityPrice
         return $this;
     }
 
-    public function getSE1(): ?float
+    public function getse1(): ?float
     {
-        return $this->SE1;
+        return $this->se1;
     }
 
-    public function setSE1(float $SE1): self
+    public function setse1(float $se1): self
     {
-        $this->SE1 = $SE1;
+        $this->se1 = $se1;
         return $this;
     }
 
-    public function getSE2(): ?float
+    public function getse2(): ?float
     {
-        return $this->SE2;
+        return $this->se2;
     }
 
-    public function setSE2(float $SE2): self
+    public function setse2(float $se2): self
     {
-        $this->SE2 = $SE2;
+        $this->se2 = $se2;
         return $this;
     }
 
-    public function getSE3(): ?float
+    public function getse3(): ?float
     {
-        return $this->SE3;
+        return $this->se3;
     }
 
-    public function setSE3(float $SE3): self
+    public function setse3(float $se3): self
     {
-        $this->SE3 = $SE3;
+        $this->se3 = $se3;
         return $this;
     }
 
-    public function getSE4(): ?float
+    public function getse4(): ?float
     {
-        return $this->SE4;
+        return $this->se4;
     }
 
-    public function setSE4(float $SE4): self
+    public function setse4(float $se4): self
     {
-        $this->SE4 = $SE4;
+        $this->se4 = $se4;
         return $this;
     }
 }

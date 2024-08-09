@@ -23,8 +23,8 @@ use App\Service\ImportService;
 )]
 class ResetAndImportDataCommand extends Command
 {
-    private $entityManager;
-    private $importService;
+    private EntityManagerInterface $entityManager;
+    private ImportService $importService;
 
     public function __construct(EntityManagerInterface $entityManager, ImportService $importService)
     {
@@ -33,7 +33,7 @@ class ResetAndImportDataCommand extends Command
         parent::__construct();
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         $this->setDescription('Resets the database and imports data from Excel files');
     }
@@ -71,13 +71,14 @@ class ResetAndImportDataCommand extends Command
         return Command::SUCCESS;
     }
 
-    private function clearTable(string $entityClass)
+    private function clearTable(string $entityClass): void
     {
         $cmd = $this->entityManager->getClassMetadata($entityClass);
         $connection = $this->entityManager->getConnection();
         $dbPlatform = $connection->getDatabasePlatform();
 
         $connection->executeQuery('DELETE FROM ' . $cmd->getTableName());
-        $connection->executeQuery('VACUUM'); // To reclaim the space
+        $connection->executeQuery('VACUUM');
     }
 }
+

@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(data => {
             const ctx = document.getElementById('populationPerElomradeChart').getContext('2d');
             const labels = Array.from(new Set(data.data.map(item => item.year)));
-            const elomrades = ['SE1', 'SE2', 'SE3', 'SE4'];
+            const elomrades = ['se1', 'se2', 'se3', 'se4'];
 
             const datasets = elomrades.map((elomrade, index) => {
                 const colors = [
@@ -132,7 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(data => {
             const ctx = document.getElementById('consumptionPerCapitaChart').getContext('2d');
             const labels = Array.from(new Set(data.data.map(item => item.year)));
-            const elomrades = ['SE1', 'SE2', 'SE3', 'SE4'];
+            const elomrades = ['se1', 'se2', 'se3', 'se4'];
 
             const datasets = elomrades.map((elomrade, index) => {
                 const colors = [
@@ -197,7 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const labels = Array.from(new Set(data.data.map(item => item.year)));
 
             // Definiera elområden
-            const elomrades = ['SE1', 'SE2', 'SE3', 'SE4'];
+            const elomrades = ['se1', 'se2', 'se3', 'se4'];
 
             // Skapa dataset för varje elområde
             const datasets = elomrades.map((elomrade, index) => {

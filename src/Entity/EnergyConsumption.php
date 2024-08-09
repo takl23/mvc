@@ -17,16 +17,16 @@ class EnergyConsumption
     private ?int $year = null;
 
     #[ORM\Column]
-    private ?int $SE1 = null;
+    private ?int $se1 = null;
 
     #[ORM\Column]
-    private ?int $SE2 = null;
+    private ?int $se2 = null;
 
     #[ORM\Column]
-    private ?int $SE3 = null;
+    private ?int $se3 = null;
 
     #[ORM\Column]
-    private ?int $SE4 = null;
+    private ?int $se4 = null;
 
     public function getId(): ?int
     {
@@ -45,50 +45,50 @@ class EnergyConsumption
         return $this;
     }
 
-    public function getSE1(): ?int
+    public function getse1(): ?int
     {
-        return $this->SE1;
+        return $this->se1;
     }
 
-    public function setSE1(int $SE1): static
+    public function setse1(int $se1): static
     {
-        $this->SE1 = $SE1;
+        $this->se1 = $se1;
 
         return $this;
     }
 
-    public function getSE2(): ?int
+    public function getse2(): ?int
     {
-        return $this->SE2;
+        return $this->se2;
     }
 
-    public function setSE2(int $SE2): static
+    public function setse2(int $se2): static
     {
-        $this->SE2 = $SE2;
+        $this->se2 = $se2;
 
         return $this;
     }
 
-    public function getSE3(): ?int
+    public function getse3(): ?int
     {
-        return $this->SE3;
+        return $this->se3;
     }
 
-    public function setSE3(int $SE3): static
+    public function setse3(int $se3): static
     {
-        $this->SE3 = $SE3;
+        $this->se3 = $se3;
 
         return $this;
     }
 
-    public function getSE4(): ?int
+    public function getse4(): ?int
     {
-        return $this->SE4;
+        return $this->se4;
     }
 
-    public function setSE4(int $SE4): static
+    public function setse4(int $se4): static
     {
-        $this->SE4 = $SE4;
+        $this->se4 = $se4;
 
         return $this;
     }

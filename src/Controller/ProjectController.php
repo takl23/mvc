@@ -12,7 +12,7 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class ProjectController extends AbstractController
 {
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
     public function __construct(EntityManagerInterface $entityManager)
     {

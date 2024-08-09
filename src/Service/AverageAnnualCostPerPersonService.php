@@ -9,7 +9,7 @@ use App\Entity\ElectricityPrice;
 
 class AverageAnnualCostPerPersonService
 {
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
     public function __construct(EntityManagerInterface $entityManager)
     {
@@ -29,17 +29,20 @@ class AverageAnnualCostPerPersonService
             $elomrade = $consumption->getElomrade();
             $consumptionPerCapita = $consumption->getConsumptionPerCapita();
 
-            $electricityPrice = $electricityPriceRepository->findOneBy([
-                'year' => $year
-            ]);
+            if ($year !== null && $elomrade !== null && $consumptionPerCapita !== null) {
+                $electricityPrice = $electricityPriceRepository->findOneBy([
+                    'year' => $year
+                ]);
 
-            if ($electricityPrice) {
-                $annualCostPerPerson = $consumptionPerCapita * $electricityPrice->{'get' . ucfirst($elomrade)}();
-                $averageAnnualCostData[] = [
-                    'year' => $year,
-                    'elomrade' => $elomrade,
-                    'averageCostPerPerson' => $annualCostPerPerson
-                ];
+                if ($electricityPrice) {
+                    $elomradeGetter = 'get' . ucfirst((string)$elomrade);
+                    $annualCostPerPerson = $consumptionPerCapita * $electricityPrice->$elomradeGetter();
+                    $averageAnnualCostData[] = [
+                        'year' => $year,
+                        'elomrade' => $elomrade,
+                        'averageCostPerPerson' => $annualCostPerPerson
+                    ];
+                }
             }
         }
 

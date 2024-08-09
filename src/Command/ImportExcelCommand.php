@@ -8,7 +8,6 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Console\Attribute\AsCommand;
-use Doctrine\ORM\EntityManagerInterface;
 use App\Service\ImportService;
 
 #[AsCommand(
@@ -17,17 +16,15 @@ use App\Service\ImportService;
 )]
 class ImportExcelCommand extends Command
 {
-    private $importService;
-    private $entityManager;
+    private ImportService $importService;
 
-    public function __construct(ImportService $importService, EntityManagerInterface $entityManager)
+    public function __construct(ImportService $importService)
     {
         $this->importService = $importService;
-        $this->entityManager = $entityManager;
         parent::__construct();
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setDescription('Imports data from an Excel file')
@@ -43,13 +40,20 @@ class ImportExcelCommand extends Command
         $entityClass = $input->getArgument('entityClass');
         $io = new SymfonyStyle($input, $output);
 
+        // Validera att argumenten verkligen är strängar
+        if (!is_string($filePath) || !is_string($sheetName) || !is_string($entityClass)) {
+            $io->error('Invalid arguments provided.');
+            return Command::FAILURE;
+        }
+
         if (!file_exists($filePath)) {
             $io->error('File not found: ' . $filePath);
             return Command::FAILURE;
         }
 
         try {
-            $this->importService->import($filePath, $sheetName, $entityClass, $this->entityManager);
+            // Importera data med tre parametrar
+            $this->importService->import($filePath, $sheetName, $entityClass);
             $io->success('Data imported successfully!');
             return Command::SUCCESS;
         } catch (\Exception $e) {

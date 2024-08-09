@@ -11,10 +11,12 @@ use App\Entity\AverageConsumption;
 use App\Entity\EnergySupplyGDP;
 use App\Entity\LanElomrade;
 use App\Entity\PopulationPerLan;
+use InvalidArgumentException;
+use Exception;
 
 class ImportService
 {
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
     public function __construct(EntityManagerInterface $entityManager)
     {
@@ -27,7 +29,7 @@ class ImportService
         $worksheet = $spreadsheet->getSheetByName($sheetName);
 
         if (!$worksheet) {
-            throw new \Exception("Sheet $sheetName not found in the file $filePath");
+            throw new Exception("Sheet $sheetName not found in the file $filePath");
         }
 
         foreach ($worksheet->getRowIterator() as $row) {
@@ -48,35 +50,35 @@ class ImportService
                 switch ($entityClass) {
                     case RenewableEnergyTWh::class:
                         $entity = new RenewableEnergyTWh();
-                        $entity->setYear((int)$data[0]);
-                        $entity->setBiofuels(isset($data[1]) ? (int)$data[1] : null);
-                        $entity->setHydropower(isset($data[2]) ? (int)$data[2] : null);
-                        $entity->setWindPower(isset($data[3]) ? (int)$data[3] : null);
-                        $entity->setHeatPump(isset($data[4]) ? (int)$data[4] : null);
-                        $entity->setSolarEnergy(isset($data[5]) ? (int)$data[5] : null);
-                        $entity->setTotal(isset($data[6]) ? (int)$data[6] : null);
-                        $entity->setStatTransferToNorway(isset($data[7]) ? (int)$data[7] : null);
-                        $entity->setRenewableEnergyInTargetCalculation(isset($data[8]) ? (int)$data[8] : null);
-                        $entity->setTotalEnergyUse(isset($data[9]) ? (int)$data[9] : null);
+                        $entity->setYear($this->ensureInt($data[0]));
+                        $entity->setBiofuels($this->ensureInt($data[1]));
+                        $entity->setHydropower($this->ensureInt($data[2]));
+                        $entity->setWindPower($this->ensureInt($data[3]));
+                        $entity->setHeatPump($this->ensureInt($data[4]));
+                        $entity->setSolarEnergy($this->ensureInt($data[5]));
+                        $entity->setTotal($this->ensureInt($data[6]));
+                        $entity->setStatTransferToNorway($this->ensureInt($data[7]));
+                        $entity->setRenewableEnergyInTargetCalculation($this->ensureInt($data[8]));
+                        $entity->setTotalEnergyUse($this->ensureInt($data[9]));
                         break;
 
                     case RenewableEnergyPercentage::class:
                         $entity = new RenewableEnergyPercentage();
-                        $entity->setYear((int)$data[0]);
-                        $entity->setVIM(isset($data[1]) ? (int)$data[1] : null);
-                        $entity->setEl(isset($data[2]) ? (int)$data[2] : null);
-                        $entity->setTransport(isset($data[3]) ? (int)$data[3] : null);
-                        $entity->setTotal(isset($data[4]) ? (int)$data[4] : null);
+                        $entity->setYear($this->ensureInt($data[0]));
+                        $entity->setVIM($this->ensureInt($data[1]));
+                        $entity->setEl($this->ensureInt($data[2]));
+                        $entity->setTransport($this->ensureInt($data[3]));
+                        $entity->setTotal($this->ensureInt($data[4]));
                         break;
 
                     case ElectricityPrice::class:
-                        if ($data[1] !== null && $data[2] !== null && $data[3] !== null && $data[4] !== null) {
+                        if ($this->isValidPriceData($data)) {
                             $entity = new ElectricityPrice();
-                            $entity->setYear((int)$data[0]);
-                            $entity->setSE1((float)str_replace(',', '.', $data[1]));
-                            $entity->setSE2((float)str_replace(',', '.', $data[2]));
-                            $entity->setSE3((float)str_replace(',', '.', $data[3]));
-                            $entity->setSE4((float)str_replace(',', '.', $data[4]));
+                            $entity->setYear($this->ensureInt($data[0]));
+                            $entity->setse1($this->ensureFloat($data[1]));
+                            $entity->setse2($this->ensureFloat($data[2]));
+                            $entity->setse3($this->ensureFloat($data[3]));
+                            $entity->setse4($this->ensureFloat($data[4]));
                         } else {
                             echo "Skipping row {$row->getRowIndex()} due to missing values in ElectricityPrice.\n";
                             continue;
@@ -84,13 +86,13 @@ class ImportService
                         break;
 
                     case AverageConsumption::class:
-                        if ($data[1] !== null && $data[2] !== null && $data[3] !== null && $data[4] !== null) {
+                        if ($this->isValidConsumptionData($data)) {
                             $entity = new AverageConsumption();
-                            $entity->setYear((int)$data[0]);
-                            $entity->setSE1((float)str_replace(',', '.', $data[1]));
-                            $entity->setSE2((float)str_replace(',', '.', $data[2]));
-                            $entity->setSE3((float)str_replace(',', '.', $data[3]));
-                            $entity->setSE4((float)str_replace(',', '.', $data[4]));
+                            $entity->setYear($this->ensureInt($data[0]));
+                            $entity->setse1($this->ensureFloat($data[1]));
+                            $entity->setse2($this->ensureFloat($data[2]));
+                            $entity->setse3($this->ensureFloat($data[3]));
+                            $entity->setse4($this->ensureFloat($data[4]));
                         } else {
                             echo "Skipping row {$row->getRowIndex()} due to missing values in AverageConsumption.\n";
                             continue;
@@ -99,15 +101,15 @@ class ImportService
 
                     case EnergySupplyGDP::class:
                         $entity = new EnergySupplyGDP();
-                        $entity->setYear((int)$data[0]);
-                        $entity->setPrecentage(isset($data[1]) && is_numeric($data[1]) ? (float)str_replace(',', '.', $data[1]) : null);
+                        $entity->setYear($this->ensureInt($data[0]));
+                        $entity->setPrecentage($this->ensureFloat($data[1]));
                         break;
 
                     case LanElomrade::class:
                         if ($data[0] !== null && $data[1] !== null) {
                             $entity = new LanElomrade();
-                            $entity->setLan($data[0]);
-                            $entity->setElomrade($data[1]);
+                            $entity->setLan($this->ensureString($data[0]));
+                            $entity->setElomrade($this->ensureString($data[1]));
                         } else {
                             echo "Skipping row {$row->getRowIndex()} due to missing values in LanElomrade.\n";
                             continue;
@@ -115,41 +117,42 @@ class ImportService
                         break;
 
                     case PopulationPerLan::class:
-                        if ($data[0] !== null) {
-                            $entity = new PopulationPerLan();
-                            $entity->setYear((int)$data[0]);
-                            $entity->setStockholm((int)str_replace(' ', '', $data[1]));
-                            $entity->setUppsala((int)str_replace(' ', '', $data[2]));
-                            $entity->setSodermanland((int)str_replace(' ', '', $data[3]));
-                            $entity->setOstergotland((int)str_replace(' ', '', $data[4]));
-                            $entity->setJonkoping((int)str_replace(' ', '', $data[5]));
-                            $entity->setKronoberg((int)str_replace(' ', '', $data[6]));
-                            $entity->setKalmar((int)str_replace(' ', '', $data[7]));
-                            $entity->setGotland((int)str_replace(' ', '', $data[8]));
-                            $entity->setBlekinge((int)str_replace(' ', '', $data[9]));
-                            $entity->setSkane((int)str_replace(' ', '', $data[10]));
-                            $entity->setHalland((int)str_replace(' ', '', $data[11]));
-                            $entity->setVastraGotaland((int)str_replace(' ', '', $data[12]));
-                            $entity->setVarmland((int)str_replace(' ', '', $data[13]));
-                            $entity->setOrebro((int)str_replace(' ', '', $data[14]));
-                            $entity->setVastmanland((int)str_replace(' ', '', $data[15]));
-                            $entity->setDalarnasLan((int)str_replace(' ', '', $data[16]));
-                            $entity->setGavleborg((int)str_replace(' ', '', $data[17]));
-                            $entity->setVasternorrland((int)str_replace(' ', '', $data[18]));
-                            $entity->setJamtland((int)str_replace(' ', '', $data[19]));
-                            $entity->setVasterbotten((int)str_replace(' ', '', $data[20]));
-                            $entity->setNorrbotten((int)str_replace(' ', '', $data[21]));
-                        } else {
-                            echo "Skipping row {$row->getRowIndex()} due to missing year in PopulationPerLan.\n";
-                            continue;
-                        }
-                        break;
+    if ($data[0] !== null) {
+        $entity = new PopulationPerLan();
+        $entity->setYear($this->ensureInt($data[0]));
+        $entity->setStockholm($this->ensureInt(str_replace(' ', '', $this->ensureString($data[1]))));
+        $entity->setUppsala($this->ensureInt(str_replace(' ', '', $this->ensureString($data[2]))));
+        $entity->setSodermanland($this->ensureInt(str_replace(' ', '', $this->ensureString($data[3]))));
+        $entity->setOstergotland($this->ensureInt(str_replace(' ', '', $this->ensureString($data[4]))));
+        $entity->setJonkoping($this->ensureInt(str_replace(' ', '', $this->ensureString($data[5]))));
+        $entity->setKronoberg($this->ensureInt(str_replace(' ', '', $this->ensureString($data[6]))));
+        $entity->setKalmar($this->ensureInt(str_replace(' ', '', $this->ensureString($data[7]))));
+        $entity->setGotland($this->ensureInt(str_replace(' ', '', $this->ensureString($data[8]))));
+        $entity->setBlekinge($this->ensureInt(str_replace(' ', '', $this->ensureString($data[9]))));
+        $entity->setSkane($this->ensureInt(str_replace(' ', '', $this->ensureString($data[10]))));
+        $entity->setHalland($this->ensureInt(str_replace(' ', '', $this->ensureString($data[11]))));
+        $entity->setVastraGotaland($this->ensureInt(str_replace(' ', '', $this->ensureString($data[12]))));
+        $entity->setVarmland($this->ensureInt(str_replace(' ', '', $this->ensureString($data[13]))));
+        $entity->setOrebro($this->ensureInt(str_replace(' ', '', $this->ensureString($data[14]))));
+        $entity->setVastmanland($this->ensureInt(str_replace(' ', '', $this->ensureString($data[15]))));
+        $entity->setDalarnasLan($this->ensureInt(str_replace(' ', '', $this->ensureString($data[16]))));
+        $entity->setGavleborg($this->ensureInt(str_replace(' ', '', $this->ensureString($data[17]))));
+        $entity->setVasternorrland($this->ensureInt(str_replace(' ', '', $this->ensureString($data[18]))));
+        $entity->setJamtland($this->ensureInt(str_replace(' ', '', $this->ensureString($data[19]))));
+        $entity->setVasterbotten($this->ensureInt(str_replace(' ', '', $this->ensureString($data[20]))));
+        $entity->setNorrbotten($this->ensureInt(str_replace(' ', '', $this->ensureString($data[21]))));
+    } else {
+        echo "Skipping row {$row->getRowIndex()} due to missing year in PopulationPerLan.\n";
+        continue;
+    }
+    break;
+
 
                     default:
-                        throw new \Exception("Unknown entity class: $entityClass");
+                        throw new Exception("Unknown entity class: $entityClass");
                 }
 
-                if ($this->isEntityValid($entity)) {
+                if (isset($entity) && $this->isEntityValid($entity)) {
                     $this->entityManager->persist($entity);
                 }
             } catch (\Exception $e) {
@@ -160,7 +163,7 @@ class ImportService
         $this->entityManager->flush();
     }
 
-    private function isEntityValid($entity): bool
+    private function isEntityValid(object $entity): bool
     {
         if ($entity instanceof RenewableEnergyTWh ||
             $entity instanceof RenewableEnergyPercentage ||
@@ -174,5 +177,63 @@ class ImportService
         }
 
         return false;
+    }
+
+    private function ensureInt(mixed $value): int
+    {
+        if (isset($value) && is_numeric($value)) {
+            return (int)$value;
+        }
+        throw new InvalidArgumentException("Value is not a valid integer: " . print_r($value, true));
+    }
+
+    private function ensureFloat(mixed $value): float
+    {
+        if (isset($value) && is_numeric($value)) {
+            return (float)str_replace(',', '.', (string)$value);
+        }
+        throw new InvalidArgumentException("Value is not a valid float: " . print_r($value, true));
+    }
+
+    private function ensureString(mixed $value): string
+{
+    if (is_null($value)) {
+        throw new InvalidArgumentException("Value is null, expected a string.");
+    }
+
+    if (is_array($value)) {
+        throw new InvalidArgumentException("Value is an array, expected a string.");
+    }
+
+    if (is_object($value)) {
+        throw new InvalidArgumentException("Value is an object, expected a string.");
+    }
+
+    if (!is_scalar($value)) {
+        throw new InvalidArgumentException("Value is not a scalar, expected a string.");
+    }
+
+    return (string)$value;
+}
+
+
+    /**
+     * @param array<mixed> $data
+     */
+    private function isValidPriceData(array $data): bool
+    {
+        return isset($data[1], $data[2], $data[3], $data[4]) &&
+               is_numeric($data[1]) && is_numeric($data[2]) &&
+               is_numeric($data[3]) && is_numeric($data[4]);
+    }
+
+    /**
+     * @param array<mixed> $data
+     */
+    private function isValidConsumptionData(array $data): bool
+    {
+        return isset($data[1], $data[2], $data[3], $data[4]) &&
+               is_numeric($data[1]) && is_numeric($data[2]) &&
+               is_numeric($data[3]) && is_numeric($data[4]);
     }
 }

@@ -6,10 +6,10 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\PopulationPerLan;
 use App\Entity\LanElomrade;
 use App\Entity\PopulationPerElomrade;
-
+use InvalidArgumentException;
 class PopulationElomradeService
 {
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
     public function __construct(EntityManagerInterface $entityManager)
     {
@@ -29,46 +29,27 @@ class PopulationElomradeService
         $populationsPerLan = $populationPerLanRepository->findAll();
         $lanElomrade = $lanElomradeRepository->findAll();
 
-        // Debugging: Visa antalet rader som hittades
-        echo "Antal PopulationPerLan poster: " . count($populationsPerLan) . "\n";
-        echo "Antal LanElomrade poster: " . count($lanElomrade) . "\n";
-
         // Skapa en mapping mellan län och elområde
         $lanToElomrade = [];
         foreach ($lanElomrade as $entry) {
             $lanToElomrade[$entry->getLan()] = $entry->getElomrade();
         }
 
-        // Debugging: Visa mappingen
-        print_r($lanToElomrade);
-
         // Beräkna populationen per elområde för varje år
         $populationPerElomrade = [];
 
         foreach ($populationsPerLan as $population) {
-            $year = $population->getYear();
-            echo "Bearbetar år: $year\n"; // Debugging
+            $year = $this->ensureInt($population->getYear());
             foreach ($lanToElomrade as $lan => $elomrade) {
                 $lanProperty = $this->convertLanToProperty($lan);
 
                 if (property_exists($population, $lanProperty)) {
-                    echo "Hittade property: $lanProperty för $lan\n"; // Debugging
                     if (!isset($populationPerElomrade[$year][$elomrade])) {
                         $populationPerElomrade[$year][$elomrade] = 0;
                     }
                     $populationValue = $population->{'get' . ucfirst($lanProperty)}();
-                    echo "Adding $populationValue to $elomrade for year $year\n"; // Debugging
                     $populationPerElomrade[$year][$elomrade] += $populationValue;
-                } else {
-                    echo "Property $lanProperty finns inte på PopulationPerLan\n"; // Debugging
                 }
-            }
-        }
-
-        // Debug utskrift
-        foreach ($populationPerElomrade as $year => $elomradeData) {
-            foreach ($elomradeData as $elomrade => $totalPopulation) {
-                echo "Year: $year, Elomrade: $elomrade, Population: $totalPopulation\n";
             }
         }
 
@@ -77,7 +58,7 @@ class PopulationElomradeService
             foreach ($elomradeData as $elomrade => $totalPopulation) {
                 $entity = new PopulationPerElomrade();
                 $entity->setYear($year);
-                $entity->setElomrade($elomrade);
+                $entity->setElomrade($this->ensureString($elomrade));
                 $entity->setPopulation($totalPopulation);
                 $this->entityManager->persist($entity);
             }
@@ -114,4 +95,30 @@ class PopulationElomradeService
 
         return $lanMappings[$lan] ?? '';
     }
+
+    private function ensureString(mixed $value): string
+{
+    if (is_string($value)) {
+        return $value;
+    }
+
+    if (is_numeric($value)) {
+        return (string)$value;
+    }
+
+    if ($value === null) {
+        throw new InvalidArgumentException("Value is null, expected a valid string: " . print_r($value, true));
+    }
+
+    throw new InvalidArgumentException("Value is not a valid string: " . print_r($value, true));
+}
+
+private function ensureInt(mixed $value): int
+{
+    if (isset($value) && is_numeric($value)) {
+        return (int)$value;
+    }
+    throw new InvalidArgumentException("Value is not a valid integer: " . print_r($value, true));
+}
+
 }

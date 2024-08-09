@@ -10,16 +10,16 @@ class AverageAnnualCostPerPerson
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private ?int $id = null;
 
     #[ORM\Column(type: 'integer')]
-    private $year;
+    private int $year;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $elomrade;
+    private string $elomrade;
 
     #[ORM\Column(type: 'float')]
-    private $averageCostPerPerson;
+    private float $averageCostPerPerson;
 
     public function getId(): ?int
     {

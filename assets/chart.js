@@ -7,10 +7,10 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(data => {
             const ctx = document.getElementById('averageConsumptionChart').getContext('2d');
             const labels = data.data.map(item => item.year);
-            const se1 = data.data.map(item => item.SE1);
-            const se2 = data.data.map(item => item.SE2);
-            const se3 = data.data.map(item => item.SE3);
-            const se4 = data.data.map(item => item.SE4);
+            const se1 = data.data.map(item => item.se1);
+            const se2 = data.data.map(item => item.se2);
+            const se3 = data.data.map(item => item.se3);
+            const se4 = data.data.map(item => item.se4);
 
             new Chart(ctx, {
                 type: 'line',
@@ -18,28 +18,28 @@ document.addEventListener('DOMContentLoaded', () => {
                     labels: labels,
                     datasets: [
                         {
-                            label: 'SE1',
+                            label: 'se1',
                             data: se1,
                             borderColor: 'rgba(75, 192, 192, 1)',
                             backgroundColor: 'rgba(75, 192, 192, 0.2)',
                             fill: true
                         },
                         {
-                            label: 'SE2',
+                            label: 'se2',
                             data: se2,
                             borderColor: 'rgba(153, 102, 255, 1)',
                             backgroundColor: 'rgba(153, 102, 255, 0.2)',
                             fill: true
                         },
                         {
-                            label: 'SE3',
+                            label: 'se3',
                             data: se3,
                             borderColor: 'rgba(255, 99, 132, 1)',
                             backgroundColor: 'rgba(255, 99, 132, 0.2)',
                             fill: true
                         },
                         {
-                            label: 'SE4',
+                            label: 'se4',
                             data: se4,
                             borderColor: 'rgba(255, 206, 86, 1)',
                             backgroundColor: 'rgba(255, 206, 86, 0.2)',
@@ -75,10 +75,10 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(data => {
             const ctx = document.getElementById('averageTemperatureChart').getContext('2d');
             const labels = data.data.map(item => item.year);
-            const se1 = data.data.map(item => item.SE1);
-            const se2 = data.data.map(item => item.SE2);
-            const se3 = data.data.map(item => item.SE3);
-            const se4 = data.data.map(item => item.SE4);
+            const se1 = data.data.map(item => item.se1);
+            const se2 = data.data.map(item => item.se2);
+            const se3 = data.data.map(item => item.se3);
+            const se4 = data.data.map(item => item.se4);
 
             new Chart(ctx, {
                 type: 'line',
@@ -86,28 +86,28 @@ document.addEventListener('DOMContentLoaded', () => {
                     labels: labels,
                     datasets: [
                         {
-                            label: 'SE1',
+                            label: 'se1',
                             data: se1,
                             borderColor: 'rgba(75, 192, 192, 1)',
                             backgroundColor: 'rgba(75, 192, 192, 0.2)',
                             fill: true
                         },
                         {
-                            label: 'SE2',
+                            label: 'se2',
                             data: se2,
                             borderColor: 'rgba(153, 102, 255, 1)',
                             backgroundColor: 'rgba(153, 102, 255, 0.2)',
                             fill: true
                         },
                         {
-                            label: 'SE3',
+                            label: 'se3',
                             data: se3,
                             borderColor: 'rgba(255, 99, 132, 1)',
                             backgroundColor: 'rgba(255, 99, 132, 0.2)',
                             fill: true
                         },
                         {
-                            label: 'SE4',
+                            label: 'se4',
                             data: se4,
                             borderColor: 'rgba(255, 206, 86, 1)',
                             backgroundColor: 'rgba(255, 206, 86, 0.2)',

@@ -118,10 +118,10 @@ class ProjectControllerJson extends AbstractController
         $formattedData = array_map(function ($item) {
             return [
                 'year' => $item->getYear(),
-                'SE1' => $item->getSE1(),
-                'SE2' => $item->getSE2(),
-                'SE3' => $item->getSE3(),
-                'SE4' => $item->getSE4(),
+                'se1' => $item->getse1(),
+                'se2' => $item->getse2(),
+                'se3' => $item->getse3(),
+                'se4' => $item->getse4(),
             ];
         }, $data);
 
@@ -145,17 +145,17 @@ class ProjectControllerJson extends AbstractController
         $formattedData = array_map(function ($item) {
             return [
                 'year' => $item->getYear(),
-                'SE1' => $item->getSE1(),
-                'SE2' => $item->getSE2(),
-                'SE3' => $item->getSE3(),
-                'SE4' => $item->getSE4(),
+                'se1' => $item->getse1(),
+                'se2' => $item->getse2(),
+                'se3' => $item->getse3(),
+                'se4' => $item->getse4(),
             ];
         }, $data);
 
         $response = new JsonResponse([
             'data' => $formattedData,
             'reference' =>
-            'https://data.nordpoolgroup.com/auction/day-ahead/prices?deliveryDate=latest&currency=SEK&aggregation=Yearly&deliveryAreas=SE1,SE2,SE3,SE4',
+            'https://data.nordpoolgroup.com/auction/day-ahead/prices?deliveryDate=latest&currency=SEK&aggregation=Yearly&deliveryAreas=se1,se2,se3,se4',
             'date' => 'August 2024'
         ]);
 
@@ -259,60 +259,69 @@ class ProjectControllerJson extends AbstractController
     }
 
     #[Route("/api/calculate-electricity-cost", name: "api_calculate_electricity_cost", methods: ["POST"])]
-    public function calculateElectricityCost(Request $request, ElectricityPriceRepository $electricityPriceRepository): JsonResponse
-    {
-        $data = json_decode($request->getContent(), true);
-        $elomrade = $data['elomrade'] ?? null;
-        $consumption = $data['consumption'] ?? null;
+public function calculateElectricityCost(Request $request, ElectricityPriceRepository $electricityPriceRepository): JsonResponse
+{
+    $data = json_decode($request->getContent(), true);
 
-        if (!$elomrade || !$consumption) {
-            return new JsonResponse([
-                'status' => 'error',
-                'message' => 'Missing required parameters: elomrade and/or consumption'
-            ], 400);
-        }
-
-        // Hämta det senaste elpriset för det angivna elområdet
-        $electricityPrice = $electricityPriceRepository->findOneBy([], ['year' => 'DESC']); // Hämta senaste året
-
-        if (!$electricityPrice) {
-            return new JsonResponse([
-                'status' => 'error',
-                'message' => 'Electricity price data not found.'
-            ], 404);
-        }
-
-        // Välj rätt pris för det angivna elområdet
-        $pricePerKwh = null;
-        switch ($elomrade) {
-            case 'SE1':
-                $pricePerKwh = $electricityPrice->getSE1();
-                break;
-            case 'SE2':
-                $pricePerKwh = $electricityPrice->getSE2();
-                break;
-            case 'SE3':
-                $pricePerKwh = $electricityPrice->getSE3();
-                break;
-            case 'SE4':
-                $pricePerKwh = $electricityPrice->getSE4();
-                break;
-            default:
-                return new JsonResponse([
-                    'status' => 'error',
-                    'message' => 'Invalid elomrade specified.'
-                ], 400);
-        }
-
-        // Beräkna kostnaden baserat på snittförbrukning och elpris
-        $cost = $consumption * $pricePerKwh;
-
+    if (!is_array($data)) {
         return new JsonResponse([
-            'elomrade' => $elomrade,
-            'year' => $electricityPrice->getYear(),
-            'price_per_kwh' => $pricePerKwh,
-            'consumption' => $consumption,
-            'total_cost' => $cost
-        ]);
+            'status' => 'error',
+            'message' => 'Invalid JSON data.'
+        ], 400);
     }
+
+    $elomrade = $data['elomrade'] ?? null;
+    $consumption = $data['consumption'] ?? null;
+
+    if (!$elomrade || !$consumption) {
+        return new JsonResponse([
+            'status' => 'error',
+            'message' => 'Missing required parameters: elomrade and/or consumption'
+        ], 400);
+    }
+
+    // Hämta det senaste elpriset för det angivna elområdet
+    $electricityPrice = $electricityPriceRepository->findOneBy([], ['year' => 'DESC']); // Hämta senaste året
+
+    if (!$electricityPrice) {
+        return new JsonResponse([
+            'status' => 'error',
+            'message' => 'Electricity price data not found.'
+        ], 404);
+    }
+
+    // Välj rätt pris för det angivna elområdet
+    $pricePerKwh = null;
+    switch ($elomrade) {
+        case 'se1':
+            $pricePerKwh = $electricityPrice->getse1();
+            break;
+        case 'se2':
+            $pricePerKwh = $electricityPrice->getse2();
+            break;
+        case 'se3':
+            $pricePerKwh = $electricityPrice->getse3();
+            break;
+        case 'se4':
+            $pricePerKwh = $electricityPrice->getse4();
+            break;
+        default:
+            return new JsonResponse([
+                'status' => 'error',
+                'message' => 'Invalid elomrade specified.'
+            ], 400);
+    }
+
+    // Beräkna kostnaden baserat på snittförbrukning och elpris
+    $cost = $consumption * $pricePerKwh;
+
+    return new JsonResponse([
+        'elomrade' => $elomrade,
+        'year' => $electricityPrice->getYear(),
+        'price_per_kwh' => $pricePerKwh,
+        'consumption' => $consumption,
+        'total_cost' => $cost
+    ]);
+}
+
 }

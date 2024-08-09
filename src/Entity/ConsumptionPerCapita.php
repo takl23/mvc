@@ -1,7 +1,5 @@
 <?php
 
-// src/Entity/ConsumptionPerCapita.php
-
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -13,18 +11,16 @@ class ConsumptionPerCapita
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private ?int $id = null;
 
     #[ORM\Column(type: 'integer')]
-    private $year;
+    private int $year;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $elomrade;
+    private string $elomrade;
 
     #[ORM\Column(type: 'float')]
-    private $consumptionPerCapita;
-
-    // Getters and setters...
+    private float $consumptionPerCapita;
 
     public function getId(): ?int
     {

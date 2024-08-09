@@ -7,7 +7,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<AnnualCostPerPerson>
+ * @extends ServiceEntityRepository<AverageAnnualCostPerPerson>
  */
 class AnnualCostPerPersonRepository extends ServiceEntityRepository
 {
@@ -17,7 +17,7 @@ class AnnualCostPerPersonRepository extends ServiceEntityRepository
     }
 
     //    /**
-    //     * @return AnnualCostPerPerson[] Returns an array of AnnualCostPerPerson objects
+    //     * @return AverageAnnualCostPerPerson[] Returns an array of AverageAnnualCostPerPerson objects
     //     */
     //    public function findByExampleField($value): array
     //    {
@@ -31,7 +31,7 @@ class AnnualCostPerPersonRepository extends ServiceEntityRepository
     //        ;
     //    }
 
-    //    public function findOneBySomeField($value): ?AnnualCostPerPerson
+    //    public function findOneBySomeField($value): ?AverageAnnualCostPerPerson
     //    {
     //        return $this->createQueryBuilder('a')
     //            ->andWhere('a.exampleField = :val')

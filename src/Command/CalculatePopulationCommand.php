@@ -7,7 +7,6 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Console\Attribute\AsCommand;
-use Doctrine\ORM\EntityManagerInterface;
 use App\Service\PopulationElomradeService;
 
 #[AsCommand(
@@ -16,13 +15,11 @@ use App\Service\PopulationElomradeService;
 )]
 class CalculatePopulationCommand extends Command
 {
-    private $populationElomradeService;
-    private $entityManager;
+    private PopulationElomradeService $populationElomradeService;
 
-    public function __construct(PopulationElomradeService $populationElomradeService, EntityManagerInterface $entityManager)
+    public function __construct(PopulationElomradeService $populationElomradeService)
     {
         $this->populationElomradeService = $populationElomradeService;
-        $this->entityManager = $entityManager;
         parent::__construct();
     }
 
@@ -34,7 +31,7 @@ class CalculatePopulationCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        $this->populationElomradeService->calculateAndSavePopulationPerElomrade($this->entityManager);
+        $this->populationElomradeService->calculateAndSavePopulationPerElomrade();
         $io->success('Population per elomrade calculated and saved successfully.');
         return Command::SUCCESS;
     }

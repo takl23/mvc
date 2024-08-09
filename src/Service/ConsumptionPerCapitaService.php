@@ -9,7 +9,7 @@ use App\Entity\ConsumptionPerCapita;
 
 class ConsumptionPerCapitaService
 {
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
     public function __construct(EntityManagerInterface $entityManager)
     {
@@ -40,7 +40,7 @@ class ConsumptionPerCapitaService
         $consumptionPerCapita = [];
         foreach ($averageConsumptions as $consumption) {
             $year = $consumption->getYear();
-            foreach (['SE1', 'SE2', 'SE3', 'SE4'] as $elomrade) {
+            foreach (['se1', 'se2', 'se3', 'se4'] as $elomrade) {
                 if (isset($populationMap[$year][$elomrade])) {
                     $population = $populationMap[$year][$elomrade];
                     $consumptionGWh = $consumption->{'get' . $elomrade}();
@@ -58,11 +58,13 @@ class ConsumptionPerCapitaService
 
         // Spara konsumtionen per capita till databasen
         foreach ($consumptionPerCapita as $data) {
-            $entity = new ConsumptionPerCapita();
-            $entity->setYear($data['year']);
-            $entity->setElomrade($data['elomrade']);
-            $entity->setConsumptionPerCapita($data['consumptionPerCapita']);
-            $this->entityManager->persist($entity);
+            if (is_int($data['year'])) { // Typkontroll för att säkerställa att året är en int
+                $entity = new ConsumptionPerCapita();
+                $entity->setYear($data['year']);
+                $entity->setElomrade($data['elomrade']);
+                $entity->setConsumptionPerCapita($data['consumptionPerCapita']);
+                $this->entityManager->persist($entity);
+            }
         }
 
         $this->entityManager->flush();
