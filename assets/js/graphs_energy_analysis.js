@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(data => {
             const ctx = document.getElementById('populationPerElomradeChart').getContext('2d');
             const labels = Array.from(new Set(data.data.map(item => item.year)));
-            const elomrades = ['se1', 'se2', 'se3', 'se4'];
+            const elomrades = ['SE1', 'SE2', 'SE3', 'SE4'];
 
             const datasets = elomrades.map((elomrade, index) => {
                 const colors = [
@@ -127,12 +127,15 @@ document.addEventListener('DOMContentLoaded', () => {
             `Error fetching data from /public/api/population-per-elomrade:`, error));
 
     // Change to bar chart for consumption per capita
+    // Konsumtion per capita graf
     fetch('/public/api/consumption-per-capita')
         .then(response => response.json())
         .then(data => {
+            console.log("Fetched data for consumption per capita:", data);
+
             const ctx = document.getElementById('consumptionPerCapitaChart').getContext('2d');
             const labels = Array.from(new Set(data.data.map(item => item.year)));
-            const elomrades = ['se1', 'se2', 'se3', 'se4'];
+            const elomrades = ['SE1', 'SE2', 'SE3', 'SE4'];
 
             const datasets = elomrades.map((elomrade, index) => {
                 const colors = [
@@ -147,7 +150,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     label: elomrade,
                     data: labels.map(year => {
                         const item = data.data.find(
-                            d => d.year === year && d.elomrade === elomrade);
+                            d => d.year === year && d.elomrade === elomrade
+                        );
 
                         return item ? item.consumptionPerCapita : 0;
                     }),
@@ -184,8 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         })
-        .catch(error => console.error(
-            `Error fetching data from /public/api/consumption-per-capita:`, error));
+        .catch(error => console.error('Error fetching data for consumption per capita:', error));
 
     fetch('/public/api/annual-cost-per-person')
         .then(response => response.json())
@@ -255,5 +258,3 @@ document.addEventListener('DOMContentLoaded', () => {
         .catch(error => console.error(
             `Error fetching data from /public/api/annual-cost-per-person:`, error));
 });
-
-

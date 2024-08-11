@@ -6,6 +6,10 @@ use App\Repository\AverageConsumptionRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: AverageConsumptionRepository::class)]
+#[ORM\Table(name: "average_consumption", uniqueConstraints: [
+    new ORM\UniqueConstraint(name: "year_elomrade_unique", columns: ["year", "se1", "se2", "se3", "se4"])
+])]
+
 class AverageConsumption
 {
     #[ORM\Id]
