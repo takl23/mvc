@@ -1,4 +1,5 @@
 <?php
+
 // src/Command/CalculateAnnualCostPerPersonCommand.php
 
 namespace App\Command;

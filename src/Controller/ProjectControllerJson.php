@@ -259,69 +259,69 @@ class ProjectControllerJson extends AbstractController
     }
 
     #[Route("/api/calculate-electricity-cost", name: "api_calculate_electricity_cost", methods: ["POST"])]
-public function calculateElectricityCost(Request $request, ElectricityPriceRepository $electricityPriceRepository): JsonResponse
-{
-    $data = json_decode($request->getContent(), true);
+    public function calculateElectricityCost(Request $request, ElectricityPriceRepository $electricityPriceRepository): JsonResponse
+    {
+        $data = json_decode($request->getContent(), true);
 
-    if (!is_array($data)) {
-        return new JsonResponse([
-            'status' => 'error',
-            'message' => 'Invalid JSON data.'
-        ], 400);
-    }
-
-    $elomrade = $data['elomrade'] ?? null;
-    $consumption = $data['consumption'] ?? null;
-
-    if (!$elomrade || !$consumption) {
-        return new JsonResponse([
-            'status' => 'error',
-            'message' => 'Missing required parameters: elomrade and/or consumption'
-        ], 400);
-    }
-
-    // Hämta det senaste elpriset för det angivna elområdet
-    $electricityPrice = $electricityPriceRepository->findOneBy([], ['year' => 'DESC']); // Hämta senaste året
-
-    if (!$electricityPrice) {
-        return new JsonResponse([
-            'status' => 'error',
-            'message' => 'Electricity price data not found.'
-        ], 404);
-    }
-
-    // Välj rätt pris för det angivna elområdet
-    $pricePerKwh = null;
-    switch ($elomrade) {
-        case 'se1':
-            $pricePerKwh = $electricityPrice->getse1();
-            break;
-        case 'se2':
-            $pricePerKwh = $electricityPrice->getse2();
-            break;
-        case 'se3':
-            $pricePerKwh = $electricityPrice->getse3();
-            break;
-        case 'se4':
-            $pricePerKwh = $electricityPrice->getse4();
-            break;
-        default:
+        if (!is_array($data)) {
             return new JsonResponse([
                 'status' => 'error',
-                'message' => 'Invalid elomrade specified.'
+                'message' => 'Invalid JSON data.'
             ], 400);
+        }
+
+        $elomrade = $data['elomrade'] ?? null;
+        $consumption = $data['consumption'] ?? null;
+
+        if (!$elomrade || !$consumption) {
+            return new JsonResponse([
+                'status' => 'error',
+                'message' => 'Missing required parameters: elomrade and/or consumption'
+            ], 400);
+        }
+
+        // Hämta det senaste elpriset för det angivna elområdet
+        $electricityPrice = $electricityPriceRepository->findOneBy([], ['year' => 'DESC']); // Hämta senaste året
+
+        if (!$electricityPrice) {
+            return new JsonResponse([
+                'status' => 'error',
+                'message' => 'Electricity price data not found.'
+            ], 404);
+        }
+
+        // Välj rätt pris för det angivna elområdet
+        $pricePerKwh = null;
+        switch ($elomrade) {
+            case 'se1':
+                $pricePerKwh = $electricityPrice->getse1();
+                break;
+            case 'se2':
+                $pricePerKwh = $electricityPrice->getse2();
+                break;
+            case 'se3':
+                $pricePerKwh = $electricityPrice->getse3();
+                break;
+            case 'se4':
+                $pricePerKwh = $electricityPrice->getse4();
+                break;
+            default:
+                return new JsonResponse([
+                    'status' => 'error',
+                    'message' => 'Invalid elomrade specified.'
+                ], 400);
+        }
+
+        // Beräkna kostnaden baserat på snittförbrukning och elpris
+        $cost = $consumption * $pricePerKwh;
+
+        return new JsonResponse([
+            'elomrade' => $elomrade,
+            'year' => $electricityPrice->getYear(),
+            'price_per_kwh' => $pricePerKwh,
+            'consumption' => $consumption,
+            'total_cost' => $cost
+        ]);
     }
-
-    // Beräkna kostnaden baserat på snittförbrukning och elpris
-    $cost = $consumption * $pricePerKwh;
-
-    return new JsonResponse([
-        'elomrade' => $elomrade,
-        'year' => $electricityPrice->getYear(),
-        'price_per_kwh' => $pricePerKwh,
-        'consumption' => $consumption,
-        'total_cost' => $cost
-    ]);
-}
 
 }

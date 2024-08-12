@@ -1,93 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="" tests="34" assertions="63" errors="6" warnings="0" failures="0" skipped="0" time="0.130913">
-    <testsuite name="Project Test Suite" tests="34" assertions="63" errors="6" warnings="0" failures="0" skipped="0" time="0.130913">
-      <testsuite name="App\Card\CardGraphicTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Card/CardGraphicTest.php" tests="2" assertions="4" errors="0" warnings="0" failures="0" skipped="0" time="0.013535">
-        <testcase name="testGraphicRep" class="App\Card\CardGraphicTest" classname="App.Card.CardGraphicTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Card/CardGraphicTest.php" line="16" assertions="2" time="0.012964"/>
-        <testcase name="testGraphicRepConvertToString" class="App\Card\CardGraphicTest" classname="App.Card.CardGraphicTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Card/CardGraphicTest.php" line="26" assertions="2" time="0.000571"/>
+  <testsuite name="" tests="33" assertions="63" errors="5" warnings="0" failures="0" skipped="0" time="0.127744">
+    <testsuite name="Project Test Suite" tests="33" assertions="63" errors="5" warnings="0" failures="0" skipped="0" time="0.127744">
+      <testsuite name="App\Card\CardGraphicTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Card/CardGraphicTest.php" tests="2" assertions="4" errors="0" warnings="0" failures="0" skipped="0" time="0.010125">
+        <testcase name="testGraphicRep" class="App\Card\CardGraphicTest" classname="App.Card.CardGraphicTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Card/CardGraphicTest.php" line="16" assertions="2" time="0.009749"/>
+        <testcase name="testGraphicRepConvertToString" class="App\Card\CardGraphicTest" classname="App.Card.CardGraphicTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Card/CardGraphicTest.php" line="26" assertions="2" time="0.000376"/>
       </testsuite>
-      <testsuite name="App\Card\CardHandTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Card/CardHandTest.php" tests="1" assertions="6" errors="0" warnings="0" failures="0" skipped="0" time="0.002191">
-        <testcase name="testCardHand" class="App\Card\CardHandTest" classname="App.Card.CardHandTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Card/CardHandTest.php" line="16" assertions="6" time="0.002191"/>
+      <testsuite name="App\Card\CardHandTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Card/CardHandTest.php" tests="1" assertions="6" errors="0" warnings="0" failures="0" skipped="0" time="0.001975">
+        <testcase name="testCardHand" class="App\Card\CardHandTest" classname="App.Card.CardHandTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Card/CardHandTest.php" line="16" assertions="6" time="0.001975"/>
       </testsuite>
-      <testsuite name="App\Card\CardTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Card/CardTest.php" tests="4" assertions="8" errors="0" warnings="0" failures="0" skipped="0" time="0.004762">
-        <testcase name="testCreateCard" class="App\Card\CardTest" classname="App.Card.CardTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Card/CardTest.php" line="17" assertions="2" time="0.000409"/>
-        <testcase name="testInvalidCardValue" class="App\Card\CardTest" classname="App.Card.CardTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Card/CardTest.php" line="30" assertions="2" time="0.003362"/>
-        <testcase name="testInvalidCardSuit" class="App\Card\CardTest" classname="App.Card.CardTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Card/CardTest.php" line="40" assertions="2" time="0.000578"/>
-        <testcase name="testCardColor" class="App\Card\CardTest" classname="App.Card.CardTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Card/CardTest.php" line="50" assertions="2" time="0.000413"/>
+      <testsuite name="App\Card\CardTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Card/CardTest.php" tests="4" assertions="8" errors="0" warnings="0" failures="0" skipped="0" time="0.004024">
+        <testcase name="testCreateCard" class="App\Card\CardTest" classname="App.Card.CardTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Card/CardTest.php" line="17" assertions="2" time="0.000558"/>
+        <testcase name="testInvalidCardValue" class="App\Card\CardTest" classname="App.Card.CardTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Card/CardTest.php" line="30" assertions="2" time="0.002699"/>
+        <testcase name="testInvalidCardSuit" class="App\Card\CardTest" classname="App.Card.CardTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Card/CardTest.php" line="40" assertions="2" time="0.000434"/>
+        <testcase name="testCardColor" class="App\Card\CardTest" classname="App.Card.CardTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Card/CardTest.php" line="50" assertions="2" time="0.000334"/>
       </testsuite>
-      <testsuite name="App\Card\DeckOfCardsTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Card/DeckOfCardsTest.php" tests="6" assertions="13" errors="0" warnings="0" failures="0" skipped="0" time="0.038957">
-        <testcase name="testCreateDeck" class="App\Card\DeckOfCardsTest" classname="App.Card.DeckOfCardsTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Card/DeckOfCardsTest.php" line="16" assertions="2" time="0.001742"/>
-        <testcase name="testShuffleDeck" class="App\Card\DeckOfCardsTest" classname="App.Card.DeckOfCardsTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Card/DeckOfCardsTest.php" line="27" assertions="3" time="0.031038"/>
-        <testcase name="testDrawCard" class="App\Card\DeckOfCardsTest" classname="App.Card.DeckOfCardsTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Card/DeckOfCardsTest.php" line="43" assertions="2" time="0.000966"/>
-        <testcase name="testCountDeck" class="App\Card\DeckOfCardsTest" classname="App.Card.DeckOfCardsTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Card/DeckOfCardsTest.php" line="54" assertions="2" time="0.001279"/>
-        <testcase name="testGraphiccDeck" class="App\Card\DeckOfCardsTest" classname="App.Card.DeckOfCardsTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Card/DeckOfCardsTest.php" line="65" assertions="2" time="0.002491"/>
-        <testcase name="testDrawEmphtyDeck" class="App\Card\DeckOfCardsTest" classname="App.Card.DeckOfCardsTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Card/DeckOfCardsTest.php" line="76" assertions="2" time="0.001440"/>
+      <testsuite name="App\Card\DeckOfCardsTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Card/DeckOfCardsTest.php" tests="6" assertions="13" errors="0" warnings="0" failures="0" skipped="0" time="0.023613">
+        <testcase name="testCreateDeck" class="App\Card\DeckOfCardsTest" classname="App.Card.DeckOfCardsTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Card/DeckOfCardsTest.php" line="16" assertions="2" time="0.002228"/>
+        <testcase name="testShuffleDeck" class="App\Card\DeckOfCardsTest" classname="App.Card.DeckOfCardsTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Card/DeckOfCardsTest.php" line="27" assertions="3" time="0.014827"/>
+        <testcase name="testDrawCard" class="App\Card\DeckOfCardsTest" classname="App.Card.DeckOfCardsTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Card/DeckOfCardsTest.php" line="43" assertions="2" time="0.000743"/>
+        <testcase name="testCountDeck" class="App\Card\DeckOfCardsTest" classname="App.Card.DeckOfCardsTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Card/DeckOfCardsTest.php" line="54" assertions="2" time="0.000665"/>
+        <testcase name="testGraphiccDeck" class="App\Card\DeckOfCardsTest" classname="App.Card.DeckOfCardsTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Card/DeckOfCardsTest.php" line="65" assertions="2" time="0.003593"/>
+        <testcase name="testDrawEmphtyDeck" class="App\Card\DeckOfCardsTest" classname="App.Card.DeckOfCardsTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Card/DeckOfCardsTest.php" line="76" assertions="2" time="0.001556"/>
       </testsuite>
-      <testsuite name="App\Card\Game21Test" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Card/Game21Test.php" tests="5" assertions="21" errors="0" warnings="0" failures="0" skipped="0" time="0.010850">
-        <testcase name="testSetupGameInitaialValues" class="App\Card\Game21Test" classname="App.Card.Game21Test" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Card/Game21Test.php" line="16" assertions="4" time="0.004635"/>
-        <testcase name="testNewGame" class="App\Card\Game21Test" classname="App.Card.Game21Test" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Card/Game21Test.php" line="29" assertions="4" time="0.001435"/>
-        <testcase name="testdrawCard" class="App\Card\Game21Test" classname="App.Card.Game21Test" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Card/Game21Test.php" line="45" assertions="3" time="0.001325"/>
-        <testcase name="testSumHand" class="App\Card\Game21Test" classname="App.Card.Game21Test" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Card/Game21Test.php" line="63" assertions="3" time="0.002339"/>
-        <testcase name="testProcessResult" class="App\Card\Game21Test" classname="App.Card.Game21Test" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Card/Game21Test.php" line="86" assertions="7" time="0.001116"/>
+      <testsuite name="App\Card\Game21Test" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Card/Game21Test.php" tests="5" assertions="21" errors="0" warnings="0" failures="0" skipped="0" time="0.009654">
+        <testcase name="testSetupGameInitaialValues" class="App\Card\Game21Test" classname="App.Card.Game21Test" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Card/Game21Test.php" line="16" assertions="4" time="0.004936"/>
+        <testcase name="testNewGame" class="App\Card\Game21Test" classname="App.Card.Game21Test" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Card/Game21Test.php" line="29" assertions="4" time="0.001324"/>
+        <testcase name="testdrawCard" class="App\Card\Game21Test" classname="App.Card.Game21Test" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Card/Game21Test.php" line="45" assertions="3" time="0.001035"/>
+        <testcase name="testSumHand" class="App\Card\Game21Test" classname="App.Card.Game21Test" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Card/Game21Test.php" line="63" assertions="3" time="0.001210"/>
+        <testcase name="testProcessResult" class="App\Card\Game21Test" classname="App.Card.Game21Test" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Card/Game21Test.php" line="86" assertions="7" time="0.001150"/>
       </testsuite>
-      <testsuite name="App\Dice\DiceTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Dice/DiceTest.php" tests="1" assertions="2" errors="0" warnings="0" failures="0" skipped="0" time="0.001003">
-        <testcase name="testCreateDice" class="App\Dice\DiceTest" classname="App.Dice.DiceTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Dice/DiceTest.php" line="16" assertions="2" time="0.001003"/>
+      <testsuite name="App\Dice\DiceTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Dice/DiceTest.php" tests="1" assertions="2" errors="0" warnings="0" failures="0" skipped="0" time="0.002045">
+        <testcase name="testCreateDice" class="App\Dice\DiceTest" classname="App.Dice.DiceTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Dice/DiceTest.php" line="16" assertions="2" time="0.002045"/>
       </testsuite>
-      <testsuite name="App\Tests\Entity\LibraryTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Library/LibraryTest.php" tests="5" assertions="5" errors="0" warnings="0" failures="0" skipped="0" time="0.003452">
-        <testcase name="testGetId" class="App\Tests\Entity\LibraryTest" classname="App.Tests.Entity.LibraryTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Library/LibraryTest.php" line="16" assertions="1" time="0.000802"/>
-        <testcase name="testSetAndGetTitle" class="App\Tests\Entity\LibraryTest" classname="App.Tests.Entity.LibraryTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Library/LibraryTest.php" line="25" assertions="1" time="0.001097"/>
-        <testcase name="testSetAndGetISBN" class="App\Tests\Entity\LibraryTest" classname="App.Tests.Entity.LibraryTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Library/LibraryTest.php" line="37" assertions="1" time="0.000479"/>
-        <testcase name="testSetAndGetAuthor" class="App\Tests\Entity\LibraryTest" classname="App.Tests.Entity.LibraryTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Library/LibraryTest.php" line="49" assertions="1" time="0.000642"/>
-        <testcase name="testSetAndGetCover" class="App\Tests\Entity\LibraryTest" classname="App.Tests.Entity.LibraryTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Library/LibraryTest.php" line="61" assertions="1" time="0.000431"/>
+      <testsuite name="App\Tests\Entity\LibraryTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Library/LibraryTest.php" tests="5" assertions="5" errors="0" warnings="0" failures="0" skipped="0" time="0.004230">
+        <testcase name="testGetId" class="App\Tests\Entity\LibraryTest" classname="App.Tests.Entity.LibraryTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Library/LibraryTest.php" line="16" assertions="1" time="0.001445"/>
+        <testcase name="testSetAndGetTitle" class="App\Tests\Entity\LibraryTest" classname="App.Tests.Entity.LibraryTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Library/LibraryTest.php" line="25" assertions="1" time="0.001694"/>
+        <testcase name="testSetAndGetISBN" class="App\Tests\Entity\LibraryTest" classname="App.Tests.Entity.LibraryTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Library/LibraryTest.php" line="37" assertions="1" time="0.000320"/>
+        <testcase name="testSetAndGetAuthor" class="App\Tests\Entity\LibraryTest" classname="App.Tests.Entity.LibraryTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Library/LibraryTest.php" line="49" assertions="1" time="0.000389"/>
+        <testcase name="testSetAndGetCover" class="App\Tests\Entity\LibraryTest" classname="App.Tests.Entity.LibraryTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Library/LibraryTest.php" line="61" assertions="1" time="0.000382"/>
       </testsuite>
-      <testsuite name="App\Tests\Entity\ProductTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Library/ProductTest.php" tests="3" assertions="3" errors="0" warnings="0" failures="0" skipped="0" time="0.003699">
-        <testcase name="testGetId" class="App\Tests\Entity\ProductTest" classname="App.Tests.Entity.ProductTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Library/ProductTest.php" line="16" assertions="1" time="0.001359"/>
-        <testcase name="testSetAndGetName" class="App\Tests\Entity\ProductTest" classname="App.Tests.Entity.ProductTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Library/ProductTest.php" line="25" assertions="1" time="0.000821"/>
-        <testcase name="testSetAndGetValue" class="App\Tests\Entity\ProductTest" classname="App.Tests.Entity.ProductTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Library/ProductTest.php" line="37" assertions="1" time="0.001520"/>
+      <testsuite name="App\Tests\Entity\ProductTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Library/ProductTest.php" tests="3" assertions="3" errors="0" warnings="0" failures="0" skipped="0" time="0.002631">
+        <testcase name="testGetId" class="App\Tests\Entity\ProductTest" classname="App.Tests.Entity.ProductTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Library/ProductTest.php" line="16" assertions="1" time="0.001572"/>
+        <testcase name="testSetAndGetName" class="App\Tests\Entity\ProductTest" classname="App.Tests.Entity.ProductTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Library/ProductTest.php" line="25" assertions="1" time="0.000748"/>
+        <testcase name="testSetAndGetValue" class="App\Tests\Entity\ProductTest" classname="App.Tests.Entity.ProductTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Library/ProductTest.php" line="37" assertions="1" time="0.000310"/>
       </testsuite>
-      <testsuite name="App\Tests\Service\AverageAnnualCostPerPersonServiceTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Service/AverageAnnualCostPerPersonServiceTest.php" tests="1" assertions="1" errors="0" warnings="0" failures="0" skipped="0" time="0.043062">
-        <testcase name="testCalculateAndSaveAverageAnnualCostPerPerson" class="App\Tests\Service\AverageAnnualCostPerPersonServiceTest" classname="App.Tests.Service.AverageAnnualCostPerPersonServiceTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Service/AverageAnnualCostPerPersonServiceTest.php" line="38" assertions="1" time="0.043062"/>
+      <testsuite name="App\Tests\Service\AverageAnnualCostPerPersonServiceTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Service/AverageAnnualCostPerPersonServiceTest.php" tests="1" assertions="1" errors="0" warnings="0" failures="0" skipped="0" time="0.043011">
+        <testcase name="testCalculateAndSaveAverageAnnualCostPerPerson" class="App\Tests\Service\AverageAnnualCostPerPersonServiceTest" classname="App.Tests.Service.AverageAnnualCostPerPersonServiceTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Service/AverageAnnualCostPerPersonServiceTest.php" line="38" assertions="1" time="0.043011"/>
       </testsuite>
-      <testsuite name="App\Tests\Service\ConsumptionPerCapitaServiceTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Service/ConsumptionPerCapitaServiceTest.php" tests="2" assertions="0" errors="2" warnings="0" failures="0" skipped="0" time="0.004856">
-        <testcase name="testCalculateConsumptionPerCapita" class="App\Tests\Service\ConsumptionPerCapitaServiceTest" classname="App.Tests.Service.ConsumptionPerCapitaServiceTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Service/ConsumptionPerCapitaServiceTest.php" line="18" assertions="0" time="0.002951">
-          <error type="Error">App\Tests\Service\ConsumptionPerCapitaServiceTest::testCalculateConsumptionPerCapita
-Error: Call to undefined method App\Service\ConsumptionPerCapitaService::calculateConsumptionPerCapita()
+      <testsuite name="App\Tests\Service\ConsumptionPerCapitaServiceTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Service/ConsumptionPerCapitaServiceTest.php" tests="1" assertions="0" errors="1" warnings="0" failures="0" skipped="0" time="0.023657">
+        <testcase name="testCalculateAndSaveConsumptionPerCapita" class="App\Tests\Service\ConsumptionPerCapitaServiceTest" classname="App.Tests.Service.ConsumptionPerCapitaServiceTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Service/ConsumptionPerCapitaServiceTest.php" line="24" assertions="0" time="0.023657">
+          <error type="Error">App\Tests\Service\ConsumptionPerCapitaServiceTest::testCalculateAndSaveConsumptionPerCapita
+Error: Call to a member function getTruncateTableSQL() on null
 
-/home/takl23/dbwebb-kurser/mvc/me/report/tests/Service/ConsumptionPerCapitaServiceTest.php:20</error>
-        </testcase>
-        <testcase name="testConvertGWhToKWh" class="App\Tests\Service\ConsumptionPerCapitaServiceTest" classname="App.Tests.Service.ConsumptionPerCapitaServiceTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Service/ConsumptionPerCapitaServiceTest.php" line="27" assertions="0" time="0.001906">
-          <error type="Error">App\Tests\Service\ConsumptionPerCapitaServiceTest::testConvertGWhToKWh
-Error: Call to undefined method App\Service\ConsumptionPerCapitaService::convertGWhToKWh()
-
-/home/takl23/dbwebb-kurser/mvc/me/report/tests/Service/ConsumptionPerCapitaServiceTest.php:29</error>
+/home/takl23/dbwebb-kurser/mvc/me/report/src/Service/ConsumptionPerCapitaService.php:28
+/home/takl23/dbwebb-kurser/mvc/me/report/tests/Service/ConsumptionPerCapitaServiceTest.php:60</error>
         </testcase>
       </testsuite>
-      <testsuite name="App\Tests\Service\ImportServiceTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Service/ImportServiceTest.php" tests="3" assertions="0" errors="3" warnings="0" failures="0" skipped="0" time="0.003603">
-        <testcase name="testEnsureInt" class="App\Tests\Service\ImportServiceTest" classname="App.Tests.Service.ImportServiceTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Service/ImportServiceTest.php" line="19" assertions="0" time="0.002009">
+      <testsuite name="App\Tests\Service\ImportServiceTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Service/ImportServiceTest.php" tests="3" assertions="0" errors="3" warnings="0" failures="0" skipped="0" time="0.002396">
+        <testcase name="testEnsureInt" class="App\Tests\Service\ImportServiceTest" classname="App.Tests.Service.ImportServiceTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Service/ImportServiceTest.php" line="19" assertions="0" time="0.001661">
           <error type="Error">App\Tests\Service\ImportServiceTest::testEnsureInt
-Error: Call to private method App\Service\ImportService::ensureInt() from scope App\Tests\Service\ImportServiceTest
+Error: Call to protected method App\Service\ImportService::ensureInt() from scope App\Tests\Service\ImportServiceTest
 
 /home/takl23/dbwebb-kurser/mvc/me/report/tests/Service/ImportServiceTest.php:21</error>
         </testcase>
-        <testcase name="testEnsureFloat" class="App\Tests\Service\ImportServiceTest" classname="App.Tests.Service.ImportServiceTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Service/ImportServiceTest.php" line="28" assertions="0" time="0.001003">
+        <testcase name="testEnsureFloat" class="App\Tests\Service\ImportServiceTest" classname="App.Tests.Service.ImportServiceTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Service/ImportServiceTest.php" line="28" assertions="0" time="0.000397">
           <error type="Error">App\Tests\Service\ImportServiceTest::testEnsureFloat
-Error: Call to private method App\Service\ImportService::ensureFloat() from scope App\Tests\Service\ImportServiceTest
+Error: Call to protected method App\Service\ImportService::ensureFloat() from scope App\Tests\Service\ImportServiceTest
 
 /home/takl23/dbwebb-kurser/mvc/me/report/tests/Service/ImportServiceTest.php:30</error>
         </testcase>
-        <testcase name="testEnsureString" class="App\Tests\Service\ImportServiceTest" classname="App.Tests.Service.ImportServiceTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Service/ImportServiceTest.php" line="37" assertions="0" time="0.000591">
+        <testcase name="testEnsureString" class="App\Tests\Service\ImportServiceTest" classname="App.Tests.Service.ImportServiceTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Service/ImportServiceTest.php" line="37" assertions="0" time="0.000338">
           <error type="Error">App\Tests\Service\ImportServiceTest::testEnsureString
-Error: Call to private method App\Service\ImportService::ensureString() from scope App\Tests\Service\ImportServiceTest
+Error: Call to protected method App\Service\ImportService::ensureString() from scope App\Tests\Service\ImportServiceTest
 
 /home/takl23/dbwebb-kurser/mvc/me/report/tests/Service/ImportServiceTest.php:39</error>
         </testcase>
       </testsuite>
-      <testsuite name="App\Tests\Service\PopulationElomradeServiceTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Service/PopulationElomradeServiceTest.php" tests="1" assertions="0" errors="1" warnings="0" failures="0" skipped="0" time="0.000942">
-        <testcase name="testConvertLanToProperty" class="App\Tests\Service\PopulationElomradeServiceTest" classname="App.Tests.Service.PopulationElomradeServiceTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Service/PopulationElomradeServiceTest.php" line="18" assertions="0" time="0.000942">
-          <error type="Error">App\Tests\Service\PopulationElomradeServiceTest::testConvertLanToProperty
-Error: Call to private method App\Service\PopulationElomradeService::convertLanToProperty() from scope App\Tests\Service\PopulationElomradeServiceTest
+      <testsuite name="App\Tests\Service\PopulationPerElomradeServiceTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Service/PopulationElomradeServiceTest.php" tests="1" assertions="0" errors="1" warnings="0" failures="0" skipped="0" time="0.000384">
+        <testcase name="testCalculateAndSavePopulationPerElomrade" class="App\Tests\Service\PopulationPerElomradeServiceTest" classname="App.Tests.Service.PopulationPerElomradeServiceTest" file="/home/takl23/dbwebb-kurser/mvc/me/report/tests/Service/PopulationElomradeServiceTest.php" line="24" assertions="0" time="0.000384">
+          <error type="Error">App\Tests\Service\PopulationPerElomradeServiceTest::testCalculateAndSavePopulationPerElomrade
+Error: Class "App\Service\PopulationPerElomradeService" not found
 
-/home/takl23/dbwebb-kurser/mvc/me/report/tests/Service/PopulationElomradeServiceTest.php:20</error>
+/home/takl23/dbwebb-kurser/mvc/me/report/tests/Service/PopulationElomradeServiceTest.php:21</error>
         </testcase>
       </testsuite>
     </testsuite>

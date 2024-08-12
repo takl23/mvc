@@ -61,10 +61,10 @@ class ConsumptionPerCapitaService
                 if (isset($populationMap[$year][$elomrade])) {
                     $population = $populationMap[$year][$elomrade];
                     $consumptionGWh = $consumption->{'get' . strtolower($elomrade)}();
-        
+
                     $consumptionKWh = $consumptionGWh * 1_000_000; // Convert GWh to kWh
                     $consumptionPerCapitaValue = $consumptionKWh / $population;
-        
+
                     $consumptionPerCapita[] = [
                         'year' => $year,
                         'elomrade' => $elomrade,
@@ -76,7 +76,7 @@ class ConsumptionPerCapitaService
                 }
             }
         }
-        
+
 
         // Spara konsumtionen per capita till databasen
         foreach ($consumptionPerCapita as $data) {

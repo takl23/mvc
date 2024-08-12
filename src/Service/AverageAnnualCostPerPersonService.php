@@ -1,5 +1,4 @@
 <?php
-// src/Service/AverageAnnualCostPerPersonService.php
 
 namespace App\Service;
 
@@ -7,29 +6,23 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\AverageAnnualCostPerPerson;
 use App\Entity\ConsumptionPerCapita;
 use App\Entity\ElectricityPrice;
-use Psr\Log\LoggerInterface;
 
 class AverageAnnualCostPerPersonService
 {
     private EntityManagerInterface $entityManager;
-    private LoggerInterface $logger;
 
-    public function __construct(EntityManagerInterface $entityManager, LoggerInterface $logger)
+    public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
-        $this->logger = $logger;
     }
 
     public function calculateAndSaveAverageAnnualCostPerPerson(): void
     {
-        $this->logger->info('Starting calculation and saving of average annual cost per person.');
-
-        $this->truncateTable();
-
         $consumptionPerCapitaRepository = $this->entityManager->getRepository(ConsumptionPerCapita::class);
         $electricityPriceRepository = $this->entityManager->getRepository(ElectricityPrice::class);
 
         $consumptionData = $consumptionPerCapitaRepository->findAll();
+        $averageAnnualCostData = [];
 
         foreach ($consumptionData as $consumption) {
             $year = $consumption->getYear();
@@ -37,32 +30,30 @@ class AverageAnnualCostPerPersonService
             $consumptionPerCapita = $consumption->getConsumptionPerCapita();
 
             if ($year !== null && $elomrade !== null && $consumptionPerCapita !== null) {
-                $electricityPrice = $electricityPriceRepository->findOneBy(['year' => $year]);
+                $electricityPrice = $electricityPriceRepository->findOneBy([
+                    'year' => $year
+                ]);
 
                 if ($electricityPrice) {
-                    $elomradeGetter = 'get' . ucfirst($elomrade);
+                    $elomradeGetter = 'get' . ucfirst((string)$elomrade);
                     $annualCostPerPerson = $consumptionPerCapita * $electricityPrice->$elomradeGetter();
-
-                    $entity = new AverageAnnualCostPerPerson();
-                    $entity->setYear($year);
-                    $entity->setElomrade($elomrade);
-                    $entity->setAverageCostPerPerson($annualCostPerPerson);
-                    $this->entityManager->persist($entity);
-
-                    $this->logger->info("Calculated and added: Year {$year}, Elomrade {$elomrade}, Cost {$annualCostPerPerson}");
+                    $averageAnnualCostData[] = [
+                        'year' => $year,
+                        'elomrade' => $elomrade,
+                        'averageCostPerPerson' => $annualCostPerPerson
+                    ];
                 }
             }
         }
 
-        $this->entityManager->flush();
-        $this->logger->info('Finished calculation and saving of average annual cost per person.');
-    }
+        foreach ($averageAnnualCostData as $data) {
+            $entity = new AverageAnnualCostPerPerson();
+            $entity->setYear($data['year']);
+            $entity->setElomrade($data['elomrade']);
+            $entity->setAverageCostPerPerson($data['averageCostPerPerson']);
+            $this->entityManager->persist($entity);
+        }
 
-    private function truncateTable(): void
-    {
-        $connection = $this->entityManager->getConnection();
-        $platform = $connection->getDatabasePlatform();
-        $connection->executeStatement($platform->getTruncateTableSQL('average_annual_cost_per_person', true));
-        $this->logger->info('Truncated the average_annual_cost_per_person table.');
+        $this->entityManager->flush();
     }
 }

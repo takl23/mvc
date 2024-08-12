@@ -59,17 +59,18 @@
     <h3>Graf 4: Population per Elområde</h3>
     <canvas id="populationPerElomradeChart"></canvas>
     <p><em>Population per elområde från 2015 till 2023.</em></p>
-    <p><em>Referens: Kombination av tabeller i databasen.</em></p>
+    <p><em><p>Referens: Datan har tagits fram genom att importera befolkningsdata per län och sedan fördelas över respektive elområde (SE1, SE2, SE3, SE4) baserat på länets tillhörighet.</p>
+</em></p>
 
     <h3>Graf 5: Consumption per Capita</h3>
     <canvas id="consumptionPerCapitaChart"></canvas>
     <p><em>Consumption per capita per elområde från 2015 till 2023.</em></p>
-    <p><em>Referens: Kombination av AverageConsumption och PopulationPerElomrade.</em></p>
+    <p><em>Referens: Genomsnittlig förbrukning per capita beräknades genom att dela den totala elförbrukningen per elområde med befolkningsantalet för respektive elområde. Datan har hämtats från AverageConsumption och PopulationPerElomrade tabellerna i databasen.</em></p>
 
     <h3>Graf 6: Årlig kostnad per person</h3>
     <canvas id="annualCostPerPersonChart"></canvas>
     <p><em>Årlig kostnad per person i SEK för varje elområde.</em></p>
-    <p><em>Referens: Kombination av tabeller i databasen.</em></p>
+    <p><em>Årlig kostnad per person beräknades genom att multiplicera den genomsnittliga förbrukningen per capita med elpriset per elområde. Datan har hämtats från ConsumptionPerCapita och ElectricityPrice tabellerna i databasen.</em></p>
 
     <hr>
 

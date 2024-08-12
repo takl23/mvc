@@ -48,7 +48,7 @@ class ImportService
         $this->entityManager->flush();
     }
 
-    private function loadSpreadsheet(string $filePath, string $sheetName): \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet
+    protected function loadSpreadsheet(string $filePath, string $sheetName): \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet
     {
         $spreadsheet = IOFactory::load($filePath);
         $worksheet = $spreadsheet->getSheetByName($sheetName);
@@ -58,7 +58,7 @@ class ImportService
         return $worksheet;
     }
 
-    private function isHeaderRow(\PhpOffice\PhpSpreadsheet\Worksheet\Row $row): bool
+    protected function isHeaderRow(\PhpOffice\PhpSpreadsheet\Worksheet\Row $row): bool
     {
         return $row->getRowIndex() === 1;
     }
@@ -66,7 +66,7 @@ class ImportService
     /**
      * @return array<mixed>
      */
-    private function extractRowData(\PhpOffice\PhpSpreadsheet\Worksheet\Row $row): array
+    protected function extractRowData(\PhpOffice\PhpSpreadsheet\Worksheet\Row $row): array
     {
         $cellIterator = $row->getCellIterator();
         $cellIterator->setIterateOnlyExistingCells(false);
@@ -82,7 +82,7 @@ class ImportService
     /**
      * @param array<mixed> $data
      */
-    private function processRowData(array $data, string $entityClass): ?object
+    protected function processRowData(array $data, string $entityClass): ?object
     {
         switch ($entityClass) {
             case RenewableEnergyTWh::class:
@@ -107,7 +107,7 @@ class ImportService
     /**
      * @param array<mixed> $data
      */
-    private function createRenewableEnergyTWh(array $data): RenewableEnergyTWh
+    protected function createRenewableEnergyTWh(array $data): RenewableEnergyTWh
     {
         $entity = new RenewableEnergyTWh();
         $entity->setYear($this->ensureInt($data[0]));
@@ -126,7 +126,7 @@ class ImportService
     /**
      * @param array<mixed> $data
      */
-    private function createRenewableEnergyPercentage(array $data): RenewableEnergyPercentage
+    protected function createRenewableEnergyPercentage(array $data): RenewableEnergyPercentage
     {
         $entity = new RenewableEnergyPercentage();
         $entity->setYear($this->ensureInt($data[0]));
@@ -140,7 +140,7 @@ class ImportService
     /**
      * @param array<mixed> $data
      */
-    private function createElectricityPrice(array $data): ?ElectricityPrice
+    protected function createElectricityPrice(array $data): ?ElectricityPrice
     {
         if ($this->isValidPriceData($data)) {
             $entity = new ElectricityPrice();
@@ -159,7 +159,7 @@ class ImportService
     /**
      * @param array<mixed> $data
      */
-    private function createAverageConsumption(array $data): ?AverageConsumption
+    protected function createAverageConsumption(array $data): ?AverageConsumption
     {
         if ($this->isValidConsumptionData($data)) {
             $entity = new AverageConsumption();
@@ -178,7 +178,7 @@ class ImportService
     /**
      * @param array<mixed> $data
      */
-    private function createEnergySupplyGDP(array $data): EnergySupplyGDP
+    protected function createEnergySupplyGDP(array $data): EnergySupplyGDP
     {
         $entity = new EnergySupplyGDP();
         $entity->setYear($this->ensureInt($data[0]));
@@ -189,7 +189,7 @@ class ImportService
     /**
      * @param array<mixed> $data
      */
-    private function createLanElomrade(array $data): ?LanElomrade
+    protected function createLanElomrade(array $data): ?LanElomrade
     {
         if ($data[0] !== null && $data[1] !== null) {
             $entity = new LanElomrade();
@@ -205,7 +205,7 @@ class ImportService
     /**
      * @param array<mixed> $data
      */
-    private function createPopulationPerLan(array $data): ?PopulationPerLan
+    protected function createPopulationPerLan(array $data): ?PopulationPerLan
     {
         if ($data[0] !== null) {
             $entity = new PopulationPerLan();
@@ -237,7 +237,7 @@ class ImportService
         }
     }
 
-    private function ensureInt(mixed $value): int
+    protected function ensureInt(mixed $value): int
     {
         if (isset($value) && is_numeric($value)) {
             return (int) $value;
@@ -245,7 +245,7 @@ class ImportService
         throw new InvalidArgumentException("Value is not a valid integer: " . print_r($value, true));
     }
 
-    private function ensureFloat(mixed $value): float
+    protected function ensureFloat(mixed $value): float
     {
         if (isset($value) && is_numeric($value)) {
             return (float) str_replace(',', '.', (string) $value);
@@ -253,7 +253,7 @@ class ImportService
         throw new InvalidArgumentException("Value is not a valid float: " . print_r($value, true));
     }
 
-    private function ensureString(mixed $value): string
+    protected function ensureString(mixed $value): string
     {
         if (is_string($value)) {
             return $value;
@@ -273,7 +273,7 @@ class ImportService
     /**
      * @param array<mixed> $data
      */
-    private function isValidPriceData(array $data): bool
+    protected function isValidPriceData(array $data): bool
     {
         return isset($data[1], $data[2], $data[3], $data[4]) &&
                is_numeric($data[1]) && is_numeric($data[2]) &&
@@ -283,14 +283,14 @@ class ImportService
     /**
      * @param array<mixed> $data
      */
-    private function isValidConsumptionData(array $data): bool
+    protected function isValidConsumptionData(array $data): bool
     {
         return isset($data[1], $data[2], $data[3], $data[4]) &&
                is_numeric($data[1]) && is_numeric($data[2]) &&
                is_numeric($data[3]) && is_numeric($data[4]);
     }
 
-    private function isEntityValid(object $entity): bool
+    protected function isEntityValid(object $entity): bool
     {
         if ($entity instanceof RenewableEnergyTWh ||
             $entity instanceof RenewableEnergyPercentage ||

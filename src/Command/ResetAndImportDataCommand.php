@@ -81,4 +81,3 @@ class ResetAndImportDataCommand extends Command
         $connection->executeQuery('VACUUM');
     }
 }
-

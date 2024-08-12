@@ -7,6 +7,7 @@ use App\Entity\PopulationPerLan;
 use App\Entity\LanElomrade;
 use App\Entity\PopulationPerElomrade;
 use InvalidArgumentException;
+
 class PopulationElomradeService
 {
     private EntityManagerInterface $entityManager;
@@ -97,28 +98,28 @@ class PopulationElomradeService
     }
 
     private function ensureString(mixed $value): string
-{
-    if (is_string($value)) {
-        return $value;
+    {
+        if (is_string($value)) {
+            return $value;
+        }
+
+        if (is_numeric($value)) {
+            return (string)$value;
+        }
+
+        if ($value === null) {
+            throw new InvalidArgumentException("Value is null, expected a valid string: " . print_r($value, true));
+        }
+
+        throw new InvalidArgumentException("Value is not a valid string: " . print_r($value, true));
     }
 
-    if (is_numeric($value)) {
-        return (string)$value;
+    private function ensureInt(mixed $value): int
+    {
+        if (isset($value) && is_numeric($value)) {
+            return (int)$value;
+        }
+        throw new InvalidArgumentException("Value is not a valid integer: " . print_r($value, true));
     }
-
-    if ($value === null) {
-        throw new InvalidArgumentException("Value is null, expected a valid string: " . print_r($value, true));
-    }
-
-    throw new InvalidArgumentException("Value is not a valid string: " . print_r($value, true));
-}
-
-private function ensureInt(mixed $value): int
-{
-    if (isset($value) && is_numeric($value)) {
-        return (int)$value;
-    }
-    throw new InvalidArgumentException("Value is not a valid integer: " . print_r($value, true));
-}
 
 }

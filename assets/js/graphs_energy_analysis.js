@@ -200,7 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const labels = Array.from(new Set(data.data.map(item => item.year)));
 
             // Definiera elområden
-            const elomrades = ['se1', 'se2', 'se3', 'se4'];
+            const elomrades = ['SE1', 'SE2', 'SE3', 'SE4'];
 
             // Skapa dataset för varje elområde
             const datasets = elomrades.map((elomrade, index) => {
@@ -213,10 +213,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 const backgroundColors = colors.map(color => color.replace('1)', '0.2)'));
 
                 return {
-                    label: elomrade,
+                    label: elomrade.toUpperCase(),
                     data: labels.map(year => {
                         const item = data.data.find(
-                            d => d.year === year && d.elomrade === elomrade);
+                            d => d.year === year && d.elomrade.toLowerCase() === elomrade
+                        );
 
                         return item ? item.annualCost : 0;
                     }),
