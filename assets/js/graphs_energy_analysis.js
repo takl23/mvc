@@ -194,6 +194,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(response => response.json())
         .then(data => {
             console.log("Data fetched from API:", data);
+
             const ctx = document.getElementById('annualCostPerPersonChart').getContext('2d');
 
             // Hämta unika år som etiketter för X-axeln
@@ -213,10 +214,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 const backgroundColors = colors.map(color => color.replace('1)', '0.2)'));
 
                 return {
-                    label: elomrade.toUpperCase(),
+                    label: elomrade,
                     data: labels.map(year => {
                         const item = data.data.find(
-                            d => d.year === year && d.elomrade.toLowerCase() === elomrade
+                            d => d.year === year && d.elomrade === elomrade
                         );
 
                         return item ? item.annualCost : 0;

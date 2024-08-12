@@ -75,7 +75,6 @@ class ResetAndImportDataCommand extends Command
     {
         $cmd = $this->entityManager->getClassMetadata($entityClass);
         $connection = $this->entityManager->getConnection();
-        $dbPlatform = $connection->getDatabasePlatform();
 
         $connection->executeQuery('DELETE FROM ' . $cmd->getTableName());
         $connection->executeQuery('VACUUM');
