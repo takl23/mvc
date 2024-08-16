@@ -28,7 +28,7 @@ class CalculateAnnualCostPerPersonCommand extends Command
         parent::__construct();
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         $this->setDescription('Calculates the annual electricity cost per person per elområde.');
     }
