@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\PopulationPerElomrade;
 use App\Entity\AverageConsumption;
 use App\Entity\ConsumptionPerCapita;
+use Exception;
 
 class ConsumptionPerCapitaService
 {
@@ -43,7 +44,7 @@ class ConsumptionPerCapitaService
         //error_log("Genomsnittlig förbrukning hämtad: " . json_encode($averageConsumptions));
 
         if (empty($populationsPerElomrade) || empty($averageConsumptions)) {
-            throw new \Exception("Missing necessary data to calculate consumption per capita.");
+            throw new Exception("Missing necessary data to calculate consumption per capita.");
         }
 
         // Skapa en mapping mellan år och elområde för population och förbrukning
