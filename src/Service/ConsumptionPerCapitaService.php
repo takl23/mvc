@@ -59,22 +59,23 @@ class ConsumptionPerCapitaService
         foreach ($averageConsumptions as $consumption) {
             $year = $consumption->getYear();
             foreach (['SE1', 'SE2', 'SE3', 'SE4'] as $elomrade) {
-                if (isset($populationMap[$year][$elomrade])) {
-                    $population = $populationMap[$year][$elomrade];
-                    $consumptionGWh = $consumption->{'get' . strtolower($elomrade)}();
-
-                    $consumptionKWh = $consumptionGWh * 1_000_000; // Convert GWh to kWh
-                    $consumptionPerCapitaValue = $consumptionKWh / $population;
-
-                    $consumptionPerCapita[] = [
-                        'year' => $year,
-                        'elomrade' => $elomrade,
-                        'consumptionPerCapita' => $consumptionPerCapitaValue,
-                    ];
-                } else {
-                    // Skip calculation for this year and elomrade if data is missing
+                if (!isset($populationMap[$year][$elomrade])) {
+                    // Hoppa över beräkningen för detta år och elområde om data saknas
                     error_log("Skipping year $year and elomrade $elomrade due to missing population data.");
+                    continue;
                 }
+
+                $population = $populationMap[$year][$elomrade];
+                $consumptionGWh = $consumption->{'get' . strtolower($elomrade)}();
+
+                $consumptionKWh = $consumptionGWh * 1_000_000; // Convert GWh to kWh
+                $consumptionPerCapitaValue = $consumptionKWh / $population;
+
+                $consumptionPerCapita[] = [
+                    'year' => $year,
+                    'elomrade' => $elomrade,
+                    'consumptionPerCapita' => $consumptionPerCapitaValue,
+                ];
             }
         }
 
@@ -96,7 +97,7 @@ class ConsumptionPerCapitaService
         $this->entityManager->flush();
 
         // Kontroll för att se hur många poster som sparats
-        $checkData = $this->entityManager->getRepository(ConsumptionPerCapita::class)->findAll();
+        //$checkData = $this->entityManager->getRepository(ConsumptionPerCapita::class)->findAll();
         //echo "Antal poster sparade: " . count($checkData) . "\n";
         //error_log("Antal poster sparade: " . count($checkData));
     }
