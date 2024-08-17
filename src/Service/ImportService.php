@@ -3,14 +3,7 @@
 namespace App\Service;
 
 use Doctrine\ORM\EntityManagerInterface;
-use App\Factory\RenewableEnergyTWhFactory;
-use App\Factory\RenewableEnergyPercentageFactory;
-use App\Factory\ElectricityPriceFactory;
-use App\Factory\AverageConsumptionFactory;
-use App\Factory\EnergySupplyGDPFactory;
-use App\Factory\LanElomradeFactory;
-use App\Factory\PopulationPerLanFactory;
-
+use App\Factory\FactoryManager;
 use App\Entity\RenewableEnergyTWh;
 use App\Entity\RenewableEnergyPercentage;
 use App\Entity\ElectricityPrice;
@@ -24,34 +17,16 @@ class ImportService
 {
     private EntityManagerInterface $entityManager;
     private SpreadsheetLoader $spreadsheetLoader;
-    private RenewableEnergyTWhFactory $renewableEnergyTWhFactory;
-    private RenewableEnergyPercentageFactory $renewableEnergyPercentageFactory;
-    private ElectricityPriceFactory $electricityPriceFactory;
-    private AverageConsumptionFactory $averageConsumptionFactory;
-    private EnergySupplyGDPFactory $energySupplyGDPFactory;
-    private LanElomradeFactory $lanElomradeFactory;
-    private PopulationPerLanFactory $populationPerLanFactory;
+    private FactoryManager $factoryManager;
 
     public function __construct(
         EntityManagerInterface $entityManager, 
         SpreadsheetLoader $spreadsheetLoader,
-        RenewableEnergyTWhFactory $renewableEnergyTWhFactory,
-        RenewableEnergyPercentageFactory $renewableEnergyPercentageFactory,
-        ElectricityPriceFactory $electricityPriceFactory,
-        AverageConsumptionFactory $averageConsumptionFactory,
-        EnergySupplyGDPFactory $energySupplyGDPFactory,
-        LanElomradeFactory $lanElomradeFactory,
-        PopulationPerLanFactory $populationPerLanFactory
+        FactoryManager $factoryManager
     ) {
         $this->entityManager = $entityManager;
         $this->spreadsheetLoader = $spreadsheetLoader;
-        $this->renewableEnergyTWhFactory = $renewableEnergyTWhFactory;
-        $this->renewableEnergyPercentageFactory = $renewableEnergyPercentageFactory;
-        $this->electricityPriceFactory = $electricityPriceFactory;
-        $this->averageConsumptionFactory = $averageConsumptionFactory;
-        $this->energySupplyGDPFactory = $energySupplyGDPFactory;
-        $this->lanElomradeFactory = $lanElomradeFactory;
-        $this->populationPerLanFactory = $populationPerLanFactory;
+        $this->factoryManager = $factoryManager;
     }
 
     public function import(string $filePath, string $sheetName, string $entityClass): void
@@ -66,7 +41,8 @@ class ImportService
             $data = $this->extractRowData($row);
 
             try {
-                $entity = $this->processRowData($data, $entityClass);
+                $factory = $this->factoryManager->getFactory($entityClass);
+                $entity = $factory->create($data);
 
                 if ($entity !== null && $this->isEntityValid($entity)) {
                     $this->entityManager->persist($entity);
@@ -90,28 +66,6 @@ class ImportService
         }
 
         return $data;
-    }
-
-    private function processRowData(array $data, string $entityClass): ?object
-    {
-        switch ($entityClass) {
-            case RenewableEnergyTWh::class:
-                return $this->renewableEnergyTWhFactory->create($data);
-            case RenewableEnergyPercentage::class:
-                return $this->renewableEnergyPercentageFactory->create($data);
-            case ElectricityPrice::class:
-                return $this->electricityPriceFactory->create($data);
-            case AverageConsumption::class:
-                return $this->averageConsumptionFactory->create($data);
-            case EnergySupplyGDP::class:
-                return $this->energySupplyGDPFactory->create($data);
-            case LanElomrade::class:
-                return $this->lanElomradeFactory->create($data);
-            case PopulationPerLan::class:
-                return $this->populationPerLanFactory->create($data);
-            default:
-                throw new Exception("Unknown entity class: $entityClass");
-        }
     }
 
     private function isHeaderRow(\PhpOffice\PhpSpreadsheet\Worksheet\Row $row): bool
