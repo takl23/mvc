@@ -8,9 +8,8 @@ class ElectricityPriceFactory
 {
     public function create(array $data): ?ElectricityPrice
     {
-
-        if ($data[0] === null) {
-            echo "Skipping row due to missing year in ElectricityPrice.\n";
+        if ($data[0] === null || !$this->isValidPriceData($data)) {
+            echo "Skipping row due to missing or invalid values in ElectricityPrice.\n";
             return null;
         }
 

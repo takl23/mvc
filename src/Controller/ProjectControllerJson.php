@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\RenewableEnergyPercentage;
@@ -21,241 +20,166 @@ use App\Repository\ElectricityPriceRepository;
 
 class ProjectControllerJson extends AbstractController
 {
-    #[Route("/api/renewable-energy", name: "api_renewable_energy_json")]
-    public function index(EntityManagerInterface $entityManager): Response
+    private EntityManagerInterface $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
     {
-        $repository = $entityManager->getRepository(RenewableEnergyPercentage::class);
-        $data = $repository->findAll();
+        $this->entityManager = $entityManager;
+    }
 
-        $formattedData = array_map(function ($item) {
-            return [
-                'year' => $item->getYear(),
-                'vim' => $item->getVIM(),
-                'el' => $item->getEl(),
-                'transport' => $item->getTransport(),
-                'total' => $item->getTotal(),
-            ];
-        }, $data);
-
-        $responseData = [
-            'data' => $formattedData,
-            'reference1' => 'https://www.sverigesmiljomal.se/miljomalen/generationsmalet/fornybar-energi/',
-            'reference2' => 'https://www.scb.se/hitta-statistik/temaomraden/agenda-2030/mal-7/#141072',
-            'date' => 'August 2024'
-        ];
-
-        $response = new JsonResponse($responseData);
-        $response->setEncodingOptions(
-            $response->getEncodingOptions() | JSON_PRETTY_PRINT
+    #[Route("/api/renewable-energy", name: "api_renewable_energy_json")]
+    public function index(): JsonResponse
+    {
+        return $this->generateJsonResponse(
+            RenewableEnergyPercentage::class,
+            function ($item) {
+                return [
+                    'year' => $item->getYear(),
+                    'vim' => $item->getVIM(),
+                    'el' => $item->getEl(),
+                    'transport' => $item->getTransport(),
+                    'total' => $item->getTotal(),
+                ];
+            },
+            'https://www.sverigesmiljomal.se/miljomalen/generationsmalet/fornybar-energi/'
         );
-
-        return $response;
     }
 
     #[Route("/api/renewable_energy_twh", name: "api_renewable_energy_twh")]
-    public function renewableEnergyTWh(EntityManagerInterface $entityManager): JsonResponse
+    public function renewableEnergyTWh(): JsonResponse
     {
-        $repository = $entityManager->getRepository(RenewableEnergyTWh::class);
-        $data = $repository->findAll();
-
-        $formattedData = array_map(function ($item) {
-            return [
-                'year' => $item->getYear(),
-                'biofuels' => $item->getBiofuels(),
-                'hydropower' => $item->getHydropower(),
-                'windPower' => $item->getWindPower(),
-                'heatPump' => $item->getHeatPump(),
-                'solarEnergy' => $item->getSolarEnergy(),
-                'total' => $item->getTotal(),
-                'statTransferToNorway' => $item->getStatTransferToNorway(),
-                'renewableEnergyInTargetCalculation' => $item->getRenewableEnergyInTargetCalculation(),
-                'totalEnergyUse' => $item->getTotalEnergyUse(),
-            ];
-        }, $data);
-
-        $response = new JsonResponse([
-            'data' => $formattedData,
-            'reference' => 'https://www.scb.se/hitta-statistik/temaomraden/agenda-2030/mal-7/#141072',
-            'date' => 'August 2024'
-        ]);
-
-        $response->setEncodingOptions($response->getEncodingOptions() | JSON_PRETTY_PRINT);
-
-        return $response;
+        return $this->generateJsonResponse(
+            RenewableEnergyTWh::class,
+            function ($item) {
+                return [
+                    'year' => $item->getYear(),
+                    'biofuels' => $item->getBiofuels(),
+                    'hydropower' => $item->getHydropower(),
+                    'windPower' => $item->getWindPower(),
+                    'heatPump' => $item->getHeatPump(),
+                    'solarEnergy' => $item->getSolarEnergy(),
+                    'total' => $item->getTotal(),
+                    'statTransferToNorway' => $item->getStatTransferToNorway(),
+                    'renewableEnergyInTargetCalculation' => $item->getRenewableEnergyInTargetCalculation(),
+                    'totalEnergyUse' => $item->getTotalEnergyUse(),
+                ];
+            },
+            'https://www.scb.se/hitta-statistik/temaomraden/agenda-2030/mal-7/#141072'
+        );
     }
 
     #[Route("/api/energy_supply_gdp", name: "api_energy_supply_gdp")]
-    public function energySupplyGDP(EntityManagerInterface $entityManager): JsonResponse
+    public function energySupplyGDP(): JsonResponse
     {
-        $repository = $entityManager->getRepository(EnergySupplyGDP::class);
-        $data = $repository->findAll();
-
-        $formattedData = array_map(function ($item) {
-            return [
-                'year' => $item->getYear(),
-                'precentage' => $item->getPrecentage(),
-            ];
-        }, $data);
-
-        $response = new JsonResponse([
-            'data' => $formattedData,
-            'reference' => 'https://www.scb.se/hitta-statistik/temaomraden/agenda-2030/mal-7/',
-            'date' => 'August 2024'
-        ]);
-
-        $response->setEncodingOptions($response->getEncodingOptions() | JSON_PRETTY_PRINT);
-
-        return $response;
+        return $this->generateJsonResponse(
+            EnergySupplyGDP::class,
+            function ($item) {
+                return [
+                    'year' => $item->getYear(),
+                    'precentage' => $item->getPrecentage(),
+                ];
+            },
+            'https://www.scb.se/hitta-statistik/temaomraden/agenda-2030/mal-7/'
+        );
     }
 
-
     #[Route("/api/average-consumption", name: "api_average_consumption")]
-    public function averageConsumption(EntityManagerInterface $entityManager): JsonResponse
+    public function averageConsumption(): JsonResponse
     {
-        $repository = $entityManager->getRepository(AverageConsumption::class);
-        $data = $repository->findAll();
-
-        $formattedData = array_map(function ($item) {
-            return [
-                'year' => $item->getYear(),
-                'se1' => $item->getse1(),
-                'se2' => $item->getse2(),
-                'se3' => $item->getse3(),
-                'se4' => $item->getse4(),
-            ];
-        }, $data);
-
-        $response = new JsonResponse([
-            'data' => $formattedData,
-            'reference' => 'https://www.statistikdatabasen.scb.se/pxweb/sv/ssd/START__EN__EN0105__EN0105A/ElAnvSNI2007ArN/table/tableViewLayout1/',
-            'date' => 'August 2024'
-        ]);
-
-        $response->setEncodingOptions($response->getEncodingOptions() | JSON_PRETTY_PRINT);
-
-        return $response;
+        return $this->generateJsonResponse(
+            AverageConsumption::class,
+            function ($item) {
+                return [
+                    'year' => $item->getYear(),
+                    'se1' => $item->getse1(),
+                    'se2' => $item->getse2(),
+                    'se3' => $item->getse3(),
+                    'se4' => $item->getse4(),
+                ];
+            },
+            'https://www.statistikdatabasen.scb.se/pxweb/sv/ssd/START__EN__EN0105__EN0105A/ElAnvSNI2007ArN/table/tableViewLayout1/'
+        );
     }
 
     #[Route("/api/electricity-price", name: "api_electricity_price")]
-    public function electricityPrice(EntityManagerInterface $entityManager): JsonResponse
+    public function electricityPrice(): JsonResponse
     {
-        $repository = $entityManager->getRepository(ElectricityPrice::class);
-        $data = $repository->findAll();
-
-        $formattedData = array_map(function ($item) {
-            return [
-                'year' => $item->getYear(),
-                'se1' => $item->getse1(),
-                'se2' => $item->getse2(),
-                'se3' => $item->getse3(),
-                'se4' => $item->getse4(),
-            ];
-        }, $data);
-
-        $response = new JsonResponse([
-            'data' => $formattedData,
-            'reference' =>
-            'https://data.nordpoolgroup.com/auction/day-ahead/prices?deliveryDate=latest&currency=SEK&aggregation=Yearly&deliveryAreas=se1,se2,se3,se4',
-            'date' => 'August 2024'
-        ]);
-
-        $response->setEncodingOptions($response->getEncodingOptions() | JSON_PRETTY_PRINT);
-
-        return $response;
+        return $this->generateJsonResponse(
+            ElectricityPrice::class,
+            function ($item) {
+                return [
+                    'year' => $item->getYear(),
+                    'se1' => $item->getse1(),
+                    'se2' => $item->getse2(),
+                    'se3' => $item->getse3(),
+                    'se4' => $item->getse4(),
+                ];
+            },
+            'https://data.nordpoolgroup.com/auction/day-ahead/prices?deliveryDate=latest&currency=SEK&aggregation=Yearly&deliveryAreas=se1,se2,se3,se4'
+        );
     }
 
     #[Route("/api/lan-elomrade", name: "api_lan_elomrade")]
-    public function lanElomrade(EntityManagerInterface $entityManager): JsonResponse
+    public function lanElomrade(): JsonResponse
     {
-        $repository = $entityManager->getRepository(LanElomrade::class);
-        $data = $repository->findAll();
-
-        $formattedData = array_map(function ($item) {
-            return [
-                'lan' => $item->getLan(),
-                'elomrade' => $item->getElomrade(),
-            ];
-        }, $data);
-
-        $response = new JsonResponse([
-            'data' => $formattedData,
-            'reference' => 'https://elavtaldirekt.se/elmarknad/elomraden/',
-            'date' => 'August 2024'
-        ]);
-
-        $response->setEncodingOptions($response->getEncodingOptions() | JSON_PRETTY_PRINT);
-
-        return $response;
+        return $this->generateJsonResponse(
+            LanElomrade::class,
+            function ($item) {
+                return [
+                    'lan' => $item->getLan(),
+                    'elomrade' => $item->getElomrade(),
+                ];
+            },
+            'https://elavtaldirekt.se/elmarknad/elomraden/'
+        );
     }
+
     #[Route("/api/population-per-elomrade", name: "api_population_per_elomrade")]
-    public function populationPerElomrade(EntityManagerInterface $entityManager): JsonResponse
+    public function populationPerElomrade(): JsonResponse
     {
-        $repository = $entityManager->getRepository(PopulationPerElomrade::class);
-        $data = $repository->findAll();
-
-        $formattedData = array_map(function ($item) {
-            return [
-                'year' => $item->getYear(),
-                'elomrade' => $item->getElomrade(),
-                'population' => $item->getPopulation(),
-            ];
-        }, $data);
-
-        $response = new JsonResponse([
-            'data' => $formattedData,
-            'reference' => 'https://www.scb.se/',
-            'date' => 'August 2024'
-        ]);
-
-        $response->setEncodingOptions($response->getEncodingOptions() | JSON_PRETTY_PRINT);
-
-        return $response;
+        return $this->generateJsonResponse(
+            PopulationPerElomrade::class,
+            function ($item) {
+                return [
+                    'year' => $item->getYear(),
+                    'elomrade' => $item->getElomrade(),
+                    'population' => $item->getPopulation(),
+                ];
+            },
+            'https://www.scb.se/'
+        );
     }
 
     #[Route("/api/consumption-per-capita", name: "api_consumption_per_capita")]
-    public function consumptionPerCapita(EntityManagerInterface $entityManager): JsonResponse
+    public function consumptionPerCapita(): JsonResponse
     {
-        $repository = $entityManager->getRepository(ConsumptionPerCapita::class);
-        $data = $repository->findAll();
-
-        $formattedData = array_map(function ($item) {
-            return [
-                'year' => $item->getYear(),
-                'elomrade' => $item->getElomrade(),
-                'consumptionPerCapita' => $item->getConsumptionPerCapita(),
-            ];
-        }, $data);
-
-        $response = new JsonResponse([
-            'data' => $formattedData,
-            'reference' => 'https://www.scb.se/',
-            'date' => 'August 2024'
-        ]);
-
-        $response->setEncodingOptions($response->getEncodingOptions() | JSON_PRETTY_PRINT);
-
-        return $response;
+        return $this->generateJsonResponse(
+            ConsumptionPerCapita::class,
+            function ($item) {
+                return [
+                    'year' => $item->getYear(),
+                    'elomrade' => $item->getElomrade(),
+                    'consumptionPerCapita' => $item->getConsumptionPerCapita(),
+                ];
+            },
+            'https://www.scb.se/'
+        );
     }
 
     #[Route("/api/annual-cost-per-person", name: "api_annual_cost_per_person")]
-    public function annualCostPerPerson(EntityManagerInterface $entityManager): JsonResponse
+    public function annualCostPerPerson(): JsonResponse
     {
-        $repository = $entityManager->getRepository(AverageAnnualCostPerPerson::class);
-        $data = $repository->findAll();
-
-        $formattedData = array_map(function ($item) {
-            return [
-                'year' => $item->getYear(),
-                'elomrade' => $item->getElomrade(),
-                'annualCost' => $item->getAverageCostPerPerson(),
-            ];
-        }, $data);
-
-        $response = new JsonResponse(['data' => $formattedData]);
-
-        $response->setEncodingOptions($response->getEncodingOptions() | JSON_PRETTY_PRINT);
-
-        return $response;
+        return $this->generateJsonResponse(
+            AverageAnnualCostPerPerson::class,
+            function ($item) {
+                return [
+                    'year' => $item->getYear(),
+                    'elomrade' => $item->getElomrade(),
+                    'annualCost' => $item->getAverageCostPerPerson(),
+                ];
+            },
+            'https://www.scb.se/'
+        );
     }
 
     #[Route("/api/calculate-electricity-cost", name: "api_calculate_electricity_cost", methods: ["POST"])]
@@ -280,8 +204,7 @@ class ProjectControllerJson extends AbstractController
             ], 400);
         }
 
-        // Hämta det senaste elpriset för det angivna elområdet
-        $electricityPrice = $electricityPriceRepository->findOneBy([], ['year' => 'DESC']); // Hämta senaste året
+        $electricityPrice = $electricityPriceRepository->findOneBy([], ['year' => 'DESC']); 
 
         if (!$electricityPrice) {
             return new JsonResponse([
@@ -290,29 +213,21 @@ class ProjectControllerJson extends AbstractController
             ], 404);
         }
 
-        // Välj rätt pris för det angivna elområdet
-        $pricePerKwh = null;
-        switch ($elomrade) {
-            case 'se1':
-                $pricePerKwh = $electricityPrice->getse1();
-                break;
-            case 'se2':
-                $pricePerKwh = $electricityPrice->getse2();
-                break;
-            case 'se3':
-                $pricePerKwh = $electricityPrice->getse3();
-                break;
-            case 'se4':
-                $pricePerKwh = $electricityPrice->getse4();
-                break;
-            default:
-                return new JsonResponse([
-                    'status' => 'error',
-                    'message' => 'Invalid elomrade specified.'
-                ], 400);
+        $pricePerKwh = match ($elomrade) {
+            'se1' => $electricityPrice->getse1(),
+            'se2' => $electricityPrice->getse2(),
+            'se3' => $electricityPrice->getse3(),
+            'se4' => $electricityPrice->getse4(),
+            default => null,
+        };
+
+        if ($pricePerKwh === null) {
+            return new JsonResponse([
+                'status' => 'error',
+                'message' => 'Invalid elomrade specified.'
+            ], 400);
         }
 
-        // Beräkna kostnaden baserat på snittförbrukning och elpris
         $cost = $consumption * $pricePerKwh;
 
         return new JsonResponse([
@@ -324,4 +239,21 @@ class ProjectControllerJson extends AbstractController
         ]);
     }
 
+    private function generateJsonResponse(string $entityClass, callable $formatter, string $reference): JsonResponse
+    {
+        $repository = $this->entityManager->getRepository($entityClass);
+        $data = $repository->findAll();
+
+        $formattedData = array_map($formatter, $data);
+
+        $response = new JsonResponse([
+            'data' => $formattedData,
+            'reference' => $reference,
+            'date' => 'August 2024'
+        ]);
+
+        $response->setEncodingOptions($response->getEncodingOptions() | JSON_PRETTY_PRINT);
+
+        return $response;
+    }
 }
