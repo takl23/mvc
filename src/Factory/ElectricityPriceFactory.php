@@ -8,18 +8,19 @@ class ElectricityPriceFactory
 {
     public function create(array $data): ?ElectricityPrice
     {
-        if ($this->isValidPriceData($data)) {
-            $entity = new ElectricityPrice();
-            $entity->setYear($this->ensureInt($data[0]));
-            $entity->setSe1($this->ensureFloat($data[1]));
-            $entity->setSe2($this->ensureFloat($data[2]));
-            $entity->setSe3($this->ensureFloat($data[3]));
-            $entity->setSe4($this->ensureFloat($data[4]));
-            return $entity;
-        } else {
-            echo "Skipping row due to missing values in ElectricityPrice.\n";
+
+        if ($data[0] === null) {
+            echo "Skipping row due to missing year in ElectricityPrice.\n";
             return null;
         }
+
+        $entity = new ElectricityPrice();
+        $entity->setYear($this->ensureInt($data[0]));
+        $entity->setSe1($this->ensureFloat($data[1]));
+        $entity->setSe2($this->ensureFloat($data[2]));
+        $entity->setSe3($this->ensureFloat($data[3]));
+        $entity->setSe4($this->ensureFloat($data[4]));
+        return $entity;
     }
 
     private function ensureFloat(mixed $value): float

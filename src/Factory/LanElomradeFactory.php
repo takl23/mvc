@@ -8,15 +8,16 @@ class LanElomradeFactory
 {
     public function create(array $data): ?LanElomrade
     {
-        if ($data[0] !== null && $data[1] !== null) {
-            $entity = new LanElomrade();
-            $entity->setLan($this->ensureString($data[0]));
-            $entity->setElomrade($this->ensureString($data[1]));
-            return $entity;
-        } else {
-            echo "Skipping row due to missing values in LanElomrade.\n";
+
+        if ($data[0] === null) {
+            echo "Skipping row due to missing year in PopulationPerLan.\n";
             return null;
         }
+
+        $entity = new LanElomrade();
+        $entity->setLan($this->ensureString($data[0]));
+        $entity->setElomrade($this->ensureString($data[1]));
+        return $entity;
     }
 
     private function ensureString(mixed $value): string
