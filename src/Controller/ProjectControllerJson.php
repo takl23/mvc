@@ -204,7 +204,7 @@ class ProjectControllerJson extends AbstractController
             ], 400);
         }
 
-        $electricityPrice = $electricityPriceRepository->findOneBy([], ['year' => 'DESC']); 
+        $electricityPrice = $electricityPriceRepository->findOneBy([], ['year' => 'DESC']);
 
         if (!$electricityPrice) {
             return new JsonResponse([
@@ -239,6 +239,12 @@ class ProjectControllerJson extends AbstractController
         ]);
     }
 
+    /**
+ * @param class-string<object> $entityClass
+ * @param callable $formatter
+ * @param string $reference
+ * @return JsonResponse
+ */
     private function generateJsonResponse(string $entityClass, callable $formatter, string $reference): JsonResponse
     {
         $repository = $this->entityManager->getRepository($entityClass);

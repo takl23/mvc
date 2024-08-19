@@ -5,13 +5,18 @@ namespace App\Factory;
 use App\Entity\RenewableEnergyPercentage;
 use InvalidArgumentException;
 
-
 class RenewableEnergyPercentageFactory
 {
+    /**
+     * Create a RenewableEnergyPercentage entity from an array of data.
+     *
+     * @param array<int, mixed> $data The data used to create the entity.
+     * @return RenewableEnergyPercentage
+     */
     public function create(array $data): RenewableEnergyPercentage
     {
         $entity = new RenewableEnergyPercentage();
-        
+
         // Här antar jag att din data har följande struktur, justera efter behov
         $entity->setYear($this->ensureInt($data[0]));
         $entity->setVIM($this->ensureInt($data[1]));
@@ -22,6 +27,13 @@ class RenewableEnergyPercentageFactory
         return $entity;
     }
 
+    /**
+     * Ensures that a value is an integer.
+     *
+     * @param mixed $value The value to ensure is an integer.
+     * @return int
+     * @throws InvalidArgumentException if the value is not a valid integer.
+     */
     private function ensureInt(mixed $value): int
     {
         if (isset($value) && is_numeric($value)) {

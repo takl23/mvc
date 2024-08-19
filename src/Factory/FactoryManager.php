@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Factory;
 
 use App\Entity\RenewableEnergyTWh;
@@ -38,7 +39,13 @@ class FactoryManager
         $this->populationPerLanFactory = $populationPerLanFactory;
     }
 
-    public function getFactory(string $entityClass)
+    public function getFactory(string $entityClass): RenewableEnergyTWhFactory |
+    RenewableEnergyPercentageFactory |
+    ElectricityPriceFactory |
+    AverageConsumptionFactory |
+    EnergySupplyGDPFactory |
+    LanElomradeFactory |
+    PopulationPerLanFactory
     {
         switch ($entityClass) {
             case RenewableEnergyTWh::class:

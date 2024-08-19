@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Factory;
 
 use App\Entity\LanElomrade;
@@ -6,6 +7,12 @@ use InvalidArgumentException;
 
 class LanElomradeFactory
 {
+    /**
+     * Create a LanElomrade entity from an array of data.
+     *
+     * @param array<int, mixed> $data The data used to create the entity.
+     * @return LanElomrade|null
+     */
     public function create(array $data): ?LanElomrade
     {
 
@@ -20,7 +27,14 @@ class LanElomradeFactory
         return $entity;
     }
 
-    private function ensureString(mixed $value): string
+
+    /**
+         * Ensure the value is a valid string.
+         *
+         * @param mixed $value
+         * @return string
+         * @throws InvalidArgumentException
+         */    private function ensureString(mixed $value): string
     {
         if (is_string($value)) {
             return $value;

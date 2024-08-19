@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Factory;
 
 use App\Entity\RenewableEnergyTWh;
@@ -6,6 +7,12 @@ use InvalidArgumentException;
 
 class RenewableEnergyTWhFactory
 {
+    /**
+ * Create a RenewableEnergyTWh entity from an array of data.
+ *
+ * @param array<int, mixed> $data The data used to create the entity.
+ * @return RenewableEnergyTWh
+ */
     public function create(array $data): RenewableEnergyTWh
     {
         $entity = new RenewableEnergyTWh();

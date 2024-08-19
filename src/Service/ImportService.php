@@ -20,7 +20,7 @@ class ImportService
     private FactoryManager $factoryManager;
 
     public function __construct(
-        EntityManagerInterface $entityManager, 
+        EntityManagerInterface $entityManager,
         SpreadsheetLoader $spreadsheetLoader,
         FactoryManager $factoryManager
     ) {
@@ -55,6 +55,12 @@ class ImportService
         $this->entityManager->flush();
     }
 
+    /**
+ * Extracts row data from a spreadsheet row.
+ *
+ * @param \PhpOffice\PhpSpreadsheet\Worksheet\Row $row
+ * @return array<int, mixed> The array containing values from the row cells.
+ */
     private function extractRowData(\PhpOffice\PhpSpreadsheet\Worksheet\Row $row): array
     {
         $cellIterator = $row->getCellIterator();
@@ -74,72 +80,72 @@ class ImportService
     }
 
     private function isEntityValid(object $entity): bool
-{
-    if ($entity instanceof RenewableEnergyTWh) {
-        return $this->isRenewableEnergyTWhValid($entity);
+    {
+        if ($entity instanceof RenewableEnergyTWh) {
+            return $this->isRenewableEnergyTWhValid($entity);
+        }
+
+        if ($entity instanceof RenewableEnergyPercentage) {
+            return $this->isRenewableEnergyPercentageValid($entity);
+        }
+
+        if ($entity instanceof ElectricityPrice) {
+            return $this->isElectricityPriceValid($entity);
+        }
+
+        if ($entity instanceof AverageConsumption) {
+            return $this->isAverageConsumptionValid($entity);
+        }
+
+        if ($entity instanceof EnergySupplyGDP) {
+            return $this->isEnergySupplyGDPValid($entity);
+        }
+
+        if ($entity instanceof PopulationPerLan) {
+            return $this->isPopulationPerLanValid($entity);
+        }
+
+        if ($entity instanceof LanElomrade) {
+            return $this->isLanElomradeValid($entity);
+        }
+
+        return false;
     }
 
-    if ($entity instanceof RenewableEnergyPercentage) {
-        return $this->isRenewableEnergyPercentageValid($entity);
+
+    private function isRenewableEnergyTWhValid(RenewableEnergyTWh $entity): bool
+    {
+        return $entity->getYear() !== null && $entity->getYear() > 0;
     }
 
-    if ($entity instanceof ElectricityPrice) {
-        return $this->isElectricityPriceValid($entity);
+    private function isRenewableEnergyPercentageValid(RenewableEnergyPercentage $entity): bool
+    {
+        return $entity->getYear() !== null && $entity->getYear() > 0;
     }
 
-    if ($entity instanceof AverageConsumption) {
-        return $this->isAverageConsumptionValid($entity);
+    private function isElectricityPriceValid(ElectricityPrice $entity): bool
+    {
+        return $entity->getYear() !== null && $entity->getYear() > 0;
     }
 
-    if ($entity instanceof EnergySupplyGDP) {
-        return $this->isEnergySupplyGDPValid($entity);
+    private function isAverageConsumptionValid(AverageConsumption $entity): bool
+    {
+        return $entity->getYear() !== null && $entity->getYear() > 0;
     }
 
-    if ($entity instanceof PopulationPerLan) {
-        return $this->isPopulationPerLanValid($entity);
+    private function isEnergySupplyGDPValid(EnergySupplyGDP $entity): bool
+    {
+        return $entity->getYear() !== null && $entity->getYear() > 0;
     }
 
-    if ($entity instanceof LanElomrade) {
-        return $this->isLanElomradeValid($entity);
+    private function isPopulationPerLanValid(PopulationPerLan $entity): bool
+    {
+        return $entity->getYear() !== null && $entity->getYear() > 0;
     }
 
-    return false;
-}
-
-
-private function isRenewableEnergyTWhValid(RenewableEnergyTWh $entity): bool
-{
-    return $entity->getYear() !== null && $entity->getYear() > 0;
-}
-
-private function isRenewableEnergyPercentageValid(RenewableEnergyPercentage $entity): bool
-{
-    return $entity->getYear() !== null && $entity->getYear() > 0;
-}
-
-private function isElectricityPriceValid(ElectricityPrice $entity): bool
-{
-    return $entity->getYear() !== null && $entity->getYear() > 0;
-}
-
-private function isAverageConsumptionValid(AverageConsumption $entity): bool
-{
-    return $entity->getYear() !== null && $entity->getYear() > 0;
-}
-
-private function isEnergySupplyGDPValid(EnergySupplyGDP $entity): bool
-{
-    return $entity->getYear() !== null && $entity->getYear() > 0;
-}
-
-private function isPopulationPerLanValid(PopulationPerLan $entity): bool
-{
-    return $entity->getYear() !== null && $entity->getYear() > 0;
-}
-
-private function isLanElomradeValid(LanElomrade $entity): bool
-{
-    return $entity->getLan() !== null && $entity->getElomrade() !== null;
-}
+    private function isLanElomradeValid(LanElomrade $entity): bool
+    {
+        return $entity->getLan() !== null && $entity->getElomrade() !== null;
+    }
 
 }

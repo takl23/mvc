@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Factory;
 
 use App\Entity\PopulationPerLan;
@@ -6,6 +7,12 @@ use InvalidArgumentException;
 
 class PopulationPerLanFactory
 {
+    /**
+     * Create a PopulationPerLan entity from an array of data.
+     *
+     * @param array<int, mixed> $data The data used to create the entity.
+     * @return PopulationPerLan|null
+     */
     public function create(array $data): ?PopulationPerLan
     {
         if ($data[0] === null) {
@@ -38,6 +45,13 @@ class PopulationPerLanFactory
         return $entity;
     }
 
+    /**
+     * Ensure the value is a valid string.
+     *
+     * @param mixed $value
+     * @return string
+     * @throws InvalidArgumentException
+     */
     private function ensureString(mixed $value): string
     {
         if (is_string($value)) {
@@ -55,7 +69,14 @@ class PopulationPerLanFactory
         throw new InvalidArgumentException("Value is not a valid string: " . print_r($value, true));
     }
 
-    private function ensureInt(mixed $value): int
+
+    /**
+         * Ensure the value is a valid integer.
+         *
+         * @param mixed $value
+         * @return int
+         * @throws InvalidArgumentException
+         */    private function ensureInt(mixed $value): int
     {
         if (isset($value) && is_numeric($value)) {
             return (int) $value;
