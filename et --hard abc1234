@@ -1,0 +1,135 @@
+[33m6fe1349[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m  Replace EntityManagerInterface with Doctrine\DBAL\Connection
+[33mc31a376[m REmove spredsheetloader and EntityManagerInterface and remake ImporteService
+[33madbb845[m Make composer lint and csfix
+[33maa34d21[m Add correction for phpmd and exclude TooManyFields and TooManyPublicMethods for given range!
+[33mfdb6bd5[m Correct phpmd elseexpression
+[33m5ea1df1[m Update according to  phpmd
+[33mb456833[m Add FactoryManager for all factories and reduce Coupling between objects for ImprovedService from 23 to 16
+[33mf32b19d[m Imporve  CyclomaticComplexity  for ImporteService
+[33m33e1e8b[m Add SpreadsheetLoader
+[33m279410c[m Make phpunit test correction
+[33m3c57fc9[m Make phpmd fixes and correct graph
+[33m21028aa[m Add new graph and make csfix
+[33m84a38c2[m Correct errors
+[33m3f2b8a7[m Run Linters
+[33m3477de1[m Make linter correction
+[33m00848fc[m Make csfix
+[33m430994d[m Update in presentation
+[33mbda4133[m Add post route for calculatin annual cost
+[33m69d2918[m Add EntityManagerInterface for working with database
+[33m00403be[m Add discussion fo renergy analysis
+[33m875b256[m Add new tabel in database annual cost per person and year
+[33m0cabcd6[m Make graf representation for cunsumption per capita and population per elomrade
+[33m32a1c5c[m Add table consumption per capita
+[33mfd88cb0[m Create table for population per elomrade
+[33m96fe784[m Change name of folder to Service
+[33m04aa4ce[m Add ResetAndImportDataCommand for updating database, Update database
+[33mcee0269[m Add service files
+[33m5119106[m Create new tabel in database and update in energy-analysis
+[33m9714fa7[m Add energy_analysis data
+[33m98754fa[m Add grafs and javascript
+[33m038636d[m Add JSON for new database data
+[33mc3e6403[m Add database data
+[33m40c6589[m Add backup file for database
+[33m78d24cf[m Correct services.yaml and update report text
+[33m84e3fda[m Add chart.js and add graf representation
+[33m45d188b[m Add data for database and correct misspellings
+[33m28f7f28[m Add tabel in database energy_supply_gdp and add data to it
+[33m01c7ba2[m Add database tabels and JSON print
+[33mef7a801[m Add Excel import services and command
+[33m7ec6c8f[m Add Excel import services and command
+[33m7ac4519[m Correct spelling
+[33mde6923b[m Correct spelling
+[33m4637707[m Update styling, add text in about and created new page goal
+[33mdeedc94[m Add styling for project
+[33m7f801c1[m Add base structure for project
+[33mf164cc4[m[33m ([m[1;33mtag: v6.0.0[m[33m)[m Add kmom06 report text
+[33mbd11b4d[m Make tests
+[33m0bf8533[m Update reporttext in /metric
+[33maae329d[m Test with PhpMetric
+[33mc617360[m Test with PhpMetric
+[33m9af944c[m Update method jsonDraw and jsonDrawMany to use method drawCardToHand from class CardHand
+[33m3f61f56[m Update CardHand with new method drawCardToHand and update CardGameCotroller to use new method drawCardToHand in drawOneCard and drawFiveCards
+[33meed6785[m Update metod processResult and sumHand and test with PhpMetric
+[33m28a1d69[m Add comments and make PhpMetric test
+[33mc73c0e7[m Add comments and make PhpMetric test
+[33m2b5b0c6[m New PhpMetric analysis
+[33mf72edbc[m Add explanations
+[33mc88132d[m Add test for Library and Product
+[33me77da0e[m Update text for /metric
+[33m47e50f1[m Update text for /meric
+[33m3a44276[m Add MetricController
+[33mb84b867[m Add scrutinizer
+[33m69b4534[m Add PhpMetrics
+[33mddc4ca3[m[33m ([m[1;33mtag: v5.0.0[m[33m)[m Correct style
+[33med90816[m Add report for kmom05
+[33madcab93[m FIx code according to PHPStan
+[33m9c075cb[m Add JSON control for library
+[33m7c213d6[m Add style to update view
+[33m458d66e[m Add style to update view
+[33m793bd85[m Add style to update view
+[33mbcab807[m Add update function and update usage of linking book covers
+[33mec47829[m Add delete option to book in library
+[33mb2cda2c[m Add cover 1-3
+[33me199d8e[m Add flashmessage
+[33mcc51364[m Style library
+[33m3c58b6f[m Enable Fontawesom
+[33mded5fdb[m Add view all books and style for table
+[33m4690c50[m Add Doctrine ORM and start Library page
+[33mcf0324c[m[33m ([m[1;33mtag: v4.0.0[m[33m)[m Add report text for task kmom04
+[33m8cc1f56[m Add report text for task kmom04
+[33mb014a73[m Make lint correction
+[33mf0eacb0[m Make lint correction
+[33m92ff481[m Add phpunit testing for Game21
+[33m406c56e[m Add phpunit testing on CardGraphic and CardHand
+[33m5c8b027[m Add phpunit test for class DeckOfCards.php
+[33mc1c2550[m Add phpunit test for class Card
+[33m4bee549[m Make phpUnit testing aviable
+[33m69d1947[m[33m ([m[1;33mtag: v3.0.1[m[33m)[m Add Game21ControllerJson
+[33m7850182[m[33m ([m[1;33mtag: v3.0.0[m[33m)[m Add json score representation for game 21
+[33madf941b[m Update according to PHPStan
+[33m146316d[m Add result page and flashmessage and style
+[33m3186a92[m Add cardhand player 2 and process for winner
+[33m729940e[m Initiate game process, draw cards and calculate sum for hand
+[33m26ae678[m Start game21 and test card handout to player1 and player 2
+[33mabb016e[m Add text for documentation and game intro
+[33mcd86213[m Create first page and documentation page for game 21
+[33m0ee5f1c[m Clean code with phpmd and phpstan
+[33m449342d[m Uppdate
+[33m866a3be[m Uppdate composer
+[33mac453e7[m[33m ([m[1;33mtag: v2.0.1[m[33m)[m  Clean code
+[33mf30fbfd[m[33m ([m[1;33mtag: v2.0.0[m[33m)[m  Add text for kmom02 in reportpage
+[33mae794a9[m Update with description of card game, the classes it uses and their relation
+[33m3121dff[m Update title
+[33m75bcada[m Update route
+[33me6d228b[m Add CardGraphic representation for route deck and clean code
+[33m5c152e8[m Add test of CardGraphic
+[33ma4e61f8[m Test new class CardGraphic
+[33ma9ce46c[m Add CardGraphic.php
+[33m8fb167d[m Remove test folder
+[33m2bc761e[m Add link to delete session
+[33m9666744[m Add option to draw one or more cards from deck
+[33m9755b10[m Correct spelling
+[33mfb8299c[m Add controller for JSN represantation of sorted and shuffled deck
+[33maca9618[m Add route, functions and html for drawing more then one card
+[33me169a3f[m Create sorted deck, unsorted deck, and fnction draw card from deck, and session handling
+[33m8513cdf[m Add Api qoute link in nav bar
+[33ma743e50[m Create deck of cards
+[33m59b1bbb[m Fix RewriteRule
+[33m7993caa[m Add link
+[33m76bc210[m Add styling for flash messag
+[33m2727a4b[m Add styling for flash message
+[33ma940bf5[m Add link for card homepage
+[33ma4bf4bc[m Add template for homepage card game
+[33m67c47af[m Add template for flashmessage
+[33ma04436b[m Add new controller for card game
+[33m282ea03[m Fix small error
+[33m7d29f6a[m Add PHP Codinng Standard Fixers
+[33mf7e6202[m[33m ([m[1;33mtag: v1.0.1[m[33m)[m Added raouter /links
+[33mc487770[m[33m ([m[1;33mtag: v1.0.0[m[33m)[m Updates made in about page, kmom01 text in report page and in README file
+[33mede681c[m Report text for first assigment kmom01
+[33m67a8b9c[m Update README.md
+[33m00a4512[m Update README.md
+[33m21c1fec[m Initial release
+[33m0df534e[m me-page, about, report and lucky number created in web page and also route /api not aviable in nav bar
+[33m78e09dd[m First commit

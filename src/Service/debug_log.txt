@@ -1,0 +1,290 @@
+Starting population calculation and saving process...
+Truncated population_per_elomrade table.
+Created lanToElomrade mapping: Array
+(
+    [Stockholms län] => SE3
+    [Uppsala län] => SE3
+    [Västerbottens län] => SE2
+    [Gotlands län] => SE4
+)
+
+Processing year: 2020
+Checking property: stockholm for län: Stockholms län and elområde: SE3
+Successfully accessed population value for stockholm: 1000000
+Checking property: uppsala for län: Uppsala län and elområde: SE3
+Successfully accessed population value for uppsala: 200000
+Checking property: vasterbotten for län: Västerbottens län and elområde: SE2
+Successfully accessed population value for vasterbotten: 
+Checking property: gotland for län: Gotlands län and elområde: SE4
+Successfully accessed population value for gotland: 
+Processing year: 2020
+Checking property: stockholm for län: Stockholms län and elområde: SE3
+Successfully accessed population value for stockholm: 
+Checking property: uppsala for län: Uppsala län and elområde: SE3
+Successfully accessed population value for uppsala: 
+Checking property: vasterbotten for län: Västerbottens län and elområde: SE2
+Successfully accessed population value for vasterbotten: 300000
+Checking property: gotland for län: Gotlands län and elområde: SE4
+Successfully accessed population value for gotland: 
+Processing year: 2020
+Checking property: stockholm for län: Stockholms län and elområde: SE3
+Successfully accessed population value for stockholm: 
+Checking property: uppsala for län: Uppsala län and elområde: SE3
+Successfully accessed population value for uppsala: 
+Checking property: vasterbotten for län: Västerbottens län and elområde: SE2
+Successfully accessed population value for vasterbotten: 
+Checking property: gotland for län: Gotlands län and elområde: SE4
+Successfully accessed population value for gotland: 100000
+Processing year: 2020
+Checking property: stockholm for län: Stockholms län and elområde: SE3
+Successfully accessed population value for stockholm: 
+Checking property: uppsala for län: Uppsala län and elområde: SE3
+Successfully accessed population value for uppsala: 
+Checking property: vasterbotten for län: Västerbottens län and elområde: SE2
+Successfully accessed population value for vasterbotten: 
+Checking property: gotland for län: Gotlands län and elområde: SE4
+Successfully accessed population value for gotland: 
+Persisted PopulationPerElomrade for elområde: SE3 in year: 2020 with population: 1200000
+Persisted PopulationPerElomrade for elområde: SE2 in year: 2020 with population: 300000
+Persisted PopulationPerElomrade for elområde: SE4 in year: 2020 with population: 100000
+Flush called on entity manager.
+Starting population calculation and saving process...
+Truncated population_per_elomrade table.
+Created lanToElomrade mapping: Array
+(
+    [Stockholms län] => SE3
+    [Uppsala län] => SE3
+    [Västerbottens län] => SE2
+    [Gotlands län] => SE4
+    [Norrbottens län] => SE1
+)
+
+Processing year: 2020
+Checking property: stockholm for län: Stockholms län and elområde: SE3
+Successfully accessed population value for stockholm: 1000000
+Checking property: uppsala for län: Uppsala län and elområde: SE3
+Successfully accessed population value for uppsala: 200000
+Checking property: vasterbotten for län: Västerbottens län and elområde: SE2
+Successfully accessed population value for vasterbotten: 
+Checking property: gotland for län: Gotlands län and elområde: SE4
+Successfully accessed population value for gotland: 
+Checking property: norrbotten for län: Norrbottens län and elområde: SE1
+Successfully accessed population value for norrbotten: 249614
+Processing year: 2020
+Checking property: stockholm for län: Stockholms län and elområde: SE3
+Successfully accessed population value for stockholm: 
+Checking property: uppsala for län: Uppsala län and elområde: SE3
+Successfully accessed population value for uppsala: 
+Checking property: vasterbotten for län: Västerbottens län and elområde: SE2
+Successfully accessed population value for vasterbotten: 300000
+Checking property: gotland for län: Gotlands län and elområde: SE4
+Successfully accessed population value for gotland: 
+Checking property: norrbotten for län: Norrbottens län and elområde: SE1
+Successfully accessed population value for norrbotten: 
+Processing year: 2020
+Checking property: stockholm for län: Stockholms län and elområde: SE3
+Successfully accessed population value for stockholm: 
+Checking property: uppsala for län: Uppsala län and elområde: SE3
+Successfully accessed population value for uppsala: 
+Checking property: vasterbotten for län: Västerbottens län and elområde: SE2
+Successfully accessed population value for vasterbotten: 
+Checking property: gotland for län: Gotlands län and elområde: SE4
+Successfully accessed population value for gotland: 100000
+Checking property: norrbotten for län: Norrbottens län and elområde: SE1
+Successfully accessed population value for norrbotten: 
+Processing year: 2020
+Checking property: stockholm for län: Stockholms län and elområde: SE3
+Successfully accessed population value for stockholm: 
+Checking property: uppsala for län: Uppsala län and elområde: SE3
+Successfully accessed population value for uppsala: 
+Checking property: vasterbotten for län: Västerbottens län and elområde: SE2
+Successfully accessed population value for vasterbotten: 
+Checking property: gotland for län: Gotlands län and elområde: SE4
+Successfully accessed population value for gotland: 
+Checking property: norrbotten for län: Norrbottens län and elområde: SE1
+Successfully accessed population value for norrbotten: 
+Persisted PopulationPerElomrade for elområde: SE3 in year: 2020 with population: 1200000
+Persisted PopulationPerElomrade for elområde: SE2 in year: 2020 with population: 300000
+Persisted PopulationPerElomrade for elområde: SE4 in year: 2020 with population: 100000
+Persisted PopulationPerElomrade for elområde: SE1 in year: 2020 with population: 249614
+Flush called on entity manager.
+Starting population calculation and saving process...
+Truncated population_per_elomrade table.
+Created lanToElomrade mapping: Array
+(
+    [Stockholms län] => SE3
+    [Uppsala län] => SE3
+    [Västerbottens län] => SE2
+    [Gotlands län] => SE4
+    [Norrbottens län] => SE1
+)
+
+Processing year: 2020
+Checking property: stockholm for län: Stockholms län and elområde: SE3
+Successfully accessed population value for stockholm: 1000000
+Checking property: uppsala for län: Uppsala län and elområde: SE3
+Successfully accessed population value for uppsala: 200000
+Checking property: vasterbotten for län: Västerbottens län and elområde: SE2
+Successfully accessed population value for vasterbotten: 
+Checking property: gotland for län: Gotlands län and elområde: SE4
+Successfully accessed population value for gotland: 
+Checking property: norrbotten for län: Norrbottens län and elområde: SE1
+Successfully accessed population value for norrbotten: 249614
+Processing year: 2020
+Checking property: stockholm for län: Stockholms län and elområde: SE3
+Successfully accessed population value for stockholm: 
+Checking property: uppsala for län: Uppsala län and elområde: SE3
+Successfully accessed population value for uppsala: 
+Checking property: vasterbotten for län: Västerbottens län and elområde: SE2
+Successfully accessed population value for vasterbotten: 300000
+Checking property: gotland for län: Gotlands län and elområde: SE4
+Successfully accessed population value for gotland: 
+Checking property: norrbotten for län: Norrbottens län and elområde: SE1
+Successfully accessed population value for norrbotten: 
+Processing year: 2020
+Checking property: stockholm for län: Stockholms län and elområde: SE3
+Successfully accessed population value for stockholm: 
+Checking property: uppsala for län: Uppsala län and elområde: SE3
+Successfully accessed population value for uppsala: 
+Checking property: vasterbotten for län: Västerbottens län and elområde: SE2
+Successfully accessed population value for vasterbotten: 
+Checking property: gotland for län: Gotlands län and elområde: SE4
+Successfully accessed population value for gotland: 100000
+Checking property: norrbotten for län: Norrbottens län and elområde: SE1
+Successfully accessed population value for norrbotten: 
+Processing year: 2020
+Checking property: stockholm for län: Stockholms län and elområde: SE3
+Successfully accessed population value for stockholm: 
+Checking property: uppsala for län: Uppsala län and elområde: SE3
+Successfully accessed population value for uppsala: 
+Checking property: vasterbotten for län: Västerbottens län and elområde: SE2
+Successfully accessed population value for vasterbotten: 
+Checking property: gotland for län: Gotlands län and elområde: SE4
+Successfully accessed population value for gotland: 
+Checking property: norrbotten for län: Norrbottens län and elområde: SE1
+Successfully accessed population value for norrbotten: 
+Persisted PopulationPerElomrade for elområde: SE3 in year: 2020 with population: 1200000
+Persisted PopulationPerElomrade for elområde: SE2 in year: 2020 with population: 300000
+Persisted PopulationPerElomrade for elområde: SE4 in year: 2020 with population: 100000
+Persisted PopulationPerElomrade for elområde: SE1 in year: 2020 with population: 249614
+Flush called on entity manager.
+Starting population calculation and saving process...
+Truncated population_per_elomrade table.
+Created lanToElomrade mapping: Array
+(
+    [Stockholms län] => SE3
+    [Uppsala län] => SE3
+    [Västerbottens län] => SE2
+    [Gotlands län] => SE4
+    [Norrbottens län] => SE1
+)
+
+Processing year: 2020
+Checking property: stockholm for län: Stockholms län and elområde: SE3
+Successfully accessed population value for stockholm: 1000000
+Checking property: uppsala for län: Uppsala län and elområde: SE3
+Successfully accessed population value for uppsala: 200000
+Checking property: vasterbotten for län: Västerbottens län and elområde: SE2
+Successfully accessed population value for vasterbotten: 
+Checking property: gotland for län: Gotlands län and elområde: SE4
+Successfully accessed population value for gotland: 
+Checking property: norrbotten for län: Norrbottens län and elområde: SE1
+Successfully accessed population value for norrbotten: 249614
+Processing year: 2020
+Checking property: stockholm for län: Stockholms län and elområde: SE3
+Successfully accessed population value for stockholm: 
+Checking property: uppsala for län: Uppsala län and elområde: SE3
+Successfully accessed population value for uppsala: 
+Checking property: vasterbotten for län: Västerbottens län and elområde: SE2
+Successfully accessed population value for vasterbotten: 300000
+Checking property: gotland for län: Gotlands län and elområde: SE4
+Successfully accessed population value for gotland: 
+Checking property: norrbotten for län: Norrbottens län and elområde: SE1
+Successfully accessed population value for norrbotten: 
+Processing year: 2020
+Checking property: stockholm for län: Stockholms län and elområde: SE3
+Successfully accessed population value for stockholm: 
+Checking property: uppsala for län: Uppsala län and elområde: SE3
+Successfully accessed population value for uppsala: 
+Checking property: vasterbotten for län: Västerbottens län and elområde: SE2
+Successfully accessed population value for vasterbotten: 
+Checking property: gotland for län: Gotlands län and elområde: SE4
+Successfully accessed population value for gotland: 100000
+Checking property: norrbotten for län: Norrbottens län and elområde: SE1
+Successfully accessed population value for norrbotten: 
+Processing year: 2020
+Checking property: stockholm for län: Stockholms län and elområde: SE3
+Successfully accessed population value for stockholm: 
+Checking property: uppsala for län: Uppsala län and elområde: SE3
+Successfully accessed population value for uppsala: 
+Checking property: vasterbotten for län: Västerbottens län and elområde: SE2
+Successfully accessed population value for vasterbotten: 
+Checking property: gotland for län: Gotlands län and elområde: SE4
+Successfully accessed population value for gotland: 
+Checking property: norrbotten for län: Norrbottens län and elområde: SE1
+Successfully accessed population value for norrbotten: 
+Persisted PopulationPerElomrade for elområde: SE3 in year: 2020 with population: 1200000
+Persisted PopulationPerElomrade for elområde: SE2 in year: 2020 with population: 300000
+Persisted PopulationPerElomrade for elområde: SE4 in year: 2020 with population: 100000
+Persisted PopulationPerElomrade for elområde: SE1 in year: 2020 with population: 249614
+Flush called on entity manager.
+Starting population calculation and saving process...
+Truncated population_per_elomrade table.
+Created lanToElomrade mapping: Array
+(
+    [Stockholms län] => SE3
+    [Uppsala län] => SE3
+    [Västerbottens län] => SE2
+    [Gotlands län] => SE4
+    [Norrbottens län] => SE1
+)
+
+Processing year: 2020
+Checking property: stockholm for län: Stockholms län and elområde: SE3
+Successfully accessed population value for stockholm: 1000000
+Checking property: uppsala for län: Uppsala län and elområde: SE3
+Successfully accessed population value for uppsala: 200000
+Checking property: vasterbotten for län: Västerbottens län and elområde: SE2
+Successfully accessed population value for vasterbotten: 
+Checking property: gotland for län: Gotlands län and elområde: SE4
+Successfully accessed population value for gotland: 
+Checking property: norrbotten for län: Norrbottens län and elområde: SE1
+Successfully accessed population value for norrbotten: 249614
+Processing year: 2020
+Checking property: stockholm for län: Stockholms län and elområde: SE3
+Successfully accessed population value for stockholm: 
+Checking property: uppsala for län: Uppsala län and elområde: SE3
+Successfully accessed population value for uppsala: 
+Checking property: vasterbotten for län: Västerbottens län and elområde: SE2
+Successfully accessed population value for vasterbotten: 300000
+Checking property: gotland for län: Gotlands län and elområde: SE4
+Successfully accessed population value for gotland: 
+Checking property: norrbotten for län: Norrbottens län and elområde: SE1
+Successfully accessed population value for norrbotten: 
+Processing year: 2020
+Checking property: stockholm for län: Stockholms län and elområde: SE3
+Successfully accessed population value for stockholm: 
+Checking property: uppsala for län: Uppsala län and elområde: SE3
+Successfully accessed population value for uppsala: 
+Checking property: vasterbotten for län: Västerbottens län and elområde: SE2
+Successfully accessed population value for vasterbotten: 
+Checking property: gotland for län: Gotlands län and elområde: SE4
+Successfully accessed population value for gotland: 100000
+Checking property: norrbotten for län: Norrbottens län and elområde: SE1
+Successfully accessed population value for norrbotten: 
+Processing year: 2020
+Checking property: stockholm for län: Stockholms län and elområde: SE3
+Successfully accessed population value for stockholm: 
+Checking property: uppsala for län: Uppsala län and elområde: SE3
+Successfully accessed population value for uppsala: 
+Checking property: vasterbotten for län: Västerbottens län and elområde: SE2
+Successfully accessed population value for vasterbotten: 
+Checking property: gotland for län: Gotlands län and elområde: SE4
+Successfully accessed population value for gotland: 
+Checking property: norrbotten for län: Norrbottens län and elområde: SE1
+Successfully accessed population value for norrbotten: 
+Persisted PopulationPerElomrade for elområde: SE3 in year: 2020 with population: 1200000
+Persisted PopulationPerElomrade for elområde: SE2 in year: 2020 with population: 300000
+Persisted PopulationPerElomrade for elområde: SE4 in year: 2020 with population: 100000
+Persisted PopulationPerElomrade for elområde: SE1 in year: 2020 with population: 249614
+Flush called on entity manager.

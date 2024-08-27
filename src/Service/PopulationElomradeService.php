@@ -41,15 +41,19 @@ class PopulationElomradeService
 
         foreach ($populationsPerLan as $population) {
             $year = $this->ensureInt($population->getYear());
+
             foreach ($lanToElomrade as $lan => $elomrade) {
                 $lanProperty = $this->convertLanToProperty($lan);
 
-                if (property_exists($population, $lanProperty)) {
+                try {
+                    $populationValue = $population->{'get' . ucfirst($lanProperty)}();
+
                     if (!isset($populationPerElomrade[$year][$elomrade])) {
                         $populationPerElomrade[$year][$elomrade] = 0;
                     }
-                    $populationValue = $population->{'get' . ucfirst($lanProperty)}();
                     $populationPerElomrade[$year][$elomrade] += $populationValue;
+                } catch (\Exception $e) {
+                    // Property doesn't exist on the entity
                 }
             }
         }
@@ -121,5 +125,4 @@ class PopulationElomradeService
         }
         throw new InvalidArgumentException("Value is not a valid integer: " . print_r($value, true));
     }
-
 }
