@@ -15,40 +15,46 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 class ConsumptionPerCapitaServiceTest extends TestCase
 {
-    /** @var MockObject|EntityManagerInterface */
+    /** @var EntityManagerInterface|MockObject */
     private $entityManagerMock;
 
-    /** @var MockObject|Connection */
-    private $connectionMock;
+    /** @var MockObject|EntityRepository */
+    private $populationRepoMock;
 
-    /** @var MockObject|AbstractPlatform */
-    private $platformMock;
+    /** @var MockObject|EntityRepository */
+    private $consumptionRepoMock;
 
     /** @var ConsumptionPerCapitaService */
     private $service;
 
     protected function setUp(): void
     {
+        /** @var EntityManagerInterface|MockObject $entityManagerMock */
         $this->entityManagerMock = $this->createMock(EntityManagerInterface::class);
-        $this->connectionMock = $this->createMock(Connection::class);
-        $this->platformMock = $this->createMock(AbstractPlatform::class);
 
-        $this->entityManagerMock
-            ->method('getConnection')
-            ->willReturn($this->connectionMock);
+        /** @var EntityRepository|MockObject $populationRepoMock */
+        $this->populationRepoMock = $this->createMock(EntityRepository::class);
 
-        $this->connectionMock
-            ->method('getDatabasePlatform')
-            ->willReturn($this->platformMock);
+        /** @var EntityRepository|MockObject $consumptionRepoMock */
+        $this->consumptionRepoMock = $this->createMock(EntityRepository::class);
 
-        $this->platformMock
-            ->method('getTruncateTableSQL')
-            ->willReturn('TRUNCATE TABLE consumption_per_capita');
+        // Mock the connection and platform
+        $connectionMock = $this->createMock(Connection::class);
+        $platformMock = $this->createMock(AbstractPlatform::class);
+
+        // Set expectations for the methods
+        $connectionMock->method('getDatabasePlatform')->willReturn($platformMock);
+        $this->entityManagerMock->method('getConnection')->willReturn($connectionMock);
+
+        $this->entityManagerMock->method('getRepository')->willReturnMap([
+            [PopulationPerElomrade::class, $this->populationRepoMock],
+            [AverageConsumption::class, $this->consumptionRepoMock],
+        ]);
 
         $this->service = new ConsumptionPerCapitaService($this->entityManagerMock);
     }
 
-    public function testCalculateAndSaveConsumptionPerCapita(): void
+    public function testCalculateAndSaveConsumptionPerCapita()
     {
         // Set up mock data for PopulationPerElomrade
         $population1 = $this->createMock(PopulationPerElomrade::class);
@@ -67,20 +73,9 @@ class ConsumptionPerCapitaServiceTest extends TestCase
         $averageConsumption->method('getse1')->willReturn(100.0); // GWh
         $averageConsumption->method('getse2')->willReturn(200.0); // GWh
 
-        // Mock the repositories
-        $populationRepoMock = $this->createMock(EntityRepository::class);
-        $populationRepoMock->method('findAll')->willReturn([$population1, $population2]);
-
-        $consumptionRepoMock = $this->createMock(EntityRepository::class);
-        $consumptionRepoMock->method('findAll')->willReturn([$averageConsumption]);
-
-        // Set up the entity manager to return the mock repositories
-        $this->entityManagerMock
-            ->method('getRepository')
-            ->willReturnMap([
-                [PopulationPerElomrade::class, $populationRepoMock],
-                [AverageConsumption::class, $consumptionRepoMock],
-            ]);
+        // Setting up the repository mocks to return the mock data
+        $this->populationRepoMock->method('findAll')->willReturn([$population1, $population2]);
+        $this->consumptionRepoMock->method('findAll')->willReturn([$averageConsumption]);
 
         // Expect the entity manager to persist the ConsumptionPerCapita entities
         $this->entityManagerMock
