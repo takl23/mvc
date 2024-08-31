@@ -59,20 +59,20 @@ class ImportServiceTest extends TestCase
     public function testFactoryCreatesEntityCorrectly(): void
     {
         $factory = new RenewableEnergyTWhFactory();
-        $data = [2021, 100, 200, 1, 2, 3, 4, 5, 6, 7];
+        $data = [2021, 1, 2, 3, 4, 5, 6, 7, 8, 9];
         $entity = $factory->create($data);
     
         $this->assertInstanceOf(RenewableEnergyTWh::class, $entity);
         $this->assertEquals(2021, $entity->getYear());
-        $this->assertEquals(100, $entity->getBiofuels());
-        $this->assertEquals(200, $entity->getHydropower());
-        $this->assertEquals(1, $entity->getWindPower());
-        $this->assertEquals(2, $entity->getHeatPump());
-        $this->assertEquals(3, $entity->getSolarEnergy());
-        $this->assertEquals(4, $entity->getTotal());
-        $this->assertEquals(5, $entity->getStatTransferToNorway());
-        $this->assertEquals(6, $entity->getRenewableEnergyInTargetCalculation());
-        $this->assertEquals(7, $entity->getTotalEnergyUse());
+        $this->assertEquals(1, $entity->getBiofuels());
+        $this->assertEquals(2, $entity->getHydropower());
+        $this->assertEquals(3, $entity->getWindPower());
+        $this->assertEquals(4, $entity->getHeatPump());
+        $this->assertEquals(5, $entity->getSolarEnergy());
+        $this->assertEquals(6, $entity->getTotal());
+        $this->assertEquals(7, $entity->getStatTransferToNorway());
+        $this->assertEquals(8, $entity->getRenewableEnergyInTargetCalculation());
+        $this->assertEquals(9, $entity->getTotalEnergyUse());
     }
     
     public function testEntityPersistence(): void
@@ -82,7 +82,7 @@ class ImportServiceTest extends TestCase
         $entityClass = RenewableEnergyTWh::class;
     
         // Använd samma testdata här
-        $data = [2021, 100, 200, 1, 2, 3, 4, 5, 6, 7];
+        $data = [2021, 1, 2, 3, 4, 5, 6, 7, 8, 9];
         $factory = new RenewableEnergyTWhFactory();
         $entity = $factory->create($data);
     
@@ -129,5 +129,52 @@ class ImportServiceTest extends TestCase
         return $worksheetMock;
     }
     
+    public function testFactoryHandlesNullValuesCorrectly(): void
+{
+    $factory = new RenewableEnergyTWhFactory();
+    $data = [2021, 1, null, null, 2, null, 3, null, 4, null];
+    $entity = $factory->create($data);
 
+    $this->assertInstanceOf(RenewableEnergyTWh::class, $entity);
+    $this->assertEquals(2021, $entity->getYear());
+    $this->assertEquals(1, $entity->getBiofuels());
+    $this->assertNull($entity->getHydropower());
+    $this->assertNull($entity->getWindPower());
+    $this->assertEquals(2, $entity->getHeatPump());
+    $this->assertNull($entity->getSolarEnergy());
+    $this->assertEquals(3, $entity->getTotal());
+    $this->assertNull($entity->getStatTransferToNorway());
+    $this->assertEquals(4, $entity->getRenewableEnergyInTargetCalculation());
+    $this->assertNull($entity->getTotalEnergyUse());
+}
+
+public function testEntityPersistenceWithNullValues(): void
+{
+    $filePath = 'dummy/path/to/spreadsheet.xlsx';
+    $sheetName = 'ValidSheet';
+    $entityClass = RenewableEnergyTWh::class;
+
+    // Ladda in verklig data med nullvärden.
+    $factory = new RenewableEnergyTWhFactory();
+    $data = [2021, 1, null, null, 2, null, 3, null, 4, null];
+    $entity = $factory->create($data);
+
+    // Riktig instans istället för mock
+    $this->spreadsheetLoaderMock->method('load')->with($filePath, $sheetName)->willReturn($this->mockWorksheet($data));
+
+    $this->factoryManagerMock->method('getFactory')->with($entityClass)->willReturn($factory);
+
+    // Förväntningar på entityManager
+    $this->entityManagerMock->expects($this->once())
+        ->method('persist')
+        ->with($this->callback(function ($object) use ($data) {
+            return $object instanceof RenewableEnergyTWh && $object->getYear() === $data[0];
+        }));
+
+    $this->entityManagerMock->expects($this->once())
+        ->method('flush');
+
+    // Kör importen
+    $this->importService->import($filePath, $sheetName, $entityClass);
+}
 }

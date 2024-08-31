@@ -70,13 +70,14 @@ private function extractRowData(\PhpOffice\PhpSpreadsheet\Worksheet\Row $row): a
     $data = [];
     foreach ($cellIterator as $cell) {
         $value = $cell->getValue();
-        if ($value !== null && $value !== '') {
-            $data[] = $value;
-        }
+        // Inkludera nullvärden istället för att filtrera bort dem
+        $data[] = ($value !== null && $value !== '') ? $value : null;
     }
-    print_r($data);
+    // Ta bort print_r för att undvika onödig utskrift
+    // print_r($data);
     return $data;
 }
+
 
     private function isHeaderRow(\PhpOffice\PhpSpreadsheet\Worksheet\Row $row): bool
     {

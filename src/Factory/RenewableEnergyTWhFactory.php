@@ -46,4 +46,15 @@ class RenewableEnergyTWhFactory
     throw new InvalidArgumentException("Value is not a valid integer: " . print_r($value, true));
 }
 
+private function ensureNullableInt(mixed $value): ?int
+{
+    if ($value === null) {
+        return null;
+    }
+    if (is_numeric($value)) {
+        return (int) $value;
+    }
+    throw new InvalidArgumentException("Value is not a valid nullable integer: " . print_r($value, true));
+}
+
 }
