@@ -11,6 +11,7 @@ use App\Entity\AverageConsumption;
 use App\Entity\EnergySupplyGDP;
 use App\Entity\LanElomrade;
 use App\Entity\PopulationPerLan;
+use App\Service\SpreadsheetLoader;
 use Exception;
 
 class ImportService
@@ -61,18 +62,21 @@ class ImportService
  * @param \PhpOffice\PhpSpreadsheet\Worksheet\Row $row
  * @return array<int, mixed> The array containing values from the row cells.
  */
-    private function extractRowData(\PhpOffice\PhpSpreadsheet\Worksheet\Row $row): array
-    {
-        $cellIterator = $row->getCellIterator();
-        $cellIterator->setIterateOnlyExistingCells(false);
+private function extractRowData(\PhpOffice\PhpSpreadsheet\Worksheet\Row $row): array
+{
+    $cellIterator = $row->getCellIterator();
+    $cellIterator->setIterateOnlyExistingCells(false);
 
-        $data = [];
-        foreach ($cellIterator as $cell) {
-            $data[] = $cell->getValue();
+    $data = [];
+    foreach ($cellIterator as $cell) {
+        $value = $cell->getValue();
+        if ($value !== null && $value !== '') {
+            $data[] = $value;
         }
-
-        return $data;
     }
+    print_r($data);
+    return $data;
+}
 
     private function isHeaderRow(\PhpOffice\PhpSpreadsheet\Worksheet\Row $row): bool
     {

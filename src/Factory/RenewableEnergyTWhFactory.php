@@ -15,6 +15,8 @@ class RenewableEnergyTWhFactory
  */
     public function create(array $data): RenewableEnergyTWh
     {
+
+        echo "Data received in create method: " . print_r($data, true) . "\n";
         $entity = new RenewableEnergyTWh();
         $entity->setYear($this->ensureInt($data[0]));
         $entity->setBiofuels($this->ensureInt($data[1]));
@@ -30,11 +32,18 @@ class RenewableEnergyTWhFactory
         return $entity;
     }
 
-    private function ensureInt(mixed $value): int
-    {
-        if (isset($value) && is_numeric($value)) {
-            return (int) $value;
-        }
-        throw new InvalidArgumentException("Value is not a valid integer: " . print_r($value, true));
+    private function ensureInt(mixed $value): ?int
+{
+    if ($value === null || $value === '') {
+        return null; // Returnera null för tomma eller saknade celler
     }
+    
+    if (is_numeric($value)) {
+        return (int) $value;
+    }
+    
+    echo "Invalid value detected: " . print_r($value, true) . "\n";
+    throw new InvalidArgumentException("Value is not a valid integer: " . print_r($value, true));
+}
+
 }
