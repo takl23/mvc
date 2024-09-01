@@ -9,6 +9,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Console\Attribute\AsCommand;
 use App\Service\ImportService;
+use App\Service\FileSystemService;
 
 #[AsCommand(
     name: 'app:import-excel',
@@ -17,10 +18,12 @@ use App\Service\ImportService;
 class ImportExcelCommand extends Command
 {
     private ImportService $importService;
+    private FileSystemService $fileSystemService;
 
-    public function __construct(ImportService $importService)
+    public function __construct(ImportService $importService, FileSystemService $fileSystemService)
     {
         $this->importService = $importService;
+        $this->fileSystemService = $fileSystemService;
         parent::__construct();
     }
 
@@ -40,19 +43,17 @@ class ImportExcelCommand extends Command
         $entityClass = $input->getArgument('entityClass');
         $io = new SymfonyStyle($input, $output);
 
-        // Validera att argumenten verkligen är strängar
         if (!is_string($filePath) || !is_string($sheetName) || !is_string($entityClass)) {
             $io->error('Invalid arguments provided.');
             return Command::FAILURE;
         }
 
-        if (!file_exists($filePath)) {
+        if (!$this->fileSystemService->fileExists($filePath)) {
             $io->error('File not found: ' . $filePath);
             return Command::FAILURE;
         }
 
         try {
-            // Importera data med tre parametrar
             $this->importService->import($filePath, $sheetName, $entityClass);
             $io->success('Data imported successfully!');
             return Command::SUCCESS;
