@@ -15,10 +15,8 @@ class LanElomradeFactory
      */
     public function create(array $data): ?LanElomrade
     {
-
-        if ($data[0] === null) {
-            echo "Skipping row due to missing year in PopulationPerLan.\n";
-            return null;
+        if ($data[0] === null || $data[1] === null || $data[0] === '' || $data[1] === '') {
+            throw new InvalidArgumentException("Missing required data for 'lan' or 'elomrade'.");
         }
 
         $entity = new LanElomrade();
@@ -27,25 +25,21 @@ class LanElomradeFactory
         return $entity;
     }
 
-
     /**
-         * Ensure the value is a valid string.
-         *
-         * @param mixed $value
-         * @return string
-         * @throws InvalidArgumentException
-         */    private function ensureString(mixed $value): string
+     * Ensure the value is a valid string.
+     *
+     * @param mixed $value
+     * @return string
+     * @throws InvalidArgumentException
+     */
+    private function ensureString(mixed $value): string
     {
-        if (is_string($value)) {
+        if (is_string($value) && $value !== '') {
             return $value;
         }
 
         if (is_numeric($value)) {
             return (string) $value;
-        }
-
-        if ($value === null) {
-            throw new InvalidArgumentException("Value is null, expected a valid string.");
         }
 
         throw new InvalidArgumentException("Value is not a valid string: " . print_r($value, true));

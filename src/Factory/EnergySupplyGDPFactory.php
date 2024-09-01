@@ -29,14 +29,15 @@ class EnergySupplyGDPFactory
          * @param mixed $value
          * @return float
          * @throws InvalidArgumentException
-         */    private function ensureFloat(mixed $value): float
-    {
-        if (isset($value) && is_numeric($value)) {
-            return (float) str_replace(',', '.', (string) $value);
+         */    
+        public function ensureFloat(mixed $value): float
+        {
+            if (isset($value) && is_numeric(str_replace(',', '.', $value))) {
+                return (float) str_replace(',', '.', (string) $value);
+            }
+            throw new InvalidArgumentException("Value is not a valid float: " . print_r($value, true));
         }
-        throw new InvalidArgumentException("Value is not a valid float: " . print_r($value, true));
-    }
-
+        
 
     /**
      * Ensure the value is a valid integer.
@@ -45,7 +46,7 @@ class EnergySupplyGDPFactory
      * @return int
      * @throws InvalidArgumentException
      */
-    private function ensureInt(mixed $value): int
+    public function ensureInt(mixed $value): int
     {
         if (isset($value) && is_numeric($value)) {
             return (int) $value;
