@@ -91,7 +91,7 @@ class ImportServiceTest extends TestCase
         // Använd samma testdata här
         $data = [2021, 1, 2, 3, 4, 5, 6, 7, 8, 9];
         $factory = new RenewableEnergyTWhFactory();
-        $entity = $factory->create($data);
+    
     
         $this->spreadsheetLoaderMock->method('load')->with($filePath, $sheetName)->willReturn($this->mockWorksheet($data));
     
@@ -164,7 +164,6 @@ public function testEntityPersistenceWithNullValues(): void
     // Ladda in verklig data med nullvärden.
     $factory = new RenewableEnergyTWhFactory();
     $data = [2021, 1, null, null, 2, null, 3, null, 4, null];
-    $entity = $factory->create($data);
 
     // Riktig instans istället för mock
     $this->spreadsheetLoaderMock->method('load')->with($filePath, $sheetName)->willReturn($this->mockWorksheet($data));
