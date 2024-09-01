@@ -62,7 +62,7 @@ class ImportService
  * @param \PhpOffice\PhpSpreadsheet\Worksheet\Row $row
  * @return array<int, mixed> The array containing values from the row cells.
  */
-private function extractRowData(\PhpOffice\PhpSpreadsheet\Worksheet\Row $row): array
+public function extractRowData(\PhpOffice\PhpSpreadsheet\Worksheet\Row $row): array
 {
     $cellIterator = $row->getCellIterator();
     $cellIterator->setIterateOnlyExistingCells(false);
@@ -79,12 +79,12 @@ private function extractRowData(\PhpOffice\PhpSpreadsheet\Worksheet\Row $row): a
 }
 
 
-    private function isHeaderRow(\PhpOffice\PhpSpreadsheet\Worksheet\Row $row): bool
+    public function isHeaderRow(\PhpOffice\PhpSpreadsheet\Worksheet\Row $row): bool
     {
         return $row->getRowIndex() === 1;
     }
 
-    private function isEntityValid(object $entity): bool
+    public function isEntityValid(object $entity): bool
     {
         if ($entity instanceof RenewableEnergyTWh) {
             return $this->isRenewableEnergyTWhValid($entity);
@@ -118,37 +118,37 @@ private function extractRowData(\PhpOffice\PhpSpreadsheet\Worksheet\Row $row): a
     }
 
 
-    private function isRenewableEnergyTWhValid(RenewableEnergyTWh $entity): bool
+    public function isRenewableEnergyTWhValid(RenewableEnergyTWh $entity): bool
     {
         return $entity->getYear() !== null && $entity->getYear() > 0;
     }
 
-    private function isRenewableEnergyPercentageValid(RenewableEnergyPercentage $entity): bool
+    public function isRenewableEnergyPercentageValid(RenewableEnergyPercentage $entity): bool
     {
         return $entity->getYear() !== null && $entity->getYear() > 0;
     }
 
-    private function isElectricityPriceValid(ElectricityPrice $entity): bool
+    public function isElectricityPriceValid(ElectricityPrice $entity): bool
     {
         return $entity->getYear() !== null && $entity->getYear() > 0;
     }
 
-    private function isAverageConsumptionValid(AverageConsumption $entity): bool
+    public function isAverageConsumptionValid(AverageConsumption $entity): bool
     {
         return $entity->getYear() !== null && $entity->getYear() > 0;
     }
 
-    private function isEnergySupplyGDPValid(EnergySupplyGDP $entity): bool
+    public function isEnergySupplyGDPValid(EnergySupplyGDP $entity): bool
     {
         return $entity->getYear() !== null && $entity->getYear() > 0;
     }
 
-    private function isPopulationPerLanValid(PopulationPerLan $entity): bool
+    public function isPopulationPerLanValid(PopulationPerLan $entity): bool
     {
         return $entity->getYear() !== null && $entity->getYear() > 0;
     }
 
-    private function isLanElomradeValid(LanElomrade $entity): bool
+    public function isLanElomradeValid(LanElomrade $entity): bool
     {
         return $entity->getLan() !== null && $entity->getElomrade() !== null;
     }

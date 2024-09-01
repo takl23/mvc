@@ -10,6 +10,13 @@ use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use App\Factory\RenewableEnergyTWhFactory;
 use App\Entity\RenewableEnergyTWh;
+use App\Entity\RenewableEnergyPercentage;
+use App\Entity\ElectricityPrice;
+use App\Entity\AverageConsumption;
+use App\Entity\EnergySupplyGDP;
+use App\Entity\PopulationPerLan;
+use App\Entity\LanElomrade;
+
 
 class ImportServiceTest extends TestCase
 {
@@ -177,4 +184,62 @@ public function testEntityPersistenceWithNullValues(): void
     // Kör importen
     $this->importService->import($filePath, $sheetName, $entityClass);
 }
+
+public function testIsEntityValidForRenewableEnergyTWh(): void
+{
+    $entity = $this->createMock(RenewableEnergyTWh::class);
+    $entity->method('getYear')->willReturn(2021); // Justera validering
+    $result = $this->importService->isEntityValid($entity);
+    $this->assertTrue($result);
+}
+
+public function testIsEntityValidForElectricityPrice(): void
+{
+    $entity = $this->createMock(ElectricityPrice::class);
+    $entity->method('getYear')->willReturn(2021); // Justera validering
+    $result = $this->importService->isEntityValid($entity);
+    $this->assertTrue($result);
+}
+
+public function testIsEntityValidForRenewableEnergyPercentage(): void
+{
+    $entity = $this->createMock(RenewableEnergyPercentage::class);
+    $entity->method('getYear')->willReturn(2021); // Justera validering
+    $result = $this->importService->isEntityValid($entity);
+    $this->assertTrue($result);
+}
+
+public function testIsEntityValidForAverageConsumption(): void
+{
+    $entity = $this->createMock(AverageConsumption::class);
+    $entity->method('getYear')->willReturn(2021); // Justera validering
+    $result = $this->importService->isEntityValid($entity);
+    $this->assertTrue($result);
+}
+
+public function testIsEntityValidForEnergySupplyGDP(): void
+{
+    $entity = $this->createMock(EnergySupplyGDP::class);
+    $entity->method('getYear')->willReturn(2021); // Justera validering
+    $result = $this->importService->isEntityValid($entity);
+    $this->assertTrue($result);
+}
+
+public function testIsEntityValidForPopulationPerLan(): void
+{
+    $entity = $this->createMock(PopulationPerLan::class);
+    $entity->method('getYear')->willReturn(2021); // Justera validering
+    $result = $this->importService->isEntityValid($entity);
+    $this->assertTrue($result);
+}
+
+public function testIsEntityValidForLanElomrade(): void
+{
+    $entity = $this->createMock(LanElomrade::class);
+    $entity->method('getLan')->willReturn('Stockholms län');
+    $entity->method('getElomrade')->willReturn('SE3');
+    $result = $this->importService->isEntityValid($entity);
+    $this->assertTrue($result);
+}
+
 }
