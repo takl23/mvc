@@ -12,7 +12,7 @@ use Exception;
 
 class SpreadsheetLoaderTest extends TestCase
 {
-    /** @var MockObject */
+    /** @var MockObject&Xlsx */
     private $readerMock;
 
     /** @var SpreadsheetLoader */
@@ -20,11 +20,10 @@ class SpreadsheetLoaderTest extends TestCase
 
     protected function setUp(): void
     {
-        // Här tar vi bort typdeklarationen men använder en kommentar för att specificera typen.
-        /** @var MockObject|Xlsx $readerMock */
+        // Use MockObject with the Xlsx type hint
         $this->readerMock = $this->createMock(Xlsx::class);
 
-        // Nu använder vi den mockade versionen av Xlsx
+        // Instantiate SpreadsheetLoader with the mocked reader
         $this->spreadsheetLoader = new SpreadsheetLoader($this->readerMock);
     }
 
@@ -58,7 +57,6 @@ class SpreadsheetLoaderTest extends TestCase
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage("Sheet InvalidSheet not found in the file dummy/path/to/spreadsheet.xlsx");
-
 
         $filePath = 'dummy/path/to/spreadsheet.xlsx';
         $sheetName = 'InvalidSheet';
