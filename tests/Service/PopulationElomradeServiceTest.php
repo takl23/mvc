@@ -113,7 +113,7 @@ class PopulationElomradeServiceTest extends TestCase
         // Run the method under test
         $this->populationElomradeService->calculateAndSavePopulationPerElomrade();
     }
-    
+
     public function testEnsureStringThrowsExceptionOnInvalidValue()
     {
         $this->expectException(InvalidArgumentException::class);

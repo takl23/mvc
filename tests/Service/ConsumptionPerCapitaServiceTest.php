@@ -96,18 +96,18 @@ class ConsumptionPerCapitaServiceTest extends TestCase
     }
 
     public function testCalculateAndSaveConsumptionPerCapitaWithMissingData(): void
-{
-    // Simulera att inget data returneras av repository
-    $this->populationRepoMock->method('findAll')->willReturn([]);
-    $this->consumptionRepoMock->method('findAll')->willReturn([]);
+    {
+        // Simulera att inget data returneras av repository
+        $this->populationRepoMock->method('findAll')->willReturn([]);
+        $this->consumptionRepoMock->method('findAll')->willReturn([]);
 
-    // Förvänta att en exception kastas
-    $this->expectException(Exception::class);
-    $this->expectExceptionMessage('Missing necessary data to calculate consumption per capita.');
+        // Förvänta att en exception kastas
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Missing necessary data to calculate consumption per capita.');
 
-    // Kör metoden
-    $this->service->calculateAndSaveConsumptionPerCapita();
-}
+        // Kör metoden
+        $this->service->calculateAndSaveConsumptionPerCapita();
+    }
 
 
 }

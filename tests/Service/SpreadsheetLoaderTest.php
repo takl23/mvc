@@ -23,7 +23,7 @@ class SpreadsheetLoaderTest extends TestCase
         // Här tar vi bort typdeklarationen men använder en kommentar för att specificera typen.
         /** @var MockObject|Xlsx $readerMock */
         $this->readerMock = $this->createMock(Xlsx::class);
-        
+
         // Nu använder vi den mockade versionen av Xlsx
         $this->spreadsheetLoader = new SpreadsheetLoader($this->readerMock);
     }

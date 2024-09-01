@@ -62,21 +62,21 @@ class ImportService
  * @param \PhpOffice\PhpSpreadsheet\Worksheet\Row $row
  * @return array<int, mixed> The array containing values from the row cells.
  */
-public function extractRowData(\PhpOffice\PhpSpreadsheet\Worksheet\Row $row): array
-{
-    $cellIterator = $row->getCellIterator();
-    $cellIterator->setIterateOnlyExistingCells(false);
+    public function extractRowData(\PhpOffice\PhpSpreadsheet\Worksheet\Row $row): array
+    {
+        $cellIterator = $row->getCellIterator();
+        $cellIterator->setIterateOnlyExistingCells(false);
 
-    $data = [];
-    foreach ($cellIterator as $cell) {
-        $value = $cell->getValue();
-        // Inkludera nullvärden istället för att filtrera bort dem
-        $data[] = ($value !== null && $value !== '') ? $value : null;
+        $data = [];
+        foreach ($cellIterator as $cell) {
+            $value = $cell->getValue();
+            // Inkludera nullvärden istället för att filtrera bort dem
+            $data[] = ($value !== null && $value !== '') ? $value : null;
+        }
+        // Ta bort print_r för att undvika onödig utskrift
+        // print_r($data);
+        return $data;
     }
-    // Ta bort print_r för att undvika onödig utskrift
-    // print_r($data);
-    return $data;
-}
 
 
     public function isHeaderRow(\PhpOffice\PhpSpreadsheet\Worksheet\Row $row): bool

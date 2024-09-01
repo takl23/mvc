@@ -12,7 +12,7 @@ class AverageConsumptionFactory
         *
         * @param array<int, mixed> $data The data used to create the entity.
         * @return AverageConsumption
-        */    
+        */
     public function create(array $data): AverageConsumption
     {
         $entity = new AverageConsumption();

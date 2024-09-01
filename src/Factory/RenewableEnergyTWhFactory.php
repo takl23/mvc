@@ -35,11 +35,11 @@ class RenewableEnergyTWhFactory
         if ($value === null || $value === '') {
             throw new InvalidArgumentException("Value is not a valid integer: " . print_r($value, true));
         }
-        
+
         if (is_numeric($value)) {
             return (int) $value;
         }
-        
+
         throw new InvalidArgumentException("Value is not a valid integer: " . print_r($value, true));
     }
 
@@ -48,11 +48,11 @@ class RenewableEnergyTWhFactory
         if ($value === null || $value === '') {
             return null;
         }
-        
+
         if (is_numeric($value)) {
             return (int) $value;
         }
-        
+
         throw new InvalidArgumentException("Value is not a valid nullable integer: " . print_r($value, true));
     }
 }

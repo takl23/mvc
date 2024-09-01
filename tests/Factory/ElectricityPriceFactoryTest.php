@@ -49,11 +49,11 @@ class ElectricityPriceFactoryTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage("Invalid price data provided.");
-    
+
         $data = [2021, 'invalid', '36.0', '34.8', '33.9'];
         $this->factory->create($data);
     }
-    
+
 
     public function testCreateWithMissingValuesThrowsException(): void
     {

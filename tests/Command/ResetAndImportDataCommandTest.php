@@ -12,7 +12,6 @@ use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Console\Command\Command;
 
-
 class ResetAndImportDataCommandTest extends TestCase
 {
     /** @var MockObject|EntityManagerInterface */

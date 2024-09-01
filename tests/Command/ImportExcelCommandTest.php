@@ -9,7 +9,7 @@ use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 use App\Command\ImportExcelCommand;
 use App\Service\ImportService;
-use App\Service\FileSystemService; 
+use App\Service\FileSystemService;
 use Exception;
 
 class ImportExcelCommandTest extends TestCase
@@ -65,112 +65,112 @@ class ImportExcelCommandTest extends TestCase
     }
 
     public function testExecuteWhenFileDoesNotExist()
-{
-    // Mock FileSystemService to return false for fileExists
-    $this->fileSystemServiceMock
-        ->method('fileExists')
-        ->willReturn(false);
+    {
+        // Mock FileSystemService to return false for fileExists
+        $this->fileSystemServiceMock
+            ->method('fileExists')
+            ->willReturn(false);
 
-    $command = new ImportExcelCommand($this->importServiceMock, $this->fileSystemServiceMock);
+        $command = new ImportExcelCommand($this->importServiceMock, $this->fileSystemServiceMock);
 
-    $application = new Application();
-    $application->add($command);
+        $application = new Application();
+        $application->add($command);
 
-    $commandTester = new CommandTester($application->find('app:import-excel'));
+        $commandTester = new CommandTester($application->find('app:import-excel'));
 
-    $commandTester->execute([
-        'filePath' => 'path/to/nonexistent/file.xlsx',
-        'sheetName' => 'Sheet1',
-        'entityClass' => 'App\\Entity\\SomeEntityClass',
-    ]);
+        $commandTester->execute([
+            'filePath' => 'path/to/nonexistent/file.xlsx',
+            'sheetName' => 'Sheet1',
+            'entityClass' => 'App\\Entity\\SomeEntityClass',
+        ]);
 
-    $output = $commandTester->getDisplay();
-    $this->assertStringContainsString('File not found: path/to/nonexistent/file.xlsx', $output);
+        $output = $commandTester->getDisplay();
+        $this->assertStringContainsString('File not found: path/to/nonexistent/file.xlsx', $output);
 
-    $statusCode = $commandTester->getStatusCode();
-    $this->assertEquals(Command::FAILURE, $statusCode);
-}
+        $statusCode = $commandTester->getStatusCode();
+        $this->assertEquals(Command::FAILURE, $statusCode);
+    }
 
-public function testExecuteWithInvalidArguments(): void
-{
-    $command = new ImportExcelCommand($this->importServiceMock, $this->fileSystemServiceMock);
+    public function testExecuteWithInvalidArguments(): void
+    {
+        $command = new ImportExcelCommand($this->importServiceMock, $this->fileSystemServiceMock);
 
-    $application = new Application();
-    $application->add($command);
+        $application = new Application();
+        $application->add($command);
 
-    $commandTester = new CommandTester($application->find('app:import-excel'));
+        $commandTester = new CommandTester($application->find('app:import-excel'));
 
-    $commandTester->execute([
-        'filePath' => 12345,  // Felaktigt argument (borde vara en sträng)
-        'sheetName' => 67890,  // Felaktigt argument (borde vara en sträng)
-        'entityClass' => null,  // Felaktigt argument (borde vara en sträng)
-    ]);
+        $commandTester->execute([
+            'filePath' => 12345,  // Felaktigt argument (borde vara en sträng)
+            'sheetName' => 67890,  // Felaktigt argument (borde vara en sträng)
+            'entityClass' => null,  // Felaktigt argument (borde vara en sträng)
+        ]);
 
-    $output = $commandTester->getDisplay();
-    $this->assertStringContainsString('Invalid arguments provided.', $output);
+        $output = $commandTester->getDisplay();
+        $this->assertStringContainsString('Invalid arguments provided.', $output);
 
-    $statusCode = $commandTester->getStatusCode();
-    $this->assertEquals(Command::FAILURE, $statusCode);
-}
+        $statusCode = $commandTester->getStatusCode();
+        $this->assertEquals(Command::FAILURE, $statusCode);
+    }
 
-public function testExecuteWhenFileNotFound(): void
-{
-    // Mocka så att fileExists returnerar false, vilket simulerar att filen inte hittas
-    $this->fileSystemServiceMock
-        ->method('fileExists')
-        ->willReturn(false);
+    public function testExecuteWhenFileNotFound(): void
+    {
+        // Mocka så att fileExists returnerar false, vilket simulerar att filen inte hittas
+        $this->fileSystemServiceMock
+            ->method('fileExists')
+            ->willReturn(false);
 
-    $command = new ImportExcelCommand($this->importServiceMock, $this->fileSystemServiceMock);
+        $command = new ImportExcelCommand($this->importServiceMock, $this->fileSystemServiceMock);
 
-    $application = new Application();
-    $application->add($command);
+        $application = new Application();
+        $application->add($command);
 
-    $commandTester = new CommandTester($application->find('app:import-excel'));
+        $commandTester = new CommandTester($application->find('app:import-excel'));
 
-    $commandTester->execute([
-        'filePath' => 'path/to/nonexistent/file.xlsx',
-        'sheetName' => 'Sheet1',
-        'entityClass' => 'App\\Entity\\SomeEntityClass',
-    ]);
+        $commandTester->execute([
+            'filePath' => 'path/to/nonexistent/file.xlsx',
+            'sheetName' => 'Sheet1',
+            'entityClass' => 'App\\Entity\\SomeEntityClass',
+        ]);
 
-    $output = $commandTester->getDisplay();
-    $this->assertStringContainsString('File not found: path/to/nonexistent/file.xlsx', $output);
+        $output = $commandTester->getDisplay();
+        $this->assertStringContainsString('File not found: path/to/nonexistent/file.xlsx', $output);
 
-    $statusCode = $commandTester->getStatusCode();
-    $this->assertEquals(Command::FAILURE, $statusCode);
-}
+        $statusCode = $commandTester->getStatusCode();
+        $this->assertEquals(Command::FAILURE, $statusCode);
+    }
 
-public function testExecuteSuccess(): void
-{
-    // Mocka så att fileExists returnerar true, vilket simulerar att filen hittas
-    $this->fileSystemServiceMock
-        ->method('fileExists')
-        ->willReturn(true);
+    public function testExecuteSuccess(): void
+    {
+        // Mocka så att fileExists returnerar true, vilket simulerar att filen hittas
+        $this->fileSystemServiceMock
+            ->method('fileExists')
+            ->willReturn(true);
 
-    // Mocka ImportService så att import-metoden fungerar utan problem
-    $this->importServiceMock
-        ->expects($this->once())
-        ->method('import');
+        // Mocka ImportService så att import-metoden fungerar utan problem
+        $this->importServiceMock
+            ->expects($this->once())
+            ->method('import');
 
-    $command = new ImportExcelCommand($this->importServiceMock, $this->fileSystemServiceMock);
+        $command = new ImportExcelCommand($this->importServiceMock, $this->fileSystemServiceMock);
 
-    $application = new Application();
-    $application->add($command);
+        $application = new Application();
+        $application->add($command);
 
-    $commandTester = new CommandTester($application->find('app:import-excel'));
+        $commandTester = new CommandTester($application->find('app:import-excel'));
 
-    $commandTester->execute([
-        'filePath' => 'path/to/valid/file.xlsx',
-        'sheetName' => 'Sheet1',
-        'entityClass' => 'App\\Entity\\SomeEntityClass',
-    ]);
+        $commandTester->execute([
+            'filePath' => 'path/to/valid/file.xlsx',
+            'sheetName' => 'Sheet1',
+            'entityClass' => 'App\\Entity\\SomeEntityClass',
+        ]);
 
-    $output = $commandTester->getDisplay();
-    $this->assertStringContainsString('Data imported successfully!', $output);
+        $output = $commandTester->getDisplay();
+        $this->assertStringContainsString('Data imported successfully!', $output);
 
-    $statusCode = $commandTester->getStatusCode();
-    $this->assertEquals(Command::SUCCESS, $statusCode);
-}
+        $statusCode = $commandTester->getStatusCode();
+        $this->assertEquals(Command::SUCCESS, $statusCode);
+    }
 
 
 }

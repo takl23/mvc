@@ -239,12 +239,12 @@ class ProjectControllerJson extends AbstractController
         ]);
     }
 
-/**
- * @param string $entityClass Namnet på entitetsklassen som ska hämtas från databasen.
- * @param callable $formatter En callback-funktion för att formatera varje enskild entitet.
- * @param string $reference En URL eller referens som ska inkluderas i JSON-svaret.
- * @return JsonResponse
- */
+    /**
+     * @param string $entityClass Namnet på entitetsklassen som ska hämtas från databasen.
+     * @param callable $formatter En callback-funktion för att formatera varje enskild entitet.
+     * @param string $reference En URL eller referens som ska inkluderas i JSON-svaret.
+     * @return JsonResponse
+     */
     private function generateJsonResponse(string $entityClass, callable $formatter, string $reference): JsonResponse
     {
         $repository = $this->entityManager->getRepository($entityClass);
