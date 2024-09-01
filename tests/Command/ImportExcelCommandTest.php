@@ -10,6 +10,7 @@ use Symfony\Component\Console\Tester\CommandTester;
 use App\Command\ImportExcelCommand;
 use App\Service\ImportService;
 use App\Service\FileSystemService; 
+use Exception;
 
 class ImportExcelCommandTest extends TestCase
 {
@@ -31,7 +32,7 @@ class ImportExcelCommandTest extends TestCase
         $this->importServiceMock
             ->expects($this->once())
             ->method('import')
-            ->will($this->throwException(new \Exception("Some error occurred")));
+            ->will($this->throwException(new Exception("Some error occurred")));
 
         // Mock filsystemservice beroendet om det behövs
         $this->fileSystemServiceMock

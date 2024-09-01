@@ -6,6 +6,7 @@ use App\Factory\LanElomradeFactory;
 use App\Entity\LanElomrade;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
+use stdClass;
 
 class LanElomradeFactoryTest extends TestCase
 {
@@ -63,7 +64,7 @@ class LanElomradeFactoryTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Value is not a valid string');
 
-        $data = [new \stdClass(), 'SE3'];
+        $data = [new stdClass(), 'SE3'];
         $this->factory->create($data);
     }
 }
