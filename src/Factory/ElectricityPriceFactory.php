@@ -36,7 +36,7 @@ class ElectricityPriceFactory
      * @return float
      * @throws InvalidArgumentException
      */
-    private function ensureFloat(mixed $value): float
+    public function ensureFloat(mixed $value): float
     {
         if (isset($value) && is_numeric($value)) {
             return (float) str_replace(',', '.', (string) $value);
@@ -51,7 +51,7 @@ class ElectricityPriceFactory
      * @return int
      * @throws InvalidArgumentException
      */
-    private function ensureInt(mixed $value): int
+    public function ensureInt(mixed $value): int
     {
         if (isset($value) && is_numeric($value)) {
             return (int) $value;
@@ -65,7 +65,7 @@ class ElectricityPriceFactory
      * @param array<int, mixed> $data
      * @return bool
      */
-    private function isValidPriceData(array $data): bool
+    public function isValidPriceData(array $data): bool
     {
         return isset($data[1], $data[2], $data[3], $data[4]) &&
                is_numeric($data[1]) && is_numeric($data[2]) &&
