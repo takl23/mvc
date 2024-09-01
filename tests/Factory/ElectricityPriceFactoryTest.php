@@ -39,7 +39,7 @@ class ElectricityPriceFactoryTest extends TestCase
     public function testCreateWithNullYearThrowsException(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage("Value is not a valid integer:");
+        $this->expectExceptionMessage("Year is missing, cannot create ElectricityPrice entity.");
 
         $data = [null, '35.5', '36.0', '34.8', '33.9'];
         $this->factory->create($data);
@@ -48,19 +48,20 @@ class ElectricityPriceFactoryTest extends TestCase
     public function testCreateWithInvalidFloatThrowsException(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage("Value is not a valid float:");
-
+        $this->expectExceptionMessage("Invalid price data provided.");
+    
         $data = [2021, 'invalid', '36.0', '34.8', '33.9'];
         $this->factory->create($data);
     }
+    
 
-    public function testCreateWithMissingValuesReturnsNull(): void
+    public function testCreateWithMissingValuesThrowsException(): void
     {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage("Invalid price data provided.");
+
         $data = [2021, '35.5', null, '34.8', '33.9'];
-
-        $result = $this->factory->create($data);
-
-        $this->assertNull($result);
+        $this->factory->create($data);
     }
 
     public function testEnsureFloatWithValidData(): void
@@ -91,12 +92,12 @@ class ElectricityPriceFactoryTest extends TestCase
         $this->factory->ensureInt('invalid');
     }
 
-    public function testCreateWithEmptyStringReturnsNull(): void
+    public function testCreateWithEmptyStringThrowsException(): void
     {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage("Invalid price data provided.");
+
         $data = [2021, '', '', '', ''];
-
-        $result = $this->factory->create($data);
-
-        $this->assertNull($result);
+        $this->factory->create($data);
     }
 }

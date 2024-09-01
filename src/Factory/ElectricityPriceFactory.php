@@ -11,13 +11,16 @@ class ElectricityPriceFactory
      * Create an ElectricityPrice entity from an array of data.
      *
      * @param array<int, mixed> $data The data used to create the entity.
-     * @return ElectricityPrice|null
+     * @return ElectricityPrice
      */
-    public function create(array $data): ?ElectricityPrice
+    public function create(array $data): ElectricityPrice
     {
-        if ($data[0] === null || !$this->isValidPriceData($data)) {
-            echo "Skipping row due to missing or invalid values in ElectricityPrice.\n";
-            return null;
+        if ($data[0] === null) {
+            throw new InvalidArgumentException("Year is missing, cannot create ElectricityPrice entity.");
+        }
+
+        if (!$this->isValidPriceData($data)) {
+            throw new InvalidArgumentException("Invalid price data provided.");
         }
 
         $entity = new ElectricityPrice();
