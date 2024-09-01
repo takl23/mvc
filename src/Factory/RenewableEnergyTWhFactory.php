@@ -19,15 +19,15 @@ class RenewableEnergyTWhFactory
         echo "Data received in create method: " . print_r($data, true) . "\n";
         $entity = new RenewableEnergyTWh();
         $entity->setYear($this->ensureInt($data[0]));
-        $entity->setBiofuels($this->ensureInt($data[1]));
-        $entity->setHydropower($this->ensureInt($data[2]));
-        $entity->setWindPower($this->ensureInt($data[3]));
-        $entity->setHeatPump($this->ensureInt($data[4]));
-        $entity->setSolarEnergy($this->ensureInt($data[5]));
-        $entity->setTotal($this->ensureInt($data[6]));
-        $entity->setStatTransferToNorway($this->ensureInt($data[7]));
-        $entity->setRenewableEnergyInTargetCalculation($this->ensureInt($data[8]));
-        $entity->setTotalEnergyUse($this->ensureInt($data[9]));
+        $entity->setBiofuels($this->ensureNullableInt($data[1]));
+        $entity->setHydropower($this->ensureNullableInt($data[2]));
+        $entity->setWindPower($this->ensureNullableInt($data[3]));
+        $entity->setHeatPump($this->ensureNullableInt($data[4]));
+        $entity->setSolarEnergy($this->ensureNullableInt($data[5]));
+        $entity->setTotal($this->ensureNullableInt($data[6]));
+        $entity->setStatTransferToNorway($this->ensureNullableInt($data[7]));
+        $entity->setRenewableEnergyInTargetCalculation($this->ensureNullableInt($data[8]));
+        $entity->setTotalEnergyUse($this->ensureNullableInt($data[9]));
 
         return $entity;
     }

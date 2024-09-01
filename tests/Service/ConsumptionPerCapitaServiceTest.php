@@ -12,6 +12,7 @@ use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\MockObject\MockObject;
+use Exception;
 
 class ConsumptionPerCapitaServiceTest extends TestCase
 {
@@ -93,4 +94,20 @@ class ConsumptionPerCapitaServiceTest extends TestCase
 
         // Assertions and expectations are handled through the mock's `expects` method
     }
+
+    public function testCalculateAndSaveConsumptionPerCapitaWithMissingData(): void
+{
+    // Simulera att inget data returneras av repository
+    $this->populationRepoMock->method('findAll')->willReturn([]);
+    $this->consumptionRepoMock->method('findAll')->willReturn([]);
+
+    // Förvänta att en exception kastas
+    $this->expectException(Exception::class);
+    $this->expectExceptionMessage('Missing necessary data to calculate consumption per capita.');
+
+    // Kör metoden
+    $this->service->calculateAndSaveConsumptionPerCapita();
+}
+
+
 }

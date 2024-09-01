@@ -30,6 +30,11 @@ class PopulationElomradeService
         $populationsPerLan = $populationPerLanRepository->findAll();
         $lanElomrade = $lanElomradeRepository->findAll();
 
+        if (empty($populationsPerLan) || empty($lanElomrade)) {
+            // Avsluta tidigt om det inte finns något att bearbeta
+            return;
+        }
+
         // Skapa en mapping mellan län och elområde
         $lanToElomrade = [];
         foreach ($lanElomrade as $entry) {
@@ -72,7 +77,8 @@ class PopulationElomradeService
         $this->entityManager->flush();
     }
 
-    private function convertLanToProperty(string $lan): string
+    // Ändra dessa metoder från privata till publika
+    public function convertLanToProperty(string $lan): string
     {
         $lanMappings = [
             'Norrbottens län' => 'norrbotten',
@@ -101,7 +107,7 @@ class PopulationElomradeService
         return $lanMappings[$lan] ?? '';
     }
 
-    private function ensureString(mixed $value): string
+    public function ensureString(mixed $value): string
     {
         if (is_string($value)) {
             return $value;
@@ -118,7 +124,7 @@ class PopulationElomradeService
         throw new InvalidArgumentException("Value is not a valid string: " . print_r($value, true));
     }
 
-    private function ensureInt(mixed $value): int
+    public function ensureInt(mixed $value): int
     {
         if (isset($value) && is_numeric($value)) {
             return (int)$value;

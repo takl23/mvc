@@ -76,4 +76,17 @@ class AverageAnnualCostPerPersonServiceTest extends TestCase
 
         // Assertions and expectations are handled through the mock's `expects` method
     }
+    public function testCalculateAndSaveAverageAnnualCostPerPersonWithMissingData(): void
+{
+    // Simulera att inget data returneras av repository
+    $this->consumptionRepoMock->method('findAll')->willReturn([]);
+    $this->electricityPriceRepoMock->method('findOneBy')->willReturn(null);
+
+    // Förvänta att metoden körs utan fel men inget persist anropas
+    $this->entityManagerMock->expects($this->never())->method('persist');
+
+    // Kör metoden
+    $this->service->calculateAndSaveAverageAnnualCostPerPerson();
+}
+
 }

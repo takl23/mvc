@@ -12,6 +12,7 @@ use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\ORM\EntityRepository;
 use PHPUnit\Framework\MockObject\MockObject;
+use InvalidArgumentException;
 
 class PopulationElomradeServiceTest extends TestCase
 {
@@ -110,6 +111,43 @@ class PopulationElomradeServiceTest extends TestCase
             ->method('flush');
 
         // Run the method under test
+        $this->populationElomradeService->calculateAndSavePopulationPerElomrade();
+    }
+    
+    public function testEnsureStringThrowsExceptionOnInvalidValue()
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage("Value is null, expected a valid string");
+
+        // Testar direkt den nu publika metoden ensureString
+        $this->populationElomradeService->ensureString(null);
+    }
+
+    public function testEnsureIntThrowsExceptionOnInvalidValue()
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage("Value is not a valid integer");
+
+        // Testar direkt den nu publika metoden ensureInt
+        $this->populationElomradeService->ensureInt('invalid');
+    }
+
+    public function testConvertLanToPropertyReturnsEmptyStringOnUnknownLan()
+    {
+        $result = $this->populationElomradeService->convertLanToProperty('Unknown län');
+        $this->assertEquals('', $result);
+    }
+
+    public function testCalculateAndSavePopulationPerElomradeWithEmptyData()
+    {
+        // Mock tomma resultat från repository
+        $this->populationPerLanRepositoryMock->method('findAll')->willReturn([]);
+        $this->lanElomradeRepositoryMock->method('findAll')->willReturn([]);
+
+        // Förvänta att inga metoder för persist eller flush anropas
+        $this->entityManagerMock->expects($this->never())->method('persist');
+        $this->entityManagerMock->expects($this->never())->method('flush');
+
         $this->populationElomradeService->calculateAndSavePopulationPerElomrade();
     }
 }
