@@ -20,15 +20,10 @@ class PopulationElomradeService
     public function calculateAndSavePopulationPerElomrade(): void
     {
         // Rensa tabellen innan ny data importeras
-        $connection = $this->entityManager->getConnection();
-        $platform = $connection->getDatabasePlatform();
-        $connection->executeStatement($platform->getTruncateTableSQL('population_per_elomrade', true));
+        $this->truncateTable('population_per_elomrade');
 
-        $populationPerLanRepository = $this->entityManager->getRepository(PopulationPerLan::class);
-        $lanElomradeRepository = $this->entityManager->getRepository(LanElomrade::class);
-
-        $populationsPerLan = $populationPerLanRepository->findAll();
-        $lanElomrade = $lanElomradeRepository->findAll();
+        $populationsPerLan = $this->entityManager->getRepository(PopulationPerLan::class)->findAll();
+        $lanElomrade = $this->entityManager->getRepository(LanElomrade::class)->findAll();
 
         if (empty($populationsPerLan) || empty($lanElomrade)) {
             // Avsluta tidigt om det inte finns något att bearbeta
@@ -36,12 +31,35 @@ class PopulationElomradeService
         }
 
         // Skapa en mapping mellan län och elområde
+        $lanToElomrade = $this->createLanToElomradeMap($lanElomrade);
+
+        // Beräkna populationen per elområde för varje år
+        $populationPerElomrade = $this->calculatePopulationPerElomrade($populationsPerLan, $lanToElomrade);
+
+        // Spara populationen per elområde till databasen
+        $this->savePopulationPerElomrade($populationPerElomrade);
+
+        $this->entityManager->flush();
+    }
+
+    private function truncateTable(string $tableName): void
+    {
+        $connection = $this->entityManager->getConnection();
+        $platform = $connection->getDatabasePlatform();
+        $connection->executeStatement($platform->getTruncateTableSQL($tableName, true));
+    }
+
+    private function createLanToElomradeMap(array $lanElomrade): array
+    {
         $lanToElomrade = [];
         foreach ($lanElomrade as $entry) {
             $lanToElomrade[$entry->getLan()] = $entry->getElomrade();
         }
+        return $lanToElomrade;
+    }
 
-        // Beräkna populationen per elområde för varje år
+    private function calculatePopulationPerElomrade(array $populationsPerLan, array $lanToElomrade): array
+    {
         $populationPerElomrade = [];
 
         foreach ($populationsPerLan as $population) {
@@ -63,7 +81,11 @@ class PopulationElomradeService
             }
         }
 
-        // Spara populationen per elområde till databasen
+        return $populationPerElomrade;
+    }
+
+    private function savePopulationPerElomrade(array $populationPerElomrade): void
+    {
         foreach ($populationPerElomrade as $year => $elomradeData) {
             foreach ($elomradeData as $elomrade => $totalPopulation) {
                 $entity = new PopulationPerElomrade();
@@ -73,11 +95,8 @@ class PopulationElomradeService
                 $this->entityManager->persist($entity);
             }
         }
-
-        $this->entityManager->flush();
     }
 
-    // Ändra dessa metoder från privata till publika
     public function convertLanToProperty(string $lan): string
     {
         $lanMappings = [
