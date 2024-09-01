@@ -12,7 +12,8 @@ class AverageConsumptionFactory
         *
         * @param array<int, mixed> $data The data used to create the entity.
         * @return AverageConsumption
-        */    public function create(array $data): AverageConsumption
+        */    
+    public function create(array $data): AverageConsumption
     {
         $entity = new AverageConsumption();
         $entity->setYear($this->ensureInt($data[0]));
@@ -31,9 +32,9 @@ class AverageConsumptionFactory
     * @return float
     * @throws InvalidArgumentException
     */
-    private function ensureFloat(mixed $value): float
+    public function ensureFloat(mixed $value): float
     {
-        if (isset($value) && is_numeric($value)) {
+        if (isset($value) && is_numeric(str_replace(',', '.', $value))) {
             return (float) str_replace(',', '.', (string) $value);
         }
         throw new InvalidArgumentException("Value is not a valid float: " . print_r($value, true));
@@ -46,7 +47,7 @@ class AverageConsumptionFactory
     * @return int
     * @throws InvalidArgumentException
     */
-    private function ensureInt(mixed $value): int
+    public function ensureInt(mixed $value): int
     {
         if (isset($value) && is_numeric($value)) {
             return (int) $value;
