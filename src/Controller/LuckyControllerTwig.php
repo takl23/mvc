@@ -51,4 +51,10 @@ class LuckyControllerTwig extends AbstractController
     {
         return $this->render('links.html.twig');
     }
+
+    #[Route("/docs", name: "docs")]
+    public function docs(): Response
+    {
+        return $this->redirect('/docs/api/index.html');
+    }
 }
