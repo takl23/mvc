@@ -14,10 +14,10 @@ use Exception;
 
 class ImportExcelCommandTest extends TestCase
 {
-    /** @var ImportService|MockObject */
+    /** @var ImportService&MockObject */
     private $importServiceMock;
 
-    /** @var FileSystemService|MockObject */
+    /** @var FileSystemService&MockObject */
     private $fileSystemServiceMock;
 
     protected function setUp(): void
@@ -26,7 +26,7 @@ class ImportExcelCommandTest extends TestCase
         $this->fileSystemServiceMock = $this->createMock(FileSystemService::class); // Skapa ett mock för det andra beroendet
     }
 
-    public function testExecuteImportFails()
+    public function testExecuteImportFails(): void
     {
         // Mock the ImportService
         $this->importServiceMock
@@ -64,7 +64,7 @@ class ImportExcelCommandTest extends TestCase
         $this->assertEquals(Command::FAILURE, $statusCode);
     }
 
-    public function testExecuteWhenFileDoesNotExist()
+    public function testExecuteWhenFileDoesNotExist(): void
     {
         // Mock FileSystemService to return false for fileExists
         $this->fileSystemServiceMock

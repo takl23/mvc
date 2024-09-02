@@ -18,6 +18,12 @@ class FileSystemServiceTest extends TestCase
     {
         // Skapa en temporär fil
         $tempFile = tempnam(sys_get_temp_dir(), 'test_file');
+
+        // Kontrollera om tempnam returnerade false
+        if ($tempFile === false) {
+            $this->fail('Could not create temporary file');
+        }
+
         $this->assertFileExists($tempFile); // Säkerställ att filen skapades
 
         // Testa att fileExists returnerar true för den existerande filen

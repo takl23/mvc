@@ -49,15 +49,24 @@ class PopulationElomradeService
         $connection->executeStatement($platform->getTruncateTableSQL($tableName, true));
     }
 
+    /**
+ * @param LanElomrade[] $lanElomrade
+ * @return array<string, string>
+ */
     private function createLanToElomradeMap(array $lanElomrade): array
     {
         $lanToElomrade = [];
         foreach ($lanElomrade as $entry) {
-            $lanToElomrade[$entry->getLan()] = $entry->getElomrade();
+            $lanToElomrade[$entry->getLan()] = $entry->getElomrade() ?? '';
         }
         return $lanToElomrade;
     }
 
+    /**
+ * @param PopulationPerLan[] $populationsPerLan
+ * @param array<string, string> $lanToElomrade
+ * @return array<int, array<string, int>>
+ */
     private function calculatePopulationPerElomrade(array $populationsPerLan, array $lanToElomrade): array
     {
         $populationPerElomrade = [];
@@ -84,6 +93,9 @@ class PopulationElomradeService
         return $populationPerElomrade;
     }
 
+    /**
+ * @param array<int, array<string, int>> $populationPerElomrade
+ */
     private function savePopulationPerElomrade(array $populationPerElomrade): void
     {
         foreach ($populationPerElomrade as $year => $elomradeData) {

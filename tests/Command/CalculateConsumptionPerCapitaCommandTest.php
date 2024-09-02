@@ -13,7 +13,7 @@ use App\Service\ConsumptionPerCapitaService;
 class CalculateConsumptionPerCapitaCommandTest extends TestCase
 {
     /**
-     * @var ConsumptionPerCapitaService|MockObject
+     * @var ConsumptionPerCapitaService&MockObject
      */
     private $consumptionPerCapitaServiceMock;
 
@@ -23,7 +23,7 @@ class CalculateConsumptionPerCapitaCommandTest extends TestCase
         $this->consumptionPerCapitaServiceMock = $this->createMock(ConsumptionPerCapitaService::class);
     }
 
-    public function testExecute()
+    public function testExecute(): void
     {
         // Expect the calculateAndSaveConsumptionPerCapita method to be called once
         $this->consumptionPerCapitaServiceMock

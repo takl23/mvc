@@ -14,12 +14,12 @@ use App\Service\AverageAnnualCostPerPersonService;
 class CalculateAnnualCostPerPersonCommandTest extends TestCase
 {
     /**
-     * @var AverageAnnualCostPerPersonService|MockObject
+     * @var AverageAnnualCostPerPersonService&MockObject
      */
     private $serviceMock;
 
     /**
-     * @var LoggerInterface|MockObject
+     * @var LoggerInterface&MockObject
      */
     private $loggerMock;
 
@@ -32,7 +32,7 @@ class CalculateAnnualCostPerPersonCommandTest extends TestCase
         $this->loggerMock = $this->createMock(LoggerInterface::class);
     }
 
-    public function testExecute()
+    public function testExecute(): void
     {
         // Expect the calculateAndSaveAverageAnnualCostPerPerson method to be called once
         $this->serviceMock

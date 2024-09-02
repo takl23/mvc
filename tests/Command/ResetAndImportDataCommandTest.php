@@ -14,14 +14,15 @@ use Symfony\Component\Console\Command\Command;
 
 class ResetAndImportDataCommandTest extends TestCase
 {
-    /** @var MockObject|EntityManagerInterface */
+    /** @var EntityManagerInterface&MockObject */
     private $entityManagerMock;
 
-    /** @var MockObject|ImportService */
+    /** @var ImportService&MockObject */
     private $importServiceMock;
 
     protected function setUp(): void
     {
+        // Correctly initialize the mock properties
         $this->entityManagerMock = $this->createMock(EntityManagerInterface::class);
         $this->importServiceMock = $this->createMock(ImportService::class);
     }

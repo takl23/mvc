@@ -10,6 +10,7 @@ use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use App\Factory\RenewableEnergyTWhFactory;
 use App\Entity\RenewableEnergyTWh;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 class ImportServiceEntityTest extends TestCase
 {
@@ -80,9 +81,16 @@ class ImportServiceEntityTest extends TestCase
         $this->importService->import($filePath, $sheetName, $entityClass);
     }
 
-    private function mockWorksheet(array $data)
+    /**
+     * Mock a worksheet with provided data.
+     *
+     * @param array<int|null> $data
+     * @return Worksheet&MockObject
+     */
+    private function mockWorksheet(array $data): Worksheet
     {
-        $worksheetMock = $this->createMock(\PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::class);
+        /** @var Worksheet&MockObject $worksheetMock */
+        $worksheetMock = $this->createMock(Worksheet::class);
         $rowMock = $this->createMock(\PhpOffice\PhpSpreadsheet\Worksheet\Row::class);
         $cellMock = $this->createMock(\PhpOffice\PhpSpreadsheet\Cell\Cell::class);
 

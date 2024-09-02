@@ -13,7 +13,7 @@ use App\Service\PopulationElomradeService;
 class CalculatePopulationCommandTest extends TestCase
 {
     /**
-     * @var PopulationElomradeService|MockObject
+     * @var PopulationElomradeService&MockObject
      */
     private $populationElomradeServiceMock;
 
@@ -23,7 +23,7 @@ class CalculatePopulationCommandTest extends TestCase
         $this->populationElomradeServiceMock = $this->createMock(PopulationElomradeService::class);
     }
 
-    public function testExecute()
+    public function testExecute(): void
     {
         // Expect the calculateAndSavePopulationPerElomrade method to be called once
         $this->populationElomradeServiceMock

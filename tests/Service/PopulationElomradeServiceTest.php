@@ -22,10 +22,10 @@ class PopulationElomradeServiceTest extends TestCase
     private $entityManagerMock;
 
 
-    /** @var MockObject|EntityRepository<PopulationPerLan> */
+    /** @var MockObject&EntityRepository<PopulationPerLan> */
     private $populationPerLanRepositoryMock;
 
-    /** @var MockObject|EntityRepository<LanElomrade> */
+    /** @var MockObject&EntityRepository<LanElomrade> */
     private $lanElomradeRepositoryMock;
 
     /** @var PopulationElomradeService */

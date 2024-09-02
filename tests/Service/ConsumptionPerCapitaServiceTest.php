@@ -16,13 +16,13 @@ use Exception;
 
 class ConsumptionPerCapitaServiceTest extends TestCase
 {
-    /** @var EntityManagerInterface|MockObject */
+    /** @var EntityManagerInterface&MockObject */
     private $entityManagerMock;
 
-    /** @var MockObject|EntityRepository */
+    /** @var EntityRepository<PopulationPerElomrade>&MockObject */
     private $populationRepoMock;
 
-    /** @var MockObject|EntityRepository */
+    /** @var EntityRepository<AverageConsumption>&MockObject */
     private $consumptionRepoMock;
 
     /** @var ConsumptionPerCapitaService */
@@ -30,20 +30,14 @@ class ConsumptionPerCapitaServiceTest extends TestCase
 
     protected function setUp(): void
     {
-        /** @var EntityManagerInterface|MockObject $entityManagerMock */
         $this->entityManagerMock = $this->createMock(EntityManagerInterface::class);
-
-        /** @var EntityRepository|MockObject $populationRepoMock */
         $this->populationRepoMock = $this->createMock(EntityRepository::class);
-
-        /** @var EntityRepository|MockObject $consumptionRepoMock */
         $this->consumptionRepoMock = $this->createMock(EntityRepository::class);
 
         // Mock the connection and platform
         $connectionMock = $this->createMock(Connection::class);
         $platformMock = $this->createMock(AbstractPlatform::class);
 
-        // Set expectations for the methods
         $connectionMock->method('getDatabasePlatform')->willReturn($platformMock);
         $this->entityManagerMock->method('getConnection')->willReturn($connectionMock);
 
@@ -55,7 +49,7 @@ class ConsumptionPerCapitaServiceTest extends TestCase
         $this->service = new ConsumptionPerCapitaService($this->entityManagerMock);
     }
 
-    public function testCalculateAndSaveConsumptionPerCapita()
+    public function testCalculateAndSaveConsumptionPerCapita(): void
     {
         // Set up mock data for PopulationPerElomrade
         $population1 = $this->createMock(PopulationPerElomrade::class);
@@ -97,17 +91,15 @@ class ConsumptionPerCapitaServiceTest extends TestCase
 
     public function testCalculateAndSaveConsumptionPerCapitaWithMissingData(): void
     {
-        // Simulera att inget data returneras av repository
+        // Simulate that no data is returned by the repository
         $this->populationRepoMock->method('findAll')->willReturn([]);
         $this->consumptionRepoMock->method('findAll')->willReturn([]);
 
-        // Förvänta att en exception kastas
+        // Expect an exception to be thrown
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('Missing necessary data to calculate consumption per capita.');
 
-        // Kör metoden
+        // Run the method
         $this->service->calculateAndSaveConsumptionPerCapita();
     }
-
-
 }
