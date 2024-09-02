@@ -49,17 +49,17 @@ class PopulationPerLanFactory
     }
 
     private function sanitizeString(mixed $value): string
-{
-    if (is_string($value)) {
-        return str_replace(' ', '', $value);
-    }
+    {
+        if (is_string($value)) {
+            return str_replace(' ', '', $value);
+        }
 
-    if (is_numeric($value)) {
-        return str_replace(' ', '', (string)$value);
-    }
+        if (is_numeric($value)) {
+            return str_replace(' ', '', (string)$value);
+        }
 
-    throw new InvalidArgumentException("Value cannot be converted to string: " . print_r($value, true));
-}
+        throw new InvalidArgumentException("Value cannot be converted to string: " . print_r($value, true));
+    }
 
 
     /**

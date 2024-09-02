@@ -16,8 +16,8 @@ use InvalidArgumentException;
 
 class PopulationElomradeServiceTest extends TestCase
 {
-    /** 
-     * @var \Doctrine\ORM\EntityManagerInterface&\PHPUnit\Framework\MockObject\MockObject 
+    /**
+     * @var \Doctrine\ORM\EntityManagerInterface&\PHPUnit\Framework\MockObject\MockObject
      */
     private $entityManagerMock;
 

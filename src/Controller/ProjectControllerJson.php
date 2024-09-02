@@ -246,24 +246,24 @@ class ProjectControllerJson extends AbstractController
      * @return JsonResponse
      */
     private function generateJsonResponse(string $entityClass, callable $formatter, string $reference): JsonResponse
-{
-    // Ensure the entity class exists and is a valid class-string
-    assert(class_exists($entityClass), sprintf('Class %s does not exist.', $entityClass));
+    {
+        // Ensure the entity class exists and is a valid class-string
+        assert(class_exists($entityClass), sprintf('Class %s does not exist.', $entityClass));
 
-    $repository = $this->entityManager->getRepository($entityClass);
-    $data = $repository->findAll();
+        $repository = $this->entityManager->getRepository($entityClass);
+        $data = $repository->findAll();
 
-    $formattedData = array_map($formatter, $data);
+        $formattedData = array_map($formatter, $data);
 
-    $response = new JsonResponse([
-        'data' => $formattedData,
-        'reference' => $reference,
-        'date' => 'August 2024'
-    ]);
+        $response = new JsonResponse([
+            'data' => $formattedData,
+            'reference' => $reference,
+            'date' => 'August 2024'
+        ]);
 
-    $response->setEncodingOptions($response->getEncodingOptions() | JSON_PRETTY_PRINT);
+        $response->setEncodingOptions($response->getEncodingOptions() | JSON_PRETTY_PRINT);
 
-    return $response;
-}
+        return $response;
+    }
 
 }

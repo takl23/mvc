@@ -17,10 +17,10 @@ class AverageAnnualCostPerPersonServiceTest extends TestCase
     private $entityManagerMock;
 
     /** @var EntityRepository<ConsumptionPerCapita>&MockObject */
-private $consumptionRepoMock;
+    private $consumptionRepoMock;
 
-/** @var EntityRepository<ElectricityPrice>&MockObject */
-private $electricityPriceRepoMock;
+    /** @var EntityRepository<ElectricityPrice>&MockObject */
+    private $electricityPriceRepoMock;
 
     /** @var AverageAnnualCostPerPersonService */
     private $service;
