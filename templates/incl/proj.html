@@ -1,26 +1,57 @@
 <h2 id="proj">Redovisning av projektet</h2>
 
-<p>
-PhpMetrics var ett mycket användbart verktyg för att få en visuell överblick över kodens kvalitet och komplexitet där cirklarnas färg och 
-storlek gav en tydlig indikation på vilka delar som bör förbättras. 
+<h3>Krav 1-3</h3>
 
+<p>Krav 1-3 uppfylls. 
 </p>
 
-<p>
-Integrationen med Scrutinizer gick smidigt. Tycker att badges var ett positivt inslag som gav en enkel överblick över kodens kvalitet.
-Efter första bygget fick jag ett snittbetyg på 9,85 och en kodtäckning på endast 20%. 
+<p>Projektet startat i /proj och finns i navbaren i min report-sida och man kommer även till en /proj/about. I git-repot hittar man åt en README.md fil och bagges 
+    Scrutinizer där jag även kort peskriver syftet med repot samt hur man klonar det. Jag har även skapat innehåll till docs/ där jag har en kodtäckning som överstiger 
+    90% både för Scrutinizer och PHPunit. Jag har även genererat rapporter för phpdoc och phpmetric. 
 </p>
 
-<p>
-Jag är rätt grön på hela programmeringsbiten men har en stor arbetserfarenhet i den medicintekniska branschen där det är av stor vikt att
-upprätthålla tydlighet i utveckligen för att underlätta för underhållsarbete samt eftermarknadskrav. I denna bransch finns även tydliga ISO standader 
-som man rättar sig efter samt en tydliga krav på språbarhet. Så jag kan väl bara säga att jag har en stor förståelse till varför man vill jobba 
-med att upprätthålla en god kodkvalitet där man lätt ska kunna lämna över kod till någon annan samt att man långsiktigt skapar en bra 
-förutsättning för underhåll samt uppgraderingar. 
+<h3>Krav 4</h3>
+<p>Krav 4 uppfylls.
+</p>
+<p> Jag har skapat ett JSON API med start i proj/api. 10 routes finns varav en är en POST route där man kan beräkna elkostnad baserat senaste årests snittpris för valt 
+    elområde. 
 </p>
 
-<p>
-Min TIL (Today I Learned) för detta kursmoment är att jag har lärt mig mer om hur man använder PhpMetrics och Scrutinizer 
-för att analysera och förbättra kodkvaliteten. Jag har också insett vikten av kontunuerligt jobba med god kodkvalitet så att arbetet inte ska 
-kännas övermäktigt.
+<h3>Krav 5</h3>
+<p>Krav 5 uppfylls delvis.
 </p>
+<p>Jag använder Doctrine ORM för att hantera databasinteraktioner. Genom användninga av EntityManager kan jag persistera och uppdatera data. För att enhetstesta var jag 
+    tvungen att använda mig av mocks för att kunna stimulera databasinteraktioner. För att uppfylla krav 5 helt hade jag också behövt skapa ER-diagram samt skapa en 
+    landningssida, men mäktade inte med det. 
+</p>
+
+<h3>Krav 6</h3>
+<p>Ja jag tycker nog att jag uppfyller krav 6.
+</p>
+<p>Jag använde mocks i mina enhetstester för att hantera testning av databasinteraktioner vilket jag tyckte var väldigt svårt att komma igång med och det tog väldigt 
+    mycket tid att förstå sig på. Sedan så var jag ännu mer dumdristig i att redan tidigt i projektet bestämma mig för att hitta ett sätt att smidigt impotera data till 
+    databasen vilket landade i att jag använde PhpSpreadsheet och Doctrine ORM som också tog alldelse för lång tid, men tycker ändå att det var mer greppbart än mocks. 
+    Jag måste nog även lyfta att jag skapade entiteter dynamiskt via fabriker vilket kanske inte var så svårt, men nödvändigt för att få till en bättre struktur. 
+</p>
+
+<p>Ja ghar ju inte läst någon JavaScript och Chart.js så kanske också går att säga att det är en avancerad feature eftersom jag inte hade så mycket erfarenhet av JavaScript.
+    Men det gick att hitte mycket hjälp på nätet som var enkel att förstå, så det var ju betydligt enklare att implementera jämfört med mocks och PhpSpreadsheet.  </p>
+
+
+<h3>Allmänt om projektet</h3>    
+<p>
+Jag vill säga att projektet är rimligt för kursen men... för mig var projektet väldigt tidskrävande och svårt. Jag var lite väl optimistisk i början och bestämde mig 
+tidigt att jag absolut skulle enhetstesta med mocks. Jag ville också hitta bra sätt att impotera data till databasen. Och inte nog med det så gick jag in på 
+ett sidospår från projektidéen " Viualisera indikatorer för hållbarhet" och börja kika på elpriser för just där och då var det intressant, men väldigt svårt att hitta 
+bra data och information. Så det tog ALLDELLES FÖR MYCKET TID. Och därför lyckas jag inte heller leverera projektet i tid för kursen. 
+</p>
+
+
+<h3>Kursen</h3> 
+<p>
+Jag tycker kursen hade ett bra upplägg, men tycker det var svårt att förstå och relatera till alla parametera i de olika testverktygen som vi använde i kursen. 
+Så ett förbättringsförslag kanske skulle vara att förklara lite mer kring verktygen och hur man kan tolka parametera med fler exempel. För mig personligen 
+hade jag också haft stor nytta av att se hur andra löst projekten tidigare för att kanske få inspiration och klarhet i hur man kan avgränsa. Men som alla andra kurser jag 
+läst så är supporten och strukturen toppen så kursen är helt klart en 9 på en skala 1-10. 
+</p>
+

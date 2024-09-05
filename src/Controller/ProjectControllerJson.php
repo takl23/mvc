@@ -97,7 +97,7 @@ class ProjectControllerJson extends AbstractController
                     'se4' => $item->getse4(),
                 ];
             },
-            'https://www.statistikdatabasen.scb.se/pxweb/sv/ssd/START__EN__EN0105__EN0105A/ElAnvSNI2007ArN/table/tableViewLayout1/'
+            'https://www.statistikdatabasen.scb.se/pxweb/sv/ssd/START__EN__EN0105__EN0105A/ElAnvSNI2007ArN/table/tableViewLayout1 (Välj permanenta bostäder, flerbostadshus, kollektivleveranser och SE1, SE2, SE3, SE4 samt år)'
         );
     }
 
@@ -115,7 +115,7 @@ class ProjectControllerJson extends AbstractController
                     'se4' => $item->getse4(),
                 ];
             },
-            'https://data.nordpoolgroup.com/auction/day-ahead/prices?deliveryDate=latest&currency=SEK&aggregation=Yearly&deliveryAreas=se1,se2,se3,se4'
+            'https://data.nordpoolgroup.com/auction/day-ahead/prices?deliveryDate=latest&currency=SEK&aggregation=Yearly&deliveryAreas=se1,se2,se3,se4 (Filtrera SE1, SE2, SE3, SE4)'
         );
     }
 
