@@ -19,7 +19,7 @@ use App\Service\ImportService;
 
 #[AsCommand(
     name: 'app:reset-and-import-data',
-    description: 'Resets the database and imports data from Excel files'
+    description: 'Resets the database and imports data from CSV files'
 )]
 class ResetAndImportDataCommand extends Command
 {
@@ -35,7 +35,7 @@ class ResetAndImportDataCommand extends Command
 
     protected function configure(): void
     {
-        $this->setDescription('Resets the database and imports data from Excel files');
+        $this->setDescription('Resets the database and imports data from CSV files');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -55,16 +55,16 @@ class ResetAndImportDataCommand extends Command
 
         $io->success('Tables cleared.');
 
-        // Import new data
+        // Import new data from CSV files
         $io->section('Importing new data...');
 
-        $this->importService->import('src/Service/importfile.xlsx', '7.2.1.2', RenewableEnergyTWh::class);
-        $this->importService->import('src/Service/importfile.xlsx', '7.2.1.1', RenewableEnergyPercentage::class);
-        $this->importService->import('src/Service/importfile.xlsx', 'Elpris per elområde och år', ElectricityPrice::class);
-        $this->importService->import('src/Service/importfile.xlsx', 'Snittförbrukning per elområde', AverageConsumption::class);
-        $this->importService->import('src/Service/importfile.xlsx', '7.3.1', EnergySupplyGDP::class);
-        $this->importService->import('src/Service/importfile.xlsx', 'Elområde och län', LanElomrade::class);
-        $this->importService->import('src/Service/importfile.xlsx', 'Befolkning per län', PopulationPerLan::class);
+        $this->importService->import('src/csv/renewable_energy_twh.csv', RenewableEnergyTWh::class);
+        $this->importService->import('src/csv/renewable_energy_percentage.csv', RenewableEnergyPercentage::class);
+        $this->importService->import('src/csv/electricity_price.csv', ElectricityPrice::class);
+        $this->importService->import('src/csv/average_consumption.csv', AverageConsumption::class);
+        $this->importService->import('src/csv/energy_supply_gdp.csv', EnergySupplyGDP::class);
+        $this->importService->import('src/csv/lan_elomrade.csv', LanElomrade::class);
+        $this->importService->import('src/csv/population_per_lan.csv', PopulationPerLan::class);
 
         $io->success('Data import complete.');
 

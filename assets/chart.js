@@ -1,8 +1,11 @@
 import Chart from 'chart.js/auto';
+const baseUrl = window.location.origin.includes('localhost')
+    ? `${window.location.origin}/public/api`
+    : 'https://www.student.bth.se/~takl23/dbwebb-kurser/mvc/me/report/public/api';
 
 document.addEventListener('DOMContentLoaded', () => {
     // Fetch average consumption data
-    fetch('/public/api/average-consumption')
+    fetch(`${baseUrl}/average-consumption`)
         .then(response => response.json())
         .then(data => {
             const ctx = document.getElementById('averageConsumptionChart').getContext('2d');
@@ -70,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .catch(error => console.error('Error fetching average consumption data:', error));
     // Fetch average temperature data
-    fetch('/public/api/average-temperature')
+    fetch(`${baseUrl}/average-temperature`)
         .then(response => response.json())
         .then(data => {
             const ctx = document.getElementById('averageTemperatureChart').getContext('2d');
@@ -139,7 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .catch(error => console.error('Error fetching average temperature data:', error));
 
     // Fetch renewable energy percentage data
-    fetch('/public/api/renewable-energy')
+    fetch(`${baseUrl}/renewable-energy`)
         .then(response => response.json())
         .then(data => {
             const ctx = document.getElementById('renewableEnergyPercentageChart').getContext('2d');
@@ -182,7 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .catch(error => console.error('Error fetching renewable energy percentage data:', error));
 
     // Fetch renewable energy TWh data
-    fetch('/public/api/renewable_energy_twh')
+    fetch(`${baseUrl}/renewable_energy_twh`)
         .then(response => response.json())
         .then(data => {
             const ctx = document.getElementById('renewableEnergyTWhChart').getContext('2d');
@@ -225,7 +228,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .catch(error => console.error('Error fetching renewable energy TWh data:', error));
 
     // Fetch energy supply GDP data
-    fetch('/public/api/energy_supply_gdp')
+    fetch(`${baseUrl}/energy_supply_gdp`)
         .then(response => response.json())
         .then(data => {
             const ctx = document.getElementById('energySupplyGDPChart').getContext('2d');
@@ -268,7 +271,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .catch(error => console.error('Error fetching energy supply GDP data:', error));
 
     // Fetch Län och Elområde data and populate table
-    fetch('/public/api/lan_elomrade')
+    fetch(`${baseUrl}/lan_elomrade`)
         .then(response => response.json())
         .then(data => {
             const tableBody = document.querySelector('#lanElomradeTable tbody');

@@ -1,8 +1,11 @@
 import Chart from 'chart.js/auto';
+const baseUrl = window.location.origin.includes('localhost')
+    ? `${window.location.origin}`
+    : 'https://www.student.bth.se/~takl23/dbwebb-kurser/mvc/me/report';
 
 document.addEventListener('DOMContentLoaded', () => {
     // Fetch renewable energy percentage data
-    fetch('/public/api/renewable-energy')
+    fetch(`${baseUrl}/public/api/renewable-energy`)
         .then(response => response.json())
         .then(data => {
             const ctx = document.getElementById('renewableEnergyPercentageChart').getContext('2d');
@@ -45,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .catch(error => console.error('Error fetching renewable energy percentage data:', error));
 
     // Fetch renewable energy TWh data
-    fetch('/public/api/renewable_energy_twh')
+    fetch(`${baseUrl}/public/api/renewable_energy_twh`)
         .then(response => response.json())
         .then(data => {
             const ctx = document.getElementById('renewableEnergyTWhChart').getContext('2d');
@@ -88,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .catch(error => console.error('Error fetching renewable energy TWh data:', error));
 
     // Fetch energy supply GDP data
-    fetch('/public/api/energy_supply_gdp')
+    fetch(`${baseUrl}/public/api/energy_supply_gdp`)
         .then(response => response.json())
         .then(data => {
             const ctx = document.getElementById('energySupplyGDPChart').getContext('2d');

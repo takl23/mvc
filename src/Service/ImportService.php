@@ -4,153 +4,154 @@ namespace App\Service;
 
 use Doctrine\ORM\EntityManagerInterface;
 use App\Factory\FactoryManager;
-use App\Entity\RenewableEnergyTWh;
-use App\Entity\RenewableEnergyPercentage;
-use App\Entity\ElectricityPrice;
-use App\Entity\AverageConsumption;
-use App\Entity\EnergySupplyGDP;
-use App\Entity\LanElomrade;
-use App\Entity\PopulationPerLan;
-use App\Service\SpreadsheetLoader;
 use Exception;
 
 class ImportService
 {
     private EntityManagerInterface $entityManager;
-    private SpreadsheetLoader $spreadsheetLoader;
     private FactoryManager $factoryManager;
 
     public function __construct(
         EntityManagerInterface $entityManager,
-        SpreadsheetLoader $spreadsheetLoader,
         FactoryManager $factoryManager
     ) {
         $this->entityManager = $entityManager;
-        $this->spreadsheetLoader = $spreadsheetLoader;
         $this->factoryManager = $factoryManager;
     }
 
-    public function import(string $filePath, string $sheetName, string $entityClass): void
+    public function importAll(): void
     {
-        $worksheet = $this->spreadsheetLoader->load($filePath, $sheetName);
+        // Lista över alla CSV-filer och vilken entitetsklass de tillhör
+        $csvFiles = [
+            ['path' => 'src/csv/renewable_energy_twh.csv', 'entityClass' => \App\Entity\RenewableEnergyTWh::class],
+            ['path' => 'src/csv/renewable_energy_percentage.csv', 'entityClass' => \App\Entity\RenewableEnergyPercentage::class],
+            ['path' => 'src/csv/electricity_price.csv', 'entityClass' => \App\Entity\ElectricityPrice::class],
+            ['path' => 'src/csv/average_consumption.csv', 'entityClass' => \App\Entity\AverageConsumption::class],
+            ['path' => 'src/csv/energy_supply_gdp.csv', 'entityClass' => \App\Entity\EnergySupplyGDP::class],
+            ['path' => 'src/csv/population_per_lan.csv', 'entityClass' => \App\Entity\PopulationPerLan::class],
+            ['path' => 'src/csv/lan_elomrade.csv', 'entityClass' => \App\Entity\LanElomrade::class],
+        ];
 
-        foreach ($worksheet->getRowIterator() as $row) {
-            if ($this->isHeaderRow($row)) {
-                continue;
-            }
+        foreach ($csvFiles as $csvFile) {
+            $this->import($csvFile['path'], $csvFile['entityClass']);
+        }
+    }
 
-            $data = $this->extractRowData($row);
+    public function import(string $filePath, string $entityClass): void
+    {
+        // Öppna CSV-filen
+        if (($handle = fopen($filePath, 'r')) !== false) {
+            $rowIndex = 0;
 
-            try {
-                $factory = $this->factoryManager->getFactory($entityClass);
-                $entity = $factory->create($data);
+            // Skriv ut att filen bearbetas
+            echo "Processing file: $filePath\n";
 
-                if ($entity !== null && $this->isEntityValid($entity)) {
-                    $this->entityManager->persist($entity);
+            while (($data = fgetcsv($handle, 1000, ';')) !== false) {
+                // Hoppa över headern
+                if ($rowIndex === 0) {
+                    $rowIndex++;
+                    continue;
                 }
-            } catch (Exception $e) {
-                echo "Error processing row {$row->getRowIndex()}: " . $e->getMessage() . "\n";
+
+                // Lägg till felsökningsutskrift för att visa datan för varje rad
+                echo "Processing row {$rowIndex}: " . json_encode($data) . "\n";
+
+                try {
+                    $factory = $this->factoryManager->getFactory($entityClass);
+                    $entity = $factory->create($data);
+
+                    // Om entiteten är ogiltig, logga datan
+                    if ($entity === null || !$this->isEntityValid($entity)) {
+                        echo "Invalid entity on row {$rowIndex}: " . json_encode($data) . "\n";
+                    } else {
+                        // Spara entiteten om den är giltig
+                        $this->entityManager->persist($entity);
+                    }
+                } catch (Exception $e) {
+                    // Fånga eventuella undantag och skriv ut felmeddelandet
+                    echo "Error processing row {$rowIndex} in file {$filePath}: " . $e->getMessage() . "\n";
+                }
+
+                $rowIndex++;
             }
+
+            // Stäng filen efter bearbetning
+            fclose($handle);
+
+            // Skicka alla entiteter till databasen
+            $this->entityManager->flush();
+            echo "Finished processing file: $filePath\n";
+        } else {
+            throw new Exception("Could not open file $filePath");
         }
-
-        $this->entityManager->flush();
-    }
-
-    /**
- * Extracts row data from a spreadsheet row.
- *
- * @param \PhpOffice\PhpSpreadsheet\Worksheet\Row $row
- * @return array<int, mixed> The array containing values from the row cells.
- */
-    public function extractRowData(\PhpOffice\PhpSpreadsheet\Worksheet\Row $row): array
-    {
-        $cellIterator = $row->getCellIterator();
-        $cellIterator->setIterateOnlyExistingCells(false);
-
-        $data = [];
-        foreach ($cellIterator as $cell) {
-            $value = $cell->getValue();
-            // Inkludera nullvärden istället för att filtrera bort dem
-            $data[] = ($value !== null && $value !== '') ? $value : null;
-        }
-        // Ta bort print_r för att undvika onödig utskrift
-        // print_r($data);
-        return $data;
-    }
-
-
-    public function isHeaderRow(\PhpOffice\PhpSpreadsheet\Worksheet\Row $row): bool
-    {
-        return $row->getRowIndex() === 1;
     }
 
     public function isEntityValid(object $entity): bool
     {
-        if ($entity instanceof RenewableEnergyTWh) {
+        // Kontrollera entitetens giltighet beroende på dess typ
+        if ($entity instanceof \App\Entity\RenewableEnergyTWh) {
             return $this->isRenewableEnergyTWhValid($entity);
         }
 
-        if ($entity instanceof RenewableEnergyPercentage) {
+        if ($entity instanceof \App\Entity\RenewableEnergyPercentage) {
             return $this->isRenewableEnergyPercentageValid($entity);
         }
 
-        if ($entity instanceof ElectricityPrice) {
+        if ($entity instanceof \App\Entity\ElectricityPrice) {
             return $this->isElectricityPriceValid($entity);
         }
 
-        if ($entity instanceof AverageConsumption) {
+        if ($entity instanceof \App\Entity\AverageConsumption) {
             return $this->isAverageConsumptionValid($entity);
         }
 
-        if ($entity instanceof EnergySupplyGDP) {
+        if ($entity instanceof \App\Entity\EnergySupplyGDP) {
             return $this->isEnergySupplyGDPValid($entity);
         }
 
-        if ($entity instanceof PopulationPerLan) {
+        if ($entity instanceof \App\Entity\PopulationPerLan) {
             return $this->isPopulationPerLanValid($entity);
         }
 
-        if ($entity instanceof LanElomrade) {
+        if ($entity instanceof \App\Entity\LanElomrade) {
             return $this->isLanElomradeValid($entity);
         }
 
         return false;
     }
 
-
-    public function isRenewableEnergyTWhValid(RenewableEnergyTWh $entity): bool
+    public function isRenewableEnergyTWhValid(\App\Entity\RenewableEnergyTWh $entity): bool
     {
         return $entity->getYear() !== null && $entity->getYear() > 0;
     }
 
-    public function isRenewableEnergyPercentageValid(RenewableEnergyPercentage $entity): bool
+    public function isRenewableEnergyPercentageValid(\App\Entity\RenewableEnergyPercentage $entity): bool
     {
         return $entity->getYear() !== null && $entity->getYear() > 0;
     }
 
-    public function isElectricityPriceValid(ElectricityPrice $entity): bool
+    public function isElectricityPriceValid(\App\Entity\ElectricityPrice $entity): bool
     {
         return $entity->getYear() !== null && $entity->getYear() > 0;
     }
 
-    public function isAverageConsumptionValid(AverageConsumption $entity): bool
+    public function isAverageConsumptionValid(\App\Entity\AverageConsumption $entity): bool
     {
         return $entity->getYear() !== null && $entity->getYear() > 0;
     }
 
-    public function isEnergySupplyGDPValid(EnergySupplyGDP $entity): bool
+    public function isEnergySupplyGDPValid(\App\Entity\EnergySupplyGDP $entity): bool
     {
         return $entity->getYear() !== null && $entity->getYear() > 0;
     }
 
-    public function isPopulationPerLanValid(PopulationPerLan $entity): bool
+    public function isPopulationPerLanValid(\App\Entity\PopulationPerLan $entity): bool
     {
         return $entity->getYear() !== null && $entity->getYear() > 0;
     }
 
-    public function isLanElomradeValid(LanElomrade $entity): bool
+    public function isLanElomradeValid(\App\Entity\LanElomrade $entity): bool
     {
         return $entity->getLan() !== null && $entity->getElomrade() !== null;
     }
-
 }

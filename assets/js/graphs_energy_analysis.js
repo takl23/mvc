@@ -1,5 +1,9 @@
 import Chart from 'chart.js/auto';
 
+const baseUrl = window.location.origin.includes('localhost')
+    ? `${window.location.origin}/public/api`
+    : 'https://www.student.bth.se/~takl23/dbwebb-kurser/mvc/me/report/public/api';
+
 document.addEventListener('DOMContentLoaded', () => {
     const fetchDataAndRenderChart = (url, canvasId, chartType, yLabel) => {
         fetch(url)
@@ -59,14 +63,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Restore line chart for average consumption
     fetchDataAndRenderChart(
-        '/public/api/average-consumption', 'averageConsumptionChart', 'line', 'GWh');
+        `${baseUrl}/average-consumption`, 'averageConsumptionChart', 'line', 'GWh');
 
     // Restore line chart for electricity price
     fetchDataAndRenderChart(
-        '/public/api/electricity-price', 'averageElectricityPriceChart', 'line', 'SEK/kWh');
+        `${baseUrl}/electricity-price`, 'averageElectricityPriceChart', 'line', 'SEK/kWh');
 
     // Change to bar chart for population per elomrade
-    fetch('/public/api/population-per-elomrade')
+    fetch(`${baseUrl}/population-per-elomrade`)
         .then(response => response.json())
         .then(data => {
             const ctx = document.getElementById('populationPerElomradeChart').getContext('2d');
@@ -128,7 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Change to bar chart for consumption per capita
     // Konsumtion per capita graf
-    fetch('/public/api/consumption-per-capita')
+    fetch(`${baseUrl}/consumption-per-capita`)
         .then(response => response.json())
         .then(data => {
             console.log("Fetched data for consumption per capita:", data);
@@ -190,7 +194,7 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .catch(error => console.error('Error fetching data for consumption per capita:', error));
 
-    fetch('/public/api/annual-cost-per-person')
+    fetch(`${baseUrl}/annual-cost-per-person`)
         .then(response => response.json())
         .then(data => {
             console.log("Data fetched from API:", data);
