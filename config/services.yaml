@@ -21,9 +21,4 @@ services:
     App\Command\CalculatePopulationCommand: ~
     App\Command\CalculateAnnualCostPerPersonCommand: ~
 
-    # Register SpreadsheetLoader and its dependencies
-    PhpOffice\PhpSpreadsheet\Reader\Xlsx: ~
-
-    App\Service\SpreadsheetLoader:
-        arguments:
-            $reader: '@PhpOffice\PhpSpreadsheet\Reader\Xlsx'
+   

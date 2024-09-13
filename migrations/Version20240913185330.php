@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20240808221517 extends AbstractMigration
+final class Version20240913185330 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,7 +20,7 @@ final class Version20240808221517 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('CREATE TABLE annual_cost_per_person (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, year INTEGER NOT NULL, elomrade VARCHAR(255) NOT NULL, annual_cost DOUBLE PRECISION NOT NULL)');
+        $this->addSql('CREATE TABLE average_annual_cost_per_person (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, year INTEGER NOT NULL, elomrade VARCHAR(255) NOT NULL, average_cost_per_person DOUBLE PRECISION NOT NULL)');
         $this->addSql('CREATE TABLE average_consumption (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, year INTEGER NOT NULL, se1 DOUBLE PRECISION NOT NULL, se2 DOUBLE PRECISION NOT NULL, se3 DOUBLE PRECISION NOT NULL, se4 DOUBLE PRECISION NOT NULL)');
         $this->addSql('CREATE TABLE consumption_per_capita (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, year INTEGER NOT NULL, elomrade VARCHAR(255) NOT NULL, consumption_per_capita DOUBLE PRECISION NOT NULL)');
         $this->addSql('CREATE TABLE electricity_price (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, year INTEGER NOT NULL, se1 DOUBLE PRECISION NOT NULL, se2 DOUBLE PRECISION NOT NULL, se3 DOUBLE PRECISION NOT NULL, se4 DOUBLE PRECISION NOT NULL)');
@@ -34,10 +34,7 @@ final class Version20240808221517 extends AbstractMigration
         $this->addSql('CREATE TABLE product (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name VARCHAR(255) NOT NULL, value INTEGER NOT NULL)');
         $this->addSql('CREATE TABLE renewable_energy_percentage (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, year INTEGER NOT NULL, vim INTEGER DEFAULT NULL, el INTEGER DEFAULT NULL, transport INTEGER DEFAULT NULL, total INTEGER DEFAULT NULL)');
         $this->addSql('CREATE TABLE renewable_energy_twh (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, year INTEGER NOT NULL, biofuels INTEGER DEFAULT NULL, hydropower INTEGER DEFAULT NULL, wind_power INTEGER DEFAULT NULL, heat_pump INTEGER DEFAULT NULL, solar_energy INTEGER DEFAULT NULL, total INTEGER DEFAULT NULL, stat_transfer_to_norway INTEGER DEFAULT NULL, renewable_energy_in_target_calculation INTEGER DEFAULT NULL, total_energy_use INTEGER DEFAULT NULL)');
-        $this->addSql('CREATE TABLE messenger_messages (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, body CLOB NOT NULL, headers CLOB NOT NULL, queue_name VARCHAR(190) NOT NULL, created_at DATETIME NOT NULL --(DC2Type:datetime_immutable)
-        , available_at DATETIME NOT NULL --(DC2Type:datetime_immutable)
-        , delivered_at DATETIME DEFAULT NULL --(DC2Type:datetime_immutable)
-        )');
+        $this->addSql('CREATE TABLE messenger_messages (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, body CLOB NOT NULL, headers CLOB NOT NULL, queue_name VARCHAR(190) NOT NULL, created_at DATETIME NOT NULL, available_at DATETIME NOT NULL, delivered_at DATETIME DEFAULT NULL)');
         $this->addSql('CREATE INDEX IDX_75EA56E0FB7336F0 ON messenger_messages (queue_name)');
         $this->addSql('CREATE INDEX IDX_75EA56E0E3BD61CE ON messenger_messages (available_at)');
         $this->addSql('CREATE INDEX IDX_75EA56E016BA31DB ON messenger_messages (delivered_at)');
@@ -46,7 +43,7 @@ final class Version20240808221517 extends AbstractMigration
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('DROP TABLE annual_cost_per_person');
+        $this->addSql('DROP TABLE average_annual_cost_per_person');
         $this->addSql('DROP TABLE average_consumption');
         $this->addSql('DROP TABLE consumption_per_capita');
         $this->addSql('DROP TABLE electricity_price');
