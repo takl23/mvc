@@ -59,9 +59,9 @@ class LuckyControllerTwig extends AbstractController
     }
 
     #[Route("/docs/metrics", name: "metrics_docs")]
-public function metricsDocs(): Response
-{
-    // Här dirigerar vi direkt till indexfilen i din metrics dokumentation
-    return $this->redirect('/docs/metrics/index.html');
-}
+    public function metricsDocs(): Response
+    {
+        // Här dirigerar vi direkt till indexfilen i din metrics dokumentation
+        return $this->redirect('/docs/metrics/index.html');
+    }
 }
