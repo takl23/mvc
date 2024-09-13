@@ -54,7 +54,7 @@ class ImportExcelCommand extends Command
         }
 
         try {
-            $this->importService->import($filePath, $sheetName, $entityClass);
+            $this->importService->import($filePath, $entityClass);
             $io->success('Data imported successfully!');
             return Command::SUCCESS;
         } catch (\Exception $e) {
