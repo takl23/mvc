@@ -22,7 +22,7 @@ class ResetAndImportDataCommandTest extends TestCase
 
     protected function setUp(): void
     {
-        // Correctly initialize the mock properties
+        // Initialize the mock properties
         $this->entityManagerMock = $this->createMock(EntityManagerInterface::class);
         $this->importServiceMock = $this->createMock(ImportService::class);
     }
@@ -56,18 +56,6 @@ class ResetAndImportDataCommandTest extends TestCase
             ->method('executeQuery')
             ->withConsecutive(
                 ['DELETE FROM some_table_name'],
-                ['VACUUM'],
-                ['DELETE FROM some_table_name'],
-                ['VACUUM'],
-                ['DELETE FROM some_table_name'],
-                ['VACUUM'],
-                ['DELETE FROM some_table_name'],
-                ['VACUUM'],
-                ['DELETE FROM some_table_name'],
-                ['VACUUM'],
-                ['DELETE FROM some_table_name'],
-                ['VACUUM'],
-                ['DELETE FROM some_table_name'],
                 ['VACUUM']
             );
 
@@ -76,13 +64,13 @@ class ResetAndImportDataCommandTest extends TestCase
             ->expects($this->exactly(7))
             ->method('import')
             ->withConsecutive(
-                ['src/Service/importfile.xlsx', '7.2.1.2', \App\Entity\RenewableEnergyTWh::class],
-                ['src/Service/importfile.xlsx', '7.2.1.1', \App\Entity\RenewableEnergyPercentage::class],
-                ['src/Service/importfile.xlsx', 'Elpris per elområde och år', \App\Entity\ElectricityPrice::class],
-                ['src/Service/importfile.xlsx', 'Snittförbrukning per elområde', \App\Entity\AverageConsumption::class],
-                ['src/Service/importfile.xlsx', '7.3.1', \App\Entity\EnergySupplyGDP::class],
-                ['src/Service/importfile.xlsx', 'Elområde och län', \App\Entity\LanElomrade::class],
-                ['src/Service/importfile.xlsx', 'Befolkning per län', \App\Entity\PopulationPerLan::class]
+                ['src/csv/renewable_energy_twh.csv', \App\Entity\RenewableEnergyTWh::class],
+                ['src/csv/renewable_energy_percentage.csv', \App\Entity\RenewableEnergyPercentage::class],
+                ['src/csv/electricity_price.csv', \App\Entity\ElectricityPrice::class],
+                ['src/csv/average_consumption.csv', \App\Entity\AverageConsumption::class],
+                ['src/csv/energy_supply_gdp.csv', \App\Entity\EnergySupplyGDP::class],
+                ['src/csv/lan_elomrade.csv', \App\Entity\LanElomrade::class],
+                ['src/csv/population_per_lan.csv', \App\Entity\PopulationPerLan::class]
             );
 
         // Instantiate the command

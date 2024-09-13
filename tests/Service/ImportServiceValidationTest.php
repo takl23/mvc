@@ -12,7 +12,6 @@ use App\Entity\EnergySupplyGDP;
 use App\Entity\PopulationPerLan;
 use App\Entity\LanElomrade;
 use Doctrine\ORM\EntityManagerInterface;
-use App\Service\SpreadsheetLoader;
 use App\Factory\FactoryManager;
 
 class ImportServiceValidationTest extends TestCase
@@ -23,9 +22,6 @@ class ImportServiceValidationTest extends TestCase
     /** @var EntityManagerInterface&\PHPUnit\Framework\MockObject\MockObject */
     private $entityManagerMock;
 
-    /** @var SpreadsheetLoader&\PHPUnit\Framework\MockObject\MockObject */
-    private $spreadsheetLoaderMock;
-
     /** @var FactoryManager&\PHPUnit\Framework\MockObject\MockObject */
     private $factoryManagerMock;
 
@@ -33,13 +29,11 @@ class ImportServiceValidationTest extends TestCase
     {
         // Create mocks for dependencies
         $this->entityManagerMock = $this->createMock(EntityManagerInterface::class);
-        $this->spreadsheetLoaderMock = $this->createMock(SpreadsheetLoader::class);
         $this->factoryManagerMock = $this->createMock(FactoryManager::class);
 
         // Instantiate the ImportService with the mocked dependencies
         $this->importService = new ImportService(
             $this->entityManagerMock,
-            $this->spreadsheetLoaderMock,
             $this->factoryManagerMock
         );
     }
